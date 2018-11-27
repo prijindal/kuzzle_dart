@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  uuid: any
+  web_socket_channel: any
 
 dev_dependencies:
   flutter_test:

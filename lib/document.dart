@@ -4,7 +4,7 @@ import 'response.dart';
 import 'room.dart';
 import 'subscription.dart';
 
-class Document {
+class Document extends Object {
   Document(
     this.collection, {
     this.id,
@@ -77,4 +77,9 @@ class Document {
           users: users,
         ),
       );
+
+  @override
+  String toString() {
+    return content.toString();
+  }
 }

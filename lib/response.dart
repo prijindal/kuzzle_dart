@@ -1,4 +1,5 @@
 class RawKuzzleResponse {
+  RawKuzzleResponse.fromMap(Map<String, dynamic> map);
   int status;
   String error;
   String requestId;

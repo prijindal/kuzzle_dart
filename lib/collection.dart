@@ -36,17 +36,45 @@ class Collection {
       throw ResponseError();
 
   Future<RawKuzzleResponse> create(Map<String, MappingDefinition> mapping,
-          {bool queuable = true}) async =>
-      throw ResponseError();
+      {bool queuable = true}) async {
+    final dynamic body = <String, dynamic>{
+      'index': index,
+      'collection': collection,
+      'controller': 'collection',
+      'action': 'create',
+      'body': mapping,
+    };
+    if (queuable) {
+      return kuzzle
+          .addNetworkQuery(body)
+          .then((onValue) => RawKuzzleResponse.fromMap(onValue));
+    } else {
+      kuzzle.networkQuery(body);
+      return RawKuzzleResponse.fromMap(<String, dynamic>{});
+    }
+  }
 
-  Future<Document> createDocument(
-    Document document, {
+  Document createDocument(
+    Map<String, dynamic> content, {
     Map<String, dynamic> volatile,
     bool queuable = true,
     String refresh,
     String ifExist,
-  }) async =>
-      throw ResponseError();
+  }) {
+    Map<String, dynamic> json = <String, dynamic>{
+      'index': index,
+      'collection': collection,
+      'controller': 'document',
+      'action': 'create',
+      'body': content,
+    };
+    if (queuable) {
+      kuzzle.addNetworkQuery(json);
+    } else {
+      kuzzle.networkQuery(json);
+    }
+    return Document(this, content: content);
+  }
 
   /* TODO: There are two types of deleteDocument, one with id
   * And other with filter, both should be implemented */

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:uuid/uuid.dart';
+import 'package:web_socket_channel/io.dart';
 import 'collection.dart';
 import 'credentials.dart';
 import 'error.dart';
@@ -20,8 +24,12 @@ class CheckTokenResponse {
 }
 
 class IndexCreationResponse {
-  bool acknowledged;
-  bool shards_acknowledged;
+  IndexCreationResponse.fromMap(Map<String, dynamic> map)
+      : acknowledged = map['acknowledged'],
+        shards_acknowledged = map['shards_acknowledged'];
+
+  final bool acknowledged;
+  final bool shards_acknowledged;
 }
 
 class Kuzzle {
@@ -44,6 +52,18 @@ class Kuzzle {
     this.sslConnection = false,
   }) {
     security = Security(this);
+    futureMaps = <String, Completer<Map<String, dynamic>>>{};
+    _webSocket = IOWebSocketChannel.connect(
+        'ws://' + host + ':' + port.toString() + '/ws');
+
+    _webSocket.stream.listen((dynamic message) {
+      final dynamic jsonResponse = json.decode(message);
+      print(message);
+      final String requestId = jsonResponse['requestId'];
+      if (futureMaps.containsKey(requestId)) {
+        futureMaps[requestId].complete(Map<String, dynamic>.from(jsonResponse));
+      }
+    });
   }
 
   final String host;
@@ -63,11 +83,30 @@ class Kuzzle {
   final int reconnectionDelay;
   final bool sslConnection;
   Security security;
+  Map<String, Completer<Map<String, dynamic>>> futureMaps;
+  IOWebSocketChannel _webSocket; // Make private
+  Uuid uuid = Uuid();
 
   String jwtToken;
   int offlineQueue; // TODO: ??
   void Function() offlineQueueLoader; // TODO: ??
   void Function() queueFilter; // TODO: ??
+
+  Future<Map<String, dynamic>> addNetworkQuery(Map<String, dynamic> body) {
+    final Completer<Map<String, dynamic>> completer =
+        Completer<Map<String, dynamic>>();
+    final String requestId = uuid.v1();
+    body.addAll(<String, dynamic>{
+      'requestId': requestId,
+    });
+    networkQuery(body);
+    futureMaps[requestId] = completer;
+    return completer.future;
+  }
+
+  void networkQuery(Map<String, dynamic> body) {
+    _webSocket.sink.add(json.encode(body));
+  }
 
   void addListener(Event event, EventListener callback) =>
       throw ResponseError();
@@ -75,14 +114,32 @@ class Kuzzle {
   Future<CheckTokenResponse> checkToken(String token) async =>
       throw ResponseError();
 
-  Collection collection(String collection, String index) =>
-      Collection(this, collection, index);
+  Collection collection(String collection, {String index}) {
+    if (index == null) {
+      index = defaultIndex;
+    }
+    return Collection(this, collection, index);
+  }
 
   void connect() => throw ResponseError();
 
-  Future<IndexCreationResponse> createIndex(String index,
-          {bool queuable = true}) async =>
-      throw ResponseError();
+  FutureOr<IndexCreationResponse> createIndex(
+    String index, {
+    bool queuable = true,
+  }) async {
+    final dynamic body = <String, dynamic>{
+      'index': index,
+      'controller': 'index',
+      'action': 'create',
+    };
+    if (queuable) {
+      return addNetworkQuery(body)
+          .then((onValue) => IndexCreationResponse.fromMap(onValue));
+    } else {
+      networkQuery(body);
+      return IndexCreationResponse.fromMap(<String, dynamic>{});
+    }
+  }
 
   Future<Credentials> createMyCredentials(
           String strategy, Credentials credentials,
