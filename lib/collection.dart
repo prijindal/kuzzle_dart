@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'collectionmapping.dart';
 import 'document.dart';
 import 'error.dart';
@@ -35,7 +36,7 @@ class Collection {
           {bool queuable = true}) async =>
       throw ResponseError();
 
-  Future<RawKuzzleResponse> create(Map<String, MappingDefinition> mapping,
+  FutureOr<RawKuzzleResponse> create(Map<String, MappingDefinition> mapping,
       {bool queuable = true}) async {
     final dynamic body = <String, dynamic>{
       'index': index,
@@ -54,14 +55,14 @@ class Collection {
     }
   }
 
-  Document createDocument(
+  FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
     Map<String, dynamic> volatile,
     bool queuable = true,
     String refresh,
     String ifExist,
-  }) {
-    Map<String, dynamic> json = <String, dynamic>{
+  }) async {
+    final Map<String, dynamic> json = <String, dynamic>{
       'index': index,
       'collection': collection,
       'controller': 'document',
@@ -69,7 +70,9 @@ class Collection {
       'body': content,
     };
     if (queuable) {
-      kuzzle.addNetworkQuery(json);
+      return kuzzle
+          .addNetworkQuery(json)
+          .then((onValue) => Document(this, content: onValue));
     } else {
       kuzzle.networkQuery(json);
     }

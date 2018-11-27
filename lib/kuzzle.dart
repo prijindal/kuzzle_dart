@@ -58,10 +58,17 @@ class Kuzzle {
 
     _webSocket.stream.listen((dynamic message) {
       final dynamic jsonResponse = json.decode(message);
-      print(message);
       final String requestId = jsonResponse['requestId'];
       if (futureMaps.containsKey(requestId)) {
-        futureMaps[requestId].complete(Map<String, dynamic>.from(jsonResponse));
+        if (jsonResponse['error'] == null) {
+          futureMaps[requestId]
+              .complete(Map<String, dynamic>.from(jsonResponse['result']));
+        } else {
+          futureMaps[requestId].completeError(ResponseError(
+              status: jsonResponse['error']['status'],
+              message: jsonResponse['error']['message']));
+        }
+        futureMaps.remove(requestId);
       }
     });
   }
