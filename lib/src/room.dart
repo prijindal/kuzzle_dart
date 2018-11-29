@@ -9,16 +9,21 @@ enum RoomState { pending, done, all }
 class Room {
   Room(
     this.collection, {
-    this.volatile,
+    this.id,
+    this.channel,
     this.subscribeToSelf,
-    RoomScope scope,
-    RoomState state,
-    RoomUsersScope users,
+    this.scope,
+    this.state,
+    this.users,
   });
 
   final Collection collection;
-  final Map<String, dynamic> volatile;
+  final String id;
+  final String channel;
   final bool subscribeToSelf;
+  final RoomScope scope;
+  final RoomState state;
+  final RoomUsersScope users;
 
   Map<String, dynamic> filters;
   Map<String, dynamic> get headers => collection.headers;
@@ -26,7 +31,6 @@ class Room {
 
   Future<int> count() => throw ResponseError();
 
-  // TODO
   void renew() => throw ResponseError();
 
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>

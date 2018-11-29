@@ -17,6 +17,8 @@ import 'user.dart';
 enum KuzzleConnectType { auto }
 enum KuzzleOfflineModeType { auto, manual }
 
+typedef NotificationCallback = void Function(RawKuzzleResponse response);
+
 class CheckTokenResponse {
   int valid;
   String state;
@@ -26,10 +28,10 @@ class CheckTokenResponse {
 class IndexCreationResponse {
   IndexCreationResponse.fromMap(Map<String, dynamic> map)
       : acknowledged = map['acknowledged'],
-        shards_acknowledged = map['shards_acknowledged'];
+        shardsAcknowledged = map['shards_acknowledged'];
 
   final bool acknowledged;
-  final bool shards_acknowledged;
+  final bool shardsAcknowledged;
 }
 
 class Kuzzle {
@@ -52,16 +54,18 @@ class Kuzzle {
     this.sslConnection = false,
   }) {
     security = Security(this);
-    futureMaps = <String, Completer<RawKuzzleResponse>>{};
     _webSocket = IOWebSocketChannel.connect(
         'ws://' + host + ':' + port.toString() + '/ws');
 
     _webSocket.stream.listen((dynamic message) {
       final dynamic jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
-      if (futureMaps.containsKey(requestId) &&
+      final RawKuzzleResponse response =
+          RawKuzzleResponse.fromMap(this, jsonResponse);
+      if (roomMaps.containsKey(response.room)) {
+        roomMaps[response.room](response);
+      } else if (futureMaps.containsKey(requestId) &&
           !futureMaps[requestId].isCompleted) {
-        final response = RawKuzzleResponse.fromMap(jsonResponse);
         if (response.error == null) {
           futureMaps[requestId].complete(response);
         } else {
@@ -89,14 +93,16 @@ class Kuzzle {
   final int reconnectionDelay;
   final bool sslConnection;
   Security security;
-  Map<String, Completer<RawKuzzleResponse>> futureMaps;
+  Map<String, Completer<RawKuzzleResponse>> futureMaps =
+      <String, Completer<RawKuzzleResponse>>{};
+  Map<String, NotificationCallback> roomMaps = <String, NotificationCallback>{};
   IOWebSocketChannel _webSocket; // Make private
   Uuid uuid = Uuid();
 
   String jwtToken;
-  int offlineQueue; // TODO: ??
-  void Function() offlineQueueLoader; // TODO: ??
-  void Function() queueFilter; // TODO: ??
+  // int offlineQueue;
+  // void Function() offlineQueueLoader;
+  // void Function() queueFilter;
 
   Future<RawKuzzleResponse> addNetworkQuery(
     Map<String, dynamic> body, {
@@ -104,17 +110,17 @@ class Kuzzle {
   }) {
     final Completer<RawKuzzleResponse> completer =
         Completer<RawKuzzleResponse>();
+    final String requestId = uuid.v1();
+    body.addAll(<String, dynamic>{
+      'requestId': requestId,
+    });
     if (queuable) {
-      final String requestId = uuid.v1();
-      body.addAll(<String, dynamic>{
-        'requestId': requestId,
-      });
       networkQuery(body);
       futureMaps[requestId] = completer;
     } else {
       networkQuery(body);
       completer.complete(
-          RawKuzzleResponse.fromMap(<String, dynamic>{'result': body}));
+          RawKuzzleResponse.fromMap(this, <String, dynamic>{'result': body}));
     }
     return completer.future;
   }
@@ -130,9 +136,7 @@ class Kuzzle {
       throw ResponseError();
 
   Collection collection(String collection, {String index}) {
-    if (index == null) {
-      index = defaultIndex;
-    }
+    index ??= defaultIndex;
     return Collection(this, collection, index);
   }
 
@@ -210,8 +214,7 @@ class Kuzzle {
 
   Future<int> now({bool queuable = true}) async => throw ResponseError();
 
-  // TODO: Define types
-  void query({bool queuable = true}) => throw ResponseError();
+  // void query({bool queuable = true}) => throw ResponseError();
 
   Future<void> refreshIndex(String index, {bool queuable = true}) =>
       throw ResponseError();
