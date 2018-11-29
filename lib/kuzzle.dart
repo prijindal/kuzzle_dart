@@ -52,21 +52,20 @@ class Kuzzle {
     this.sslConnection = false,
   }) {
     security = Security(this);
-    futureMaps = <String, Completer<Map<String, dynamic>>>{};
+    futureMaps = <String, Completer<RawKuzzleResponse>>{};
     _webSocket = IOWebSocketChannel.connect(
         'ws://' + host + ':' + port.toString() + '/ws');
 
     _webSocket.stream.listen((dynamic message) {
       final dynamic jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
-      if (futureMaps.containsKey(requestId)) {
-        if (jsonResponse['error'] == null) {
-          futureMaps[requestId]
-              .complete(Map<String, dynamic>.from(jsonResponse['result']));
+      if (futureMaps.containsKey(requestId) &&
+          !futureMaps[requestId].isCompleted) {
+        final response = RawKuzzleResponse.fromMap(jsonResponse);
+        if (response.error == null) {
+          futureMaps[requestId].complete(response);
         } else {
-          futureMaps[requestId].completeError(ResponseError(
-              status: jsonResponse['error']['status'],
-              message: jsonResponse['error']['message']));
+          futureMaps[requestId].completeError(response.error);
         }
         futureMaps.remove(requestId);
       }
@@ -90,7 +89,7 @@ class Kuzzle {
   final int reconnectionDelay;
   final bool sslConnection;
   Security security;
-  Map<String, Completer<Map<String, dynamic>>> futureMaps;
+  Map<String, Completer<RawKuzzleResponse>> futureMaps;
   IOWebSocketChannel _webSocket; // Make private
   Uuid uuid = Uuid();
 
@@ -99,15 +98,24 @@ class Kuzzle {
   void Function() offlineQueueLoader; // TODO: ??
   void Function() queueFilter; // TODO: ??
 
-  Future<Map<String, dynamic>> addNetworkQuery(Map<String, dynamic> body) {
-    final Completer<Map<String, dynamic>> completer =
-        Completer<Map<String, dynamic>>();
-    final String requestId = uuid.v1();
-    body.addAll(<String, dynamic>{
-      'requestId': requestId,
-    });
-    networkQuery(body);
-    futureMaps[requestId] = completer;
+  Future<RawKuzzleResponse> addNetworkQuery(
+    Map<String, dynamic> body, {
+    bool queuable = true,
+  }) {
+    final Completer<RawKuzzleResponse> completer =
+        Completer<RawKuzzleResponse>();
+    if (queuable) {
+      final String requestId = uuid.v1();
+      body.addAll(<String, dynamic>{
+        'requestId': requestId,
+      });
+      networkQuery(body);
+      futureMaps[requestId] = completer;
+    } else {
+      networkQuery(body);
+      completer.complete(
+          RawKuzzleResponse.fromMap(<String, dynamic>{'result': body}));
+    }
     return completer.future;
   }
 
@@ -133,20 +141,14 @@ class Kuzzle {
   FutureOr<IndexCreationResponse> createIndex(
     String index, {
     bool queuable = true,
-  }) async {
-    final dynamic body = <String, dynamic>{
-      'index': index,
-      'controller': 'index',
-      'action': 'create',
-    };
-    if (queuable) {
-      return addNetworkQuery(body)
-          .then((onValue) => IndexCreationResponse.fromMap(onValue));
-    } else {
-      networkQuery(body);
-      return IndexCreationResponse.fromMap(<String, dynamic>{});
-    }
-  }
+  }) async =>
+      addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'controller': 'index',
+        'action': 'create',
+      }, queuable: queuable)
+          .then((RawKuzzleResponse onValue) =>
+              IndexCreationResponse.fromMap(onValue.result));
 
   Future<Credentials> createMyCredentials(
           String strategy, Credentials credentials,

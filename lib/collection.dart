@@ -8,14 +8,38 @@ import 'room.dart';
 import 'specifications.dart';
 import 'subscription.dart';
 
+const Map<String, dynamic> emptyMap = <String, dynamic>{};
+
 enum MappingDefinitionTypes {
-  int,
-  string,
+  long,
+  text,
 }
 
-class MappingDefinition {
-  MappingDefinitionTypes type;
-  String index;
+class MappingDefinition extends Object {
+  MappingDefinition(this.index, String type, this.fields)
+      : type = type == 'long'
+            ? MappingDefinitionTypes.long
+            : MappingDefinitionTypes.text;
+
+  final MappingDefinitionTypes type;
+  final String index;
+  final Map<String, dynamic> fields;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, String> toMap() {
+    final Map<String, String> map = <String, String>{
+      'type': type.toString(),
+    };
+    if (index != null) {
+      map['index'] = index;
+    }
+    if (fields != null) {
+      map['fields'] = fields.toString();
+    }
+    return map;
+  }
 }
 
 class Collection {
@@ -24,6 +48,7 @@ class Collection {
   final String collection;
   final String index;
   final Kuzzle kuzzle;
+  static String controller = 'collection';
 
   Map<String, dynamic> get headers => kuzzle.headers;
 
@@ -32,28 +57,28 @@ class Collection {
       CollectionMapping(this, mapping);
 
   // filters is elasticsearch dsl format
-  Future<int> count(Map<String, dynamic> filters,
-          {bool queuable = true}) async =>
-      throw ResponseError();
+  Future<int> count(
+          {Map<String, dynamic> filter = emptyMap,
+          bool queuable = true}) async =>
+      kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'collection': collection,
+        'controller': Document.controller,
+        'action': 'count',
+        'filters': filter,
+        'body': <String, dynamic>{},
+      }, queuable: queuable).then(
+          (RawKuzzleResponse response) => response.result['count']);
 
   FutureOr<RawKuzzleResponse> create(Map<String, MappingDefinition> mapping,
-      {bool queuable = true}) async {
-    final dynamic body = <String, dynamic>{
-      'index': index,
-      'collection': collection,
-      'controller': 'collection',
-      'action': 'create',
-      'body': mapping,
-    };
-    if (queuable) {
-      return kuzzle
-          .addNetworkQuery(body)
-          .then((onValue) => RawKuzzleResponse.fromMap(onValue));
-    } else {
-      kuzzle.networkQuery(body);
-      return RawKuzzleResponse.fromMap(<String, dynamic>{});
-    }
-  }
+          {bool queuable = true}) async =>
+      kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'collection': collection,
+        'controller': controller,
+        'action': 'create',
+        'body': mapping,
+      }, queuable: queuable);
 
   FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
@@ -61,23 +86,15 @@ class Collection {
     bool queuable = true,
     String refresh,
     String ifExist,
-  }) async {
-    final Map<String, dynamic> json = <String, dynamic>{
-      'index': index,
-      'collection': collection,
-      'controller': 'document',
-      'action': 'create',
-      'body': content,
-    };
-    if (queuable) {
-      return kuzzle
-          .addNetworkQuery(json)
-          .then((onValue) => Document(this, content: onValue));
-    } else {
-      kuzzle.networkQuery(json);
-    }
-    return Document(this, content: content);
-  }
+  }) async =>
+      kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'collection': collection,
+        'controller': Document.controller,
+        'action': 'create',
+        'body': content,
+      }, queuable: queuable).then((RawKuzzleResponse onValue) =>
+          Document.fromMap(this, onValue.result));
 
   /* TODO: There are two types of deleteDocument, one with id
   * And other with filter, both should be implemented */
@@ -104,7 +121,14 @@ class Collection {
       throw ResponseError();
 
   Future<CollectionMapping> getMapping({bool queuable = true}) async =>
-      throw ResponseError();
+      kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'collection': collection,
+        'controller': controller,
+        'action': 'getMapping',
+      }, queuable: queuable).then((RawKuzzleResponse onValue) =>
+          CollectionMapping.fromMap(this,
+              onValue.result[index]['mappings'][collection]['properties']));
 
   Future<Specifications> getSpecifications({bool queuable = true}) async =>
       throw ResponseError();
@@ -179,7 +203,16 @@ class Collection {
         ),
       );
 
-  void truncate() => throw ResponseError();
+  Future<RawKuzzleResponse> truncate({
+    bool queuable = true,
+    String refresh = 'false',
+  }) =>
+      kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'collection': collection,
+        'controller': controller,
+        'action': 'truncate',
+      }, queuable: queuable);
 
   Future<Document> updateDocument(
     String documentId,

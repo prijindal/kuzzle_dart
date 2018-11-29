@@ -1,4 +1,4 @@
 class Credentials {
-  final String username;
   Credentials(this.username);
+  final String username;
 }

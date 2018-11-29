@@ -1,11 +1,21 @@
 import 'collection.dart';
 import 'error.dart';
 
-class CollectionMapping {
+class CollectionMapping extends Object {
   CollectionMapping(this.collection, this.mapping);
+  CollectionMapping.fromMap(this.collection, Map<String, dynamic> map)
+      : mapping = map.map<String, MappingDefinition>((String key,
+                dynamic mapValue) =>
+            MapEntry<String, MappingDefinition>(
+                key,
+                MappingDefinition(
+                    mapValue['index'], mapValue['type'], mapValue['fields'])));
 
   final Collection collection;
   final Map<String, MappingDefinition> mapping;
+
+  @override
+  String toString() => mapping.toString();
 
   Map<String, dynamic> get headers => collection.headers;
 

@@ -11,9 +11,15 @@ class Document extends Object {
     this.content,
   });
 
+  Document.fromMap(this.collection, Map<String, dynamic> map)
+      : content = map['_source'],
+        id = map['_id'];
+
   final Collection collection;
   final String id;
   final Map<String, dynamic> content;
+
+  static String controller = 'document';
 
   Map<String, dynamic> get headers => collection.headers;
   Map<String, dynamic> get meta => <String, dynamic>{};
@@ -22,9 +28,17 @@ class Document extends Object {
   Future<String> delete({
     Map<String, dynamic> volatile,
     bool queuable = true,
-    String refresh,
+    String refresh = 'false',
   }) async =>
-      throw ResponseError();
+      collection.kuzzle.addNetworkQuery(<String, dynamic>{
+        'index': collection.index,
+        'collection': collection.collection,
+        'controller': controller,
+        'action': 'delete',
+        'refresh': refresh,
+        '_id': id,
+      }, queuable: queuable).then(
+          (RawKuzzleResponse response) => response.result['_id']);
 
   Future<bool> exists({
     Map<String, dynamic> volatile,
