@@ -27,7 +27,7 @@ class RawKuzzleResponse {
   final String room;
   final String requestId;
   final String state;
-  final Map<String, dynamic> result;
+  final dynamic result; // Usually Map<String, dynamic> result;
 
   @override
   String toString() => toMap().toString();

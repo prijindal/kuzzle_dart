@@ -8,8 +8,6 @@ import 'response.dart';
 import 'room.dart';
 import 'specifications.dart';
 
-const Map<String, dynamic> emptyMap = <String, dynamic>{};
-
 enum MappingDefinitionTypes {
   long,
   text,
