@@ -1,3 +1,8 @@
+# Kuzzle SDK for dart
+
+[![Build Status](https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master)](https://travis-ci.org/prijindal/kuzzle_dart)
+[![Coverage Status](https://coveralls.io/repos/github/prijindal/kuzzle_dart/badge.svg?branch=master)](https://coveralls.io/github/prijindal/kuzzle_dart?branch=master)
+
 The kuzzle_dart package provides SDK for [kuzzle](https://docs.kuzzle.io).
 It uses websocket to do the same.
 
