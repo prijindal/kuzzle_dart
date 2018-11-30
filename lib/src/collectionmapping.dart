@@ -1,33 +1,39 @@
 import 'collection.dart';
-import 'error.dart';
+import 'helpers.dart';
+import 'response.dart';
 
-class CollectionMapping extends Object {
-  CollectionMapping(this.collection, this.mapping);
-  CollectionMapping.fromMap(this.collection, Map<String, dynamic> map)
-      : mapping = map.map<String, MappingDefinition>((String key,
+class CollectionMapping extends KuzzleObject {
+  CollectionMapping(Collection collection, this.mappings) : super(collection);
+  CollectionMapping.fromMap(Collection collection, Map<String, dynamic> map)
+      : mappings = map.map<String, MappingDefinition>((String key,
                 dynamic mapValue) =>
             MapEntry<String, MappingDefinition>(
                 key,
                 MappingDefinition(
-                    mapValue['index'], mapValue['type'], mapValue['fields'])));
+                    mapValue['index'], mapValue['type'], mapValue['fields']))),
+        super(collection);
 
-  final Collection collection;
-  final Map<String, MappingDefinition> mapping;
+  Map<String, MappingDefinition> mappings;
+  static const String controller = 'collection';
 
   @override
-  String toString() => mapping.toString();
+  String toString() => mappings.toString();
 
-  Map<String, dynamic> get headers => collection.headers;
+  Future<void> apply({bool queuable = true}) =>
+      addNetworkQuery(<String, dynamic>{
+        'action': 'updateMapping',
+        'body': {
+          'properties': mappings,
+        }
+      });
 
-  Future<CollectionMapping> apply({bool queuable = true}) =>
-      throw ResponseError();
+  Future<CollectionMapping> refresh({bool queuable = true}) async {
+    final CollectionMapping collectionMapping =
+        await collection.getMapping(queuable: queuable);
+    mappings = collectionMapping.mappings;
+    return this;
+  }
 
-  Future<CollectionMapping> refresh({bool queuable = true}) =>
-      throw ResponseError();
-
-  Future<void> set(String filed, MappingDefinition mapping) =>
-      throw ResponseError();
-
-  void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      throw ResponseError();
+  void set(String field, MappingDefinition mapping) =>
+      mappings[field] = mapping;
 }
