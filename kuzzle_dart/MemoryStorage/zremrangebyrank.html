@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the zremrangebyrank method from the MemoryStorage class, for the Dart programming language.">
+  <title>zremrangebyrank method - MemoryStorage class - kuzzle_dart library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">kuzzle_dart</a></li>
+    <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+    <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
+    <li class="self-crumb">zremrangebyrank method</li>
+  </ol>
+  <div class="self-name">zremrangebyrank</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>MemoryStorage class</h5>
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/MemoryStorage-class.html#constructors">Constructors</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/MemoryStorage.html">MemoryStorage</a></li>
+    
+      <li class="section-title inherited">
+        <a href="kuzzle_dart/MemoryStorage-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/collection.html">collection</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/headers.html">headers</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/kuzzle.html">kuzzle</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/MemoryStorage-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/append.html">append</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/bitcount.html">bitcount</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/bitop.html">bitop</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/bitpos.html">bitpos</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/dbsize.html">dbsize</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/decr.html">decr</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/decrby.html">decrby</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/del.html">del</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/exists.html">exists</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/expire.html">expire</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/expireat.html">expireat</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/flushdb.html">flushdb</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/geoadd.html">geoadd</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/geodist.html">geodist</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/geohash.html">geohash</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/geopos.html">geopos</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/georadius.html">georadius</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/georadiusbymember.html">georadiusbymember</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/get.html">get</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/getbit.html">getbit</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/getController.html">getController</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/getrange.html">getrange</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/getset.html">getset</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hdel.html">hdel</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hexists.html">hexists</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hget.html">hget</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hgetall.html">hgetall</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hincrby.html">hincrby</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hincrbyfloat.html">hincrbyfloat</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hkeys.html">hkeys</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hlen.html">hlen</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hmget.html">hmget</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hmset.html">hmset</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hscan.html">hscan</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hset.html">hset</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hsetnx.html">hsetnx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hstrlen.html">hstrlen</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/hvals.html">hvals</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/incr.html">incr</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/incrby.html">incrby</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">incrbyfloat</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/keys.html">keys</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lindex.html">lindex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/linsert.html">linsert</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/llen.html">llen</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lpop.html">lpop</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lpush.html">lpush</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lpushx.html">lpushx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lrange.html">lrange</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lrem.html">lrem</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/ltrim.html">ltrim</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/mget.html">mget</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/mset.html">mset</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/msetnx.html">msetnx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/object.html">object</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/persist.html">persist</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pexpire.html">pexpire</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pexpireat.html">pexpireat</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pfadd.html">pfadd</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pfcount.html">pfcount</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pfmerge.html">pfmerge</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/ping.html">ping</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/psetex.html">psetex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/pttl.html">pttl</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/randomkey.html">randomkey</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/rename.html">rename</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/renamenx.html">renamenx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/rpop.html">rpop</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/rpoplpush.html">rpoplpush</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/rpush.html">rpush</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/rpushx.html">rpushx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sadd.html">sadd</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/scan.html">scan</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/scard.html">scard</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sdiff.html">sdiff</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sdiffstore.html">sdiffstore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/set.html">set</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/setex.html">setex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/setnx.html">setnx</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sinter.html">sinter</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sinterstore.html">sinterstore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sismember.html">sismember</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/smembers.html">smembers</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/smove.html">smove</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sort.html">sort</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/spop.html">spop</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/srandmember.html">srandmember</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/srem.html">srem</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sscan.html">sscan</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/strlen.html">strlen</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sunion.html">sunion</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/sunionstore.html">sunionstore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/time.html">time</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/touch.html">touch</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/ttl.html">ttl</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/type.html">type</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zadd.html">zadd</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zcard.html">zcard</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zcount.html">zcount</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zincrby.html">zincrby</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zinterstore.html">zinterstore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zlexcount.html">zlexcount</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrank.html">zrank</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrem.html">zrem</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">zremrangebylex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">zremrangebyrank</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zremrangebyscore.html">zremrangebyscore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrevrange.html">zrevrange</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrevrangebylex.html">zrevrangebylex</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrevrangebyscore.html">zrevrangebyscore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zrevrank.html">zrevrank</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zscan.html">zscan</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zscore.html">zscore</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/zunionstore.html">zunionstore</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/addNetworkQuery.html">addNetworkQuery</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/getPartialQuery.html">getPartialQuery</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/setHeaders.html">setHeaders</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="kuzzle_dart/MemoryStorage-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="kuzzle_dart/MemoryStorage/operator_equals.html">operator ==</a></li>
+    
+    
+    
+      <li class="section-title"><a href="kuzzle_dart/MemoryStorage-class.html#constants">Constants</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage/controller-constant.html">controller</a></li>
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>zremrangebyrank method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="name ">zremrangebyrank</span>
+(<wbr>{<span class="parameter" id="zremrangebyrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+      
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; zremrangebyrank({bool queuable = true}) =&gt;
+    addNetworkQuery(
+      &#39;append&#39;,
+      body: &lt;String, dynamic&gt;{},
+      optionalParams: &lt;String, dynamic&gt;{},
+      queuable: queuable,
+    ).then((RawKuzzleResponse response) =&gt; throw ResponseError());</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    kuzzle_dart 0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

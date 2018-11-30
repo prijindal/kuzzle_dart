@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the Kuzzle class from the kuzzle_dart library, for the Dart programming language.">
+  <title>Kuzzle class - kuzzle_dart library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">kuzzle_dart</a></li>
+    <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+    <li class="self-crumb">Kuzzle class</li>
+  </ol>
+  <div class="self-name">Kuzzle</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>kuzzle_dart library</h5>
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
+      <li><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></li>
+      <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
+      <li><a href="kuzzle_dart/CollectionMapping-class.html">CollectionMapping</a></li>
+      <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
+      <li><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></li>
+      <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
+      <li><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></li>
+      <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
+      <li><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></li>
+      <li><a href="kuzzle_dart/RequestStatistics-class.html">RequestStatistics</a></li>
+      <li><a href="kuzzle_dart/Rights-class.html">Rights</a></li>
+      <li><a href="kuzzle_dart/Room-class.html">Room</a></li>
+      <li><a href="kuzzle_dart/Security-class.html">Security</a></li>
+      <li><a href="kuzzle_dart/ServerInfo-class.html">ServerInfo</a></li>
+      <li><a href="kuzzle_dart/Statistics-class.html">Statistics</a></li>
+      <li><a href="kuzzle_dart/User-class.html">User</a></li>
+    
+    
+    
+    
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
+      <li><a href="kuzzle_dart/Event-class.html">Event</a></li>
+      <li><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></li>
+      <li><a href="kuzzle_dart/KuzzleOfflineModeType-class.html">KuzzleOfflineModeType</a></li>
+      <li><a href="kuzzle_dart/RoomScope-class.html">RoomScope</a></li>
+      <li><a href="kuzzle_dart/RoomState-class.html">RoomState</a></li>
+      <li><a href="kuzzle_dart/RoomUsersScope-class.html">RoomUsersScope</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#typedefs">Typedefs</a></li>
+      <li><a href="kuzzle_dart/EventListener.html">EventListener</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#exceptions">Exceptions</a></li>
+      <li><a href="kuzzle_dart/ResponseError-class.html">ResponseError</a></li>
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <h1>Kuzzle class </h1>
+
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="Kuzzle" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/Kuzzle.html">Kuzzle</a></span><span class="signature">(<span class="parameter" id="-param-host"><span class="type-annotation">String</span> <span class="parameter-name">host</span>, {</span> <span class="parameter" id="-param-autoQueue"><span class="type-annotation">bool</span> <span class="parameter-name">autoQueue</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="-param-autoReconnect"><span class="type-annotation">bool</span> <span class="parameter-name">autoReconnect</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="-param-autoReplay"><span class="type-annotation">bool</span> <span class="parameter-name">autoReplay</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="-param-autoResubscribe"><span class="type-annotation">bool</span> <span class="parameter-name">autoResubscribe</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="-param-connectType"><span class="type-annotation"><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></span> <span class="parameter-name">connectType</span>: <span class="default-value">KuzzleConnectType.auto</span>, </span> <span class="parameter" id="-param-defaultIndex"><span class="type-annotation">String</span> <span class="parameter-name">defaultIndex</span>, </span> <span class="parameter" id="-param-headers"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">headers</span>, </span> <span class="parameter" id="-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="-param-offlineMode"><span class="type-annotation"><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></span> <span class="parameter-name">offlineMode</span>, </span> <span class="parameter" id="-param-port"><span class="type-annotation">int</span> <span class="parameter-name">port</span>: <span class="default-value">7512</span>, </span> <span class="parameter" id="-param-queueTTL"><span class="type-annotation">int</span> <span class="parameter-name">queueTTL</span>: <span class="default-value">120000</span>, </span> <span class="parameter" id="-param-queueMaxSize"><span class="type-annotation">int</span> <span class="parameter-name">queueMaxSize</span>: <span class="default-value">500</span>, </span> <span class="parameter" id="-param-replayInterval"><span class="type-annotation">int</span> <span class="parameter-name">replayInterval</span>: <span class="default-value">10</span>, </span> <span class="parameter" id="-param-reconnectionDelay"><span class="type-annotation">int</span> <span class="parameter-name">reconnectionDelay</span>: <span class="default-value">1000</span>, </span> <span class="parameter" id="-param-sslConnection"><span class="type-annotation">bool</span> <span class="parameter-name">sslConnection</span>: <span class="default-value">false</span></span> })</span>
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="autoQueue" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/autoQueue.html">autoQueue</a></span>
+          <span class="signature">&#8594; bool</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="autoReconnect" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/autoReconnect.html">autoReconnect</a></span>
+          <span class="signature">&#8594; bool</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="autoReplay" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/autoReplay.html">autoReplay</a></span>
+          <span class="signature">&#8594; bool</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="autoResubscribe" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/autoResubscribe.html">autoResubscribe</a></span>
+          <span class="signature">&#8594; bool</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="connectType" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/connectType.html">connectType</a></span>
+          <span class="signature">&#8594; <a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="defaultIndex" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/defaultIndex.html">defaultIndex</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="futureMaps" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></span>
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">Completer<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>&gt;</span></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="headers" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></span>
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="host" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/host.html">host</a></span>
+          <span class="signature">&#8594; String</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="jwtToken" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="memoryStorage" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></span>
+          <span class="signature">&#8594; <a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read-only</div>
+</dd>
+        <dt id="offlineMode" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></span>
+          <span class="signature">&#8594; <a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="port" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/port.html">port</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="queueMaxSize" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/queueMaxSize.html">queueMaxSize</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="queueTTL" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/queueTTL.html">queueTTL</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="reconnectionDelay" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/reconnectionDelay.html">reconnectionDelay</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="replayInterval" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/replayInterval.html">replayInterval</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="roomMaps" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/roomMaps.html">roomMaps</a></span>
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">StreamController<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>&gt;</span></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="security" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/security.html">security</a></span>
+          <span class="signature">&#8596; <a href="kuzzle_dart/Security-class.html">Security</a></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="sslConnection" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/sslConnection.html">sslConnection</a></span>
+          <span class="signature">&#8594; bool</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="uuid" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/uuid.html">uuid</a></span>
+          <span class="signature">&#8596; Uuid</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">read / write</div>
+</dd>
+        <dt id="volatile" class="property">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/volatile.html">volatile</a></span>
+          <span class="signature">&#8594; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="kuzzle_dart/Kuzzle/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span> 
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="addNetworkQuery" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></span><span class="signature">(<wbr><span class="parameter" id="addNetworkQuery-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, {</span> <span class="parameter" id="addNetworkQuery-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="checkToken" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></span><span class="signature">(<wbr><span class="parameter" id="checkToken-param-token"><span class="type-annotation">String</span> <span class="parameter-name">token</span></span>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="collection" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></span><span class="signature">(<wbr><span class="parameter" id="collection-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, {</span> <span class="parameter" id="collection-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span></span> })
+            <span class="returntype parameter">&#8594; <a href="kuzzle_dart/Collection-class.html">Collection</a></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="connect" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/connect.html">connect</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="createIndex" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></span><span class="signature">(<wbr><span class="parameter" id="createIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="createIndex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="createMyCredentials" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="createMyCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="createMyCredentials-param-credentials"><span class="type-annotation">Credentials</span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Credentials</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="deleteMyCredentials" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="deleteMyCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="deleteMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="disconect" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getAllStatistics" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></span><span class="signature">(<wbr>{<span class="parameter" id="getAllStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getAutoRefresh" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></span><span class="signature">(<wbr>{<span class="parameter" id="getAutoRefresh-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="getAutoRefresh-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getJwtToken" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getMyCredentials" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="getMyCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="getMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Credentials</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getMyRights" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></span><span class="signature">(<wbr>{<span class="parameter" id="getMyRights-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Rights-class.html">Rights</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getServerInfo" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></span><span class="signature">(<wbr>{<span class="parameter" id="getServerInfo-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ServerInfo-class.html">ServerInfo</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getStatistics" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></span><span class="signature">(<wbr><span class="parameter" id="getStatistics-param-startTime"><span class="type-annotation">String</span> <span class="parameter-name">startTime</span>, </span> <span class="parameter" id="getStatistics-param-endTime"><span class="type-annotation">String</span> <span class="parameter-name">endTime</span>, {</span> <span class="parameter" id="getStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="listCollections" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/listCollections.html">listCollections</a></span><span class="signature">(<wbr><span class="parameter" id="listCollections-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="listCollections-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="listCollections-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="listCollections-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="listCollections-param-type"><span class="type-annotation">String</span> <span class="parameter-name">type</span>: <span class="default-value">'all'</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="listIndexes" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></span><span class="signature">(<wbr>{<span class="parameter" id="listIndexes-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="login" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/login.html">login</a></span><span class="signature">(<wbr><span class="parameter" id="login-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="login-param-credentials"><span class="type-annotation">Credentials</span> <span class="parameter-name">credentials</span>, </span> <span class="parameter" id="login-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="logout" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/logout.html">logout</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="networkQuery" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></span><span class="signature">(<wbr><span class="parameter" id="networkQuery-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="now" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/now.html">now</a></span><span class="signature">(<wbr>{<span class="parameter" id="now-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="refreshIndex" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></span><span class="signature">(<wbr><span class="parameter" id="refreshIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="refreshIndex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setAutoRefresh" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></span><span class="signature">(<wbr><span class="parameter" id="setAutoRefresh-param-autoRefresh"><span class="type-annotation">bool</span> <span class="parameter-name">autoRefresh</span>, {</span> <span class="parameter" id="setAutoRefresh-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="setAutoRefresh-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setDefaultIndex" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></span><span class="signature">(<wbr><span class="parameter" id="setDefaultIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setHeaders" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setHeaders-param-newheaders"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">newheaders</span>, {</span> <span class="parameter" id="setHeaders-param-replace"><span class="type-annotation">bool</span> <span class="parameter-name">replace</span>: <span class="default-value">false</span></span> })
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setJwtToken" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></span><span class="signature">(<wbr><span class="parameter" id="setJwtToken-param-jwtToken"><span class="type-annotation">String</span> <span class="parameter-name">jwtToken</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="unsetJwtToken" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="updateMyCredentials" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="updateMyCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="updateMyCredentials-param-credentials"><span class="type-annotation">Credentials</span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="updateMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Credentials</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="updateSelf" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></span><span class="signature">(<wbr><span class="parameter" id="updateSelf-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="updateSelf-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="validateMyCredentials" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/validateMyCredentials.html">validateMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="validateMyCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="validateMyCredentials-param-credentials"><span class="type-annotation">Credentials</span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="validateMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="whoAmI" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/whoAmI.html">whoAmI</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/Kuzzle/noSuchMethod.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          The equality operator. <a href="kuzzle_dart/Kuzzle/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#constructors">Constructors</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/Kuzzle.html">Kuzzle</a></li>
+    
+      <li class="section-title">
+        <a href="kuzzle_dart/Kuzzle-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="kuzzle_dart/Kuzzle/autoQueue.html">autoQueue</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/autoReconnect.html">autoReconnect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/autoReplay.html">autoReplay</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/autoResubscribe.html">autoResubscribe</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/connectType.html">connectType</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/defaultIndex.html">defaultIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/host.html">host</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/queueMaxSize.html">queueMaxSize</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/queueTTL.html">queueTTL</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/reconnectionDelay.html">reconnectionDelay</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/replayInterval.html">replayInterval</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/roomMaps.html">roomMaps</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/security.html">security</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/sslConnection.html">sslConnection</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/uuid.html">uuid</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/volatile.html">volatile</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/connect.html">connect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/listCollections.html">listCollections</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/login.html">login</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/logout.html">logout</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/validateMyCredentials.html">validateMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/whoAmI.html">whoAmI</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="kuzzle_dart/Kuzzle-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    kuzzle_dart 0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
