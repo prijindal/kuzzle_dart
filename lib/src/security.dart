@@ -1,12 +1,16 @@
+import 'helpers.dart';
 import 'kuzzle.dart';
 import 'profile.dart';
 import 'role.dart';
 import 'user.dart';
 
-class Security {
-  Security(this.kuzzle);
+class Security extends KuzzleObject {
+  Security(Kuzzle kuzzle) : super(null, kuzzle);
 
-  final Kuzzle kuzzle;
+  static const String controller = 'security';
+
+  @override
+  String getController() => controller;
 
   Profile profile(String id, Map<String, dynamic> content,
           {Map<String, dynamic> meta}) =>

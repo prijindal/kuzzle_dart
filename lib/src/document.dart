@@ -35,6 +35,8 @@ class Document extends KuzzleObject {
         ? mapMeta['deletedAt']
         : DateTime.fromMillisecondsSinceEpoch(mapMeta['deletedAt']);
     active = mapMeta['active'];
+    author = mapMeta['author'];
+    updater = mapMeta['updater'];
   }
 
   static Map<String, dynamic> extractMeta(Map<String, dynamic> map) {
@@ -49,6 +51,8 @@ class Document extends KuzzleObject {
         'updatedAt': null,
         'deletedAt': null,
         'active': null,
+        'author': null,
+        'updater': null,
       };
     }
   }
@@ -60,6 +64,8 @@ class Document extends KuzzleObject {
   DateTime updatedAt;
   DateTime deletedAt;
   bool active;
+  String author;
+  String updater;
 
   static const String controller = 'document';
 
@@ -77,6 +83,8 @@ class Document extends KuzzleObject {
         'updatedAt': updatedAt,
         'deletedAt': deletedAt,
         'active': active,
+        'author': author,
+        'updater': updater,
       };
 
   Map<String, dynamic> get meta => <String, dynamic>{};

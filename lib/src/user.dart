@@ -1,6 +1,8 @@
+import 'profile.dart';
+import 'response.dart';
 import 'security.dart';
 
-class User {
+class User extends Object {
   User(this.security, this.id, this.content, {this.meta});
   User.fromMap(this.security, Map<String, dynamic> map)
       : id = map['_id'],
@@ -11,4 +13,18 @@ class User {
   final String id;
   final Map<String, dynamic> content; // Profile Definition
   final Map<String, dynamic> meta;
+
+  List<String> profileIds = [];
+
+  Future<List<Profile>> getProfiles() {
+    return Future.wait<Profile>(profileIds
+        .map((String profileId) => security.addNetworkQuery(
+              'getProfile',
+              optionalParams: <String, dynamic>{
+                '_id': profileId,
+              },
+            ).then<Profile>((RawKuzzleResponse response) =>
+                Profile.fromMap(security, response.result)))
+        .toList());
+  }
 }

@@ -7,18 +7,10 @@ import 'response.dart';
 import 'room.dart';
 import 'specifications.dart';
 
-enum MappingDefinitionTypes {
-  long,
-  text,
-}
-
 class MappingDefinition extends Object {
-  MappingDefinition(this.index, String type, this.fields)
-      : type = type == 'long'
-            ? MappingDefinitionTypes.long
-            : MappingDefinitionTypes.text;
+  MappingDefinition(this.index, this.type, this.fields);
 
-  final MappingDefinitionTypes type;
+  final String type; // long or text
   final String index;
   final Map<String, dynamic> fields;
 
