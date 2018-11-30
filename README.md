@@ -1,9 +1,27 @@
-# kuzzle_dart
-
-A library to communicate with kuzzle API
+The kuzzle_dart package provides SDK for [kuzzle](https://docs.kuzzle.io).
+It uses websocket to do the same.
 
 ## Getting Started
 
-For help getting started with Flutter, view our online [documentation](https://flutter.io/).
+```dart
+import 'package:kuzzle_dart/kuzzle_dart.dart';
+final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
 
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
+void setup() async {
+    await kuzzle.createIndex('playground');
+    
+    final Collection collection = kuzzle.collection('collection');
+
+    await collection.create();
+
+    const Map<String, dynamic> message = <String, dynamic>{
+        'message': 'Hello World',
+        'echoing': 1
+    };
+    final Document document = await collection.createDocument(message);
+    print(document.version);
+}
+
+setup();
+
+```

@@ -14,7 +14,7 @@ class User extends Object {
   final Map<String, dynamic> content; // Profile Definition
   final Map<String, dynamic> meta;
 
-  List<String> profileIds = [];
+  List<String> profileIds = <String>[];
 
   Future<List<Profile>> getProfiles() {
     return Future.wait<Profile>(profileIds
