@@ -1,6 +1,7 @@
+import 'dart:io' show exit;
 import 'package:kuzzle_dart/kuzzle_dart.dart';
 
-Future<void> main() async {
+Future<void> kuzzleConnections() async {
   final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
 
   try {
@@ -16,10 +17,9 @@ Future<void> main() async {
   await collection.create();
 
   final Room room = await collection.subscribe((RawKuzzleResponse response) {
-    print(response.action + ' ' + response.controller);
+    print(response.state + ' ' + response.action + ' ' + response.controller);
     print(response.toObject());
-  });
-  print(room.channel);
+  }, scope: RoomScope.all, state: RoomState.all, users: RoomUsersScope.all);
 
   const Map<String, dynamic> message = <String, dynamic>{
     'message': 'Hello World',
@@ -34,8 +34,27 @@ Future<void> main() async {
   // final CollectionMapping collectionMapping = await collection.getMapping();
   // print(collectionMapping);
 
+  await collection
+      .updateDocument(document.id, <String, dynamic>{'Hello': 'world'});
+
   await document.delete();
 
-  // final RawKuzzleResponse response = await collection.truncate();
-  // print(response);
+  await collection.truncate();
+  // print(deletedIds);
+
+  final String roomId = await room.unsubscribe();
+  print(roomId);
+
+  // kuzzle.disconect();
+}
+
+void main() {
+  const bool shouldExit = false;
+  if (!shouldExit) {
+    kuzzleConnections();
+    return;
+  }
+  kuzzleConnections().then((void value) {
+    exit(0);
+  });
 }

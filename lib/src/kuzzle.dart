@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/status.dart' as status;
+
 import 'collection.dart';
 import 'credentials.dart';
 import 'error.dart';
@@ -80,7 +82,8 @@ class Kuzzle {
   Security security;
   Map<String, Completer<RawKuzzleResponse>> futureMaps =
       <String, Completer<RawKuzzleResponse>>{};
-  Map<String, NotificationCallback> roomMaps = <String, NotificationCallback>{};
+  Map<String, StreamController<RawKuzzleResponse>> roomMaps =
+      <String, StreamController<RawKuzzleResponse>>{};
   IOWebSocketChannel _webSocket;
   StreamSubscription<dynamic> _streamSubscription;
   Uuid uuid = Uuid();
@@ -105,8 +108,10 @@ class Kuzzle {
       futureMaps[requestId] = completer;
     } else {
       networkQuery(body);
-      completer.complete(
-          RawKuzzleResponse.fromMap(this, <String, dynamic>{'result': body}));
+      completer.complete(RawKuzzleResponse.fromMap(
+        this,
+        <String, dynamic>{'result': body['body']},
+      ));
     }
     return completer.future;
   }
@@ -130,14 +135,13 @@ class Kuzzle {
   void connect() {
     _webSocket = IOWebSocketChannel.connect(
         'ws://' + host + ':' + port.toString() + '/ws');
-
     _streamSubscription = _webSocket.stream.listen((dynamic message) {
       final dynamic jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
       final RawKuzzleResponse response =
           RawKuzzleResponse.fromMap(this, jsonResponse);
       if (roomMaps.containsKey(response.room)) {
-        roomMaps[response.room](response);
+        roomMaps[response.room].add(response);
       } else if (futureMaps.containsKey(requestId) &&
           !futureMaps[requestId].isCompleted) {
         if (response.error == null) {
@@ -189,7 +193,10 @@ class Kuzzle {
           .then(
               (RawKuzzleResponse response) => response.result['acknowledged']);
 
-  void disconect() => _streamSubscription.cancel();
+  void disconect() {
+    _streamSubscription.cancel();
+    _webSocket.sink.close(status.goingAway);
+  }
 
   // void flushQueue() => throw ResponseError();
 

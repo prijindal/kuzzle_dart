@@ -127,7 +127,7 @@ class Collection {
       }, queuable: queuable);
 
   Document document({String id, Map<String, dynamic> content}) =>
-      throw ResponseError();
+      Document(this, id, content);
 
   Future<Document> fetchDocument(
     String documentId, {
@@ -250,9 +250,14 @@ class Collection {
         }
       });
 
-  Future<RawKuzzleResponse> publishMessage(Document document,
+  Future<bool> publishMessage(Map<String, dynamic> message,
           {Map<String, dynamic> volatile, bool queuable = true}) async =>
-      throw ResponseError();
+      _addNetworkQuery(<String, dynamic>{
+        'controller': 'realtime',
+        'action': 'publish',
+        'body': message,
+        'volatile': volatile,
+      }).then((RawKuzzleResponse response) => response.result['published']);
 
   Future<Document> replaceDocument(
     String documentId,
@@ -270,7 +275,7 @@ class Collection {
       }).then((RawKuzzleResponse response) =>
           Document.fromMap(this, response.result));
 
-  Room room(Map<String, dynamic> options) => throw ResponseError();
+  Room room(Map<String, dynamic> options) => Room(this);
 
   Future<RawKuzzleResponse> scroll(
     String scrollId, {
@@ -341,12 +346,14 @@ class Collection {
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {
     Map<String, dynamic> query = emptyMap,
-    final Map<String, dynamic> volatile = emptyMap,
+    Map<String, dynamic> volatile = emptyMap,
     bool subscribeToSelf,
     RoomScope scope = RoomScope.all,
     RoomState state = RoomState.done,
     RoomUsersScope users = RoomUsersScope.none,
   }) async {
+    final StreamController<RawKuzzleResponse> streamController =
+        StreamController<RawKuzzleResponse>.broadcast();
     final Room room = await _addNetworkQuery(<String, dynamic>{
       'controller': 'realtime',
       'action': 'subscribe',
@@ -363,25 +370,31 @@ class Collection {
           scope: scope,
           state: state,
           users: users,
+          volatile: volatile,
         ));
-    kuzzle.roomMaps[room.channel] = notificationCallback;
+    kuzzle.roomMaps[room.channel] = streamController;
+    room.subscription = streamController.stream.listen(notificationCallback);
     return room;
   }
 
-  Future<RawKuzzleResponse> truncate({
+  Future<List<String>> truncate({
     bool queuable = true,
     String refresh = 'false',
   }) =>
       _addNetworkQuery(<String, dynamic>{
         'action': 'truncate',
-      }, queuable: queuable);
+      }, queuable: queuable)
+          .then((RawKuzzleResponse response) =>
+              (response.result['ids'] as List<dynamic>)
+                  .map((dynamic id) => id as String)
+                  .toList());
 
   Future<RawKuzzleResponse> updateDocument(
     String documentId,
     Map<String, dynamic> content, {
     Map<String, dynamic> volatile,
     bool queuable = true,
-    String refresh,
+    String refresh = 'false',
     int retryOnConflict = 0,
   }) async =>
       _addNetworkQuery(<String, dynamic>{

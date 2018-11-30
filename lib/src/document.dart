@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'collection.dart';
 import 'error.dart';
 import 'helpers.dart';
@@ -6,32 +7,59 @@ import 'response.dart';
 import 'room.dart';
 
 class Document extends Object {
+  Document(
+    this.collection,
+    this.id,
+    this.content, {
+    this.createdAt,
+    this.updatedAt,
+    this.deletedAt,
+    this.active,
+  });
+
   Document.fromMap(this.collection, Map<String, dynamic> map)
       : assert(map['meta'] != null),
         assert(map['_id'] != null),
         assert(map['_source'] != null),
         id = map['_id'],
-        content = map['_source'],
-        createdAt = map['_meta']['createdAt'] == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(map['_meta']['createdAt']),
-        updatedAt = map['_meta']['updatedAt'] == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(map['_meta']['updatedAt']),
-        deletedAt = map['_meta']['deletedAt'] == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(map['_meta']['deletedAt']),
-        active = map['_meta']['active'] {
+        content = map['_source'] {
     content.remove('_kuzzle_info');
+    final Map<String, dynamic> mapMeta = extractMeta(map);
+    createdAt = mapMeta['createdAt'] == null
+        ? mapMeta['createdAt']
+        : DateTime.fromMillisecondsSinceEpoch(mapMeta['createdAt']);
+    updatedAt = mapMeta['updatedAt'] == null
+        ? mapMeta['updatedAt']
+        : DateTime.fromMillisecondsSinceEpoch(mapMeta['updatedAt']);
+    deletedAt = mapMeta['deletedAt'] == null
+        ? mapMeta['deletedAt']
+        : DateTime.fromMillisecondsSinceEpoch(mapMeta['deletedAt']);
+    active = mapMeta['active'];
+  }
+
+  static Map<String, dynamic> extractMeta(Map<String, dynamic> map) {
+    if (map.containsKey('_meta')) {
+      return map['_meta'];
+    } else if (map.containsKey('_source') &&
+        map['_source'].containsKey('_kuzzle_info')) {
+      return map['_source']['_kuzzle_info'];
+    } else {
+      return <String, dynamic>{
+        'createdAt': null,
+        'updatedAt': null,
+        'deletedAt': null,
+        'active': null,
+      };
+    }
   }
 
   final Collection collection;
   final String id;
   final Map<String, dynamic> content;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final DateTime deletedAt;
-  final bool active;
+  DateTime createdAt;
+  DateTime updatedAt;
+  DateTime deletedAt;
+  bool active;
 
   static String controller = 'document';
 
@@ -120,25 +148,14 @@ class Document extends Object {
     RoomScope scope = RoomScope.all,
     RoomState state = RoomState.done,
     RoomUsersScope users = RoomUsersScope.none,
-  }) async {
-    final Room room = await _addNetworkQuery(<String, dynamic>{
-      'controller': 'realtime',
-      'action': 'subscribe',
-      'body': query,
-      'volatile': volatile,
-      'scope': enumToString<RoomScope>(scope),
-      'state': enumToString<RoomState>(state),
-      'users': enumToString<RoomUsersScope>(users),
-    }).then((RawKuzzleResponse response) => Room(
-          collection,
-          id: response.result['roomId'],
-          channel: response.result['channel'],
-          subscribeToSelf: subscribeToSelf,
-          scope: scope,
-          state: state,
-          users: users,
-        ));
-    collection.kuzzle.roomMaps[room.channel] = notificationCallback;
-    return room;
-  }
+  }) async =>
+      collection.subscribe(
+        notificationCallback,
+        query: query,
+        volatile: volatile,
+        subscribeToSelf: subscribeToSelf,
+        scope: scope,
+        state: state,
+        users: users,
+      );
 }

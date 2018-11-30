@@ -46,6 +46,9 @@ class RawKuzzleResponse {
       };
 
   dynamic toObject() {
+    // if (state == 'pending') {
+    //   return this;
+    // }
     switch (controller) {
       case 'document':
         return _toDocumentObject();
@@ -58,6 +61,7 @@ class RawKuzzleResponse {
     switch (action) {
       case 'create':
       case 'replace':
+      case 'update':
         return Document.fromMap(Collection(kuzzle, collection, index), result);
       case 'delete':
         return result['_id'];
