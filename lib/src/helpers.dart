@@ -1,4 +1,6 @@
+import 'package:meta/meta.dart';
 import 'collection.dart';
+import 'kuzzle.dart';
 import 'response.dart';
 
 const Map<String, dynamic> emptyMap = <String, dynamic>{};
@@ -9,32 +11,67 @@ String enumToString<T>(T A) => A.toString().split('.')[1];
 typedef NotificationCallback = void Function(RawKuzzleResponse response);
 
 abstract class KuzzleObject extends Object {
-  KuzzleObject(this.collection);
+  KuzzleObject([this.collection, this.kuzzle])
+      : assert(collection != null || kuzzle != null);
 
   final Collection collection;
-  static String controller;
+  final Kuzzle kuzzle;
+
+  String getController();
 
   Map<String, dynamic> get headers {
-    final Map<String, dynamic> headers = collection.headers;
+    Map<String, dynamic> headers;
+    if (collection != null) {
+      headers = collection.headers;
+    } else if (kuzzle != null) {
+      headers = kuzzle.headers;
+    } else {
+      headers = <String, dynamic>{};
+    }
     headers.addAll(_headers);
     return headers;
   }
 
   Map<String, dynamic> _headers = emptyMap;
 
-  Map<String, dynamic> _getPartialQuery() => <String, dynamic>{
+  @mustCallSuper
+  Map<String, dynamic> getPartialQuery() {
+    final Map<String, dynamic> query = <String, dynamic>{
+      'controller': getController(),
+    };
+    if (collection != null) {
+      query.addAll(<String, dynamic>{
         'index': collection.index,
-        'collection': collection.collection,
-        'controller': controller,
-      };
+        'collection': collection.collectionName,
+      });
+    } else if (kuzzle != null) {
+      query.addAll(<String, dynamic>{
+        'index': kuzzle.defaultIndex,
+      });
+    }
+    return query;
+  }
 
   Future<RawKuzzleResponse> addNetworkQuery(
-    Map<String, dynamic> body, {
+    String action, {
+    Map<String, dynamic> body,
+    Map<String, dynamic> optionalParams,
     bool queuable = true,
-  }) {
-    final Map<String, dynamic> query = _getPartialQuery();
-    query.addAll(body);
-    return collection.kuzzle.addNetworkQuery(query, queuable: queuable);
+  }) async {
+    final Map<String, dynamic> query = getPartialQuery();
+    query['action'] = action;
+    if (body != null) {
+      query['body'] = body;
+    }
+    if (optionalParams != null) {
+      query.addAll(optionalParams);
+    }
+    if (collection == null && kuzzle != null) {
+      return kuzzle.addNetworkQuery(query, queuable: queuable);
+    } else if (collection != null && kuzzle == null) {
+      return collection.kuzzle.addNetworkQuery(query, queuable: queuable);
+    }
+    return RawKuzzleResponse.fromMap(null, <String, dynamic>{});
   }
 
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>

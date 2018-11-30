@@ -29,18 +29,23 @@ class Room extends KuzzleObject {
   final Map<String, dynamic> volatile;
   static const String controller = 'realtime';
 
+  @override
+  String getController() => controller;
+
   StreamSubscription<RawKuzzleResponse> subscription;
 
   Map<String, dynamic> filters;
   String roomId;
 
-  Future<int> count() => addNetworkQuery(<String, dynamic>{
-        'action': 'count',
-        'volatile': volatile,
-        'body': <String, dynamic>{
+  Future<int> count() => addNetworkQuery(
+        'count',
+        body: <String, dynamic>{
           'roomId': id,
-        }
-      }).then((RawKuzzleResponse response) => response.result['count'] as int);
+        },
+        optionalParams: <String, dynamic>{
+          'volatile': volatile,
+        },
+      ).then((RawKuzzleResponse response) => response.result['count'] as int);
 
   Future<Room> renew(
     NotificationCallback notificationCallback, {
@@ -66,13 +71,15 @@ class Room extends KuzzleObject {
     subscription.cancel();
     collection.kuzzle.roomMaps[channel].close();
     collection.kuzzle.roomMaps.remove(channel);
-    return await addNetworkQuery(<String, dynamic>{
-      'action': 'unsubscribe',
-      'volatile': volatile,
-      'body': <String, dynamic>{
+    return await addNetworkQuery(
+      'unsubscribe',
+      body: <String, dynamic>{
         'roomId': id,
-      }
-    }, queuable: false)
-        .then((RawKuzzleResponse response) => response.result['roomId']);
+      },
+      optionalParams: <String, dynamic>{
+        'volatile': volatile,
+      },
+      queuable: false,
+    ).then((RawKuzzleResponse response) => response.result['roomId']);
   }
 }

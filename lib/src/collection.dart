@@ -39,35 +39,24 @@ class MappingDefinition extends Object {
   }
 }
 
-class Collection {
-  Collection(this.kuzzle, this.collection, this.index);
+class Collection extends KuzzleObject {
+  Collection(Kuzzle kuzzle, this.collectionName, this.index)
+      : super(null, kuzzle);
 
-  final String collection;
+  final String collectionName;
   final String index;
-  final Kuzzle kuzzle;
   static String controller = 'collection';
 
-  Map<String, dynamic> get headers {
-    final Map<String, dynamic> headers = kuzzle.headers;
-    headers.addAll(_headers);
-    return headers;
-  }
+  @override
+  String getController() => controller;
 
-  Map<String, dynamic> _headers = emptyMap;
-
-  Map<String, dynamic> _getPartialQuery() => <String, dynamic>{
-        'index': index,
-        'collection': collection,
-        'controller': controller,
-      };
-
-  Future<RawKuzzleResponse> addNetworkQuery(
-    Map<String, dynamic> body, {
-    bool queuable = true,
-  }) {
-    final Map<String, dynamic> query = _getPartialQuery();
-    query.addAll(body);
-    return kuzzle.addNetworkQuery(query, queuable: queuable);
+  @override
+  Map<String, dynamic> getPartialQuery() {
+    final Map<String, dynamic> prevMap = super.getPartialQuery();
+    prevMap.addAll(<String, dynamic>{
+      'collection': collectionName,
+    });
+    return prevMap;
   }
 
   Future<CollectionMapping> collectionMapping(
@@ -78,21 +67,24 @@ class Collection {
   Future<int> count(
           {Map<String, dynamic> filter = emptyMap,
           bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'count',
-        'filters': filter,
-        'body': <String, dynamic>{},
-      }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['count']);
+      addNetworkQuery(
+        'count',
+        body: <String, dynamic>{},
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'filters': filter,
+        },
+        queuable: queuable,
+      ).then((RawKuzzleResponse response) => response.result['count']);
 
   FutureOr<RawKuzzleResponse> create(
           {Map<String, MappingDefinition> mapping,
           bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'create',
-        'body': mapping ?? emptyMap,
-      }, queuable: queuable);
+      addNetworkQuery(
+        'create',
+        body: mapping ?? emptyMap,
+        queuable: queuable,
+      );
 
   FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
@@ -101,13 +93,15 @@ class Collection {
     String refresh,
     String ifExist,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'create',
-        'body': content,
-      }, queuable: queuable)
-          .then((RawKuzzleResponse onValue) =>
-              Document.fromMap(this, onValue.result));
+      addNetworkQuery(
+        'create',
+        body: content,
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+        },
+        queuable: queuable,
+      ).then((RawKuzzleResponse onValue) =>
+          Document.fromMap(this, onValue.result));
 
   Future<String> deleteDocument(
     String documentId, {
@@ -115,21 +109,26 @@ class Collection {
     bool queuable = true,
     String refresh,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'delete',
-        'refresh': refresh,
-        '_id': documentId,
-      }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['_id']);
+      addNetworkQuery(
+        'delete',
+        optionalParams: <String, dynamic>{
+          'refresh': refresh,
+          '_id': documentId,
+        },
+        queuable: queuable,
+      ).then((RawKuzzleResponse response) => response.result['_id']);
 
   Future<RawKuzzleResponse> deleteSpecifications({
     bool queuable = true,
     String refresh,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'deleteSpecifications',
-        'refresh': refresh,
-      }, queuable: queuable);
+      addNetworkQuery(
+        'deleteSpecifications',
+        optionalParams: <String, dynamic>{
+          'refresh': refresh,
+        },
+        queuable: queuable,
+      );
 
   Document document({String id, Map<String, dynamic> content}) =>
       Document(this, id, content);
@@ -139,25 +138,23 @@ class Collection {
     bool queuable = true,
     bool includeTrash = false,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'get',
-        '_id': documentId,
-        'includeTrash': includeTrash,
-      }).then((RawKuzzleResponse response) =>
+      addNetworkQuery(
+        'get',
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          '_id': documentId,
+          'includeTrash': includeTrash,
+        },
+      ).then((RawKuzzleResponse response) =>
           Document.fromMap(this, response.result));
 
   Future<CollectionMapping> getMapping({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'getMapping',
-      }, queuable: queuable)
-          .then((RawKuzzleResponse onValue) => CollectionMapping.fromMap(this,
-              onValue.result[index]['mappings'][collection]['properties']));
+      addNetworkQuery('getMapping', queuable: queuable).then(
+          (RawKuzzleResponse onValue) => CollectionMapping.fromMap(this,
+              onValue.result[index]['mappings'][collectionName]['properties']));
 
   Future<Specifications> getSpecifications({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'getSpecifications',
-      }, queuable: queuable)
+      addNetworkQuery('getSpecifications', queuable: queuable)
           .then((RawKuzzleResponse response) => Specifications());
 
   Future<List<Document>> mCreateDocument(
@@ -165,17 +162,19 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mCreate',
-        'refresh': refresh,
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mCreate',
+        body: <String, dynamic>{
           'documents': documents.map((Document document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
-        }
-      }).then((RawKuzzleResponse response) => response.result['hits'].map(
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+        },
+      ).then((RawKuzzleResponse response) => response.result['hits'].map(
           (Map<String, dynamic> document) => Document.fromMap(this, document)));
 
   Future<List<Document>> mCreateOrReplaceDocument(
@@ -183,17 +182,19 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mCreateOrReplace',
-        'refresh': refresh,
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mCreateOrReplace',
+        body: <String, dynamic>{
           'documents': documents.map((Document document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
-        }
-      }).then((RawKuzzleResponse response) => response.result['hits'].map(
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+        },
+      ).then((RawKuzzleResponse response) => response.result['hits'].map(
           (Map<String, dynamic> document) => Document.fromMap(this, document)));
 
   Future<RawKuzzleResponse> mDeleteDocument(
@@ -201,41 +202,47 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mDelete',
-        'refresh': refresh,
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mDelete',
+        body: <String, dynamic>{
           'ids': documentIds,
-        }
-      });
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+        },
+      );
 
   Future<RawKuzzleResponse> mGetDocument(List<String> documentIds,
           {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mGet',
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mGet',
+        body: <String, dynamic>{
           'ids': documentIds,
-        }
-      });
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+        },
+      );
 
   Future<RawKuzzleResponse> mReplaceDocument(
     List<Document> documents, {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mReplace',
-        'refresh': refresh,
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mReplace',
+        body: <String, dynamic>{
           'documents': documents.map((Document document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
-        }
-      }).then((RawKuzzleResponse response) => response.result['hits'].map(
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+        },
+      ).then((RawKuzzleResponse response) => response.result['hits'].map(
           (Map<String, dynamic> document) => Document.fromMap(this, document)));
 
   Future<RawKuzzleResponse> mUpdateDocument(
@@ -243,26 +250,30 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'mUpdate',
-        'refresh': refresh,
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'mUpdate',
+        body: <String, dynamic>{
           'documents': documents.map((Document document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
-        }
-      });
+        },
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+        },
+      );
 
   Future<bool> publishMessage(Map<String, dynamic> message,
           {Map<String, dynamic> volatile, bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Room.controller,
-        'action': 'publish',
-        'body': message,
-        'volatile': volatile,
-      }).then((RawKuzzleResponse response) => response.result['published']);
+      addNetworkQuery(
+        'publish',
+        body: message,
+        optionalParams: <String, dynamic>{
+          'controller': Room.controller,
+          'volatile': volatile,
+        },
+      ).then((RawKuzzleResponse response) => response.result['published']);
 
   Future<Document> replaceDocument(
     String documentId,
@@ -271,13 +282,15 @@ class Collection {
     bool queuable = true,
     String refresh,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'replace',
-        'refresh': refresh,
-        'body': content,
-        '_id': documentId,
-      }).then((RawKuzzleResponse response) =>
+      addNetworkQuery(
+        'replace',
+        body: content,
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+          '_id': documentId,
+        },
+      ).then((RawKuzzleResponse response) =>
           Document.fromMap(this, response.result));
 
   Room room(Map<String, dynamic> options) => Room(this);
@@ -287,10 +300,9 @@ class Collection {
     bool queuable = true,
     String scroll,
   }) =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'scroll',
+      addNetworkQuery('scroll', optionalParams: <String, dynamic>{
         'scrollId': scrollId,
-        'scroll': scroll,
+        'scroll': scroll
       });
 
   void scrollSpecifications(
@@ -298,10 +310,9 @@ class Collection {
     bool queuable = true,
     String scroll,
   }) =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'scrollSpecifications',
+      addNetworkQuery('scrollSpecifications', optionalParams: <String, dynamic>{
         'scrollId': scrollId,
-        'scroll': scroll,
+        'scroll': scroll
       });
 
   Future<RawKuzzleResponse> search({
@@ -314,19 +325,21 @@ class Collection {
     int size = 10,
     bool includeTrash = false,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'search',
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'search',
+        body: <String, dynamic>{
           'query': query,
           'aggregations': aggregations,
-          'sort': sort,
+          'sort': sort
         },
-        'scroll': scroll,
-        'from': from,
-        'size': size,
-        'includeTrash': includeTrash,
-      });
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'scroll': scroll,
+          'from': from,
+          'size': size,
+          'includeTrash': includeTrash
+        },
+      );
 
   void searchSpecifications({
     Map<String, dynamic> query = emptyMap,
@@ -335,18 +348,17 @@ class Collection {
     int from = 0,
     int size = 10,
   }) =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'searchSpecifications',
-        'body': <String, dynamic>{
+      addNetworkQuery(
+        'searchSpecifications',
+        body: <String, dynamic>{
           'query': query,
         },
-        'from': from,
-        'size': size,
-        'scroll': scroll,
-      });
-
-  void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      _headers = newheaders;
+        optionalParams: <String, dynamic>{
+          'from': from,
+          'size': size,
+          'scroll': scroll,
+        },
+      );
 
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {
@@ -359,15 +371,17 @@ class Collection {
   }) async {
     final StreamController<RawKuzzleResponse> streamController =
         StreamController<RawKuzzleResponse>.broadcast();
-    final Room room = await addNetworkQuery(<String, dynamic>{
-      'controller': Room.controller,
-      'action': 'subscribe',
-      'body': query,
-      'volatile': volatile,
-      'scope': enumToString<RoomScope>(scope),
-      'state': enumToString<RoomState>(state),
-      'users': enumToString<RoomUsersScope>(users),
-    }).then((RawKuzzleResponse response) => Room(
+    final Room room = await addNetworkQuery(
+      'subscribe',
+      body: query,
+      optionalParams: <String, dynamic>{
+        'controller': Room.controller,
+        'volatile': volatile,
+        'scope': enumToString<RoomScope>(scope),
+        'state': enumToString<RoomState>(state),
+        'users': enumToString<RoomUsersScope>(users),
+      },
+    ).then((RawKuzzleResponse response) => Room(
           this,
           id: response.result['roomId'],
           channel: response.result['channel'],
@@ -386,10 +400,8 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'truncate',
-      }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
+      addNetworkQuery('truncate', queuable: queuable).then(
+          (RawKuzzleResponse response) =>
               (response.result['ids'] as List<dynamic>)
                   .map((dynamic id) => id as String)
                   .toList());
@@ -402,29 +414,25 @@ class Collection {
     String refresh = 'false',
     int retryOnConflict = 0,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Document.controller,
-        'action': 'update',
-        'refresh': refresh,
-        '_id': documentId,
-        'body': content,
-      });
+      addNetworkQuery(
+        'update',
+        body: content,
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+          'refresh': refresh,
+          '_id': documentId
+        },
+      );
 
   Future<RawKuzzleResponse> updateSpecifications(
     Specifications specifications, {
     bool queuable = true,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'updateSpecifications',
-        'body': specifications.toMap(),
-      });
+      addNetworkQuery('updateSpecifications', body: specifications.toMap());
 
   Future<RawKuzzleResponse> validateSpecifications(
     Specifications specifications, {
     bool queuable = true,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'validateSpecifications',
-        'body': specifications.toMap(),
-      });
+      addNetworkQuery('validateSpecifications', body: specifications.toMap());
 }

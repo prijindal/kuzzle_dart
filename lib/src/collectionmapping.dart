@@ -1,6 +1,5 @@
 import 'collection.dart';
 import 'helpers.dart';
-import 'response.dart';
 
 class CollectionMapping extends KuzzleObject {
   CollectionMapping(Collection collection, this.mappings) : super(collection);
@@ -17,14 +16,14 @@ class CollectionMapping extends KuzzleObject {
   static const String controller = 'collection';
 
   @override
+  String getController() => controller;
+
+  @override
   String toString() => mappings.toString();
 
   Future<void> apply({bool queuable = true}) =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'updateMapping',
-        'body': {
-          'properties': mappings,
-        }
+      addNetworkQuery('updateMapping', body: <String, dynamic>{
+        'properties': mappings,
       });
 
   Future<CollectionMapping> refresh({bool queuable = true}) async {

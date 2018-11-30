@@ -64,6 +64,9 @@ class Document extends KuzzleObject {
   static const String controller = 'document';
 
   @override
+  String getController() => controller;
+
+  @override
   String toString() => toMap().toString();
 
   Map<String, dynamic> toMap() => <String, dynamic>{
@@ -83,22 +86,26 @@ class Document extends KuzzleObject {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'delete',
-        'refresh': refresh,
-        '_id': id,
-      }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['_id']);
+      addNetworkQuery(
+        'delete',
+        optionalParams: <String, dynamic>{
+          'refresh': refresh,
+          '_id': id,
+        },
+        queuable: queuable,
+      ).then((RawKuzzleResponse response) => response.result['_id']);
 
   Future<bool> exists({
     Map<String, dynamic> volatile,
     bool queuable = true,
   }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'exists',
-        '_id': id,
-      }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result as bool);
+      addNetworkQuery(
+        'exists',
+        optionalParams: <String, dynamic>{
+          '_id': id,
+        },
+        queuable: queuable,
+      ).then((RawKuzzleResponse response) => response.result as bool);
 
   Future<bool> publish({
     Map<String, dynamic> volatile,
@@ -128,17 +135,21 @@ class Document extends KuzzleObject {
   }) async {
     final Map<String, dynamic> query = <String, dynamic>{
       'volatile': volatile,
-      'body': content,
     };
+    String action;
     if (id == null) {
-      query['action'] = 'create';
+      action = 'create';
     } else {
-      query['action'] = 'createOrReplace';
+      action = 'createOrReplace';
       query['_id'] = id;
     }
-    final Document document = await addNetworkQuery(query, queuable: queuable)
-        .then((RawKuzzleResponse response) =>
-            Document.fromMap(collection, response.result));
+    final Document document = await addNetworkQuery(
+      action,
+      body: content,
+      optionalParams: query,
+      queuable: queuable,
+    ).then((RawKuzzleResponse response) =>
+        Document.fromMap(collection, response.result));
     id = document.id;
     version = document.version;
     return this;
