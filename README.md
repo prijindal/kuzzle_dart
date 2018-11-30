@@ -8,6 +8,7 @@ import 'package:kuzzle_dart/kuzzle_dart.dart';
 final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
 
 void setup() async {
+    kuzzle.connect();
     await kuzzle.createIndex('playground');
     
     final Collection collection = kuzzle.collection('collection');

@@ -3,7 +3,7 @@ import 'package:kuzzle_dart/kuzzle_dart.dart';
 
 Future<void> kuzzleConnections() async {
   final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
-
+  kuzzle.connect();
   try {
     await kuzzle.createIndex('playground');
   } catch (err) {

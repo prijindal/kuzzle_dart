@@ -57,7 +57,6 @@ class Kuzzle {
     this.sslConnection = false,
   }) {
     security = Security(this);
-    connect();
   }
 
   final String host;

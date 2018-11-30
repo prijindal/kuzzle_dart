@@ -1,0 +1,18 @@
+language: dart
+sudo: false
+dart: dev
+
+before_install:
+  - pub global activate test_coverage
+  - gem install coveralls-lcov
+
+script:
+  - test_coverage
+  - dartanalyzer lib --fatal-infos --fatal-warnings
+
+after_success:
+  - coveralls-lcov coverage/lcov.info
+
+cache:
+  directories:
+    - $HOME/.pub-cache
