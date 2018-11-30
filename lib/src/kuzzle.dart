@@ -6,7 +6,6 @@ import 'package:web_socket_channel/status.dart' as status;
 
 import 'collection.dart';
 import 'credentials.dart';
-import 'error.dart';
 import 'memorystorage.dart';
 import 'response.dart';
 import 'rights.dart';
@@ -17,8 +16,6 @@ import 'user.dart';
 
 enum KuzzleConnectType { auto }
 enum KuzzleOfflineModeType { auto, manual }
-
-typedef NotificationCallback = void Function(RawKuzzleResponse response);
 
 class CheckTokenResponse {
   CheckTokenResponse.fromMap(Map<String, dynamic> map)
@@ -70,7 +67,6 @@ class Kuzzle {
   final bool autoResubscribe;
   final KuzzleConnectType connectType;
   String defaultIndex;
-  final Map<String, dynamic> headers;
   final Map<String, dynamic> volatile;
   final KuzzleConnectType offlineMode;
   final int port;
@@ -87,6 +83,8 @@ class Kuzzle {
   IOWebSocketChannel _webSocket;
   StreamSubscription<dynamic> _streamSubscription;
   Uuid uuid = Uuid();
+
+  Map<String, dynamic> headers;
 
   String jwtToken;
   // int offlineQueue;
@@ -350,7 +348,7 @@ class Kuzzle {
   void setDefaultIndex(String index) => defaultIndex = index;
 
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      throw ResponseError();
+      headers = newheaders;
 
   void setJwtToken(String jwtToken) => this.jwtToken = jwtToken;
 

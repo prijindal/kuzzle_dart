@@ -19,13 +19,18 @@ Future<void> kuzzleConnections() async {
   final Room room = await collection.subscribe((RawKuzzleResponse response) {
     print(response.state + ' ' + response.action + ' ' + response.controller);
     print(response.toObject());
-  }, scope: RoomScope.all, state: RoomState.all, users: RoomUsersScope.all);
+  }, scope: RoomScope.all, state: RoomState.done, users: RoomUsersScope.all);
 
   const Map<String, dynamic> message = <String, dynamic>{
     'message': 'Hello World',
     'echoing': 1
   };
   final Document document = await collection.createDocument(message);
+  print(document.version);
+  final bool doesDocumentExists = await document.exists();
+  print(doesDocumentExists);
+
+  await document.publish();
   // print(document.toString());
 
   // final int count = await collection.count();

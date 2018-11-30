@@ -2,6 +2,7 @@ import 'collection.dart';
 import 'document.dart';
 import 'error.dart';
 import 'kuzzle.dart';
+import 'room.dart';
 
 class RawKuzzleResponse {
   RawKuzzleResponse.fromMap(this.kuzzle, Map<String, dynamic> map)
@@ -50,8 +51,10 @@ class RawKuzzleResponse {
     //   return this;
     // }
     switch (controller) {
-      case 'document':
+      case Document.controller:
         return _toDocumentObject();
+      case Room.controller:
+        return _toRealtimeObject();
       default:
         return this;
     }
@@ -65,6 +68,15 @@ class RawKuzzleResponse {
         return Document.fromMap(Collection(kuzzle, collection, index), result);
       case 'delete':
         return result['_id'];
+      default:
+        return this;
+    }
+  }
+
+  dynamic _toRealtimeObject() {
+    switch (action) {
+      case 'publish':
+        return result;
       default:
         return this;
     }

@@ -1,28 +1,28 @@
 import 'dart:async';
 import 'collection.dart';
-import 'error.dart';
 import 'helpers.dart';
-import 'kuzzle.dart';
 import 'response.dart';
 import 'room.dart';
 
-class Document extends Object {
+class Document extends KuzzleObject {
   Document(
-    this.collection,
+    Collection collection,
     this.id,
     this.content, {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
     this.active,
-  });
+    this.version,
+  }) : super(collection);
 
-  Document.fromMap(this.collection, Map<String, dynamic> map)
-      : assert(map['meta'] != null),
-        assert(map['_id'] != null),
+  Document.fromMap(Collection collection, Map<String, dynamic> map)
+      : assert(map['_id'] != null),
         assert(map['_source'] != null),
         id = map['_id'],
-        content = map['_source'] {
+        version = map['_version'],
+        content = map['_source'],
+        super(collection) {
     content.remove('_kuzzle_info');
     final Map<String, dynamic> mapMeta = extractMeta(map);
     createdAt = mapMeta['createdAt'] == null
@@ -53,15 +53,15 @@ class Document extends Object {
     }
   }
 
-  final Collection collection;
-  final String id;
-  final Map<String, dynamic> content;
+  String id;
+  int version;
+  Map<String, dynamic> content;
   DateTime createdAt;
   DateTime updatedAt;
   DateTime deletedAt;
   bool active;
 
-  static String controller = 'document';
+  static const String controller = 'document';
 
   @override
   String toString() => toMap().toString();
@@ -69,38 +69,21 @@ class Document extends Object {
   Map<String, dynamic> toMap() => <String, dynamic>{
         '_id': id,
         'content': content,
+        'version': version,
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'deletedAt': deletedAt,
         'active': active,
       };
 
-  Map<String, dynamic> get headers => collection.headers;
-
-  Map<String, dynamic> _getPartialQuery() => <String, dynamic>{
-        'index': collection.index,
-        'collection': collection.collection,
-        'controller': controller,
-      };
-
-  Future<RawKuzzleResponse> _addNetworkQuery(
-    Map<String, dynamic> body, {
-    bool queuable = true,
-  }) {
-    final Map<String, dynamic> query = _getPartialQuery();
-    query.addAll(body);
-    return collection.kuzzle.addNetworkQuery(query, queuable: queuable);
-  }
-
   Map<String, dynamic> get meta => <String, dynamic>{};
-  int get version => 0;
 
   Future<String> delete({
     Map<String, dynamic> volatile,
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'delete',
         'refresh': refresh,
         '_id': id,
@@ -111,34 +94,61 @@ class Document extends Object {
     Map<String, dynamic> volatile,
     bool queuable = true,
   }) async =>
-      throw ResponseError();
+      addNetworkQuery(<String, dynamic>{
+        'action': 'exists',
+        '_id': id,
+      }, queuable: queuable)
+          .then((RawKuzzleResponse response) => response.result as bool);
 
-  Future<void> publish({
+  Future<bool> publish({
     Map<String, dynamic> volatile,
     bool queuable = true,
   }) async =>
-      throw ResponseError();
+      collection.publishMessage(content,
+          volatile: volatile, queuable: queuable);
 
   Future<Document> refresh({
     bool queuable = true,
-  }) async =>
-      throw ResponseError();
+  }) async {
+    final Document document =
+        await collection.fetchDocument(id, queuable: queuable);
+    content = document.content;
+    version = document.version;
+    createdAt = document.createdAt;
+    updatedAt = document.updatedAt;
+    deletedAt = document.deletedAt;
+    active = document.active;
+    return document;
+  }
 
   Future<Document> save({
     Map<String, dynamic> volatile,
     bool queuable = true,
     String refresh,
-  }) async =>
-      throw ResponseError();
+  }) async {
+    final Map<String, dynamic> query = <String, dynamic>{
+      'volatile': volatile,
+      'body': content,
+    };
+    if (id == null) {
+      query['action'] = 'create';
+    } else {
+      query['action'] = 'createOrReplace';
+      query['_id'] = id;
+    }
+    final Document document = await addNetworkQuery(query, queuable: queuable)
+        .then((RawKuzzleResponse response) =>
+            Document.fromMap(collection, response.result));
+    id = document.id;
+    version = document.version;
+    return this;
+  }
 
-  Future<void> setContent(
+  void setContent(
     Map<String, dynamic> content, {
     bool replace = false,
-  }) async =>
-      throw ResponseError();
-
-  void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      throw ResponseError();
+  }) =>
+      content.addAll(content);
 
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {

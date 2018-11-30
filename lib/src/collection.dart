@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'collectionmapping.dart';
 import 'document.dart';
-import 'error.dart';
 import 'helpers.dart';
 import 'kuzzle.dart';
 import 'response.dart';
@@ -48,7 +47,13 @@ class Collection {
   final Kuzzle kuzzle;
   static String controller = 'collection';
 
-  Map<String, dynamic> get headers => kuzzle.headers;
+  Map<String, dynamic> get headers {
+    final Map<String, dynamic> headers = kuzzle.headers;
+    headers.addAll(_headers);
+    return headers;
+  }
+
+  Map<String, dynamic> _headers = emptyMap;
 
   Map<String, dynamic> _getPartialQuery() => <String, dynamic>{
         'index': index,
@@ -56,7 +61,7 @@ class Collection {
         'controller': controller,
       };
 
-  Future<RawKuzzleResponse> _addNetworkQuery(
+  Future<RawKuzzleResponse> addNetworkQuery(
     Map<String, dynamic> body, {
     bool queuable = true,
   }) {
@@ -73,7 +78,7 @@ class Collection {
   Future<int> count(
           {Map<String, dynamic> filter = emptyMap,
           bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'count',
         'filters': filter,
@@ -84,7 +89,7 @@ class Collection {
   FutureOr<RawKuzzleResponse> create(
           {Map<String, MappingDefinition> mapping,
           bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'create',
         'body': mapping ?? emptyMap,
       }, queuable: queuable);
@@ -96,7 +101,7 @@ class Collection {
     String refresh,
     String ifExist,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'create',
         'body': content,
@@ -110,7 +115,7 @@ class Collection {
     bool queuable = true,
     String refresh,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'delete',
         'refresh': refresh,
         '_id': documentId,
@@ -121,7 +126,7 @@ class Collection {
     bool queuable = true,
     String refresh,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'deleteSpecifications',
         'refresh': refresh,
       }, queuable: queuable);
@@ -134,7 +139,7 @@ class Collection {
     bool queuable = true,
     bool includeTrash = false,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'get',
         '_id': documentId,
@@ -143,14 +148,14 @@ class Collection {
           Document.fromMap(this, response.result));
 
   Future<CollectionMapping> getMapping({bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'getMapping',
       }, queuable: queuable)
           .then((RawKuzzleResponse onValue) => CollectionMapping.fromMap(this,
               onValue.result[index]['mappings'][collection]['properties']));
 
   Future<Specifications> getSpecifications({bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'getSpecifications',
       }, queuable: queuable)
           .then((RawKuzzleResponse response) => Specifications());
@@ -160,7 +165,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mCreate',
         'refresh': refresh,
@@ -178,7 +183,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mCreateOrReplace',
         'refresh': refresh,
@@ -196,7 +201,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mDelete',
         'refresh': refresh,
@@ -207,7 +212,7 @@ class Collection {
 
   Future<RawKuzzleResponse> mGetDocument(List<String> documentIds,
           {bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mGet',
         'body': <String, dynamic>{
@@ -220,7 +225,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mReplace',
         'refresh': refresh,
@@ -238,7 +243,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'mUpdate',
         'refresh': refresh,
@@ -252,8 +257,8 @@ class Collection {
 
   Future<bool> publishMessage(Map<String, dynamic> message,
           {Map<String, dynamic> volatile, bool queuable = true}) async =>
-      _addNetworkQuery(<String, dynamic>{
-        'controller': 'realtime',
+      addNetworkQuery(<String, dynamic>{
+        'controller': Room.controller,
         'action': 'publish',
         'body': message,
         'volatile': volatile,
@@ -266,7 +271,7 @@ class Collection {
     bool queuable = true,
     String refresh,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'replace',
         'refresh': refresh,
@@ -282,7 +287,7 @@ class Collection {
     bool queuable = true,
     String scroll,
   }) =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'scroll',
         'scrollId': scrollId,
         'scroll': scroll,
@@ -293,7 +298,7 @@ class Collection {
     bool queuable = true,
     String scroll,
   }) =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'scrollSpecifications',
         'scrollId': scrollId,
         'scroll': scroll,
@@ -309,7 +314,7 @@ class Collection {
     int size = 10,
     bool includeTrash = false,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'search',
         'body': <String, dynamic>{
@@ -330,7 +335,7 @@ class Collection {
     int from = 0,
     int size = 10,
   }) =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'searchSpecifications',
         'body': <String, dynamic>{
           'query': query,
@@ -341,7 +346,7 @@ class Collection {
       });
 
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      throw ResponseError();
+      _headers = newheaders;
 
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {
@@ -354,8 +359,8 @@ class Collection {
   }) async {
     final StreamController<RawKuzzleResponse> streamController =
         StreamController<RawKuzzleResponse>.broadcast();
-    final Room room = await _addNetworkQuery(<String, dynamic>{
-      'controller': 'realtime',
+    final Room room = await addNetworkQuery(<String, dynamic>{
+      'controller': Room.controller,
       'action': 'subscribe',
       'body': query,
       'volatile': volatile,
@@ -381,7 +386,7 @@ class Collection {
     bool queuable = true,
     String refresh = 'false',
   }) =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'truncate',
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
@@ -397,7 +402,7 @@ class Collection {
     String refresh = 'false',
     int retryOnConflict = 0,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'controller': Document.controller,
         'action': 'update',
         'refresh': refresh,
@@ -409,7 +414,7 @@ class Collection {
     Specifications specifications, {
     bool queuable = true,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'updateSpecifications',
         'body': specifications.toMap(),
       });
@@ -418,7 +423,7 @@ class Collection {
     Specifications specifications, {
     bool queuable = true,
   }) async =>
-      _addNetworkQuery(<String, dynamic>{
+      addNetworkQuery(<String, dynamic>{
         'action': 'validateSpecifications',
         'body': specifications.toMap(),
       });
