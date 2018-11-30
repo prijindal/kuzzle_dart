@@ -384,7 +384,8 @@ class Kuzzle {
         'jwt': jwtToken,
         'body': content,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => User.fromMap(response.result));
+          .then((RawKuzzleResponse response) =>
+              User.fromMap(security, response.result));
 
   Future<bool> validateMyCredentials(
     String strategy,
@@ -407,5 +408,6 @@ class Kuzzle {
         'controller': 'auth',
         'action': 'getCurrentUser',
         'jwt': jwtToken,
-      }).then((RawKuzzleResponse response) => User.fromMap(response.result));
+      }).then((RawKuzzleResponse response) =>
+          User.fromMap(security, response.result));
 }
