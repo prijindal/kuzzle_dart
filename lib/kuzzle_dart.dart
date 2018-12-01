@@ -1,5 +1,6 @@
 export 'src/collection.dart';
 export 'src/collectionmapping.dart';
+export 'src/credentials.dart';
 export 'src/document.dart';
 export 'src/error.dart';
 export 'src/event.dart';

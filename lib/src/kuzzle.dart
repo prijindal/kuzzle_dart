@@ -6,6 +6,8 @@ import 'package:web_socket_channel/status.dart' as status;
 
 import 'collection.dart';
 import 'credentials.dart';
+import 'error.dart';
+import 'helpers.dart';
 import 'memorystorage.dart';
 import 'response.dart';
 import 'rights.dart';
@@ -85,7 +87,7 @@ class Kuzzle {
 
   Map<String, dynamic> headers;
 
-  String jwtToken;
+  String _jwtToken;
   // int offlineQueue;
   // void Function() offlineQueueLoader;
   // void Function() queueFilter;
@@ -100,6 +102,9 @@ class Kuzzle {
     body.addAll(<String, dynamic>{
       'requestId': requestId,
     });
+    if (_jwtToken != null) {
+      body['jwt'] = _jwtToken;
+    }
     if (queuable) {
       networkQuery(body);
       futureMaps[requestId] = completer;
@@ -163,29 +168,29 @@ class Kuzzle {
           .then((RawKuzzleResponse response) =>
               IndexCreationResponse.fromMap(response.result));
 
-  Future<Credentials> createMyCredentials(
-          String strategy, Credentials credentials,
+  Future<CredentialsResponse> createMyCredentials(
+          LoginStrategy strategy, Credentials credentials,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'createMyCredentials',
-        'strategy': strategy,
-        'jwt': jwtToken,
+        'strategy': enumToString<LoginStrategy>(credentials.strategy),
+        'jwt': _jwtToken,
         'body': <String, dynamic>{
           'username': credentials.username,
           'password': credentials.password,
         }
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
-              Credentials.fromMap(response.result));
+              CredentialsResponse.fromMap(response.result));
 
-  Future<bool> deleteMyCredentials(String strategy,
+  Future<bool> deleteMyCredentials(LoginStrategy strategy,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'deleteMyCredentials',
-        'strategy': strategy,
-        'jwt': jwtToken,
+        'strategy': enumToString<LoginStrategy>(strategy),
+        'jwt': _jwtToken,
       }, queuable: queuable)
           .then(
               (RawKuzzleResponse response) => response.result['acknowledged']);
@@ -213,24 +218,24 @@ class Kuzzle {
       }, queuable: queuable)
           .then((RawKuzzleResponse response) => response.result);
 
-  String getJwtToken() => jwtToken;
+  String getJwtToken() => _jwtToken;
 
-  Future<Credentials> getMyCredentials(String strategy,
+  Future<CredentialsResponse> getMyCredentials(LoginStrategy strategy,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'getMyCredentials',
-        'strategy': strategy,
-        'jwt': jwtToken,
+        'strategy': enumToString<LoginStrategy>(strategy),
+        'jwt': _jwtToken,
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
-              Credentials.fromMap(response.result));
+              CredentialsResponse.fromMap(response.result));
 
   Future<Rights> getMyRights({bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'getMyRights',
-        'jwt': jwtToken,
+        'jwt': _jwtToken,
       }, queuable: queuable)
           .then((RawKuzzleResponse response) => response.result['hits']
               .map((Map<String, dynamic> stats) => Rights.fromMap(stats)));
@@ -281,26 +286,45 @@ class Kuzzle {
       }, queuable: queuable)
           .then((RawKuzzleResponse response) => response.result['indexes']);
 
-  Future<RawKuzzleResponse> login(
-    String strategy, {
-    Credentials credentials,
+  Future<AuthResponse> login(
+    Credentials credentials, {
     String expiresIn,
   }) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
-        'action': 'createMyCredentials',
-        'strategy': strategy,
+        'action': 'login',
+        'strategy': enumToString<LoginStrategy>(credentials.strategy),
         'expiresIn': expiresIn,
         'body': <String, dynamic>{
           'username': credentials.username,
           'password': credentials.password,
         }
+      }).then((RawKuzzleResponse response) {
+        return AuthResponse.fromMap(response.result);
+      }).then((AuthResponse response) {
+        if (response.id == '-1') {
+          throw ResponseError(
+              message: 'wrong username or password', status: 401);
+        } else {
+          setJwtToken(response.jwt);
+        }
+        return response;
       });
+
+  Future<User> register(
+    User user,
+    Credentials credentials, {
+    String expiresIn,
+  }) async {
+    return await security.createUser(user, credentials);
+  }
 
   Future<void> logout() async => addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
-        'action': 'createMyCredentials',
-        'jwt': jwtToken,
+        'action': 'logout',
+        'jwt': _jwtToken,
+      }).then((RawKuzzleResponse response) {
+        setJwtToken(null);
       });
 
   MemoryStorage get memoryStorage => MemoryStorage(this);
@@ -349,53 +373,52 @@ class Kuzzle {
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
       headers = newheaders;
 
-  void setJwtToken(String jwtToken) => this.jwtToken = jwtToken;
+  void setJwtToken(String jwtToken) => _jwtToken = jwtToken;
 
   // void startQueuing() => throw ResponseError();
 
   // void stopQueuing() => throw ResponseError();
 
-  void unsetJwtToken() => jwtToken = null;
+  void unsetJwtToken() => _jwtToken = null;
 
-  Future<Credentials> updateMyCredentials(
-    String strategy,
+  Future<CredentialsResponse> updateMyCredentials(
     Credentials credentials, {
     bool queuable = true,
   }) =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'updateMyCredentials',
-        'strategy': strategy,
-        'jwt': jwtToken,
+        'strategy': enumToString<LoginStrategy>(credentials.strategy),
+        'jwt': _jwtToken,
         'body': <String, dynamic>{
           'username': credentials.username,
           'password': credentials.password,
         }
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
-              Credentials.fromMap(response.result));
+              CredentialsResponse.fromMap(response.result));
 
   Future<User> updateSelf(Map<String, dynamic> content,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'updateSelf',
-        'jwt': jwtToken,
+        'jwt': _jwtToken,
         'body': content,
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
               User.fromMap(security, response.result));
 
   Future<bool> validateMyCredentials(
-    String strategy,
+    LoginStrategy strategy,
     Credentials credentials, {
     bool queuable = true,
   }) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'validateMyCredentials',
-        'strategy': strategy,
-        'jwt': jwtToken,
+        'strategy': enumToString<LoginStrategy>(strategy),
+        'jwt': _jwtToken,
         'body': <String, dynamic>{
           'username': credentials.username,
           'password': credentials.password,
@@ -406,7 +429,7 @@ class Kuzzle {
   Future<User> whoAmI() async => addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'getCurrentUser',
-        'jwt': jwtToken,
+        'jwt': _jwtToken,
       }).then((RawKuzzleResponse response) =>
           User.fromMap(security, response.result));
 }
