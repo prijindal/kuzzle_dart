@@ -1,23 +1,31 @@
 import 'dart:io' show exit;
 import 'package:kuzzle_dart/kuzzle_dart.dart';
 
-Future<void> kuzzleConnections() async {
-  final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
-  kuzzle.connect();
+const String HOST = 'localhost';
+const String DEFAULT_INDEX = 'testindex';
+const String TEST_COLLECTION = 'testcollection';
 
-  final Credentials adminCredentials =
-      Credentials(LoginStrategy.local, username: 'admin', password: 'admin');
+const String ADMIN_USERNAME = 'admin';
+const String ADMIN_PASSWORD = 'admin';
+
+const Credentials adminCredentials = Credentials(LoginStrategy.local,
+    username: ADMIN_USERNAME, password: ADMIN_PASSWORD);
+
+const Credentials creds =
+    Credentials(LoginStrategy.local, username: 'prijindal', password: '123456');
+
+Future<void> kuzzleConnections() async {
+  final Kuzzle kuzzle = Kuzzle(HOST, defaultIndex: DEFAULT_INDEX);
+  kuzzle.connect();
   await kuzzle.login(adminCredentials);
 
-  try {
-    await kuzzle.createIndex('playground');
-  } catch (err) {
-    if (err is ResponseError) {
-      print(err.status);
-    }
+  final List<String> indexes = await kuzzle.listIndexes();
+
+  if (indexes.contains(DEFAULT_INDEX) == false) {
+    await kuzzle.createIndex(DEFAULT_INDEX);
   }
 
-  final Collection collection = kuzzle.collection('collection');
+  final Collection collection = kuzzle.collection(TEST_COLLECTION);
 
   await collection.create();
 
@@ -27,9 +35,6 @@ Future<void> kuzzleConnections() async {
   }, scope: RoomScope.all, state: RoomState.done, users: RoomUsersScope.all);
 
   await kuzzle.logout();
-
-  final Credentials creds = Credentials(LoginStrategy.local,
-      username: 'prijindal', password: '123456');
 
   try {
     final AuthResponse response = await kuzzle.login(creds);
@@ -72,6 +77,8 @@ Future<void> kuzzleConnections() async {
 
   final List<String> deletedIds = await collection.truncate();
   print(deletedIds);
+
+  await kuzzle.deleteIndex(kuzzle.defaultIndex);
 
   final String roomId = await room.unsubscribe();
   print(roomId);

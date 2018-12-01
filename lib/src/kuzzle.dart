@@ -195,6 +195,13 @@ class Kuzzle {
           .then(
               (RawKuzzleResponse response) => response.result['acknowledged']);
 
+  Future<RawKuzzleResponse> deleteIndex(String index) async =>
+      addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'controller': 'index',
+        'action': 'delete',
+      });
+
   void disconect() {
     _streamSubscription.cancel();
     _webSocket.sink.close(status.goingAway);
@@ -280,11 +287,14 @@ class Kuzzle {
           .then((RawKuzzleResponse response) => response.result['collections']);
 
   Future<List<String>> listIndexes({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
+      await addNetworkQuery(<String, dynamic>{
         'controller': 'index',
         'action': 'list',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['indexes']);
+          .then((RawKuzzleResponse response) =>
+              (response.result['indexes'] as List<dynamic>)
+                  .map((dynamic index) => index as String)
+                  .toList());
 
   Future<AuthResponse> login(
     Credentials credentials, {

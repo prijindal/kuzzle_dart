@@ -1,11 +1,11 @@
 import 'helpers.dart';
 
 class Credentials {
-  Credentials(this.strategy, {this.username, this.password});
+  const Credentials(this.strategy, {this.username, this.password});
 
   final LoginStrategy strategy;
   final String username;
-  String password;
+  final String password;
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         enumToString<LoginStrategy>(strategy): <String, dynamic>{
