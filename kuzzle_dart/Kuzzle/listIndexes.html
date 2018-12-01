@@ -76,6 +76,7 @@
       <li><a href="kuzzle_dart/Kuzzle/connect.html">connect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
@@ -126,11 +127,14 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; listIndexes({bool queuable = true}) async =&gt;
-    addNetworkQuery(&lt;String, dynamic&gt;{
+    await addNetworkQuery(&lt;String, dynamic&gt;{
       &#39;controller&#39;: &#39;index&#39;,
       &#39;action&#39;: &#39;list&#39;,
     }, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt; response.result[&#39;indexes&#39;]);</code></pre>
+        .then((RawKuzzleResponse response) =&gt;
+            (response.result[&#39;indexes&#39;] as List&lt;dynamic&gt;)
+                .map((dynamic index) =&gt; index as String)
+                .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
