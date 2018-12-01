@@ -46,9 +46,9 @@
       <li class="section-title">
         <a href="kuzzle_dart/User-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="kuzzle_dart/User/content.html">content</a></li>
       <li><a href="kuzzle_dart/User/id.html">id</a></li>
       <li><a href="kuzzle_dart/User/meta.html">meta</a></li>
+      <li><a href="kuzzle_dart/User/name.html">name</a></li>
       <li><a href="kuzzle_dart/User/profileIds.html">profileIds</a></li>
       <li><a href="kuzzle_dart/User/security.html">security</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/hashCode.html">hashCode</a></li>
@@ -56,8 +56,9 @@
     
       <li class="section-title"><a href="kuzzle_dart/User-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/User/getProfiles.html">getProfiles</a></li>
+      <li><a href="kuzzle_dart/User/toMap.html">toMap</a></li>
+      <li><a href="kuzzle_dart/User/toString.html">toString</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/noSuchMethod.html">noSuchMethod</a></li>
-      <li class="inherited"><a href="kuzzle_dart/User/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/User-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/operator_equals.html">operator ==</a></li>
@@ -80,7 +81,12 @@
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">User.fromMap(this.security, Map&lt;String, dynamic&gt; map)
     : id = map[&#39;_id&#39;],
-      content = map[&#39;_source&#39;],
+      profileIds = map[&#39;_source&#39;][&#39;profileIds&#39;] == null
+          ? &lt;String&gt;[]
+          : map[&#39;_source&#39;][&#39;profileIds&#39;]
+              .map&lt;String&gt;((dynamic id) =&gt; id as String)
+              .toList(),
+      name = map[&#39;_source&#39;][&#39;name&#39;],
       meta = map[&#39;_meta&#39;];</code></pre>
     </section>
 

@@ -54,7 +54,6 @@
       <li><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></li>
       <li><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/host.html">host</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
@@ -93,6 +92,7 @@
       <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
@@ -117,28 +117,37 @@
     <h1>login method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/AuthResponse-class.html">AuthResponse</a></span>&gt;</span></span>
       <span class="name ">login</span>
-(<wbr><span class="parameter" id="login-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="login-param-credentials"><span class="type-annotation">Credentials</span> <span class="parameter-name">credentials</span>, </span> <span class="parameter" id="login-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span></span> })
+(<wbr><span class="parameter" id="login-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="login-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; login(
-  String strategy, {
-  Credentials credentials,
+      <pre class="language-dart"><code class="language-dart">Future&lt;AuthResponse&gt; login(
+  Credentials credentials, {
   String expiresIn,
 }) async =&gt;
     addNetworkQuery(&lt;String, dynamic&gt;{
       &#39;controller&#39;: &#39;auth&#39;,
-      &#39;action&#39;: &#39;createMyCredentials&#39;,
-      &#39;strategy&#39;: strategy,
+      &#39;action&#39;: &#39;login&#39;,
+      &#39;strategy&#39;: enumToString&lt;LoginStrategy&gt;(credentials.strategy),
       &#39;expiresIn&#39;: expiresIn,
       &#39;body&#39;: &lt;String, dynamic&gt;{
         &#39;username&#39;: credentials.username,
         &#39;password&#39;: credentials.password,
       }
+    }).then((RawKuzzleResponse response) {
+      return AuthResponse.fromMap(response.result);
+    }).then((AuthResponse response) {
+      if (response.id == &#39;-1&#39;) {
+        throw ResponseError(
+            message: &#39;wrong username or password&#39;, status: 401);
+      } else {
+        setJwtToken(response.jwt);
+      }
+      return response;
     });</code></pre>
     </section>
 

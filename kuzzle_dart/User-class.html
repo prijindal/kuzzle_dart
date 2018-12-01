@@ -39,9 +39,12 @@
     <h5>kuzzle_dart library</h5>
     <ol>
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
+      <li><a href="kuzzle_dart/AuthResponse-class.html">AuthResponse</a></li>
       <li><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></li>
       <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
       <li><a href="kuzzle_dart/CollectionMapping-class.html">CollectionMapping</a></li>
+      <li><a href="kuzzle_dart/Credentials-class.html">Credentials</a></li>
+      <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
       <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
       <li><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></li>
       <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
@@ -64,6 +67,7 @@
       <li><a href="kuzzle_dart/Event-class.html">Event</a></li>
       <li><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></li>
       <li><a href="kuzzle_dart/KuzzleOfflineModeType-class.html">KuzzleOfflineModeType</a></li>
+      <li><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></li>
       <li><a href="kuzzle_dart/RoomScope-class.html">RoomScope</a></li>
       <li><a href="kuzzle_dart/RoomState-class.html">RoomState</a></li>
       <li><a href="kuzzle_dart/RoomUsersScope-class.html">RoomUsersScope</a></li>
@@ -86,7 +90,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="User" class="callable">
-          <span class="name"><a href="kuzzle_dart/User/User.html">User</a></span><span class="signature">(<span class="parameter" id="-param-security"><span class="type-annotation"><a href="kuzzle_dart/Security-class.html">Security</a></span> <span class="parameter-name">security</span>, </span> <span class="parameter" id="-param-id"><span class="type-annotation">String</span> <span class="parameter-name">id</span>, </span> <span class="parameter" id="-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="-param-meta"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">meta</span></span> })</span>
+          <span class="name"><a href="kuzzle_dart/User/User.html">User</a></span><span class="signature">(<span class="parameter" id="-param-security"><span class="type-annotation"><a href="kuzzle_dart/Security-class.html">Security</a></span> <span class="parameter-name">security</span>, {</span> <span class="parameter" id="-param-id"><span class="type-annotation">String</span> <span class="parameter-name">id</span>, </span> <span class="parameter" id="-param-meta"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">meta</span>, </span> <span class="parameter" id="-param-name"><span class="type-annotation">String</span> <span class="parameter-name">name</span>, </span> <span class="parameter" id="-param-profileIds"><span class="type-annotation">List</span> <span class="parameter-name">profileIds</span></span> })</span>
         </dt>
         <dd>
           
@@ -104,14 +108,6 @@
       <h2>Properties</h2>
 
       <dl class="properties">
-        <dt id="content" class="property">
-          <span class="name"><a href="kuzzle_dart/User/content.html">content</a></span>
-          <span class="signature">&#8594; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
-        </dt>
-        <dd>
-          
-          <div class="features">final</div>
-</dd>
         <dt id="id" class="property">
           <span class="name"><a href="kuzzle_dart/User/id.html">id</a></span>
           <span class="signature">&#8594; String</span> 
@@ -128,13 +124,21 @@
           
           <div class="features">final</div>
 </dd>
-        <dt id="profileIds" class="property">
-          <span class="name"><a href="kuzzle_dart/User/profileIds.html">profileIds</a></span>
-          <span class="signature">&#8596; List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> 
+        <dt id="name" class="property">
+          <span class="name"><a href="kuzzle_dart/User/name.html">name</a></span>
+          <span class="signature">&#8594; String</span> 
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+          <div class="features">final</div>
+</dd>
+        <dt id="profileIds" class="property">
+          <span class="name"><a href="kuzzle_dart/User/profileIds.html">profileIds</a></span>
+          <span class="signature">&#8594; List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
 </dd>
         <dt id="security" class="property">
           <span class="name"><a href="kuzzle_dart/User/security.html">security</a></span>
@@ -175,6 +179,24 @@
           
           
 </dd>
+        <dt id="toMap" class="callable">
+          <span class="name"><a href="kuzzle_dart/User/toMap.html">toMap</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="toString" class="callable">
+          <span class="name"><a href="kuzzle_dart/User/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd>
+          Returns a string representation of this object.
+          <div class="features">override</div>
+</dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/User/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
@@ -182,15 +204,6 @@
           </dt>
         <dd class="inherited">
           Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/User/noSuchMethod.html">[...]</a>
-          <div class="features">inherited</div>
-</dd>
-        <dt id="toString" class="callable inherited">
-          <span class="name"><a href="kuzzle_dart/User/toString.html">toString</a></span><span class="signature">(<wbr>)
-            <span class="returntype parameter">&#8594; String</span>
-          </span>
-          </dt>
-        <dd class="inherited">
-          Returns a string representation of this object.
           <div class="features">inherited</div>
 </dd>
       </dl>
@@ -225,9 +238,9 @@
       <li class="section-title">
         <a href="kuzzle_dart/User-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="kuzzle_dart/User/content.html">content</a></li>
       <li><a href="kuzzle_dart/User/id.html">id</a></li>
       <li><a href="kuzzle_dart/User/meta.html">meta</a></li>
+      <li><a href="kuzzle_dart/User/name.html">name</a></li>
       <li><a href="kuzzle_dart/User/profileIds.html">profileIds</a></li>
       <li><a href="kuzzle_dart/User/security.html">security</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/hashCode.html">hashCode</a></li>
@@ -235,8 +248,9 @@
     
       <li class="section-title"><a href="kuzzle_dart/User-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/User/getProfiles.html">getProfiles</a></li>
+      <li><a href="kuzzle_dart/User/toMap.html">toMap</a></li>
+      <li><a href="kuzzle_dart/User/toString.html">toString</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/noSuchMethod.html">noSuchMethod</a></li>
-      <li class="inherited"><a href="kuzzle_dart/User/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/User-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/operator_equals.html">operator ==</a></li>

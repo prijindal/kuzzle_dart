@@ -52,9 +52,11 @@
       <li class="inherited"><a href="kuzzle_dart/Security/runtimeType.html">runtimeType</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/Security-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/Security/createUser.html">createUser</a></li>
       <li><a href="kuzzle_dart/Security/getController.html">getController</a></li>
       <li><a href="kuzzle_dart/Security/profile.html">profile</a></li>
       <li><a href="kuzzle_dart/Security/role.html">role</a></li>
+      <li><a href="kuzzle_dart/Security/updateUser.html">updateUser</a></li>
       <li><a href="kuzzle_dart/Security/user.html">user</a></li>
       <li class="inherited"><a href="kuzzle_dart/Security/addNetworkQuery.html">addNetworkQuery</a></li>
       <li class="inherited"><a href="kuzzle_dart/Security/getPartialQuery.html">getPartialQuery</a></li>
@@ -86,7 +88,11 @@
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">User user(String id, Map&lt;String, dynamic&gt; content,
         {Map&lt;String, dynamic&gt; meta}) =&gt;
-    User(this, id, content, meta: meta);</code></pre>
+    User(this,
+        id: id,
+        meta: meta,
+        name: content[&#39;name&#39;],
+        profileIds: content[&#39;profileIds&#39;]);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

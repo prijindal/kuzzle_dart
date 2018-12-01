@@ -54,7 +54,6 @@
       <li><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></li>
       <li><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/host.html">host</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
@@ -93,6 +92,7 @@
       <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
@@ -135,6 +135,9 @@
   body.addAll(&lt;String, dynamic&gt;{
     &#39;requestId&#39;: requestId,
   });
+  if (_jwtToken != null) {
+    body[&#39;jwt&#39;] = _jwtToken;
+  }
   if (queuable) {
     networkQuery(body);
     futureMaps[requestId] = completer;

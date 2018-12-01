@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the jwtToken property from the Kuzzle class, for the Dart programming language.">
-  <title>jwtToken property - Kuzzle class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the register method from the Kuzzle class, for the Dart programming language.">
+  <title>register method - Kuzzle class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
-    <li class="self-crumb">jwtToken property</li>
+    <li class="self-crumb">register method</li>
   </ol>
-  <div class="self-name">jwtToken</div>
+  <div class="self-name">register</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,7 +54,6 @@
       <li><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></li>
       <li><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/host.html">host</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
@@ -93,6 +92,7 @@
       <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
@@ -114,19 +114,25 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>jwtToken property</h1>
+    <h1>register method</h1>
 
-        <section class="multi-line-signature">
-          <span class="returntype">String</span>
-          <span class="name ">jwtToken</span>
-          <div class="features">read / write</div>
-        </section>
-                <section class="summary source-code" id="source">
-          <h2><span>Implementation</span> </h2>
-          <pre class="language-dart"><code class="language-dart">String jwtToken
-
-</code></pre>
-        </section>
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+      <span class="name ">register</span>
+(<wbr><span class="parameter" id="register-param-user"><span class="type-annotation"><a href="kuzzle_dart/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span> <span class="parameter" id="register-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="register-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span></span> })
+      
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;User&gt; register(
+  User user,
+  Credentials credentials, {
+  String expiresIn,
+}) async {
+  return await security.createUser(user, credentials);
+}</code></pre>
+    </section>
 
   </div> <!-- /.main-content -->
 
