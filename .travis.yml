@@ -7,8 +7,8 @@ before_install:
   - gem install coveralls-lcov
 
 script:
+  - dartanalyzer lib test --fatal-infos --fatal-warnings
   - test_coverage
-  - dartanalyzer lib --fatal-infos --fatal-warnings
 
 after_success:
   - coveralls-lcov coverage/lcov.info
