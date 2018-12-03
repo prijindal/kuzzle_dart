@@ -3,7 +3,6 @@ sudo: false
 dart: dev
 
 before_install:
-  - pub global activate test_coverage
   - gem install coveralls-lcov
 
 script:

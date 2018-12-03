@@ -17,8 +17,8 @@ class MappingDefinition extends Object {
   @override
   String toString() => toMap().toString();
 
-  Map<String, String> toMap() {
-    final Map<String, String> map = <String, String>{
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> map = <String, dynamic>{
       'type': type.toString(),
     };
     if (index != null) {
@@ -74,7 +74,10 @@ class Collection extends KuzzleObject {
           bool queuable = true}) async =>
       addNetworkQuery(
         'create',
-        body: mapping ?? emptyMap,
+        body: mapping.map<String, dynamic>(
+                (String key, MappingDefinition definition) =>
+                    MapEntry<String, dynamic>(key, definition.toMap())) ??
+            emptyMap,
         queuable: queuable,
       );
 

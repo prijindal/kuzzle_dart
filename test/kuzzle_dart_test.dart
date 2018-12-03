@@ -9,11 +9,12 @@ void main() {
   HttpServer server;
   StreamSubscription<dynamic> streamSubscription;
   Kuzzle kuzzle;
+
   setUpAll(() async {
     server = await HttpServer.bind('localhost', 0);
     streamSubscription =
         server.transform(WebSocketTransformer()).listen(onServerTransformData);
-    kuzzle = Kuzzle('localhost', port: server.port);
+    kuzzle = Kuzzle('localhost', port: server.port, defaultIndex: 'testindex');
   });
 
   test('Simple test for kuzzle connection', () async {
@@ -21,8 +22,10 @@ void main() {
   });
 
   test('test for collection constructor', () async {
-    final Collection collection = kuzzle.collection('collection');
-    await collection.create();
+    final Collection collection = kuzzle.collection('posts');
+    await collection.create(mapping: <String, MappingDefinition>{
+      'title': MappingDefinition('', 'text', <String, dynamic>{}),
+    });
   });
 
   test('test for security constructor', () async {
@@ -36,7 +39,6 @@ void main() {
   tearDownAll(() {
     kuzzle.disconect();
     streamSubscription.cancel();
-    streamSubscription = null;
     server.close(force: true);
   });
 }
