@@ -116,7 +116,10 @@
         bool queuable = true}) async =&gt;
     addNetworkQuery(
       &#39;create&#39;,
-      body: mapping ?? emptyMap,
+      body: mapping.map&lt;String, dynamic&gt;(
+              (String key, MappingDefinition definition) =&gt;
+                  MapEntry&lt;String, dynamic&gt;(key, definition.toMap())) ??
+          emptyMap,
       queuable: queuable,
     );</code></pre>
     </section>

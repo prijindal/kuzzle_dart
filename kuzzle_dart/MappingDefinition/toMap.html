@@ -68,7 +68,7 @@
     <h1>toMap method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">String</span>&gt;</span></span>
+      <span class="returntype">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
       <span class="name ">toMap</span>
 (<wbr>)
       
@@ -76,8 +76,8 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Map&lt;String, String&gt; toMap() {
-  final Map&lt;String, String&gt; map = &lt;String, String&gt;{
+      <pre class="language-dart"><code class="language-dart">Map&lt;String, dynamic&gt; toMap() {
+  final Map&lt;String, dynamic&gt; map = &lt;String, dynamic&gt;{
     &#39;type&#39;: type.toString(),
   };
   if (index != null) {
