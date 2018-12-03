@@ -71,9 +71,11 @@
     
       <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/bindSubscription.html">bindSubscription</a></li>
       <li><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></li>
       <li><a href="kuzzle_dart/Kuzzle/connect.html">connect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/connectInternal.html">connectInternal</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
@@ -118,7 +120,7 @@
     <h1>connect method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">void</span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
       <span class="name ">connect</span>
 (<wbr>)
       
@@ -126,26 +128,9 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">void connect() {
-  _webSocket = IOWebSocketChannel.connect(
-      &#39;ws:&#47;&#47;&#39; + host + &#39;:&#39; + port.toString() + &#39;&#47;ws&#39;);
-  _streamSubscription = _webSocket.stream.listen((dynamic message) {
-    final dynamic jsonResponse = json.decode(message);
-    final String requestId = jsonResponse[&#39;requestId&#39;];
-    final RawKuzzleResponse response =
-        RawKuzzleResponse.fromMap(this, jsonResponse);
-    if (roomMaps.containsKey(response.room)) {
-      roomMaps[response.room].add(response);
-    } else if (futureMaps.containsKey(requestId) &amp;&amp;
-        !futureMaps[requestId].isCompleted) {
-      if (response.error == null) {
-        futureMaps[requestId].complete(response);
-      } else {
-        futureMaps[requestId].completeError(response.error);
-      }
-      futureMaps.remove(requestId);
-    }
-  });
+      <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; connect() async {
+  _webSocket = await connectInternal();
+  bindSubscription();
 }</code></pre>
     </section>
 
