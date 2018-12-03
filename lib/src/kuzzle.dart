@@ -134,9 +134,17 @@ class Kuzzle {
     return Collection(this, collection, index);
   }
 
-  void connect() {
-    _webSocket = IOWebSocketChannel.connect(
+  Future<void> connect() async {
+    _webSocket = await connectInternal();
+    bindSubscription();
+  }
+
+  Future<IOWebSocketChannel> connectInternal() async {
+    return IOWebSocketChannel.connect(
         'ws://' + host + ':' + port.toString() + '/ws');
+  }
+
+  void bindSubscription() {
     _streamSubscription = _webSocket.stream.listen((dynamic message) {
       final dynamic jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];

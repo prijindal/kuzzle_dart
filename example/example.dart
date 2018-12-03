@@ -16,7 +16,7 @@ const Credentials creds =
 
 Future<void> kuzzleConnections() async {
   final Kuzzle kuzzle = Kuzzle(HOST, defaultIndex: DEFAULT_INDEX);
-  kuzzle.connect();
+  await kuzzle.connect();
   await kuzzle.login(adminCredentials);
 
   final List<String> indexes = await kuzzle.listIndexes();
