@@ -43,19 +43,23 @@
       <li><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></li>
       <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
       <li><a href="kuzzle_dart/CollectionMapping-class.html">CollectionMapping</a></li>
+      <li><a href="kuzzle_dart/CreatedResponse-class.html">CreatedResponse</a></li>
       <li><a href="kuzzle_dart/Credentials-class.html">Credentials</a></li>
       <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
       <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
       <li><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></li>
       <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
+      <li><a href="kuzzle_dart/ListCollectionResponse-class.html">ListCollectionResponse</a></li>
       <li><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></li>
       <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></li>
       <li><a href="kuzzle_dart/RequestStatistics-class.html">RequestStatistics</a></li>
       <li><a href="kuzzle_dart/Rights-class.html">Rights</a></li>
       <li><a href="kuzzle_dart/Room-class.html">Room</a></li>
+      <li><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a></li>
       <li><a href="kuzzle_dart/Security-class.html">Security</a></li>
       <li><a href="kuzzle_dart/ServerInfo-class.html">ServerInfo</a></li>
+      <li><a href="kuzzle_dart/Specifications-class.html">Specifications</a></li>
       <li><a href="kuzzle_dart/Statistics-class.html">Statistics</a></li>
       <li><a href="kuzzle_dart/User-class.html">User</a></li>
     
@@ -64,6 +68,7 @@
     
     
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
+      <li><a href="kuzzle_dart/CollectionType-class.html">CollectionType</a></li>
       <li><a href="kuzzle_dart/Event-class.html">Event</a></li>
       <li><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></li>
       <li><a href="kuzzle_dart/KuzzleOfflineModeType-class.html">KuzzleOfflineModeType</a></li>
@@ -184,7 +189,7 @@
 </dd>
         <dt id="create" class="callable">
           <span class="name"><a href="kuzzle_dart/Collection/create.html">create</a></span><span class="signature">(<wbr>{<span class="parameter" id="create-param-mapping"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter"><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></span>&gt;</span></span> <span class="parameter-name">mapping</span>, </span> <span class="parameter" id="create-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/CreatedResponse-class.html">CreatedResponse</a></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -211,7 +216,7 @@
 </dd>
         <dt id="deleteSpecifications" class="callable">
           <span class="name"><a href="kuzzle_dart/Collection/deleteSpecifications.html">deleteSpecifications</a></span><span class="signature">(<wbr>{<span class="parameter" id="deleteSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="deleteSpecifications-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -221,6 +226,15 @@
         <dt id="document" class="callable">
           <span class="name"><a href="kuzzle_dart/Collection/document.html">document</a></span><span class="signature">(<wbr>{<span class="parameter" id="document-param-id"><span class="type-annotation">String</span> <span class="parameter-name">id</span>, </span> <span class="parameter" id="document-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span></span> })
             <span class="returntype parameter">&#8594; <a href="kuzzle_dart/Document-class.html">Document</a></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="exists" class="callable">
+          <span class="name"><a href="kuzzle_dart/Collection/exists.html">exists</a></span><span class="signature">(<wbr>{<span class="parameter" id="exists-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="exists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -265,7 +279,7 @@
 </dd>
         <dt id="getSpecifications" class="callable">
           <span class="name"><a href="kuzzle_dart/Collection/getSpecifications.html">getSpecifications</a></span><span class="signature">(<wbr>{<span class="parameter" id="getSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Specifications</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -364,7 +378,7 @@
 </dd>
         <dt id="scrollSpecifications" class="callable">
           <span class="name"><a href="kuzzle_dart/Collection/scrollSpecifications.html">scrollSpecifications</a></span><span class="signature">(<wbr><span class="parameter" id="scrollSpecifications-param-scrollId"><span class="type-annotation">String</span> <span class="parameter-name">scrollId</span>, {</span> <span class="parameter" id="scrollSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="scrollSpecifications-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span></span> })
-            <span class="returntype parameter">&#8594; void</span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -417,7 +431,7 @@
           
 </dd>
         <dt id="updateSpecifications" class="callable">
-          <span class="name"><a href="kuzzle_dart/Collection/updateSpecifications.html">updateSpecifications</a></span><span class="signature">(<wbr><span class="parameter" id="updateSpecifications-param-specifications"><span class="type-annotation">Specifications</span> <span class="parameter-name">specifications</span>, {</span> <span class="parameter" id="updateSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/Collection/updateSpecifications.html">updateSpecifications</a></span><span class="signature">(<wbr><span class="parameter" id="updateSpecifications-param-specifications"><span class="type-annotation"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span> <span class="parameter-name">specifications</span>, {</span> <span class="parameter" id="updateSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
           </span>
           </dt>
@@ -426,7 +440,7 @@
           
 </dd>
         <dt id="validateSpecifications" class="callable">
-          <span class="name"><a href="kuzzle_dart/Collection/validateSpecifications.html">validateSpecifications</a></span><span class="signature">(<wbr><span class="parameter" id="validateSpecifications-param-specifications"><span class="type-annotation">Specifications</span> <span class="parameter-name">specifications</span>, {</span> <span class="parameter" id="validateSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/Collection/validateSpecifications.html">validateSpecifications</a></span><span class="signature">(<wbr><span class="parameter" id="validateSpecifications-param-specifications"><span class="type-annotation"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span> <span class="parameter-name">specifications</span>, {</span> <span class="parameter" id="validateSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
           </span>
           </dt>
@@ -531,6 +545,7 @@
       <li><a href="kuzzle_dart/Collection/deleteDocument.html">deleteDocument</a></li>
       <li><a href="kuzzle_dart/Collection/deleteSpecifications.html">deleteSpecifications</a></li>
       <li><a href="kuzzle_dart/Collection/document.html">document</a></li>
+      <li><a href="kuzzle_dart/Collection/exists.html">exists</a></li>
       <li><a href="kuzzle_dart/Collection/fetchDocument.html">fetchDocument</a></li>
       <li><a href="kuzzle_dart/Collection/getController.html">getController</a></li>
       <li><a href="kuzzle_dart/Collection/getMapping.html">getMapping</a></li>

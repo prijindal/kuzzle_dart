@@ -61,6 +61,7 @@
       <li><a href="kuzzle_dart/Collection/deleteDocument.html">deleteDocument</a></li>
       <li><a href="kuzzle_dart/Collection/deleteSpecifications.html">deleteSpecifications</a></li>
       <li><a href="kuzzle_dart/Collection/document.html">document</a></li>
+      <li><a href="kuzzle_dart/Collection/exists.html">exists</a></li>
       <li><a href="kuzzle_dart/Collection/fetchDocument.html">fetchDocument</a></li>
       <li><a href="kuzzle_dart/Collection/getController.html">getController</a></li>
       <li><a href="kuzzle_dart/Collection/getMapping.html">getMapping</a></li>
@@ -103,7 +104,7 @@
     <h1>deleteSpecifications method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
       <span class="name ">deleteSpecifications</span>
 (<wbr>{<span class="parameter" id="deleteSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="deleteSpecifications-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
@@ -111,7 +112,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; deleteSpecifications({
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; deleteSpecifications({
   bool queuable = true,
   String refresh,
 }) async =&gt;
@@ -121,7 +122,7 @@
         &#39;refresh&#39;: refresh,
       },
       queuable: queuable,
-    );</code></pre>
+    ).then((RawKuzzleResponse response) =&gt; response.result as bool);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

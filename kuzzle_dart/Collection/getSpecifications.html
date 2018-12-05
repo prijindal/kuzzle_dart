@@ -61,6 +61,7 @@
       <li><a href="kuzzle_dart/Collection/deleteDocument.html">deleteDocument</a></li>
       <li><a href="kuzzle_dart/Collection/deleteSpecifications.html">deleteSpecifications</a></li>
       <li><a href="kuzzle_dart/Collection/document.html">document</a></li>
+      <li><a href="kuzzle_dart/Collection/exists.html">exists</a></li>
       <li><a href="kuzzle_dart/Collection/fetchDocument.html">fetchDocument</a></li>
       <li><a href="kuzzle_dart/Collection/getController.html">getController</a></li>
       <li><a href="kuzzle_dart/Collection/getMapping.html">getMapping</a></li>
@@ -103,7 +104,7 @@
     <h1>getSpecifications method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">Specifications</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span>&gt;</span></span>
       <span class="name ">getSpecifications</span>
 (<wbr>{<span class="parameter" id="getSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -112,8 +113,9 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;Specifications&gt; getSpecifications({bool queuable = true}) async =&gt;
-    addNetworkQuery(&#39;getSpecifications&#39;, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt; Specifications());</code></pre>
+    addNetworkQuery(&#39;getSpecifications&#39;, queuable: queuable).then(
+        (RawKuzzleResponse response) =&gt;
+            Specifications.fromMap(this, response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
