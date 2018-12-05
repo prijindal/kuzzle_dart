@@ -277,7 +277,7 @@ class Kuzzle {
           .then((RawKuzzleResponse response) => response.result['hits']
               .map((Map<String, dynamic> stats) => Statistics.fromMap(stats)));
 
-  Future<List<Map<String, String>>> listCollections(
+  Future<List<ListCollectionResponse>> listCollections(
     String index, {
     bool queuable = true,
     int from,
@@ -292,7 +292,10 @@ class Kuzzle {
         'from': from,
         'size': size,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['collections']);
+          .then((RawKuzzleResponse response) =>
+              (response.result['collections'] as List<dynamic>)
+                  .map((dynamic map) => ListCollectionResponse.fromMap(map))
+                  .toList());
 
   Future<List<String>> listIndexes({bool queuable = true}) async =>
       await addNetworkQuery(<String, dynamic>{

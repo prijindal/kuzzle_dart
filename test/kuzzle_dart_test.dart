@@ -21,10 +21,55 @@ void main() {
     await kuzzle.connect();
   });
 
-  test('test for collection constructor', () async {
-    final Collection collection = kuzzle.collection('posts');
-    await collection.create(mapping: <String, MappingDefinition>{
-      'title': MappingDefinition('', 'text', <String, dynamic>{}),
+  group('collection', () {
+    Collection collection;
+    setUpAll(() {
+      collection = kuzzle.collection('posts');
+    });
+    test('creation', () async {
+      final CreatedResponse createdResponse =
+          await collection.create(mapping: <String, MappingDefinition>{
+        'title': MappingDefinition('', 'text', <String, dynamic>{}),
+      });
+      expect(createdResponse.acknowledged, true);
+    });
+
+    test('delete specification', () async {
+      final bool deleteSpecificationsResponse =
+          await collection.deleteSpecifications();
+      expect(deleteSpecificationsResponse, true);
+    });
+
+    test('exists', () async {
+      final bool existsCollection = await collection.exists();
+      expect(existsCollection, true);
+    });
+
+    test('get mapping', () async {
+      final CollectionMapping collectionMapping = await collection.getMapping();
+      expect(collectionMapping.mappings, <String, dynamic>{});
+    });
+
+    test('get specifications', () async {
+      final Specifications collectionSpecifications =
+          await collection.getSpecifications();
+      expect(collectionSpecifications.validation, <String, dynamic>{});
+    });
+
+    test('list all collections', () async {
+      final List<ListCollectionResponse> listCollectionResponse =
+          await kuzzle.listCollections(kuzzle.defaultIndex);
+      expect(listCollectionResponse.length, greaterThanOrEqualTo(1));
+      expect(listCollectionResponse[0].name, 'posts');
+    });
+
+    test('scroll specifications', () async {
+      final ScrollResponse<Map<String, dynamic>> scrollSpecifications =
+          await collection.scrollSpecifications('abc');
+      expect(scrollSpecifications.hits.length, greaterThanOrEqualTo(1));
+      // expect(scrollSpecifications.hits[0], <String, dynamic>{
+      //   '_index': kuzzle.defaultIndex,
+      // });
     });
   });
 

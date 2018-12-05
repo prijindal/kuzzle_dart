@@ -8,7 +8,6 @@ void onServerTransformData(WebSocket webSocket) {
   final IOWebSocketChannel channel = IOWebSocketChannel(webSocket);
   channel.stream.listen((dynamic data) {
     imitationServer.transform(data).then((String transformedData) {
-      print(transformedData);
       channel.sink.add(transformedData);
     });
   });

@@ -69,7 +69,7 @@ class Collection extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => response.result['count']);
 
-  FutureOr<RawKuzzleResponse> create(
+  FutureOr<CreatedResponse> create(
           {Map<String, MappingDefinition> mapping,
           bool queuable = true}) async =>
       addNetworkQuery(
@@ -79,7 +79,8 @@ class Collection extends KuzzleObject {
                     MapEntry<String, dynamic>(key, definition.toMap())) ??
             emptyMap,
         queuable: queuable,
-      );
+      ).then((RawKuzzleResponse response) =>
+          CreatedResponse.fromMap(response.result));
 
   FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
@@ -113,7 +114,7 @@ class Collection extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => response.result['_id']);
 
-  Future<RawKuzzleResponse> deleteSpecifications({
+  Future<bool> deleteSpecifications({
     bool queuable = true,
     String refresh,
   }) async =>
@@ -123,10 +124,19 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
         },
         queuable: queuable,
-      );
+      ).then((RawKuzzleResponse response) => response.result as bool);
 
   Document document({String id, Map<String, dynamic> content}) =>
       Document(this, id, content);
+
+  Future<bool> exists({
+    Map<String, dynamic> volatile,
+    bool queuable = true,
+  }) async =>
+      addNetworkQuery(
+        'exists',
+        queuable: queuable,
+      ).then((RawKuzzleResponse response) => response.result as bool);
 
   Future<Document> fetchDocument(
     String documentId, {
@@ -149,8 +159,9 @@ class Collection extends KuzzleObject {
               onValue.result[index]['mappings'][collectionName]['properties']));
 
   Future<Specifications> getSpecifications({bool queuable = true}) async =>
-      addNetworkQuery('getSpecifications', queuable: queuable)
-          .then((RawKuzzleResponse response) => Specifications());
+      addNetworkQuery('getSpecifications', queuable: queuable).then(
+          (RawKuzzleResponse response) =>
+              Specifications.fromMap(this, response.result));
 
   Future<List<Document>> mCreateDocument(
     List<Document> documents, {
@@ -300,7 +311,7 @@ class Collection extends KuzzleObject {
         'scroll': scroll
       });
 
-  void scrollSpecifications(
+  Future<ScrollResponse<Map<String, dynamic>>> scrollSpecifications(
     String scrollId, {
     bool queuable = true,
     String scroll,
@@ -308,7 +319,8 @@ class Collection extends KuzzleObject {
       addNetworkQuery('scrollSpecifications', optionalParams: <String, dynamic>{
         'scrollId': scrollId,
         'scroll': scroll
-      });
+      }).then((RawKuzzleResponse response) =>
+          ScrollResponse<Map<String, dynamic>>.fromMap(response.result));
 
   Future<RawKuzzleResponse> search({
     Map<String, dynamic> query = emptyMap,
@@ -431,3 +443,15 @@ class Collection extends KuzzleObject {
   }) async =>
       addNetworkQuery('validateSpecifications', body: specifications.toMap());
 }
+
+class ListCollectionResponse {
+  ListCollectionResponse.fromMap(Map<String, dynamic> map)
+      : name = map['name'],
+        type = map['type'] == 'realtime'
+            ? CollectionType.realtime
+            : CollectionType.stored;
+  final String name;
+  final CollectionType type;
+}
+
+enum CollectionType { realtime, stored }

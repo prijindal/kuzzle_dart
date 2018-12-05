@@ -82,3 +82,27 @@ class RawKuzzleResponse {
     }
   }
 }
+
+class ScrollResponse<T extends Object> {
+  ScrollResponse.fromMap(Map<String, dynamic> map)
+      : scrollId = map['scrollId'],
+        hits = map['hits'].map<T>((dynamic a) => a as T).toList();
+
+  final String scrollId;
+  final List<T> hits;
+}
+
+class CreatedResponse {
+  CreatedResponse(this.acknowledged);
+  CreatedResponse.fromMap(Map<String, dynamic> map)
+      : acknowledged = map['acknowledged'];
+
+  final bool acknowledged;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'acknowledged': acknowledged,
+      };
+}
