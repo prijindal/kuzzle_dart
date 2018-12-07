@@ -39,15 +39,14 @@
     <h5>kuzzle_dart library</h5>
     <ol>
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
+      <li><a href="kuzzle_dart/AcknowledgedResponse-class.html">AcknowledgedResponse</a></li>
       <li><a href="kuzzle_dart/AuthResponse-class.html">AuthResponse</a></li>
       <li><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></li>
       <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
       <li><a href="kuzzle_dart/CollectionMapping-class.html">CollectionMapping</a></li>
-      <li><a href="kuzzle_dart/CreatedResponse-class.html">CreatedResponse</a></li>
       <li><a href="kuzzle_dart/Credentials-class.html">Credentials</a></li>
       <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
       <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
-      <li><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></li>
       <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
       <li><a href="kuzzle_dart/ListCollectionResponse-class.html">ListCollectionResponse</a></li>
       <li><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></li>
@@ -57,8 +56,12 @@
       <li><a href="kuzzle_dart/Rights-class.html">Rights</a></li>
       <li><a href="kuzzle_dart/Room-class.html">Room</a></li>
       <li><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a></li>
+      <li><a href="kuzzle_dart/ScrollSpecificationHit-class.html">ScrollSpecificationHit</a></li>
+      <li><a href="kuzzle_dart/SearchResponse-class.html">SearchResponse</a></li>
       <li><a href="kuzzle_dart/Security-class.html">Security</a></li>
       <li><a href="kuzzle_dart/ServerInfo-class.html">ServerInfo</a></li>
+      <li><a href="kuzzle_dart/Shards-class.html">Shards</a></li>
+      <li><a href="kuzzle_dart/SharedAcknowledgedResponse-class.html">SharedAcknowledgedResponse</a></li>
       <li><a href="kuzzle_dart/Specifications-class.html">Specifications</a></li>
       <li><a href="kuzzle_dart/Statistics-class.html">Statistics</a></li>
       <li><a href="kuzzle_dart/User-class.html">User</a></li>
@@ -95,7 +98,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="ScrollResponse.fromMap" class="callable">
-          <span class="name"><a href="kuzzle_dart/ScrollResponse/ScrollResponse.fromMap.html">ScrollResponse.fromMap</a></span><span class="signature">(<span class="parameter" id="fromMap-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span></span>)</span>
+          <span class="name"><a href="kuzzle_dart/ScrollResponse/ScrollResponse.fromMap.html">ScrollResponse.fromMap</a></span><span class="signature">(<span class="parameter" id="fromMap-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span>, </span> <span class="parameter" id="fromMap-param-hitTransform"><span class="type-annotation">T</span> <span class="parameter-name">hitTransform</span>(<span class="parameter" id="hitTransform-param-hitmap"><span class="type-annotation">dynamic</span> <span class="parameter-name">hitmap</span></span>)</span>)</span>
         </dt>
         <dd>
           
@@ -118,6 +121,14 @@
         <dt id="scrollId" class="property">
           <span class="name"><a href="kuzzle_dart/ScrollResponse/scrollId.html">scrollId</a></span>
           <span class="signature">&#8594; String</span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="total" class="property">
+          <span class="name"><a href="kuzzle_dart/ScrollResponse/total.html">total</a></span>
+          <span class="signature">&#8594; int</span> 
         </dt>
         <dd>
           
@@ -196,6 +207,7 @@
       </li>
       <li><a href="kuzzle_dart/ScrollResponse/hits.html">hits</a></li>
       <li><a href="kuzzle_dart/ScrollResponse/scrollId.html">scrollId</a></li>
+      <li><a href="kuzzle_dart/ScrollResponse/total.html">total</a></li>
       <li class="inherited"><a href="kuzzle_dart/ScrollResponse/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/ScrollResponse/runtimeType.html">runtimeType</a></li>
     

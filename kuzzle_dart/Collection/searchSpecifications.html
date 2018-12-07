@@ -104,7 +104,7 @@
     <h1>searchSpecifications method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">void</span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SearchResponse-class.html">SearchResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollSpecificationHit-class.html">ScrollSpecificationHit</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">searchSpecifications</span>
 (<wbr>{<span class="parameter" id="searchSpecifications-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>: <span class="default-value">emptyMap</span>, </span> <span class="parameter" id="searchSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="searchSpecifications-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span>, </span> <span class="parameter" id="searchSpecifications-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>: <span class="default-value">0</span>, </span> <span class="parameter" id="searchSpecifications-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>: <span class="default-value">10</span></span> })
       
@@ -112,7 +112,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">void searchSpecifications({
+      <pre class="language-dart"><code class="language-dart">Future&lt;SearchResponse&lt;ScrollSpecificationHit&gt;&gt; searchSpecifications({
   Map&lt;String, dynamic&gt; query = emptyMap,
   bool queuable = true,
   String scroll,
@@ -129,7 +129,11 @@
         &#39;size&#39;: size,
         &#39;scroll&#39;: scroll,
       },
-    );</code></pre>
+    ).then((RawKuzzleResponse response) =&gt;
+        SearchResponse&lt;ScrollSpecificationHit&gt;.fromMap(
+            response.result,
+            (dynamic map) =&gt; ScrollSpecificationHit.fromMap(
+                this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

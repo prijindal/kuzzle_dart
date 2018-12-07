@@ -104,7 +104,7 @@
     <h1>updateSpecifications method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span>&gt;</span></span>
       <span class="name ">updateSpecifications</span>
 (<wbr><span class="parameter" id="updateSpecifications-param-specifications"><span class="type-annotation"><a href="kuzzle_dart/Specifications-class.html">Specifications</a></span> <span class="parameter-name">specifications</span>, {</span> <span class="parameter" id="updateSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -112,11 +112,16 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; updateSpecifications(
+      <pre class="language-dart"><code class="language-dart">Future&lt;Specifications&gt; updateSpecifications(
   Specifications specifications, {
   bool queuable = true,
 }) async =&gt;
-    addNetworkQuery(&#39;updateSpecifications&#39;, body: specifications.toMap());</code></pre>
+    addNetworkQuery(&#39;updateSpecifications&#39;, body: &lt;String, dynamic&gt;{
+      index: &lt;String, dynamic&gt;{
+        collectionName: specifications.toMap(),
+      },
+    }).then((RawKuzzleResponse response) =&gt;
+        Specifications(this, response.result[index][collectionName]));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

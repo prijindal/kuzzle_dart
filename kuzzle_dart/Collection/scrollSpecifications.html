@@ -104,7 +104,7 @@
     <h1>scrollSpecifications method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollSpecificationHit-class.html">ScrollSpecificationHit</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">scrollSpecifications</span>
 (<wbr><span class="parameter" id="scrollSpecifications-param-scrollId"><span class="type-annotation">String</span> <span class="parameter-name">scrollId</span>, {</span> <span class="parameter" id="scrollSpecifications-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="scrollSpecifications-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span></span> })
       
@@ -112,7 +112,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;ScrollResponse&lt;Map&lt;String, dynamic&gt;&gt;&gt; scrollSpecifications(
+      <pre class="language-dart"><code class="language-dart">Future&lt;ScrollResponse&lt;ScrollSpecificationHit&gt;&gt; scrollSpecifications(
   String scrollId, {
   bool queuable = true,
   String scroll,
@@ -121,7 +121,10 @@
       &#39;scrollId&#39;: scrollId,
       &#39;scroll&#39;: scroll
     }).then((RawKuzzleResponse response) =&gt;
-        ScrollResponse&lt;Map&lt;String, dynamic&gt;&gt;.fromMap(response.result));</code></pre>
+        ScrollResponse&lt;ScrollSpecificationHit&gt;.fromMap(
+            response.result,
+            (dynamic map) =&gt; ScrollSpecificationHit.fromMap(
+                this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -120,7 +120,7 @@
     <h1>createIndex method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/IndexCreationResponse-class.html">IndexCreationResponse</a></span>&gt;</span></span>
+      <span class="returntype">FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SharedAcknowledgedResponse-class.html">SharedAcknowledgedResponse</a></span>&gt;</span></span>
       <span class="name ">createIndex</span>
 (<wbr><span class="parameter" id="createIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="createIndex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -128,7 +128,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">FutureOr&lt;IndexCreationResponse&gt; createIndex(
+      <pre class="language-dart"><code class="language-dart">FutureOr&lt;SharedAcknowledgedResponse&gt; createIndex(
   String index, {
   bool queuable = true,
 }) async =&gt;
@@ -138,7 +138,7 @@
       &#39;action&#39;: &#39;create&#39;,
     }, queuable: queuable)
         .then((RawKuzzleResponse response) =&gt;
-            IndexCreationResponse.fromMap(response.result));</code></pre>
+            SharedAcknowledgedResponse.fromMap(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

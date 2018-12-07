@@ -104,7 +104,7 @@
     <h1>truncate method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/AcknowledgedResponse-class.html">AcknowledgedResponse</a></span>&gt;</span></span>
       <span class="name ">truncate</span>
 (<wbr>{<span class="parameter" id="truncate-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="truncate-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>: <span class="default-value">'false'</span></span> })
       
@@ -112,15 +112,13 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; truncate({
+      <pre class="language-dart"><code class="language-dart">Future&lt;AcknowledgedResponse&gt; truncate({
   bool queuable = true,
   String refresh = &#39;false&#39;,
 }) =&gt;
     addNetworkQuery(&#39;truncate&#39;, queuable: queuable).then(
         (RawKuzzleResponse response) =&gt;
-            (response.result[&#39;ids&#39;] as List&lt;dynamic&gt;)
-                .map((dynamic id) =&gt; id as String)
-                .toList());</code></pre>
+            AcknowledgedResponse.fromMap(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
