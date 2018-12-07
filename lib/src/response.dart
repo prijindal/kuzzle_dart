@@ -141,3 +141,14 @@ class Shards {
   final int successful;
   final int total;
 }
+
+class ValidResponse {
+  ValidResponse.fromMap(Map<String, dynamic> map)
+      : valid = map['valid'],
+        details = map['details'],
+        description = map['description'];
+
+  final bool valid;
+  final List<dynamic> details;
+  final String description;
+}

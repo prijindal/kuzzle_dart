@@ -447,11 +447,16 @@ class Collection extends KuzzleObject {
       }).then((RawKuzzleResponse response) =>
           Specifications(this, response.result[index][collectionName]));
 
-  Future<RawKuzzleResponse> validateSpecifications(
+  Future<ValidResponse> validateSpecifications(
     Specifications specifications, {
     bool queuable = true,
   }) async =>
-      addNetworkQuery('validateSpecifications', body: specifications.toMap());
+      addNetworkQuery('validateSpecifications', body: <String, dynamic>{
+        index: <String, dynamic>{
+          collectionName: specifications.toMap(),
+        },
+      }).then((RawKuzzleResponse response) =>
+          ValidResponse.fromMap(response.result));
 }
 
 class ListCollectionResponse {

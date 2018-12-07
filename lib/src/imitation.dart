@@ -113,6 +113,7 @@ class ImitationServer {
         };
         break;
       case 'updateMapping':
+        response['result'] = <String, dynamic>{};
         break;
       case 'updateSpecifications':
         response['result'] = <String, dynamic>{
@@ -123,11 +124,17 @@ class ImitationServer {
         };
         break;
       case 'validateSpecifications':
+        response['result'] = <String, dynamic>{
+          'valid': true,
+          'details': <dynamic>[],
+          'description': '',
+        };
+        break;
       default:
-        response['status'] = 200;
-        response['error'] = null;
         break;
     }
+    response['status'] = 200;
+    response['error'] = null;
     response['index'] = jsonRequest['index'];
     response['collection'] = jsonRequest['collection'];
     return response;

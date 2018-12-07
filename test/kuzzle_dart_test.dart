@@ -92,6 +92,13 @@ void main() {
           await collection.updateSpecifications(oldSpecifications);
       expect(specifications.validation, <String, dynamic>{});
     });
+
+    test('validate specifications', () async {
+      final Specifications oldSpecifications = Specifications(collection);
+      final ValidResponse isValid =
+          await collection.validateSpecifications(oldSpecifications);
+      expect(isValid.valid, true);
+    });
   });
 
   test('test for security constructor', () async {
