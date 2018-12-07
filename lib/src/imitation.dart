@@ -13,6 +13,8 @@ class ImitationServer {
         response = await _collection(jsonRequest);
         break;
       case 'document':
+        response = await _document(jsonRequest);
+        break;
       case 'index':
       case 'ms':
       case 'realtime':
@@ -128,6 +130,25 @@ class ImitationServer {
           'valid': true,
           'details': <dynamic>[],
           'description': '',
+        };
+        break;
+      default:
+        response['result'] = <String, dynamic>{};
+        break;
+    }
+    response['status'] = 200;
+    response['error'] = null;
+    response['index'] = jsonRequest['index'];
+    response['collection'] = jsonRequest['collection'];
+    return response;
+  }
+
+  Future<Map<String, dynamic>> _document(dynamic jsonRequest) async {
+    final Map<String, dynamic> response = <String, dynamic>{};
+    switch (jsonRequest['action']) {
+      case 'count':
+        response['result'] = <String, dynamic>{
+          'count': 1,
         };
         break;
       default:
