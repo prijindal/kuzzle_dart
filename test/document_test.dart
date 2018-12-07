@@ -11,15 +11,23 @@ void main() {
 
   group('collection', () {
     Collection collection;
-    Document document;
     setUpAll(() {
       collection = kuzzleTestHelper.kuzzle.collection('posts');
-      document = collection.document();
     });
 
     test('count', () async {
       final int count = await collection.count();
       expect(count, 1);
+    });
+
+    test('create', () async {
+      final Document document =
+          await collection.createDocument(<String, dynamic>{
+        'title': 'This is a test post',
+      });
+      expect(document.content, <String, dynamic>{
+        'title': 'This is a test post',
+      });
     });
   });
 

@@ -96,8 +96,8 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse onValue) =>
-          Document.fromMap(this, onValue.result));
+      ).then((RawKuzzleResponse response) =>
+          Document.fromMap(this, response.result));
 
   Future<String> deleteDocument(
     String documentId, {

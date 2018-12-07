@@ -25,7 +25,7 @@ class KuzzleTestHelper {
     streamSubscription =
         server.transform(WebSocketTransformer()).listen(onServerTransformData);
     kuzzle = Kuzzle('localhost', port: server.port, defaultIndex: 'testindex');
-    kuzzle.connect();
+    await kuzzle.connect();
   }
 
   void end() {
