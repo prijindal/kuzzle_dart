@@ -1,6 +1,8 @@
 import 'collection.dart';
+import 'helpers.dart';
 
 class Specifications {
+  Specifications(this.collection, [this.validation = emptyMap]);
   Specifications.fromMap(this.collection, Map<String, dynamic> map)
       : validation = map['validation'];
 

@@ -113,7 +113,15 @@ class ImitationServer {
         };
         break;
       case 'updateMapping':
+        break;
       case 'updateSpecifications':
+        response['result'] = <String, dynamic>{
+          jsonRequest['index']: <String, dynamic>{
+            jsonRequest['collection']:
+                <String, dynamic>{} // This is a validation
+          },
+        };
+        break;
       case 'validateSpecifications':
       default:
         response['status'] = 200;

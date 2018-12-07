@@ -7,7 +7,7 @@ before_install:
 
 script:
   - dartanalyzer lib test --fatal-infos --fatal-warnings
-  - test_coverage
+  - pub run test_coverage
 
 after_success:
   - coveralls-lcov coverage/lcov.info

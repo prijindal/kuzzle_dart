@@ -85,6 +85,13 @@ void main() {
           await collection.truncate();
       expect(acknowledgedResponse.acknowledged, true);
     });
+
+    test('update specifications', () async {
+      final Specifications oldSpecifications = Specifications(collection);
+      final Specifications specifications =
+          await collection.updateSpecifications(oldSpecifications);
+      expect(specifications.validation, <String, dynamic>{});
+    });
   });
 
   test('test for security constructor', () async {
