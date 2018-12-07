@@ -30,15 +30,6 @@ class CheckTokenResponse {
   final int expiresAt;
 }
 
-class IndexCreationResponse {
-  IndexCreationResponse.fromMap(Map<String, dynamic> map)
-      : acknowledged = map['acknowledged'],
-        shardsAcknowledged = map['shards_acknowledged'];
-
-  final bool acknowledged;
-  final bool shardsAcknowledged;
-}
-
 class Kuzzle {
   Kuzzle(
     this.host, {
@@ -164,7 +155,7 @@ class Kuzzle {
     });
   }
 
-  FutureOr<IndexCreationResponse> createIndex(
+  FutureOr<SharedAcknowledgedResponse> createIndex(
     String index, {
     bool queuable = true,
   }) async =>
@@ -174,7 +165,7 @@ class Kuzzle {
         'action': 'create',
       }, queuable: queuable)
           .then((RawKuzzleResponse response) =>
-              IndexCreationResponse.fromMap(response.result));
+              SharedAcknowledgedResponse.fromMap(response.result));
 
   Future<CredentialsResponse> createMyCredentials(
           LoginStrategy strategy, Credentials credentials,

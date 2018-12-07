@@ -84,17 +84,29 @@ class RawKuzzleResponse {
 }
 
 class ScrollResponse<T extends Object> {
-  ScrollResponse.fromMap(Map<String, dynamic> map)
+  ScrollResponse.fromMap(
+      Map<String, dynamic> map, T Function(dynamic hitmap) hitTransform)
       : scrollId = map['scrollId'],
-        hits = map['hits'].map<T>((dynamic a) => a as T).toList();
+        hits = map['hits'].map<T>(hitTransform).toList(),
+        total = map['total'];
 
   final String scrollId;
   final List<T> hits;
+  final int total;
 }
 
-class CreatedResponse {
-  CreatedResponse(this.acknowledged);
-  CreatedResponse.fromMap(Map<String, dynamic> map)
+class SharedAcknowledgedResponse {
+  SharedAcknowledgedResponse.fromMap(Map<String, dynamic> map)
+      : acknowledged = map['acknowledged'],
+        shardsAcknowledged = map['shards_acknowledged'];
+
+  final bool acknowledged;
+  final bool shardsAcknowledged;
+}
+
+class AcknowledgedResponse {
+  AcknowledgedResponse(this.acknowledged);
+  AcknowledgedResponse.fromMap(dynamic map)
       : acknowledged = map['acknowledged'];
 
   final bool acknowledged;
@@ -105,4 +117,27 @@ class CreatedResponse {
   Map<String, dynamic> toMap() => <String, dynamic>{
         'acknowledged': acknowledged,
       };
+}
+
+class SearchResponse<T extends Object> {
+  SearchResponse.fromMap(
+      Map<String, dynamic> map, T Function(dynamic hitmap) hitTransform)
+      : shards = Shards.fromMap(map['_shards']),
+        hits = map['hits'].map<T>(hitTransform).toList(),
+        total = map['total'];
+
+  final List<T> hits;
+  final int total;
+  final Shards shards;
+}
+
+class Shards {
+  Shards.fromMap(Map<String, dynamic> map)
+      : failed = map['failed'],
+        successful = map['successful'],
+        total = map['total'];
+
+  final int failed;
+  final int successful;
+  final int total;
 }

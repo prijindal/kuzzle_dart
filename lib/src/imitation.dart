@@ -70,13 +70,48 @@ class ImitationServer {
       case 'scrollSpecifications':
         response['result'] = <String, dynamic>{
           'scrollId': Uuid().v1(),
+          'total': 1,
           'hits': <Map<String, dynamic>>[
-            <String, dynamic>{},
+            <String, dynamic>{
+              '_id': '${jsonRequest['index']}#posts',
+              'index': jsonRequest['index'],
+              '_score': 1,
+              '_source': <String, dynamic>{
+                'collection': 'posts',
+                'index': jsonRequest['index'],
+                'validation': <String, dynamic>{}
+              }
+            },
           ]
         };
         break;
       case 'searchSpecifications':
+        response['result'] = <String, dynamic>{
+          '_shards': <String, dynamic>{
+            'failed': 0,
+            'successful': 5,
+            'total': 5,
+          },
+          'total': 5,
+          'hits': <Map<String, dynamic>>[
+            <String, dynamic>{
+              '_id': '${jsonRequest['index']}#posts',
+              'index': jsonRequest['index'],
+              '_score': 1,
+              '_source': <String, dynamic>{
+                'collection': 'posts',
+                'index': jsonRequest['index'],
+                'validation': <String, dynamic>{}
+              }
+            },
+          ]
+        };
+        break;
       case 'truncate':
+        response['result'] = <String, dynamic>{
+          'acknowledged': true,
+        };
+        break;
       case 'updateMapping':
       case 'updateSpecifications':
       case 'validateSpecifications':

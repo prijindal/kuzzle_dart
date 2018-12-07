@@ -69,7 +69,7 @@ class Collection extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => response.result['count']);
 
-  FutureOr<CreatedResponse> create(
+  FutureOr<AcknowledgedResponse> create(
           {Map<String, MappingDefinition> mapping,
           bool queuable = true}) async =>
       addNetworkQuery(
@@ -80,7 +80,7 @@ class Collection extends KuzzleObject {
             emptyMap,
         queuable: queuable,
       ).then((RawKuzzleResponse response) =>
-          CreatedResponse.fromMap(response.result));
+          AcknowledgedResponse.fromMap(response.result));
 
   FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
@@ -311,7 +311,7 @@ class Collection extends KuzzleObject {
         'scroll': scroll
       });
 
-  Future<ScrollResponse<Map<String, dynamic>>> scrollSpecifications(
+  Future<ScrollResponse<ScrollSpecificationHit>> scrollSpecifications(
     String scrollId, {
     bool queuable = true,
     String scroll,
@@ -320,7 +320,10 @@ class Collection extends KuzzleObject {
         'scrollId': scrollId,
         'scroll': scroll
       }).then((RawKuzzleResponse response) =>
-          ScrollResponse<Map<String, dynamic>>.fromMap(response.result));
+          ScrollResponse<ScrollSpecificationHit>.fromMap(
+              response.result,
+              (dynamic map) => ScrollSpecificationHit.fromMap(
+                  this, map as Map<String, dynamic>)));
 
   Future<RawKuzzleResponse> search({
     Map<String, dynamic> query = emptyMap,
@@ -348,7 +351,7 @@ class Collection extends KuzzleObject {
         },
       );
 
-  void searchSpecifications({
+  Future<SearchResponse<ScrollSpecificationHit>> searchSpecifications({
     Map<String, dynamic> query = emptyMap,
     bool queuable = true,
     String scroll,
@@ -365,7 +368,11 @@ class Collection extends KuzzleObject {
           'size': size,
           'scroll': scroll,
         },
-      );
+      ).then((RawKuzzleResponse response) =>
+          SearchResponse<ScrollSpecificationHit>.fromMap(
+              response.result,
+              (dynamic map) => ScrollSpecificationHit.fromMap(
+                  this, map as Map<String, dynamic>)));
 
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {
@@ -403,15 +410,13 @@ class Collection extends KuzzleObject {
     return room;
   }
 
-  Future<List<String>> truncate({
+  Future<AcknowledgedResponse> truncate({
     bool queuable = true,
     String refresh = 'false',
   }) =>
       addNetworkQuery('truncate', queuable: queuable).then(
           (RawKuzzleResponse response) =>
-              (response.result['ids'] as List<dynamic>)
-                  .map((dynamic id) => id as String)
-                  .toList());
+              AcknowledgedResponse.fromMap(response.result));
 
   Future<RawKuzzleResponse> updateDocument(
     String documentId,

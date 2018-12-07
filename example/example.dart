@@ -75,8 +75,7 @@ Future<void> kuzzleConnections() async {
   final CollectionMapping collectionMapping = await collection.getMapping();
   print(collectionMapping);
 
-  final List<String> deletedIds = await collection.truncate();
-  print(deletedIds);
+  await collection.truncate();
 
   await kuzzle.deleteIndex(kuzzle.defaultIndex);
 

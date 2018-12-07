@@ -27,7 +27,7 @@ void main() {
       collection = kuzzle.collection('posts');
     });
     test('creation', () async {
-      final CreatedResponse createdResponse =
+      final AcknowledgedResponse createdResponse =
           await collection.create(mapping: <String, MappingDefinition>{
         'title': MappingDefinition('', 'text', <String, dynamic>{}),
       });
@@ -64,12 +64,26 @@ void main() {
     });
 
     test('scroll specifications', () async {
-      final ScrollResponse<Map<String, dynamic>> scrollSpecifications =
+      final ScrollResponse<ScrollSpecificationHit> scrollSpecifications =
           await collection.scrollSpecifications('abc');
       expect(scrollSpecifications.hits.length, greaterThanOrEqualTo(1));
-      // expect(scrollSpecifications.hits[0], <String, dynamic>{
-      //   '_index': kuzzle.defaultIndex,
-      // });
+      expect(
+          scrollSpecifications.hits[0].source.validation, <String, dynamic>{});
+    });
+
+    test('search specifications', () async {
+      final SearchResponse<ScrollSpecificationHit> searchSpecifications =
+          await collection.searchSpecifications();
+      expect(searchSpecifications.hits.length, greaterThanOrEqualTo(1));
+      expect(searchSpecifications.shards.total, greaterThanOrEqualTo(1));
+      expect(
+          searchSpecifications.hits[0].source.validation, <String, dynamic>{});
+    });
+
+    test('truncate', () async {
+      final AcknowledgedResponse acknowledgedResponse =
+          await collection.truncate();
+      expect(acknowledgedResponse.acknowledged, true);
     });
   });
 
