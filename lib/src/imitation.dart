@@ -2,39 +2,39 @@ import 'dart:convert';
 import 'package:uuid/uuid.dart';
 
 class ImitationServer {
-  Future<String> transform(String data) async {
+  String transform(String data) {
     final dynamic jsonRequest = json.decode(data);
     Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['controller']) {
       case 'admin':
-        response = await _admin(jsonRequest);
+        response = _admin(jsonRequest);
         break;
       case 'auth':
-        response = await _auth(jsonRequest);
+        response = _auth(jsonRequest);
         break;
       case 'bulk':
-        response = await _bulk(jsonRequest);
+        response = _bulk(jsonRequest);
         break;
       case 'collection':
-        response = await _collection(jsonRequest);
+        response = _collection(jsonRequest);
         break;
       case 'document':
-        response = await _document(jsonRequest);
+        response = _document(jsonRequest);
         break;
       case 'index':
-        response = await _index(jsonRequest);
+        response = _index(jsonRequest);
         break;
       case 'ms':
-        response = await _ms(jsonRequest);
+        response = _ms(jsonRequest);
         break;
       case 'realtime':
-        response = await _realtime(jsonRequest);
+        response = _realtime(jsonRequest);
         break;
       case 'security':
-        response = await _security(jsonRequest);
+        response = _security(jsonRequest);
         break;
       case 'server':
-        response = await _server(jsonRequest);
+        response = _server(jsonRequest);
         break;
       default:
         break;
@@ -44,7 +44,7 @@ class ImitationServer {
     return json.encode(response);
   }
 
-  Future<Map<String, dynamic>> _admin(dynamic jsonRequest) async {
+  Map<String, dynamic> _admin(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -54,12 +54,13 @@ class ImitationServer {
       case 'resetKuzzleData':
       case 'resetSecurity':
       case 'shutdowndefault:':
+        response['result'] = <String, dynamic>{};
         break;
     }
     return response;
   }
 
-  Future<Map<String, dynamic>> _auth(dynamic jsonRequest) async {
+  Map<String, dynamic> _auth(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -72,18 +73,26 @@ class ImitationServer {
       case 'getMyRights':
       case 'getStrategies':
       case 'login':
+        response['result'] = <String, dynamic>{
+          'uuid': Uuid().v1(),
+          'jwt': Uuid().v1(),
+          'expiresAt': 1321085955000,
+          'ttl': 360000
+        };
+        break;
       case 'logout':
       case 'updateMyCredentials':
       case 'updateSelf':
       case 'validateMyCredentials':
       default:
+        response['result'] = <String, dynamic>{};
         break;
     }
 
     return response;
   }
 
-  Future<Map<String, dynamic>> _bulk(dynamic jsonRequest) async {
+  Map<String, dynamic> _bulk(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -96,7 +105,7 @@ class ImitationServer {
   }
 
   /// takes in json and returns a string
-  Future<Map<String, dynamic>> _collection(dynamic jsonRequest) async {
+  Map<String, dynamic> _collection(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'create':
@@ -210,7 +219,7 @@ class ImitationServer {
     return response;
   }
 
-  Future<Map<String, dynamic>> _document(dynamic jsonRequest) async {
+  Map<String, dynamic> _document(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'count':
@@ -251,11 +260,16 @@ class ImitationServer {
     return response;
   }
 
-  Future<Map<String, dynamic>> _index(dynamic jsonRequest) async {
+  Map<String, dynamic> _index(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'create':
+        response['result'] = <String, dynamic>{
+          'acknowledged': true,
+          'shards_acknowledged': true,
+        };
+        break;
       case 'delete':
       case 'exists':
       case 'getAutoRefresh':
@@ -265,13 +279,14 @@ class ImitationServer {
       case 'refreshInternal':
       case 'setAutoRefresh':
       default:
+        response['result'] = <String, dynamic>{};
         break;
     }
 
     return response;
   }
 
-  Future<Map<String, dynamic>> _ms(dynamic jsonRequest) async {
+  Map<String, dynamic> _ms(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -399,7 +414,7 @@ class ImitationServer {
     return response;
   }
 
-  Future<Map<String, dynamic>> _realtime(dynamic jsonRequest) async {
+  Map<String, dynamic> _realtime(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -417,7 +432,7 @@ class ImitationServer {
     return response;
   }
 
-  Future<Map<String, dynamic>> _security(dynamic jsonRequest) async {
+  Map<String, dynamic> _security(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
@@ -472,7 +487,7 @@ class ImitationServer {
     return response;
   }
 
-  Future<Map<String, dynamic>> _server(dynamic jsonRequest) async {
+  Map<String, dynamic> _server(dynamic jsonRequest) {
     final Map<String, dynamic> response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {

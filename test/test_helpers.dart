@@ -9,28 +9,38 @@ void onServerTransformData(WebSocket webSocket) {
   final ImitationServer imitationServer = ImitationServer();
   final IOWebSocketChannel channel = IOWebSocketChannel(webSocket);
   channel.stream.listen((dynamic data) {
-    imitationServer.transform(data).then((String transformedData) {
-      channel.sink.add(transformedData);
-    });
+    channel.sink.add(imitationServer.transform(data));
   });
 }
+
+const Credentials adminCredentials =
+    Credentials(LoginStrategy.local, username: 'admin', password: 'admin');
 
 class KuzzleTestHelper {
   HttpServer server;
   StreamSubscription<dynamic> streamSubscription;
   Kuzzle kuzzle;
 
-  Future<void> connect() async {
-    server = await HttpServer.bind('localhost', 0);
-    streamSubscription =
-        server.transform(WebSocketTransformer()).listen(onServerTransformData);
-    kuzzle = Kuzzle('localhost', port: server.port, defaultIndex: 'testindex');
+  Future<void> connect([bool isImitation = true]) async {
+    if (isImitation) {
+      server = await HttpServer.bind('localhost', 0);
+      streamSubscription = server
+          .transform(WebSocketTransformer())
+          .listen(onServerTransformData);
+      kuzzle =
+          Kuzzle('localhost', port: server.port, defaultIndex: 'testindex');
+    } else {
+      kuzzle = Kuzzle('localhost', defaultIndex: 'testindex');
+    }
     await kuzzle.connect();
+    kuzzle.login(adminCredentials);
   }
 
   void end() {
     kuzzle.disconect();
-    streamSubscription.cancel();
-    server.close(force: true);
+    if (streamSubscription != null && server != null) {
+      streamSubscription.cancel();
+      server.close(force: true);
+    }
   }
 }

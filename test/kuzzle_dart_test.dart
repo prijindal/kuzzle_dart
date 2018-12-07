@@ -8,6 +8,11 @@ void main() {
     await kuzzleTestHelper.connect();
   });
 
+  test('create index', () async {
+    await kuzzleTestHelper.kuzzle
+        .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
+  });
+
   test('test for security constructor', () async {
     kuzzleTestHelper.kuzzle.security.role('id', <String, dynamic>{});
   });
