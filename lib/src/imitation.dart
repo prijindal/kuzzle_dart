@@ -1,9 +1,26 @@
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
 
+class ImitationDatabase {
+  // {index: {collection: [{document}]}}
+  Map<String, dynamic> db = <String, dynamic>{};
+
+  bool doesIndexExist(String index) => db.containsKey(index);
+  bool doesCollectionExist(dynamic jsonRequest) =>
+      doesIndexExist(jsonRequest['index']) &&
+      (db[jsonRequest['index']] as Map<String, dynamic>)
+          .containsKey(jsonRequest['collection']);
+
+  Map<String, dynamic> getCollection(dynamic jsonRequest) =>
+      db[jsonRequest['index']][jsonRequest['collection']];
+}
+
 class ImitationServer {
+  final ImitationDatabase imitationDatabase = ImitationDatabase();
+
   String transform(String data) {
     final dynamic jsonRequest = json.decode(data);
+    // print(jsonRequest);
     Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['controller']) {
       case 'admin':
@@ -41,6 +58,7 @@ class ImitationServer {
     }
     response['requestId'] = jsonRequest['requestId'];
     response['controller'] = jsonRequest['controller'];
+    // print(imitationDatabase.db);
     return json.encode(response);
   }
 
@@ -106,16 +124,27 @@ class ImitationServer {
 
   /// takes in json and returns a string
   Map<String, dynamic> _collection(dynamic jsonRequest) {
+    final bool doesIndexExist =
+        imitationDatabase.doesIndexExist(jsonRequest['index']);
+    final bool doesCollectionExist =
+        imitationDatabase.doesCollectionExist(jsonRequest);
+
     final Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'create':
-        response['result'] = <String, dynamic>{'acknowledged': true};
+        if (!doesIndexExist) {
+          response['result'] = <String, dynamic>{'acknowledged': false};
+        } else {
+          imitationDatabase.db[jsonRequest['index']]
+              [jsonRequest['collection']] = <String, dynamic>{};
+          response['result'] = <String, dynamic>{'acknowledged': true};
+        }
         break;
       case 'deleteSpecifications':
         response['result'] = true;
         break;
       case 'exists':
-        response['result'] = true;
+        response['result'] = doesCollectionExist;
         break;
       case 'getMapping':
         response['result'] = <String, dynamic>{
@@ -223,19 +252,38 @@ class ImitationServer {
     final Map<String, dynamic> response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'count':
-        response['result'] = <String, dynamic>{
-          'count': 1,
-        };
+        if (imitationDatabase.doesCollectionExist(jsonRequest)) {
+          response['result'] = <String, dynamic>{
+            'count': imitationDatabase.getCollection(jsonRequest).length,
+          };
+        }
         break;
       case 'create':
-        response['result'] = <String, dynamic>{
-          '_id': '1',
-          '_version': 1,
-          '_source': jsonRequest['body'],
-        };
+        if (imitationDatabase.doesCollectionExist(jsonRequest)) {
+          final String id = Uuid().v1();
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+                  as Map<String, dynamic>)
+              .addAll(<String, dynamic>{
+            id: jsonRequest['body'],
+          });
+          response['result'] = <String, dynamic>{
+            '_id': id,
+            '_version': 1,
+            '_source': jsonRequest['body'],
+          };
+        }
         break;
       case 'createOrReplace':
       case 'delete':
+        if (imitationDatabase.doesCollectionExist(jsonRequest)) {
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+                  as Map<String, dynamic>)
+              .remove(jsonRequest['_id']);
+          response['result'] = <String, dynamic>{
+            '_id': jsonRequest['_id'],
+          };
+        }
+        break;
       case 'deleteByQuery':
       case 'get':
       case 'mCreate':
@@ -265,12 +313,18 @@ class ImitationServer {
 
     switch (jsonRequest['action']) {
       case 'create':
+        imitationDatabase.db[jsonRequest['index']] = <String, dynamic>{};
         response['result'] = <String, dynamic>{
           'acknowledged': true,
           'shards_acknowledged': true,
         };
         break;
       case 'delete':
+        imitationDatabase.db.remove(jsonRequest['index']);
+        response['result'] = <String, dynamic>{
+          'acknowledged': true,
+        };
+        break;
       case 'exists':
       case 'getAutoRefresh':
       case 'list':

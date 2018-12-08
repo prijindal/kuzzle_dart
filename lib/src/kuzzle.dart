@@ -194,12 +194,13 @@ class Kuzzle {
           .then(
               (RawKuzzleResponse response) => response.result['acknowledged']);
 
-  Future<RawKuzzleResponse> deleteIndex(String index) async =>
+  Future<AcknowledgedResponse> deleteIndex(String index) async =>
       addNetworkQuery(<String, dynamic>{
         'index': index,
         'controller': 'index',
         'action': 'delete',
-      });
+      }).then((RawKuzzleResponse response) =>
+          AcknowledgedResponse.fromMap(response.result));
 
   void disconect() {
     _streamSubscription.cancel();

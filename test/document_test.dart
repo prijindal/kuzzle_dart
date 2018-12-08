@@ -9,25 +9,40 @@ void main() {
     await kuzzleTestHelper.connect();
   });
 
-  group('collection', () {
+  group('document', () {
     Collection collection;
-    setUpAll(() {
+    Document document;
+    setUpAll(() async {
+      await kuzzleTestHelper.kuzzle
+          .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
       collection = kuzzleTestHelper.kuzzle.collection('posts');
+      await collection.create();
     });
 
     test('count', () async {
       final int count = await collection.count();
-      expect(count, 1);
+      expect(count, 0);
     });
 
     test('create', () async {
-      final Document document =
-          await collection.createDocument(<String, dynamic>{
+      document = await collection.createDocument(<String, dynamic>{
         'title': 'This is a test post',
       });
       expect(document.content, <String, dynamic>{
         'title': 'This is a test post',
       });
+      expect(await collection.count(), equals(1));
+    });
+
+    test('delete', () async {
+      final String documentId = await document.delete();
+      expect(documentId, document.id);
+      expect(await collection.count(), equals(0));
+    });
+
+    tearDownAll(() async {
+      await kuzzleTestHelper.kuzzle
+          .deleteIndex(kuzzleTestHelper.kuzzle.defaultIndex);
     });
   });
 

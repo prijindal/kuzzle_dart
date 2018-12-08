@@ -39,6 +39,9 @@ class Collection extends KuzzleObject {
   final String index;
   static String controller = 'collection';
 
+  static const Map<String, MappingDefinition> emptyDefinition =
+      <String, MappingDefinition>{};
+
   @override
   String getController() => controller;
 
@@ -70,7 +73,7 @@ class Collection extends KuzzleObject {
       ).then((RawKuzzleResponse response) => response.result['count']);
 
   FutureOr<AcknowledgedResponse> create(
-          {Map<String, MappingDefinition> mapping,
+          {Map<String, MappingDefinition> mapping = emptyDefinition,
           bool queuable = true}) async =>
       addNetworkQuery(
         'create',

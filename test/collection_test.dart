@@ -11,7 +11,9 @@ void main() {
 
   group('collection', () {
     Collection collection;
-    setUpAll(() {
+    setUpAll(() async {
+      await kuzzleTestHelper.kuzzle
+          .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
       collection = kuzzleTestHelper.kuzzle.collection('posts');
     });
     test('creation', () async {
@@ -87,6 +89,11 @@ void main() {
       final ValidResponse isValid =
           await collection.validateSpecifications(oldSpecifications);
       expect(isValid.valid, true);
+    });
+
+    tearDownAll(() async {
+      await kuzzleTestHelper.kuzzle
+          .deleteIndex(kuzzleTestHelper.kuzzle.defaultIndex);
     });
   });
 
