@@ -349,12 +349,32 @@ class ImitationServer {
         };
         break;
       case 'exists':
+        response['result'] =
+            imitationDatabase.doesIndexExist(jsonRequest['index']);
+        break;
       case 'getAutoRefresh':
+        response['result'] =
+            imitationDatabase.doesIndexExist(jsonRequest['index']);
+        break;
       case 'list':
+        response['result'] = {
+          'indexes': imitationDatabase.db.keys.toList(),
+        };
+        break;
       case 'mDelete':
       case 'refresh':
+        response['result'] = <String, dynamic>{
+          '_shards': <String, dynamic>{
+            'failed': 0,
+            'succressful': 1,
+            'total': 1,
+          },
+        };
+        break;
       case 'refreshInternal':
       case 'setAutoRefresh':
+        response['result'] = jsonRequest['body']['autoRefresh'];
+        break;
       default:
         response['result'] = <String, dynamic>{};
         break;

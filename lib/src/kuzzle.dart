@@ -207,6 +207,16 @@ class Kuzzle {
     _webSocket.sink.close(status.goingAway);
   }
 
+  Future<bool> existsIndex(
+    String index, {
+    bool queuable = true,
+  }) async =>
+      addNetworkQuery(<String, dynamic>{
+        'index': index,
+        'controller': 'index',
+        'action': 'exists',
+      }).then((RawKuzzleResponse response) => response.result as bool);
+
   // void flushQueue() => throw ResponseError();
 
   Future<List<Statistics>> getAllStatistics({bool queuable = true}) async =>
@@ -351,13 +361,14 @@ class Kuzzle {
 
   // void query({bool queuable = true}) => throw ResponseError();
 
-  Future<RawKuzzleResponse> refreshIndex(String index,
-          {bool queuable = true}) =>
+  Future<Shards> refreshIndex(String index, {bool queuable = true}) =>
       addNetworkQuery(<String, dynamic>{
         'index': index,
         'controller': 'index',
         'action': 'refresh',
-      }, queuable: queuable);
+      }, queuable: queuable)
+          .then((RawKuzzleResponse response) =>
+              Shards.fromMap(response.result['_shards']));
 
   // void removeAllListeners({Event event}) => throw ResponseError();
 
