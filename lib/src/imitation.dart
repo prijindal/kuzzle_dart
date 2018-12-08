@@ -1,19 +1,6 @@
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
-
-class ImitationDatabase {
-  // {index: {collection: [{document}]}}
-  Map<String, dynamic> db = <String, dynamic>{};
-
-  bool doesIndexExist(String index) => db.containsKey(index);
-  bool doesCollectionExist(dynamic jsonRequest) =>
-      doesIndexExist(jsonRequest['index']) &&
-      (db[jsonRequest['index']] as Map<String, dynamic>)
-          .containsKey(jsonRequest['collection']);
-
-  Map<String, dynamic> getCollection(dynamic jsonRequest) =>
-      db[jsonRequest['index']][jsonRequest['collection']];
-}
+import 'imitation_databse.dart';
 
 class ImitationServer {
   final ImitationDatabase imitationDatabase = ImitationDatabase();
@@ -286,6 +273,17 @@ class ImitationServer {
         break;
       case 'deleteByQuery':
       case 'get':
+        if (imitationDatabase.doesCollectionExist(jsonRequest)) {
+          Map<String, dynamic> documentBody = (imitationDatabase
+                  .db[jsonRequest['index']][jsonRequest['collection']]
+              as Map<String, dynamic>)[jsonRequest['_id']];
+          response['result'] = <String, dynamic>{
+            '_id': jsonRequest['_id'],
+            '_source': documentBody,
+            '_version': 1,
+          };
+        }
+        break;
       case 'mCreate':
       case 'mCreateOrReplace':
       case 'mDelete':
@@ -294,6 +292,10 @@ class ImitationServer {
       case 'mUpdate':
       case 'replace':
       case 'scroll':
+        response['result'] = <String, dynamic>{
+          'hits': <Map<String, dynamic>>[],
+        };
+        break;
       case 'search':
       case 'update':
       case 'validate':

@@ -34,10 +34,21 @@ void main() {
       expect(await collection.count(), equals(1));
     });
 
+    test('get', () async {
+      final Document doc = await collection.fetchDocument(document.id);
+      expect(doc.toMap(), document.toMap());
+    });
+
     test('delete', () async {
       final String documentId = await document.delete();
       expect(documentId, document.id);
       expect(await collection.count(), equals(0));
+    });
+
+    test('scroll documents', () async {
+      final ScrollResponse<Document> scrollDocument =
+          await collection.scroll('1');
+      expect(scrollDocument.hits.length, 0);
     });
 
     tearDownAll(() async {

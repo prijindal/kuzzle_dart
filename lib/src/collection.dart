@@ -304,15 +304,19 @@ class Collection extends KuzzleObject {
 
   Room room(Map<String, dynamic> options) => Room(this);
 
-  Future<RawKuzzleResponse> scroll(
+  Future<ScrollResponse<Document>> scroll(
     String scrollId, {
     bool queuable = true,
     String scroll,
   }) =>
       addNetworkQuery('scroll', optionalParams: <String, dynamic>{
         'scrollId': scrollId,
-        'scroll': scroll
-      });
+        'scroll': scroll,
+        'controller': Document.controller,
+      }).then((RawKuzzleResponse response) => ScrollResponse<Document>.fromMap(
+          response.result,
+          (dynamic map) =>
+              Document.fromMap(this, map as Map<String, dynamic>)));
 
   Future<ScrollResponse<ScrollSpecificationHit>> scrollSpecifications(
     String scrollId, {
