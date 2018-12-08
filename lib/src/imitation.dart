@@ -274,7 +274,7 @@ class ImitationServer {
       case 'deleteByQuery':
       case 'get':
         if (imitationDatabase.doesCollectionExist(jsonRequest)) {
-          Map<String, dynamic> documentBody = (imitationDatabase
+          final Map<String, dynamic> documentBody = (imitationDatabase
                   .db[jsonRequest['index']][jsonRequest['collection']]
               as Map<String, dynamic>)[jsonRequest['_id']];
           response['result'] = <String, dynamic>{
