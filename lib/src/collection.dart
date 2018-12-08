@@ -332,7 +332,7 @@ class Collection extends KuzzleObject {
               (dynamic map) => ScrollSpecificationHit.fromMap(
                   this, map as Map<String, dynamic>)));
 
-  Future<RawKuzzleResponse> search({
+  Future<ScrollResponse<Document>> search({
     Map<String, dynamic> query = emptyMap,
     Map<String, dynamic> aggregations = emptyMap,
     Map<String, dynamic> sort = emptyMap,
@@ -356,7 +356,10 @@ class Collection extends KuzzleObject {
           'size': size,
           'includeTrash': includeTrash
         },
-      );
+      ).then((RawKuzzleResponse response) => ScrollResponse<Document>.fromMap(
+          response.result,
+          (dynamic map) =>
+              Document.fromMap(this, map as Map<String, dynamic>)));
 
   Future<SearchResponse<ScrollSpecificationHit>> searchSpecifications({
     Map<String, dynamic> query = emptyMap,
@@ -425,7 +428,7 @@ class Collection extends KuzzleObject {
           (RawKuzzleResponse response) =>
               AcknowledgedResponse.fromMap(response.result));
 
-  Future<RawKuzzleResponse> updateDocument(
+  Future<bool> updateDocument(
     String documentId,
     Map<String, dynamic> content, {
     Map<String, dynamic> volatile,
@@ -441,7 +444,8 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
           '_id': documentId
         },
-      );
+      ).then(
+          (RawKuzzleResponse response) => response.result['created'] as bool);
 
   Future<Specifications> updateSpecifications(
     Specifications specifications, {

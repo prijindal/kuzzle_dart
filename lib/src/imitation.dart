@@ -297,7 +297,22 @@ class ImitationServer {
         };
         break;
       case 'search':
+        response['result'] = <String, dynamic>{
+          'hits': <Map<String, dynamic>>[],
+        };
+        break;
       case 'update':
+        if (imitationDatabase.doesCollectionExist(jsonRequest)) {
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+                  as Map<String, dynamic>)[jsonRequest['_id']]
+              .addAll(jsonRequest['body']);
+          response['result'] = <String, dynamic>{
+            '_id': jsonRequest['_id'],
+            'created': false,
+            '_version': 1,
+          };
+        }
+        break;
       case 'validate':
       default:
         response['result'] = <String, dynamic>{};

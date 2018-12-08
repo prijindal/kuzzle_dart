@@ -52,79 +52,79 @@ class MemoryStorage extends KuzzleObject {
       ).then((RawKuzzleResponse response) => response.result);
 
   Future<RawKuzzleResponse> bitpos({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'bitpos',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> dbsize({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'dbsize',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> decr({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'decr',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> decrby({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'decrby',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> del({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'del',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> exists({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'exists',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> expire({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'expire',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> expireat({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'expireat',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> flushdb({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'flushdb',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> geoadd({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'geoadd',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> geodist({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'geodist',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> geohash({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'geohash',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> geopos({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'geopos',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
@@ -144,55 +144,55 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> get({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'get',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> getbit({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'getbit',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> getrange({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'getrange',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> getset({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'getset',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hdel({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hdel',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hexists({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hexists',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hget({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hget',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hgetall({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hgetall',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hincrby({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hincrby',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
@@ -205,67 +205,67 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hkeys({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hkeys',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hlen({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hlen',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hmget({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hmget',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hmset({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hmset',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hscan({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hscan',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hset({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hset',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hsetnx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hsetnx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hstrlen({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hstrlen',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> hvals({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'hvals',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> incr({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'incr',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> incrby({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'incrby',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
@@ -278,146 +278,146 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> keys({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'keys',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lindex({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lindex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> linsert({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'linsert',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> llen({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'llen',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lpop({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lpop',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lpush({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lpush',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lpushx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lpushx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lrange({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lrange',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lrem({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lrem',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> lset({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'lset',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> ltrim({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'ltrim',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> mget({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'mget',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> mset({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'mset',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> msetnx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'msetnx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> object({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'object',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> persist({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'persist',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pexpire({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'pexpire',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pexpireat({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'pexpireat',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pfadd({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'pfadd',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pfcount({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'pfcount',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pfmerge({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'pfmerge',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> ping({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'ping',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> psetex({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'psetex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> pttl({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'pttl',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
@@ -430,330 +430,330 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> rename({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'rename',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> renamenx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'renamenx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> rpop({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'rpop',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> rpoplpush({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'rpoplpush',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> rpush({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'rpush',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> rpushx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'rpushx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sadd({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sadd',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> scan({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'scan',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> scard({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'scard',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sdiff({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sdiff',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sdiffstore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'sdiffstore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> set({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'set',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> setex({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'setex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> setnx({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'setnx',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sinter({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sinter',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sinterstore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'sinterstore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sismember({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'sismember',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> smembers({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'smembers',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> smove({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'smove',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sort({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sort',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> spop({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'spop',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> srandmember({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'srandmember',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> srem({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'srem',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sscan({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sscan',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> strlen({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'strlen',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sunion({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'sunion',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> sunionstore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'sunionstore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> time({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'time',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> touch({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'touch',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> ttl({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'ttl',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> type({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'type',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zadd({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zadd',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zcard({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zcard',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zcount({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zcount',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zincrby({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zincrby',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zinterstore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zinterstore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zlexcount({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zlexcount',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrange({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zrange',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrangebylex({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zrangebylex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrangebyscore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zrangebyscore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrank({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zrank',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrem({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zrem',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zremrangebylex({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zremrangebylex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zremrangebyrank({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zremrangebyrank',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zremrangebyscore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zremrangebyscore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrevrange({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zrevrange',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrevrangebylex({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zrevrangebylex',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrevrangebyscore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zrevrangebyscore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zrevrank({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zrevrank',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zscan({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zscan',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zscore({bool queuable = true}) => addNetworkQuery(
-        'append',
+        'zscore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,
       ).then((RawKuzzleResponse response) => throw ResponseError());
   Future<RawKuzzleResponse> zunionstore({bool queuable = true}) =>
       addNetworkQuery(
-        'append',
+        'zunionstore',
         body: <String, dynamic>{},
         optionalParams: <String, dynamic>{},
         queuable: queuable,

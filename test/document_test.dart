@@ -39,10 +39,25 @@ void main() {
       expect(doc.toMap(), document.toMap());
     });
 
+    test('update', () async {
+      final bool isCreated =
+          await collection.updateDocument(document.id, <String, dynamic>{
+        'foo': 'bar',
+      });
+      expect(isCreated, false);
+      expect(
+          (await collection.fetchDocument(document.id)).content['foo'], 'bar');
+    });
+
     test('delete', () async {
       final String documentId = await document.delete();
       expect(documentId, document.id);
       expect(await collection.count(), equals(0));
+    });
+
+    test('search documents', () async {
+      final ScrollResponse<Document> searchDocument = await collection.search();
+      expect(searchDocument.hits.length, 0);
     });
 
     test('scroll documents', () async {
