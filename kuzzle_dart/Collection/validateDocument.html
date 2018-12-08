@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the Collection constructor from the Class Collection class from the kuzzle_dart library, for the Dart programming language.">
-  <title>Collection constructor - Collection class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the validateDocument method from the Collection class, for the Dart programming language.">
+  <title>validateDocument method - Collection class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
-    <li class="self-crumb">Collection constructor</li>
+    <li class="self-crumb">validateDocument method</li>
   </ol>
-  <div class="self-name">Collection</div>
+  <div class="self-name">validateDocument</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -101,21 +101,31 @@
       <li class="section-title"><a href="kuzzle_dart/Collection-class.html#constants">Constants</a></li>
       <li><a href="kuzzle_dart/Collection/emptyDefinition-constant.html">emptyDefinition</a></li>
     </ol>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>Collection constructor</h1>
+    <h1>validateDocument method</h1>
 
     <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+      <span class="name ">validateDocument</span>
+(<wbr><span class="parameter" id="validateDocument-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, {</span> <span class="parameter" id="validateDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
-      <span class="name ">Collection</span>(<wbr><span class="parameter" id="-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span>, </span> <span class="parameter" id="-param-collectionName"><span class="type-annotation">String</span> <span class="parameter-name">collectionName</span>, </span> <span class="parameter" id="-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span></span>)
     </section>
-
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Collection(Kuzzle kuzzle, this.collectionName, this.index)
-    : super(null, kuzzle);</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; validateDocument(
+  Map&lt;String, dynamic&gt; body, {
+  bool queuable = true,
+}) async =&gt;
+    addNetworkQuery(
+      &#39;validate&#39;,
+      body: body,
+      optionalParams: &lt;String, dynamic&gt;{
+        &#39;controller&#39;: Document.controller,
+      },
+    ).then((RawKuzzleResponse response) =&gt; response.result[&#39;valid&#39;] as bool);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
