@@ -458,6 +458,18 @@ class Collection extends KuzzleObject {
       }).then((RawKuzzleResponse response) =>
           Specifications(this, response.result[index][collectionName]));
 
+  Future<bool> validateDocument(
+    Map<String, dynamic> body, {
+    bool queuable = true,
+  }) async =>
+      addNetworkQuery(
+        'validate',
+        body: body,
+        optionalParams: <String, dynamic>{
+          'controller': Document.controller,
+        },
+      ).then((RawKuzzleResponse response) => response.result['valid'] as bool);
+
   Future<ValidResponse> validateSpecifications(
     Specifications specifications, {
     bool queuable = true,

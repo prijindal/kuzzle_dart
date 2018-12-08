@@ -66,6 +66,12 @@ void main() {
       expect(scrollDocument.hits.length, 0);
     });
 
+    test('validate document', () async {
+      final bool isValid =
+          await collection.validateDocument(<String, dynamic>{});
+      expect(isValid, true);
+    });
+
     tearDownAll(() async {
       await kuzzleTestHelper.kuzzle
           .deleteIndex(kuzzleTestHelper.kuzzle.defaultIndex);

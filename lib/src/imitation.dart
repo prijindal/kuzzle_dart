@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
+import 'helpers.dart';
 import 'imitation_databse.dart';
 
 class ImitationServer {
@@ -314,6 +315,11 @@ class ImitationServer {
         }
         break;
       case 'validate':
+        response['result'] = <String, dynamic>{
+          'errorMessages': emptyMap,
+          'valid': true,
+        };
+        break;
       default:
         response['result'] = <String, dynamic>{};
         break;
