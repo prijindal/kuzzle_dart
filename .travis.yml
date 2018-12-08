@@ -2,15 +2,11 @@ language: dart
 sudo: false
 dart: dev
 
-before_install:
-  - gem install coveralls-lcov
-
 script:
   - dartanalyzer lib test --fatal-infos --fatal-warnings
   - pub run test_coverage -j 1
 
 after_success:
-  - coveralls-lcov coverage/lcov.info
   - bash <(curl -s https://codecov.io/bash)
   - dartdoc
 
