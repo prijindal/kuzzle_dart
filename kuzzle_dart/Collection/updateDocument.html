@@ -106,7 +106,7 @@
     <h1>updateDocument method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
       <span class="name ">updateDocument</span>
 (<wbr><span class="parameter" id="updateDocument-param-documentId"><span class="type-annotation">String</span> <span class="parameter-name">documentId</span>, </span> <span class="parameter" id="updateDocument-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="updateDocument-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="updateDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="updateDocument-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>: <span class="default-value">'false'</span>, </span> <span class="parameter" id="updateDocument-param-retryOnConflict"><span class="type-annotation">int</span> <span class="parameter-name">retryOnConflict</span>: <span class="default-value">0</span></span> })
       
@@ -114,7 +114,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; updateDocument(
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; updateDocument(
   String documentId,
   Map&lt;String, dynamic&gt; content, {
   Map&lt;String, dynamic&gt; volatile,
@@ -130,7 +130,8 @@
         &#39;refresh&#39;: refresh,
         &#39;_id&#39;: documentId
       },
-    );</code></pre>
+    ).then(
+        (RawKuzzleResponse response) =&gt; response.result[&#39;created&#39;] as bool);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
