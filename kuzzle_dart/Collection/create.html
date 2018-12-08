@@ -97,6 +97,8 @@
       <li><a href="kuzzle_dart/Collection/controller.html">controller</a></li>
     
     
+      <li class="section-title"><a href="kuzzle_dart/Collection-class.html#constants">Constants</a></li>
+      <li><a href="kuzzle_dart/Collection/emptyDefinition-constant.html">emptyDefinition</a></li>
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -106,14 +108,14 @@
     <section class="multi-line-signature">
       <span class="returntype">FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/AcknowledgedResponse-class.html">AcknowledgedResponse</a></span>&gt;</span></span>
       <span class="name ">create</span>
-(<wbr>{<span class="parameter" id="create-param-mapping"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter"><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></span>&gt;</span></span> <span class="parameter-name">mapping</span>, </span> <span class="parameter" id="create-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr>{<span class="parameter" id="create-param-mapping"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter"><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></span>&gt;</span></span> <span class="parameter-name">mapping</span>: <span class="default-value">emptyDefinition</span>, </span> <span class="parameter" id="create-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">FutureOr&lt;AcknowledgedResponse&gt; create(
-        {Map&lt;String, MappingDefinition&gt; mapping,
+        {Map&lt;String, MappingDefinition&gt; mapping = emptyDefinition,
         bool queuable = true}) async =&gt;
     addNetworkQuery(
       &#39;create&#39;,
