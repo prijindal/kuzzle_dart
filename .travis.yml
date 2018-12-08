@@ -11,6 +11,7 @@ script:
 
 after_success:
   - coveralls-lcov coverage/lcov.info
+  - bash <(curl -s https://codecov.io/bash)
   - dartdoc
 
 cache:
