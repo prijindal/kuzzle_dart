@@ -121,7 +121,9 @@
 }) async =&gt;
     addNetworkQuery(&#39;validateSpecifications&#39;, body: &lt;String, dynamic&gt;{
       index: &lt;String, dynamic&gt;{
-        collectionName: specifications.toMap(),
+        collectionName: &lt;String, dynamic&gt;{
+          &#39;fields&#39;: specifications.validation,
+        },
       },
     }).then((response) =&gt; ValidResponse.fromMap(response.result));</code></pre>
     </section>

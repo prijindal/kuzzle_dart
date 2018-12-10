@@ -132,6 +132,7 @@
     final jsonResponse = json.decode(message);
     final String requestId = jsonResponse[&#39;requestId&#39;];
     final response = RawKuzzleResponse.fromMap(this, jsonResponse);
+    &#47;&#47; print(response.result);
     if (roomMaps.containsKey(response.room)) {
       roomMaps[response.room].add(response);
     } else if (futureMaps.containsKey(requestId) &amp;&amp;
