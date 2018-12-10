@@ -132,11 +132,10 @@
         &#39;size&#39;: size,
         &#39;scroll&#39;: scroll,
       },
-    ).then((RawKuzzleResponse response) =&gt;
-        SearchResponse&lt;ScrollSpecificationHit&gt;.fromMap(
-            response.result,
-            (dynamic map) =&gt; ScrollSpecificationHit.fromMap(
-                this, map as Map&lt;String, dynamic&gt;)));</code></pre>
+    ).then((response) =&gt; SearchResponse&lt;ScrollSpecificationHit&gt;.fromMap(
+        response.result,
+        (map) =&gt; ScrollSpecificationHit.fromMap(
+            this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -109,7 +109,7 @@
       content = map[&#39;_source&#39;],
       super(collection) {
   content.remove(&#39;_kuzzle_info&#39;);
-  final Map&lt;String, dynamic&gt; mapMeta = extractMeta(map);
+  final mapMeta = extractMeta(map);
   createdAt = mapMeta[&#39;createdAt&#39;] == null
       ? mapMeta[&#39;createdAt&#39;]
       : DateTime.fromMillisecondsSinceEpoch(mapMeta[&#39;createdAt&#39;]);

@@ -80,17 +80,15 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Profile&gt;&gt; getProfiles() {
-  return Future.wait&lt;Profile&gt;(profileIds
-      .map((String profileId) =&gt; security.addNetworkQuery(
-            &#39;getProfile&#39;,
-            optionalParams: &lt;String, dynamic&gt;{
-              &#39;_id&#39;: profileId,
-            },
-          ).then&lt;Profile&gt;((RawKuzzleResponse response) =&gt;
-              Profile.fromMap(security, response.result)))
-      .toList());
-}</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Profile&gt;&gt; getProfiles() =&gt; Future.wait&lt;Profile&gt;(profileIds
+    .map((profileId) =&gt; security.addNetworkQuery(
+          &#39;getProfile&#39;,
+          optionalParams: &lt;String, dynamic&gt;{
+            &#39;_id&#39;: profileId,
+          },
+        ).then&lt;Profile&gt;(
+            (response) =&gt; Profile.fromMap(security, response.result)))
+    .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -105,8 +105,7 @@
       <pre class="language-dart"><code class="language-dart">Future&lt;Document&gt; refresh({
   bool queuable = true,
 }) async {
-  final Document document =
-      await collection.fetchDocument(id, queuable: queuable);
+  final document = await collection.fetchDocument(id, queuable: queuable);
   content = document.content;
   version = document.version;
   createdAt = document.createdAt;

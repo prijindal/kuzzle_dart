@@ -116,9 +116,8 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;Specifications&gt; getSpecifications({bool queuable = true}) async =&gt;
-    addNetworkQuery(&#39;getSpecifications&#39;, queuable: queuable).then(
-        (RawKuzzleResponse response) =&gt;
-            Specifications.fromMap(this, response.result));</code></pre>
+    addNetworkQuery(&#39;getSpecifications&#39;, queuable: queuable)
+        .then((response) =&gt; Specifications.fromMap(this, response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

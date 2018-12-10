@@ -92,7 +92,7 @@
   Map&lt;String, dynamic&gt; optionalParams,
   bool queuable = true,
 }) async {
-  final Map&lt;String, dynamic&gt; query = getPartialQuery();
+  final query = getPartialQuery();
   query[&#39;action&#39;] = action;
   if (body != null) {
     query[&#39;body&#39;] = body;

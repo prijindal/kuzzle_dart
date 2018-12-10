@@ -75,7 +75,9 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">ScrollResponse.fromMap(
-    Map&lt;String, dynamic&gt; map, T Function(dynamic hitmap) hitTransform)
+    Map&lt;String, dynamic&gt; map,
+    T Function(dynamic hitmap) &#47;&#47; ignore: avoid_annotating_with_dynamic
+        hitTransform)
     : scrollId = map[&#39;scrollId&#39;],
       hits = map[&#39;hits&#39;].map&lt;T&gt;(hitTransform).toList(),
       total = map[&#39;total&#39;];</code></pre>

@@ -116,9 +116,11 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;CollectionMapping&gt; getMapping({bool queuable = true}) async =&gt;
-    addNetworkQuery(&#39;getMapping&#39;, queuable: queuable).then(
-        (RawKuzzleResponse onValue) =&gt; CollectionMapping.fromMap(this,
-            onValue.result[index][&#39;mappings&#39;][collectionName][&#39;properties&#39;]));</code></pre>
+    addNetworkQuery(&#39;getMapping&#39;, queuable: queuable).then((response) =&gt;
+        CollectionMapping.fromMap(
+            this,
+            response.result[index][&#39;mappings&#39;][collectionName]
+                [&#39;properties&#39;]));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -123,11 +123,10 @@
     addNetworkQuery(&#39;scrollSpecifications&#39;, optionalParams: &lt;String, dynamic&gt;{
       &#39;scrollId&#39;: scrollId,
       &#39;scroll&#39;: scroll
-    }).then((RawKuzzleResponse response) =&gt;
-        ScrollResponse&lt;ScrollSpecificationHit&gt;.fromMap(
-            response.result,
-            (dynamic map) =&gt; ScrollSpecificationHit.fromMap(
-                this, map as Map&lt;String, dynamic&gt;)));</code></pre>
+    }).then((response) =&gt; ScrollResponse&lt;ScrollSpecificationHit&gt;.fromMap(
+        response.result,
+        (map) =&gt; ScrollSpecificationHit.fromMap(
+            this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

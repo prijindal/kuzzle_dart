@@ -75,7 +75,9 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">SearchResponse.fromMap(
-    Map&lt;String, dynamic&gt; map, T Function(dynamic hitmap) hitTransform)
+    Map&lt;String, dynamic&gt; map,
+    T Function(dynamic hitmap) &#47;&#47; ignore: avoid_annotating_with_dynamic
+        hitTransform)
     : shards = Shards.fromMap(map[&#39;_shards&#39;]),
       hits = map[&#39;hits&#39;].map&lt;T&gt;(hitTransform).toList(),
       total = map[&#39;total&#39;];</code></pre>

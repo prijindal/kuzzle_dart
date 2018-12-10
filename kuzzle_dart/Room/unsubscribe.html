@@ -95,8 +95,8 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; unsubscribe() async {
-  subscription.cancel();
-  collection.kuzzle.roomMaps[channel].close();
+  unawaited(subscription.cancel());
+  unawaited(collection.kuzzle.roomMaps[channel].close());
   collection.kuzzle.roomMaps.remove(channel);
   return await addNetworkQuery(
     &#39;unsubscribe&#39;,
@@ -107,7 +107,7 @@
       &#39;volatile&#39;: volatile,
     },
     queuable: false,
-  ).then((RawKuzzleResponse response) =&gt; response.result[&#39;roomId&#39;]);
+  ).then((response) =&gt; response.result[&#39;roomId&#39;]);
 }</code></pre>
     </section>
 

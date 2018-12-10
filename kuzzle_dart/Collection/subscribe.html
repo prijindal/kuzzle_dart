@@ -124,9 +124,8 @@
   RoomState state = RoomState.done,
   RoomUsersScope users = RoomUsersScope.none,
 }) async {
-  final StreamController&lt;RawKuzzleResponse&gt; streamController =
-      StreamController&lt;RawKuzzleResponse&gt;.broadcast();
-  final Room room = await addNetworkQuery(
+  final streamController = StreamController&lt;RawKuzzleResponse&gt;.broadcast();
+  final room = await addNetworkQuery(
     &#39;subscribe&#39;,
     body: query,
     optionalParams: &lt;String, dynamic&gt;{
@@ -136,7 +135,7 @@
       &#39;state&#39;: enumToString&lt;RoomState&gt;(state),
       &#39;users&#39;: enumToString&lt;RoomUsersScope&gt;(users),
     },
-  ).then((RawKuzzleResponse response) =&gt; Room(
+  ).then((response) =&gt; Room(
         this,
         id: response.result[&#39;roomId&#39;],
         channel: response.result[&#39;channel&#39;],

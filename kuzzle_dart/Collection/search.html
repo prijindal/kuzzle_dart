@@ -139,10 +139,8 @@
         &#39;size&#39;: size,
         &#39;includeTrash&#39;: includeTrash
       },
-    ).then((RawKuzzleResponse response) =&gt; ScrollResponse&lt;Document&gt;.fromMap(
-        response.result,
-        (dynamic map) =&gt;
-            Document.fromMap(this, map as Map&lt;String, dynamic&gt;)));</code></pre>
+    ).then((response) =&gt; ScrollResponse&lt;Document&gt;.fromMap(response.result,
+        (map) =&gt; Document.fromMap(this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -144,10 +142,9 @@
       &#39;from&#39;: from,
       &#39;size&#39;: size,
     }, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt;
-            (response.result[&#39;collections&#39;] as List&lt;dynamic&gt;)
-                .map((dynamic map) =&gt; ListCollectionResponse.fromMap(map))
-                .toList());</code></pre>
+        .then((response) =&gt; (response.result[&#39;collections&#39;] as List&lt;dynamic&gt;)
+            .map((map) =&gt; ListCollectionResponse.fromMap(map))
+            .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

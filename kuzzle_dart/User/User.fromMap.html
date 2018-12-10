@@ -84,7 +84,7 @@
       profileIds = map[&#39;_source&#39;][&#39;profileIds&#39;] == null
           ? &lt;String&gt;[]
           : map[&#39;_source&#39;][&#39;profileIds&#39;]
-              .map&lt;String&gt;((dynamic id) =&gt; id as String)
+              .map&lt;String&gt;((id) =&gt; id as String)
               .toList(),
       name = map[&#39;_source&#39;][&#39;name&#39;],
       meta = map[&#39;_meta&#39;];</code></pre>

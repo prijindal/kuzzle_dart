@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -130,11 +128,10 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">void bindSubscription() {
-  _streamSubscription = _webSocket.stream.listen((dynamic message) {
-    final dynamic jsonResponse = json.decode(message);
+  _streamSubscription = _webSocket.stream.listen((message) {
+    final jsonResponse = json.decode(message);
     final String requestId = jsonResponse[&#39;requestId&#39;];
-    final RawKuzzleResponse response =
-        RawKuzzleResponse.fromMap(this, jsonResponse);
+    final response = RawKuzzleResponse.fromMap(this, jsonResponse);
     if (roomMaps.containsKey(response.room)) {
       roomMaps[response.room].add(response);
     } else if (futureMaps.containsKey(requestId) &amp;&amp;

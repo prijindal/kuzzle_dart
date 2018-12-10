@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -142,14 +140,14 @@
         &#39;username&#39;: credentials.username,
         &#39;password&#39;: credentials.password,
       }
-    }).then((RawKuzzleResponse response) {
-      return AuthResponse.fromMap(response.result);
-    }).then((AuthResponse response) {
+    })
+        .then((response) =&gt; AuthResponse.fromMap(response.result))
+        .then((response) {
       if (response.id == &#39;-1&#39;) {
         throw ResponseError(
             message: &#39;wrong username or password&#39;, status: 401);
       } else {
-        setJwtToken(response.jwt);
+        _jwtToken = response.jwt;
       }
       return response;
     });</code></pre>

@@ -120,13 +120,11 @@
         bool queuable = true}) async =&gt;
     addNetworkQuery(
       &#39;create&#39;,
-      body: mapping.map&lt;String, dynamic&gt;(
-              (String key, MappingDefinition definition) =&gt;
-                  MapEntry&lt;String, dynamic&gt;(key, definition.toMap())) ??
+      body: mapping.map&lt;String, dynamic&gt;((key, definition) =&gt;
+              MapEntry&lt;String, dynamic&gt;(key, definition.toMap())) ??
           emptyMap,
       queuable: queuable,
-    ).then((RawKuzzleResponse response) =&gt;
-        AcknowledgedResponse.fromMap(response.result));</code></pre>
+    ).then((response) =&gt; AcknowledgedResponse.fromMap(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

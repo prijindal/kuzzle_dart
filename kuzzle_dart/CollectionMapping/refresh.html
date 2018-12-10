@@ -87,8 +87,7 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;CollectionMapping&gt; refresh({bool queuable = true}) async {
-  final CollectionMapping collectionMapping =
-      await collection.getMapping(queuable: queuable);
+  final collectionMapping = await collection.getMapping(queuable: queuable);
   mappings = collectionMapping.mappings;
   return this;
 }</code></pre>

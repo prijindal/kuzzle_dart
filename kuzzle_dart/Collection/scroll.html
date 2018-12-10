@@ -124,10 +124,8 @@
       &#39;scrollId&#39;: scrollId,
       &#39;scroll&#39;: scroll,
       &#39;controller&#39;: Document.controller,
-    }).then((RawKuzzleResponse response) =&gt; ScrollResponse&lt;Document&gt;.fromMap(
-        response.result,
-        (dynamic map) =&gt;
-            Document.fromMap(this, map as Map&lt;String, dynamic&gt;)));</code></pre>
+    }).then((response) =&gt; ScrollResponse&lt;Document&gt;.fromMap(response.result,
+        (map) =&gt; Document.fromMap(this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

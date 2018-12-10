@@ -122,10 +122,10 @@
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">@override
 Map&lt;String, dynamic&gt; getPartialQuery() {
-  final Map&lt;String, dynamic&gt; prevMap = super.getPartialQuery();
-  prevMap.addAll(&lt;String, dynamic&gt;{
-    &#39;collection&#39;: collectionName,
-  });
+  final prevMap = super.getPartialQuery()
+    ..addAll(&lt;String, dynamic&gt;{
+      &#39;collection&#39;: collectionName,
+    });
   return prevMap;
 }</code></pre>
     </section>

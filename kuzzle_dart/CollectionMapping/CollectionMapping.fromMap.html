@@ -86,8 +86,7 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">CollectionMapping.fromMap(Collection collection, Map&lt;String, dynamic&gt; map)
-    : mappings = map.map&lt;String, MappingDefinition&gt;((String key,
-              dynamic mapValue) =&gt;
+    : mappings = map.map&lt;String, MappingDefinition&gt;((key, mapValue) =&gt;
           MapEntry&lt;String, MappingDefinition&gt;(
               key,
               MappingDefinition(

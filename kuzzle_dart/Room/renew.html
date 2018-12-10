@@ -98,8 +98,8 @@
   NotificationCallback notificationCallback, {
   Map&lt;String, dynamic&gt; query = emptyMap,
 }) async {
-  unsubscribe();
-  final Room room = await collection.subscribe(
+  unawaited(unsubscribe());
+  final room = await collection.subscribe(
     notificationCallback,
     query: emptyMap,
     volatile: volatile,

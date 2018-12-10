@@ -127,8 +127,7 @@
         &#39;_id&#39;: documentId,
         &#39;includeTrash&#39;: includeTrash,
       },
-    ).then((RawKuzzleResponse response) =&gt;
-        Document.fromMap(this, response.result));</code></pre>
+    ).then((response) =&gt; Document.fromMap(this, response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

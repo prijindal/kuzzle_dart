@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -135,8 +133,8 @@
       &#39;action&#39;: &#39;getMyRights&#39;,
       &#39;jwt&#39;: _jwtToken,
     }, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt; response.result[&#39;hits&#39;]
-            .map((Map&lt;String, dynamic&gt; stats) =&gt; Rights.fromMap(stats)));</code></pre>
+        .then((response) =&gt;
+            response.result[&#39;hits&#39;].map((stats) =&gt; Rights.fromMap(stats)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

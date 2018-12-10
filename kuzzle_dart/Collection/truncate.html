@@ -119,9 +119,8 @@
   bool queuable = true,
   String refresh = &#39;false&#39;,
 }) =&gt;
-    addNetworkQuery(&#39;truncate&#39;, queuable: queuable).then(
-        (RawKuzzleResponse response) =&gt;
-            AcknowledgedResponse.fromMap(response.result));</code></pre>
+    addNetworkQuery(&#39;truncate&#39;, queuable: queuable)
+        .then((response) =&gt; AcknowledgedResponse.fromMap(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

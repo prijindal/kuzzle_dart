@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -129,10 +127,8 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;IOWebSocketChannel&gt; connectInternal() async {
-  return IOWebSocketChannel.connect(
-      &#39;ws:&#47;&#47;&#39; + host + &#39;:&#39; + port.toString() + &#39;&#47;ws&#39;);
-}</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;IOWebSocketChannel&gt; connectInternal() async =&gt;
+    IOWebSocketChannel.connect(&#39;ws:&#47;&#47;$host:${port.toString()}&#47;ws&#39;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

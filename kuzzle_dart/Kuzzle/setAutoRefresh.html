@@ -98,9 +98,7 @@
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setDefaultIndex.html">setDefaultIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setHeaders.html">setHeaders</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/setJwtToken.html">setJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
@@ -123,14 +121,14 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
       <span class="name ">setAutoRefresh</span>
-(<wbr><span class="parameter" id="setAutoRefresh-param-autoRefresh"><span class="type-annotation">bool</span> <span class="parameter-name">autoRefresh</span>, {</span> <span class="parameter" id="setAutoRefresh-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="setAutoRefresh-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr>{<span class="parameter" id="setAutoRefresh-param-autoRefresh"><span>@required</span> <span class="type-annotation">bool</span> <span class="parameter-name">autoRefresh</span>, </span> <span class="parameter" id="setAutoRefresh-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="setAutoRefresh-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; setAutoRefresh(
-  bool autoRefresh, {
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; setAutoRefresh({
+  @required bool autoRefresh,
   String index,
   bool queuable = true,
 }) async =&gt;
@@ -142,7 +140,7 @@
         &#39;autoRefresh&#39;: autoRefresh,
       }
     }, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt; response.result[&#39;response&#39;]);</code></pre>
+        .then((response) =&gt; response.result[&#39;response&#39;]);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

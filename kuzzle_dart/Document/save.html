@@ -107,7 +107,7 @@
   bool queuable = true,
   String refresh,
 }) async {
-  final Map&lt;String, dynamic&gt; query = &lt;String, dynamic&gt;{
+  final query = &lt;String, dynamic&gt;{
     &#39;volatile&#39;: volatile,
   };
   String action;
@@ -117,13 +117,12 @@
     action = &#39;createOrReplace&#39;;
     query[&#39;_id&#39;] = id;
   }
-  final Document document = await addNetworkQuery(
+  final document = await addNetworkQuery(
     action,
     body: content,
     optionalParams: query,
     queuable: queuable,
-  ).then((RawKuzzleResponse response) =&gt;
-      Document.fromMap(collection, response.result));
+  ).then((response) =&gt; Document.fromMap(collection, response.result));
   id = document.id;
   version = document.version;
   return this;
