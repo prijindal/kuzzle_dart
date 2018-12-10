@@ -126,7 +126,8 @@ class SearchResponse<T extends Object> {
       Map<String, dynamic> map,
       T Function(dynamic hitmap) // ignore: avoid_annotating_with_dynamic
           hitTransform)
-      : shards = Shards.fromMap(map['_shards']),
+      : shards =
+            map['_shards'] == null ? Shards() : Shards.fromMap(map['_shards']),
         hits = map['hits'].map<T>(hitTransform).toList(),
         total = map['total'];
 
@@ -136,6 +137,10 @@ class SearchResponse<T extends Object> {
 }
 
 class Shards {
+  Shards()
+      : failed = 0,
+        successful = 0,
+        total = 0;
   Shards.fromMap(Map<String, dynamic> map)
       : failed = map['failed'],
         successful = map['successful'],

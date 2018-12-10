@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:uuid/uuid.dart';
 
 import 'test_helpers.dart';
 
@@ -6,6 +7,7 @@ void main() {
   final kuzzleTestHelper = KuzzleTestHelper();
   setUpAll(() async {
     await kuzzleTestHelper.connect();
+    kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
   });
 
   group('index', () {
@@ -27,7 +29,7 @@ void main() {
 
     test('list', () async {
       expect(await kuzzleTestHelper.kuzzle.listIndexes(),
-          <String>['justatestindex']);
+          contains('justatestindex'));
     });
 
     test('refresh index', () async {

@@ -409,12 +409,14 @@ class Collection extends KuzzleObject {
     return room;
   }
 
-  Future<AcknowledgedResponse> truncate({
+  Future<List<String>> truncate({
     bool queuable = true,
     String refresh = 'false',
   }) =>
-      addNetworkQuery('truncate', queuable: queuable)
-          .then((response) => AcknowledgedResponse.fromMap(response.result));
+      addNetworkQuery('truncate', queuable: queuable).then((response) =>
+          (response.result['ids'] as List<dynamic>)
+              .map((index) => index as String)
+              .toList());
 
   Future<bool> updateDocument(
     String documentId,
@@ -432,7 +434,7 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
           '_id': documentId
         },
-      ).then((response) => response.result['created'] as bool);
+      ).then((response) => response.result['result'] == 'updated');
 
   Future<Specifications> updateSpecifications(
     Specifications specifications, {
@@ -440,7 +442,9 @@ class Collection extends KuzzleObject {
   }) async =>
       addNetworkQuery('updateSpecifications', body: <String, dynamic>{
         index: <String, dynamic>{
-          collectionName: specifications.toMap(),
+          collectionName: <String, dynamic>{
+            'fields': specifications.validation,
+          },
         },
       }).then((response) =>
           Specifications(this, response.result[index][collectionName]));
@@ -463,7 +467,9 @@ class Collection extends KuzzleObject {
   }) async =>
       addNetworkQuery('validateSpecifications', body: <String, dynamic>{
         index: <String, dynamic>{
-          collectionName: specifications.toMap(),
+          collectionName: <String, dynamic>{
+            'fields': specifications.validation,
+          },
         },
       }).then((response) => ValidResponse.fromMap(response.result));
 }

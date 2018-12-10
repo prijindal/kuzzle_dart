@@ -151,7 +151,7 @@ class ImitationServer {
         response['result'] = <String, dynamic>{
           'collection': jsonRequest['collection'],
           'index': jsonRequest['index'],
-          'validation': <String, dynamic>{},
+          'validation': <String, dynamic>{'fields': {}},
         };
         break;
       case 'list':
@@ -205,8 +205,11 @@ class ImitationServer {
         };
         break;
       case 'truncate':
-        response['result'] = <String, dynamic>{
-          'acknowledged': true,
+        response['result'] = {
+          'ids': (imitationDatabase.db[jsonRequest['index']]
+                  [jsonRequest['collection']] as Map<String, dynamic>)
+              .keys
+              .toList(),
         };
         break;
       case 'updateMapping':
@@ -215,8 +218,9 @@ class ImitationServer {
       case 'updateSpecifications':
         response['result'] = <String, dynamic>{
           jsonRequest['index']: <String, dynamic>{
-            jsonRequest['collection']:
-                <String, dynamic>{} // This is a validation
+            jsonRequest['collection']: <String, dynamic>{
+              'fields': {}
+            } // This is a validation
           },
         };
         break;
@@ -312,6 +316,7 @@ class ImitationServer {
           response['result'] = <String, dynamic>{
             '_id': jsonRequest['_id'],
             'created': false,
+            'result': 'updated',
             '_version': 1,
           };
         }

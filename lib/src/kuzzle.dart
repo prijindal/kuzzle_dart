@@ -137,6 +137,7 @@ class Kuzzle {
       final jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
       final response = RawKuzzleResponse.fromMap(this, jsonResponse);
+      // print(response.result);
       if (roomMaps.containsKey(response.room)) {
         roomMaps[response.room].add(response);
       } else if (futureMaps.containsKey(requestId) &&
