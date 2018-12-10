@@ -45,6 +45,42 @@ void main() {
       });
     });
 
+    test('bitpos', () async {
+      expect(await memoryStorage.bitpos('foo'), equals(1));
+    });
+
+    test('dbsize', () async {
+      expect(await memoryStorage.dbsize(), equals(5));
+    });
+
+    test('decr', () async {
+      expect(await memoryStorage.set('num2', '4'), 'OK');
+      expect(await memoryStorage.decr('num2'), equals(3));
+    });
+
+    test('decrby', () async {
+      expect(await memoryStorage.set('num2', '4'), 'OK');
+      expect(await memoryStorage.decrby('num2', 5), equals(-1));
+    });
+
+    test('del', () async {
+      expect(await memoryStorage.del(['num1', 'num2']), equals(2));
+    });
+
+    test('exists', () async {
+      expect(await memoryStorage.exists(['num1', 'num2']), equals(0));
+      expect(await memoryStorage.set('num2', '4'), 'OK');
+      expect(await memoryStorage.exists(['num1', 'num2']), equals(1));
+    });
+
+    test('expire', () async {
+      expect(await memoryStorage.expire('num2', 200), 1);
+    });
+
+    test('expexpireatire', () async {
+      expect(await memoryStorage.expireat('num2', 200), 1);
+    });
+
     tearDownAll(() async {
       await memoryStorage.flushdb();
     });

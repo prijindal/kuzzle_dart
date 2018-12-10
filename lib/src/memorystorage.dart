@@ -48,60 +48,98 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) => response.result);
 
-  Future<int> bitpos({bool queuable = true}) => addNetworkQuery(
+  Future<int> bitpos(String key,
+          {int bit = 1, int start, int end, bool queuable = true}) =>
+      addNetworkQuery(
         'bitpos',
         body: {},
-        optionalParams: {},
+        optionalParams: {
+          '_id': key,
+          'bit': bit,
+          'start': start,
+          'end': end,
+        },
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<int> dbsize({bool queuable = true}) => addNetworkQuery(
         'dbsize',
         body: {},
         optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> decr({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> decr(String key, {bool queuable = true}) => addNetworkQuery(
         'decr',
         body: {},
-        optionalParams: {},
+        optionalParams: {
+          '_id': key,
+        },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> decrby({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> decrby(String key, int value, {bool queuable = true}) =>
+      addNetworkQuery(
         'decrby',
-        body: {},
-        optionalParams: {},
+        body: {
+          'value': value,
+        },
+        optionalParams: {
+          '_id': key,
+        },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> del({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> del(List<String> keys, {bool queuable = true}) => addNetworkQuery(
         'del',
-        body: {},
+        body: {
+          'keys': keys,
+        },
         optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> exists({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> exists(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'exists',
         body: {},
-        optionalParams: {},
+        optionalParams: {
+          'keys': keys,
+        },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> expire({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> expire(String key, int seconds, {bool queuable = true}) =>
+      addNetworkQuery(
         'expire',
-        body: {},
-        optionalParams: {},
+        body: {
+          'seconds': seconds,
+        },
+        optionalParams: {
+          '_id': key,
+        },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> expireat({bool queuable = true}) => addNetworkQuery(
+
+  Future<int> expireat(String key, int timestamp, {bool queuable = true}) =>
+      addNetworkQuery(
         'expireat',
-        body: {},
-        optionalParams: {},
+        body: {
+          'timestamp': timestamp,
+        },
+        optionalParams: {
+          '_id': key,
+        },
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<String> flushdb({bool queuable = true}) => addNetworkQuery(
         'flushdb',
         body: {},
         optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result as String);
+
   Future<int> geoadd({bool queuable = true}) => addNetworkQuery(
         'geoadd',
         body: {},

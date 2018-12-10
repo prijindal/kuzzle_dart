@@ -425,14 +425,55 @@ class ImitationServer {
         response['result'] = value.toString().length;
         break;
       case 'bitpos':
+        final bytesStr =
+            stringToBytes(imitationDatabase.cache[jsonRequest['_id']]);
+        response['result'] =
+            bytesStr.indexOf(jsonRequest['bit'].toString()) + 1;
+        break;
       case 'dbsize':
+        response['result'] = imitationDatabase.cache.keys.length;
+        break;
       case 'decr':
+        final String value = imitationDatabase.cache[jsonRequest['_id']];
+        final valueInt = int.parse(value) - 1;
+        response['result'] = valueInt;
+        imitationDatabase.cache[jsonRequest['_id']] = valueInt.toString();
+        break;
       case 'decrby':
+        final String value = imitationDatabase.cache[jsonRequest['_id']];
+        final valueInt = int.parse(value) - jsonRequest['body']['value'];
+        response['result'] = valueInt;
+        imitationDatabase.cache[jsonRequest['_id']] = valueInt.toString();
+        break;
       case 'del':
+        var deletedCount = 0;
+        jsonRequest['body']['keys'].forEach((key) {
+          if (imitationDatabase.cache.containsKey(key)) {
+            imitationDatabase.cache.remove(key);
+            deletedCount += 1;
+          }
+        });
+        response['result'] = deletedCount;
+        break;
       case 'exists':
+        var existsCount = 0;
+        jsonRequest['keys'].forEach((key) {
+          if (imitationDatabase.cache.containsKey(key)) {
+            existsCount += 1;
+          }
+        });
+        response['result'] = existsCount;
+        break;
       case 'expire':
+        response['result'] = 1;
+        break;
       case 'expireat':
+        response['result'] = 1;
+        break;
       case 'flushdb':
+        imitationDatabase.cache.removeWhere((key, value) => true);
+        response['result'] = 'OK';
+        break;
       case 'geoadd':
       case 'geodist':
       case 'geohash':

@@ -3,7 +3,7 @@ sudo: false
 dart: dev
 
 script:
-  - dartanalyzer lib test --fatal-infos --fatal-warnings
+  - dartanalyzer lib test --fatal-warnings
   - pub run test_coverage -j 1
 
 after_success:
