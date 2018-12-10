@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:meta/meta.dart';
 import 'collection.dart';
 import 'kuzzle.dart';
@@ -7,6 +8,19 @@ const Map<String, dynamic> emptyMap = <String, dynamic>{};
 
 // T should be an enum
 String enumToString<T>(T A) => A.toString().split('.')[1];
+
+String stringToBytes(String str) {
+  String finalString;
+  try {
+    finalString = int.parse(str).toRadixString(2);
+  } catch (e) {
+    finalString = utf8
+        .encode(str)
+        .map((a) => a.toRadixString(2))
+        .fold('', (initValue, value) => '$initValue$value');
+  }
+  return finalString;
+}
 
 typedef NotificationCallback = void Function(RawKuzzleResponse response);
 

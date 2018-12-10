@@ -396,8 +396,34 @@ class ImitationServer {
 
     switch (jsonRequest['action']) {
       case 'append':
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['value'];
+        response['result'] = imitationDatabase.cache[jsonRequest['_id']].length;
+        break;
       case 'bitcount':
+        final byteString = stringToBytes(
+            imitationDatabase.cache[jsonRequest['_id']] as String);
+        final count = '1'.allMatches(byteString).length;
+        response['result'] = count;
+        break;
       case 'bitop':
+        final keys = jsonRequest['body']['keys'];
+        final List<dynamic> byteValues =
+            keys.map((key) => int.parse(imitationDatabase.cache[key])).toList();
+        int value;
+        switch (jsonRequest['body']['operation']) {
+          case 'AND':
+            value = byteValues.fold(
+                0, (prevValue, curValue) => prevValue & curValue);
+            break;
+          case 'OR':
+            value = byteValues.fold(
+                0, (prevValue, curValue) => prevValue | curValue);
+            break;
+        }
+        imitationDatabase.cache[jsonRequest['_id']] = value.toString();
+        response['result'] = value.toString().length;
+        break;
       case 'bitpos':
       case 'dbsize':
       case 'decr':
@@ -414,6 +440,8 @@ class ImitationServer {
       case 'georadius':
       case 'georadiusbymember':
       case 'get':
+        response['result'] = imitationDatabase.cache[jsonRequest['_id']];
+        break;
       case 'getbit':
       case 'getrange':
       case 'getset':
@@ -472,6 +500,10 @@ class ImitationServer {
       case 'sdiff':
       case 'sdiffstore':
       case 'set':
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['value'];
+        response['result'] = 'OK';
+        break;
       case 'setex':
       case 'setnx':
       case 'sinter':
