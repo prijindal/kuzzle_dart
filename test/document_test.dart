@@ -51,9 +51,21 @@ void main() {
           (await collection.fetchDocument(document.id)).content['foo'], 'bar');
     });
 
+    test('exists', () async {
+      expect(await document.exists(), true);
+    });
+
     test('delete', () async {
       final documentId = await document.delete();
       expect(documentId, document.id);
+    });
+
+    test('delete by id', () async {
+      final doc = await collection.createDocument(<String, dynamic>{
+        'title': 'This is a test post',
+      });
+      final docId = await collection.deleteDocument(doc.id);
+      expect(docId, doc.id);
     });
 
     test('search documents', () async {

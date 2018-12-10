@@ -108,6 +108,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'delete',
         optionalParams: <String, dynamic>{
+          'controller': Document.controller,
           'refresh': refresh,
           '_id': documentId,
         },

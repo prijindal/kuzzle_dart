@@ -75,6 +75,10 @@ void main() {
 
     test('get specifications', () async {
       final collectionSpecifications = await collection.getSpecifications();
+      expect(collectionSpecifications.toMap(), {
+        'index': collection.collectionName,
+        'validation': {'fields': {}},
+      });
       expect(
           collectionSpecifications.validation, <String, dynamic>{'fields': {}});
     });

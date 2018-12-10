@@ -380,8 +380,8 @@ class Kuzzle {
       }, queuable: queuable)
           .then((response) => response.result['response']);
 
-  void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      headers = newheaders;
+  // void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
+  //     headers = newheaders;
 
   // void startQueuing() => throw ResponseError();
 

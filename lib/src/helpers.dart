@@ -33,20 +33,20 @@ abstract class KuzzleObject extends Object {
 
   String getController();
 
-  Map<String, dynamic> get headers {
-    Map<String, dynamic> headers;
-    if (collection != null) {
-      headers = collection.headers;
-    } else if (kuzzle != null) {
-      headers = kuzzle.headers;
-    } else {
-      headers = <String, dynamic>{};
-    }
-    headers.addAll(_headers);
-    return headers;
-  }
+  // Map<String, dynamic> get headers {
+  //   Map<String, dynamic> headers;
+  //   if (collection != null) {
+  //     headers = collection.headers;
+  //   } else if (kuzzle != null) {
+  //     headers = kuzzle.headers;
+  //   } else {
+  //     headers = <String, dynamic>{};
+  //   }
+  //   headers.addAll(_headers);
+  //   return headers;
+  // }
 
-  Map<String, dynamic> _headers = emptyMap;
+  // Map<String, dynamic> _headers = emptyMap;
 
   @mustCallSuper
   Map<String, dynamic> getPartialQuery() {
@@ -88,6 +88,6 @@ abstract class KuzzleObject extends Object {
     return RawKuzzleResponse.fromMap(null, <String, dynamic>{});
   }
 
-  void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-      _headers = newheaders;
+  // void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
+  //     _headers = newheaders;
 }
