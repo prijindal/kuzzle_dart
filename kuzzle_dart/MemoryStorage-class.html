@@ -185,7 +185,7 @@
           
 </dd>
         <dt id="bitpos" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/bitpos.html">bitpos</a></span><span class="signature">(<wbr>{<span class="parameter" id="bitpos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/bitpos.html">bitpos</a></span><span class="signature">(<wbr><span class="parameter" id="bitpos-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="bitpos-param-bit"><span class="type-annotation">int</span> <span class="parameter-name">bit</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="bitpos-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="bitpos-param-end"><span class="type-annotation">int</span> <span class="parameter-name">end</span>, </span> <span class="parameter" id="bitpos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -203,7 +203,7 @@
           
 </dd>
         <dt id="decr" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/decr.html">decr</a></span><span class="signature">(<wbr>{<span class="parameter" id="decr-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/decr.html">decr</a></span><span class="signature">(<wbr><span class="parameter" id="decr-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="decr-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -212,7 +212,7 @@
           
 </dd>
         <dt id="decrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/decrby.html">decrby</a></span><span class="signature">(<wbr>{<span class="parameter" id="decrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/decrby.html">decrby</a></span><span class="signature">(<wbr><span class="parameter" id="decrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="decrby-param-value"><span class="type-annotation">int</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="decrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -221,7 +221,7 @@
           
 </dd>
         <dt id="del" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/del.html">del</a></span><span class="signature">(<wbr>{<span class="parameter" id="del-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/del.html">del</a></span><span class="signature">(<wbr><span class="parameter" id="del-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="del-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -230,7 +230,7 @@
           
 </dd>
         <dt id="exists" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/exists.html">exists</a></span><span class="signature">(<wbr>{<span class="parameter" id="exists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/exists.html">exists</a></span><span class="signature">(<wbr><span class="parameter" id="exists-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="exists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -239,7 +239,7 @@
           
 </dd>
         <dt id="expire" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/expire.html">expire</a></span><span class="signature">(<wbr>{<span class="parameter" id="expire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/expire.html">expire</a></span><span class="signature">(<wbr><span class="parameter" id="expire-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="expire-param-seconds"><span class="type-annotation">int</span> <span class="parameter-name">seconds</span>, {</span> <span class="parameter" id="expire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -248,7 +248,7 @@
           
 </dd>
         <dt id="expireat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/expireat.html">expireat</a></span><span class="signature">(<wbr>{<span class="parameter" id="expireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/expireat.html">expireat</a></span><span class="signature">(<wbr><span class="parameter" id="expireat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="expireat-param-timestamp"><span class="type-annotation">int</span> <span class="parameter-name">timestamp</span>, {</span> <span class="parameter" id="expireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
