@@ -39,13 +39,6 @@ void main() {
       final CollectionMapping collectionMapping = await collection.getMapping();
       expect(collectionMapping.mappings, <String, dynamic>{});
     });
-
-    test('get specifications', () async {
-      final Specifications collectionSpecifications =
-          await collection.getSpecifications();
-      expect(collectionSpecifications.validation, <String, dynamic>{});
-    });
-
     test('list all collections', () async {
       final List<ListCollectionResponse> listCollectionResponse =
           await kuzzleTestHelper.kuzzle
@@ -84,6 +77,11 @@ void main() {
       expect(specifications.validation, <String, dynamic>{});
     });
 
+    test('get specifications', () async {
+      final Specifications collectionSpecifications =
+          await collection.getSpecifications();
+      expect(collectionSpecifications.validation, <String, dynamic>{});
+    });
     test('validate specifications', () async {
       final Specifications oldSpecifications = Specifications(collection);
       final ValidResponse isValid =

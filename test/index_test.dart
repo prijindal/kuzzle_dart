@@ -23,17 +23,18 @@ void main() {
     test('get auto refresh', () async {
       expect(
           await kuzzleTestHelper.kuzzle.getAutoRefresh(index: 'justatestindex'),
-          true);
+          false);
     });
 
     test('list', () async {
-      expect(await kuzzleTestHelper.kuzzle.listIndexes(), ['justatestindex']);
+      expect(await kuzzleTestHelper.kuzzle.listIndexes(),
+          <String>['justatestindex']);
     });
 
     test('refresh index', () async {
-      Shards shards =
+      final Shards shards =
           await kuzzleTestHelper.kuzzle.refreshIndex('justatestindex');
-      expect(shards.total, 1);
+      expect(shards.total, 10);
     });
 
     test('set auto refresh', () async {

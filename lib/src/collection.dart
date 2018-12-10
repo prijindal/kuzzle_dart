@@ -127,7 +127,8 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse response) => response.result as bool);
+      ).then((RawKuzzleResponse response) =>
+          response.result['acknowledged'] as bool);
 
   Document document({String id, Map<String, dynamic> content}) =>
       Document(this, id, content);

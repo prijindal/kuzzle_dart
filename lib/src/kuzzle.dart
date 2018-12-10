@@ -390,7 +390,7 @@ class Kuzzle {
           'autoRefresh': autoRefresh,
         }
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result);
+          .then((RawKuzzleResponse response) => response.result['response']);
 
   void setDefaultIndex(String index) => defaultIndex = index;
 
