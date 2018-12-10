@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:pedantic/pedantic.dart';
+
 import 'collection.dart';
 import 'helpers.dart';
 import 'response.dart';
@@ -45,14 +47,14 @@ class Room extends KuzzleObject {
         optionalParams: <String, dynamic>{
           'volatile': volatile,
         },
-      ).then((RawKuzzleResponse response) => response.result['count'] as int);
+      ).then((response) => response.result['count'] as int);
 
   Future<Room> renew(
     NotificationCallback notificationCallback, {
     Map<String, dynamic> query = emptyMap,
   }) async {
-    unsubscribe();
-    final Room room = await collection.subscribe(
+    unawaited(unsubscribe());
+    final room = await collection.subscribe(
       notificationCallback,
       query: emptyMap,
       volatile: volatile,
@@ -68,8 +70,8 @@ class Room extends KuzzleObject {
   }
 
   Future<String> unsubscribe() async {
-    subscription.cancel();
-    collection.kuzzle.roomMaps[channel].close();
+    unawaited(subscription.cancel());
+    unawaited(collection.kuzzle.roomMaps[channel].close());
     collection.kuzzle.roomMaps.remove(channel);
     return await addNetworkQuery(
       'unsubscribe',
@@ -80,6 +82,6 @@ class Room extends KuzzleObject {
         'volatile': volatile,
       },
       queuable: false,
-    ).then((RawKuzzleResponse response) => response.result['roomId']);
+    ).then((response) => response.result['roomId']);
   }
 }

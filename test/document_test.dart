@@ -4,7 +4,7 @@ import 'package:kuzzle_dart/kuzzle_dart.dart';
 import 'test_helpers.dart';
 
 void main() {
-  final KuzzleTestHelper kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzleTestHelper = KuzzleTestHelper();
   setUpAll(() async {
     await kuzzleTestHelper.connect();
   });
@@ -20,7 +20,7 @@ void main() {
     });
 
     test('count', () async {
-      final int count = await collection.count();
+      final count = await collection.count();
       expect(count, 0);
     });
 
@@ -35,12 +35,12 @@ void main() {
     });
 
     test('get', () async {
-      final Document doc = await collection.fetchDocument(document.id);
+      final doc = await collection.fetchDocument(document.id);
       expect(doc.toMap(), document.toMap());
     });
 
     test('update', () async {
-      final bool isCreated =
+      final isCreated =
           await collection.updateDocument(document.id, <String, dynamic>{
         'foo': 'bar',
       });
@@ -50,25 +50,23 @@ void main() {
     });
 
     test('delete', () async {
-      final String documentId = await document.delete();
+      final documentId = await document.delete();
       expect(documentId, document.id);
       expect(await collection.count(), equals(0));
     });
 
     test('search documents', () async {
-      final ScrollResponse<Document> searchDocument = await collection.search();
+      final searchDocument = await collection.search();
       expect(searchDocument.hits.length, 0);
     });
 
     test('scroll documents', () async {
-      final ScrollResponse<Document> scrollDocument =
-          await collection.scroll('1');
+      final scrollDocument = await collection.scroll('1');
       expect(scrollDocument.hits.length, 0);
     });
 
     test('validate document', () async {
-      final bool isValid =
-          await collection.validateDocument(<String, dynamic>{});
+      final isValid = await collection.validateDocument(<String, dynamic>{});
       expect(isValid, true);
     });
 
@@ -78,7 +76,5 @@ void main() {
     });
   });
 
-  tearDownAll(() {
-    kuzzleTestHelper.end();
-  });
+  tearDownAll(kuzzleTestHelper.end);
 }

@@ -18,7 +18,7 @@ class MappingDefinition extends Object {
   String toString() => toMap().toString();
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> map = <String, dynamic>{
+    final map = <String, dynamic>{
       'type': type.toString(),
     };
     if (index != null) {
@@ -47,10 +47,10 @@ class Collection extends KuzzleObject {
 
   @override
   Map<String, dynamic> getPartialQuery() {
-    final Map<String, dynamic> prevMap = super.getPartialQuery();
-    prevMap.addAll(<String, dynamic>{
-      'collection': collectionName,
-    });
+    final prevMap = super.getPartialQuery()
+      ..addAll(<String, dynamic>{
+        'collection': collectionName,
+      });
     return prevMap;
   }
 
@@ -70,20 +70,18 @@ class Collection extends KuzzleObject {
           'filters': filter,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse response) => response.result['count']);
+      ).then((response) => response.result['count']);
 
   FutureOr<AcknowledgedResponse> create(
           {Map<String, MappingDefinition> mapping = emptyDefinition,
           bool queuable = true}) async =>
       addNetworkQuery(
         'create',
-        body: mapping.map<String, dynamic>(
-                (String key, MappingDefinition definition) =>
-                    MapEntry<String, dynamic>(key, definition.toMap())) ??
+        body: mapping.map<String, dynamic>((key, definition) =>
+                MapEntry<String, dynamic>(key, definition.toMap())) ??
             emptyMap,
         queuable: queuable,
-      ).then((RawKuzzleResponse response) =>
-          AcknowledgedResponse.fromMap(response.result));
+      ).then((response) => AcknowledgedResponse.fromMap(response.result));
 
   FutureOr<Document> createDocument(
     Map<String, dynamic> content, {
@@ -99,8 +97,7 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse response) =>
-          Document.fromMap(this, response.result));
+      ).then((response) => Document.fromMap(this, response.result));
 
   Future<String> deleteDocument(
     String documentId, {
@@ -115,7 +112,7 @@ class Collection extends KuzzleObject {
           '_id': documentId,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse response) => response.result['_id']);
+      ).then((response) => response.result['_id']);
 
   Future<bool> deleteSpecifications({
     bool queuable = true,
@@ -127,8 +124,7 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
         },
         queuable: queuable,
-      ).then((RawKuzzleResponse response) =>
-          response.result['acknowledged'] as bool);
+      ).then((response) => response.result['acknowledged'] as bool);
 
   Document document({String id, Map<String, dynamic> content}) =>
       Document(this, id, content);
@@ -140,7 +136,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'exists',
         queuable: queuable,
-      ).then((RawKuzzleResponse response) => response.result as bool);
+      ).then((response) => response.result as bool);
 
   Future<Document> fetchDocument(
     String documentId, {
@@ -154,18 +150,18 @@ class Collection extends KuzzleObject {
           '_id': documentId,
           'includeTrash': includeTrash,
         },
-      ).then((RawKuzzleResponse response) =>
-          Document.fromMap(this, response.result));
+      ).then((response) => Document.fromMap(this, response.result));
 
   Future<CollectionMapping> getMapping({bool queuable = true}) async =>
-      addNetworkQuery('getMapping', queuable: queuable).then(
-          (RawKuzzleResponse onValue) => CollectionMapping.fromMap(this,
-              onValue.result[index]['mappings'][collectionName]['properties']));
+      addNetworkQuery('getMapping', queuable: queuable).then((response) =>
+          CollectionMapping.fromMap(
+              this,
+              response.result[index]['mappings'][collectionName]
+                  ['properties']));
 
   Future<Specifications> getSpecifications({bool queuable = true}) async =>
-      addNetworkQuery('getSpecifications', queuable: queuable).then(
-          (RawKuzzleResponse response) =>
-              Specifications.fromMap(this, response.result));
+      addNetworkQuery('getSpecifications', queuable: queuable)
+          .then((response) => Specifications.fromMap(this, response.result));
 
   Future<List<Document>> mCreateDocument(
     List<Document> documents, {
@@ -175,7 +171,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mCreate',
         body: <String, dynamic>{
-          'documents': documents.map((Document document) => <String, dynamic>{
+          'documents': documents.map((document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
@@ -184,8 +180,8 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
           'refresh': refresh,
         },
-      ).then((RawKuzzleResponse response) => response.result['hits'].map(
-          (Map<String, dynamic> document) => Document.fromMap(this, document)));
+      ).then((response) => response.result['hits']
+          .map((document) => Document.fromMap(this, document)));
 
   Future<List<Document>> mCreateOrReplaceDocument(
     List<Document> documents, {
@@ -195,7 +191,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mCreateOrReplace',
         body: <String, dynamic>{
-          'documents': documents.map((Document document) => <String, dynamic>{
+          'documents': documents.map((document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
@@ -204,8 +200,8 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
           'refresh': refresh,
         },
-      ).then((RawKuzzleResponse response) => response.result['hits'].map(
-          (Map<String, dynamic> document) => Document.fromMap(this, document)));
+      ).then((response) => response.result['hits']
+          .map((document) => Document.fromMap(this, document)));
 
   Future<RawKuzzleResponse> mDeleteDocument(
     List<String> documentIds, {
@@ -243,7 +239,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mReplace',
         body: <String, dynamic>{
-          'documents': documents.map((Document document) => <String, dynamic>{
+          'documents': documents.map((document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
@@ -252,8 +248,8 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
           'refresh': refresh,
         },
-      ).then((RawKuzzleResponse response) => response.result['hits'].map(
-          (Map<String, dynamic> document) => Document.fromMap(this, document)));
+      ).then((response) => response.result['hits']
+          .map((document) => Document.fromMap(this, document)));
 
   Future<RawKuzzleResponse> mUpdateDocument(
     List<Document> documents, {
@@ -263,7 +259,7 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mUpdate',
         body: <String, dynamic>{
-          'documents': documents.map((Document document) => <String, dynamic>{
+          'documents': documents.map((document) => <String, dynamic>{
                 '_id': document.id,
                 'body': document.content,
               }),
@@ -283,7 +279,7 @@ class Collection extends KuzzleObject {
           'controller': Room.controller,
           'volatile': volatile,
         },
-      ).then((RawKuzzleResponse response) => response.result['published']);
+      ).then((response) => response.result['published']);
 
   Future<Document> replaceDocument(
     String documentId,
@@ -300,8 +296,7 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
           '_id': documentId,
         },
-      ).then((RawKuzzleResponse response) =>
-          Document.fromMap(this, response.result));
+      ).then((response) => Document.fromMap(this, response.result));
 
   Room room(Map<String, dynamic> options) => Room(this);
 
@@ -314,10 +309,8 @@ class Collection extends KuzzleObject {
         'scrollId': scrollId,
         'scroll': scroll,
         'controller': Document.controller,
-      }).then((RawKuzzleResponse response) => ScrollResponse<Document>.fromMap(
-          response.result,
-          (dynamic map) =>
-              Document.fromMap(this, map as Map<String, dynamic>)));
+      }).then((response) => ScrollResponse<Document>.fromMap(response.result,
+          (map) => Document.fromMap(this, map as Map<String, dynamic>)));
 
   Future<ScrollResponse<ScrollSpecificationHit>> scrollSpecifications(
     String scrollId, {
@@ -327,11 +320,10 @@ class Collection extends KuzzleObject {
       addNetworkQuery('scrollSpecifications', optionalParams: <String, dynamic>{
         'scrollId': scrollId,
         'scroll': scroll
-      }).then((RawKuzzleResponse response) =>
-          ScrollResponse<ScrollSpecificationHit>.fromMap(
-              response.result,
-              (dynamic map) => ScrollSpecificationHit.fromMap(
-                  this, map as Map<String, dynamic>)));
+      }).then((response) => ScrollResponse<ScrollSpecificationHit>.fromMap(
+          response.result,
+          (map) => ScrollSpecificationHit.fromMap(
+              this, map as Map<String, dynamic>)));
 
   Future<ScrollResponse<Document>> search({
     Map<String, dynamic> query = emptyMap,
@@ -357,10 +349,8 @@ class Collection extends KuzzleObject {
           'size': size,
           'includeTrash': includeTrash
         },
-      ).then((RawKuzzleResponse response) => ScrollResponse<Document>.fromMap(
-          response.result,
-          (dynamic map) =>
-              Document.fromMap(this, map as Map<String, dynamic>)));
+      ).then((response) => ScrollResponse<Document>.fromMap(response.result,
+          (map) => Document.fromMap(this, map as Map<String, dynamic>)));
 
   Future<SearchResponse<ScrollSpecificationHit>> searchSpecifications({
     Map<String, dynamic> query = emptyMap,
@@ -379,11 +369,10 @@ class Collection extends KuzzleObject {
           'size': size,
           'scroll': scroll,
         },
-      ).then((RawKuzzleResponse response) =>
-          SearchResponse<ScrollSpecificationHit>.fromMap(
-              response.result,
-              (dynamic map) => ScrollSpecificationHit.fromMap(
-                  this, map as Map<String, dynamic>)));
+      ).then((response) => SearchResponse<ScrollSpecificationHit>.fromMap(
+          response.result,
+          (map) => ScrollSpecificationHit.fromMap(
+              this, map as Map<String, dynamic>)));
 
   Future<Room> subscribe(
     NotificationCallback notificationCallback, {
@@ -394,9 +383,8 @@ class Collection extends KuzzleObject {
     RoomState state = RoomState.done,
     RoomUsersScope users = RoomUsersScope.none,
   }) async {
-    final StreamController<RawKuzzleResponse> streamController =
-        StreamController<RawKuzzleResponse>.broadcast();
-    final Room room = await addNetworkQuery(
+    final streamController = StreamController<RawKuzzleResponse>.broadcast();
+    final room = await addNetworkQuery(
       'subscribe',
       body: query,
       optionalParams: <String, dynamic>{
@@ -406,7 +394,7 @@ class Collection extends KuzzleObject {
         'state': enumToString<RoomState>(state),
         'users': enumToString<RoomUsersScope>(users),
       },
-    ).then((RawKuzzleResponse response) => Room(
+    ).then((response) => Room(
           this,
           id: response.result['roomId'],
           channel: response.result['channel'],
@@ -425,9 +413,8 @@ class Collection extends KuzzleObject {
     bool queuable = true,
     String refresh = 'false',
   }) =>
-      addNetworkQuery('truncate', queuable: queuable).then(
-          (RawKuzzleResponse response) =>
-              AcknowledgedResponse.fromMap(response.result));
+      addNetworkQuery('truncate', queuable: queuable)
+          .then((response) => AcknowledgedResponse.fromMap(response.result));
 
   Future<bool> updateDocument(
     String documentId,
@@ -445,8 +432,7 @@ class Collection extends KuzzleObject {
           'refresh': refresh,
           '_id': documentId
         },
-      ).then(
-          (RawKuzzleResponse response) => response.result['created'] as bool);
+      ).then((response) => response.result['created'] as bool);
 
   Future<Specifications> updateSpecifications(
     Specifications specifications, {
@@ -456,7 +442,7 @@ class Collection extends KuzzleObject {
         index: <String, dynamic>{
           collectionName: specifications.toMap(),
         },
-      }).then((RawKuzzleResponse response) =>
+      }).then((response) =>
           Specifications(this, response.result[index][collectionName]));
 
   Future<bool> validateDocument(
@@ -469,7 +455,7 @@ class Collection extends KuzzleObject {
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
         },
-      ).then((RawKuzzleResponse response) => response.result['valid'] as bool);
+      ).then((response) => response.result['valid'] as bool);
 
   Future<ValidResponse> validateSpecifications(
     Specifications specifications, {
@@ -479,8 +465,7 @@ class Collection extends KuzzleObject {
         index: <String, dynamic>{
           collectionName: specifications.toMap(),
         },
-      }).then((RawKuzzleResponse response) =>
-          ValidResponse.fromMap(response.result));
+      }).then((response) => ValidResponse.fromMap(response.result));
 }
 
 class ListCollectionResponse {

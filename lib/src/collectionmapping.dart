@@ -4,8 +4,7 @@ import 'helpers.dart';
 class CollectionMapping extends KuzzleObject {
   CollectionMapping(Collection collection, this.mappings) : super(collection);
   CollectionMapping.fromMap(Collection collection, Map<String, dynamic> map)
-      : mappings = map.map<String, MappingDefinition>((String key,
-                dynamic mapValue) =>
+      : mappings = map.map<String, MappingDefinition>((key, mapValue) =>
             MapEntry<String, MappingDefinition>(
                 key,
                 MappingDefinition(
@@ -27,8 +26,7 @@ class CollectionMapping extends KuzzleObject {
       });
 
   Future<CollectionMapping> refresh({bool queuable = true}) async {
-    final CollectionMapping collectionMapping =
-        await collection.getMapping(queuable: queuable);
+    final collectionMapping = await collection.getMapping(queuable: queuable);
     mappings = collectionMapping.mappings;
     return this;
   }

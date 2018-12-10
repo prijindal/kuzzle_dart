@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'collection.dart';
 import 'document.dart';
 import 'error.dart';
@@ -85,7 +86,9 @@ class RawKuzzleResponse {
 
 class ScrollResponse<T extends Object> {
   ScrollResponse.fromMap(
-      Map<String, dynamic> map, T Function(dynamic hitmap) hitTransform)
+      Map<String, dynamic> map,
+      T Function(dynamic hitmap) // ignore: avoid_annotating_with_dynamic
+          hitTransform)
       : scrollId = map['scrollId'],
         hits = map['hits'].map<T>(hitTransform).toList(),
         total = map['total'];
@@ -105,9 +108,8 @@ class SharedAcknowledgedResponse {
 }
 
 class AcknowledgedResponse {
-  AcknowledgedResponse(this.acknowledged);
-  AcknowledgedResponse.fromMap(dynamic map)
-      : acknowledged = map['acknowledged'];
+  AcknowledgedResponse({@required this.acknowledged});
+  AcknowledgedResponse.fromMap(map) : acknowledged = map['acknowledged'];
 
   final bool acknowledged;
 
@@ -121,7 +123,9 @@ class AcknowledgedResponse {
 
 class SearchResponse<T extends Object> {
   SearchResponse.fromMap(
-      Map<String, dynamic> map, T Function(dynamic hitmap) hitTransform)
+      Map<String, dynamic> map,
+      T Function(dynamic hitmap) // ignore: avoid_annotating_with_dynamic
+          hitTransform)
       : shards = Shards.fromMap(map['_shards']),
         hits = map['hits'].map<T>(hitTransform).toList(),
         total = map['total'];

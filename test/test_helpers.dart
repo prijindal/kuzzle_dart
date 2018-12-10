@@ -6,9 +6,9 @@ import 'package:web_socket_channel/io.dart';
 import 'package:kuzzle_dart/src/imitation.dart';
 
 void onServerTransformData(WebSocket webSocket) {
-  final ImitationServer imitationServer = ImitationServer();
-  final IOWebSocketChannel channel = IOWebSocketChannel(webSocket);
-  channel.stream.listen((dynamic data) {
+  final imitationServer = ImitationServer();
+  final channel = IOWebSocketChannel(webSocket);
+  channel.stream.listen((data) {
     channel.sink.add(imitationServer.transform(data));
   });
 }
@@ -21,7 +21,7 @@ class KuzzleTestHelper {
   StreamSubscription<dynamic> streamSubscription;
   Kuzzle kuzzle;
 
-  Future<void> connect([bool isImitation = true]) async {
+  Future<void> connect({bool isImitation = true}) async {
     if (isImitation) {
       server = await HttpServer.bind('localhost', 0);
       streamSubscription = server
@@ -33,7 +33,7 @@ class KuzzleTestHelper {
       kuzzle = Kuzzle('localhost', defaultIndex: 'testindex');
     }
     await kuzzle.connect();
-    kuzzle.login(adminCredentials);
+    await kuzzle.login(adminCredentials);
   }
 
   void end() {

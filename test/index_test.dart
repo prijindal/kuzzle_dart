@@ -1,17 +1,16 @@
 import 'package:test/test.dart';
-import 'package:kuzzle_dart/kuzzle_dart.dart';
 
 import 'test_helpers.dart';
 
 void main() {
-  final KuzzleTestHelper kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzleTestHelper = KuzzleTestHelper();
   setUpAll(() async {
     await kuzzleTestHelper.connect();
   });
 
   group('index', () {
     test('create', () async {
-      final SharedAcknowledgedResponse sharedAcknowledgedResponse =
+      final sharedAcknowledgedResponse =
           await kuzzleTestHelper.kuzzle.createIndex('justatestindex');
       expect(sharedAcknowledgedResponse.acknowledged, true);
     });
@@ -32,7 +31,7 @@ void main() {
     });
 
     test('refresh index', () async {
-      final Shards shards =
+      final shards =
           await kuzzleTestHelper.kuzzle.refreshIndex('justatestindex');
       expect(shards.total, 10);
     });
@@ -40,18 +39,16 @@ void main() {
     test('set auto refresh', () async {
       expect(
           await kuzzleTestHelper.kuzzle
-              .setAutoRefresh(false, index: 'justatestindex'),
+              .setAutoRefresh(autoRefresh: false, index: 'justatestindex'),
           false);
     });
 
     test('delete', () async {
-      final AcknowledgedResponse acknowledgedResponse =
+      final acknowledgedResponse =
           await kuzzleTestHelper.kuzzle.deleteIndex('justatestindex');
       expect(acknowledgedResponse.acknowledged, true);
     });
   });
 
-  tearDownAll(() {
-    kuzzleTestHelper.end();
-  });
+  tearDownAll(kuzzleTestHelper.end);
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
@@ -87,8 +88,7 @@ class Kuzzle {
     Map<String, dynamic> body, {
     bool queuable = true,
   }) {
-    final Completer<RawKuzzleResponse> completer =
-        Completer<RawKuzzleResponse>();
+    final completer = Completer<RawKuzzleResponse>();
     final String requestId = uuid.v1();
     body.addAll(<String, dynamic>{
       'requestId': requestId,
@@ -117,8 +117,7 @@ class Kuzzle {
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'token': token,
-      }).then((RawKuzzleResponse response) =>
-          CheckTokenResponse.fromMap(response.result));
+      }).then((response) => CheckTokenResponse.fromMap(response.result));
 
   Collection collection(String collection, {String index}) {
     index ??= defaultIndex;
@@ -130,17 +129,14 @@ class Kuzzle {
     bindSubscription();
   }
 
-  Future<IOWebSocketChannel> connectInternal() async {
-    return IOWebSocketChannel.connect(
-        'ws://' + host + ':' + port.toString() + '/ws');
-  }
+  Future<IOWebSocketChannel> connectInternal() async =>
+      IOWebSocketChannel.connect('ws://$host:${port.toString()}/ws');
 
   void bindSubscription() {
-    _streamSubscription = _webSocket.stream.listen((dynamic message) {
-      final dynamic jsonResponse = json.decode(message);
+    _streamSubscription = _webSocket.stream.listen((message) {
+      final jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
-      final RawKuzzleResponse response =
-          RawKuzzleResponse.fromMap(this, jsonResponse);
+      final response = RawKuzzleResponse.fromMap(this, jsonResponse);
       if (roomMaps.containsKey(response.room)) {
         roomMaps[response.room].add(response);
       } else if (futureMaps.containsKey(requestId) &&
@@ -164,7 +160,7 @@ class Kuzzle {
         'controller': 'index',
         'action': 'create',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
+          .then((response) =>
               SharedAcknowledgedResponse.fromMap(response.result));
 
   Future<CredentialsResponse> createMyCredentials(
@@ -180,8 +176,7 @@ class Kuzzle {
           'password': credentials.password,
         }
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              CredentialsResponse.fromMap(response.result));
+          .then((response) => CredentialsResponse.fromMap(response.result));
 
   Future<bool> deleteMyCredentials(LoginStrategy strategy,
           {bool queuable = true}) async =>
@@ -191,16 +186,14 @@ class Kuzzle {
         'strategy': enumToString<LoginStrategy>(strategy),
         'jwt': _jwtToken,
       }, queuable: queuable)
-          .then(
-              (RawKuzzleResponse response) => response.result['acknowledged']);
+          .then((response) => response.result['acknowledged']);
 
   Future<AcknowledgedResponse> deleteIndex(String index) async =>
       addNetworkQuery(<String, dynamic>{
         'index': index,
         'controller': 'index',
         'action': 'delete',
-      }).then((RawKuzzleResponse response) =>
-          AcknowledgedResponse.fromMap(response.result));
+      }).then((response) => AcknowledgedResponse.fromMap(response.result));
 
   void disconect() {
     _streamSubscription.cancel();
@@ -215,7 +208,7 @@ class Kuzzle {
         'index': index,
         'controller': 'index',
         'action': 'exists',
-      }).then((RawKuzzleResponse response) => response.result as bool);
+      }).then((response) => response.result as bool);
 
   // void flushQueue() => throw ResponseError();
 
@@ -224,8 +217,8 @@ class Kuzzle {
         'controller': 'server',
         'action': 'getAllStats',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['hits']
-              .map((Map<String, dynamic> stats) => Statistics.fromMap(stats)));
+          .then((response) => response.result['hits']
+              .map((stats) => Statistics.fromMap(stats)));
 
   Future<bool> getAutoRefresh({String index, bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
@@ -233,7 +226,7 @@ class Kuzzle {
         'controller': 'index',
         'action': 'getAutoRefresh',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result);
+          .then((response) => response.result);
 
   String getJwtToken() => _jwtToken;
 
@@ -245,8 +238,7 @@ class Kuzzle {
         'strategy': enumToString<LoginStrategy>(strategy),
         'jwt': _jwtToken,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              CredentialsResponse.fromMap(response.result));
+          .then((response) => CredentialsResponse.fromMap(response.result));
 
   Future<Rights> getMyRights({bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
@@ -254,16 +246,15 @@ class Kuzzle {
         'action': 'getMyRights',
         'jwt': _jwtToken,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['hits']
-              .map((Map<String, dynamic> stats) => Rights.fromMap(stats)));
+          .then((response) =>
+              response.result['hits'].map((stats) => Rights.fromMap(stats)));
 
   Future<ServerInfo> getServerInfo({bool queuable = true}) =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'server',
         'action': 'info',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              ServerInfo.fromMap(response.result));
+          .then((response) => ServerInfo.fromMap(response.result));
 
   Future<List<Statistics>> getStatistics(
     String startTime,
@@ -276,8 +267,8 @@ class Kuzzle {
         'startTime': startTime,
         'endTime': endTime,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['hits']
-              .map((Map<String, dynamic> stats) => Statistics.fromMap(stats)));
+          .then((response) => response.result['hits']
+              .map((stats) => Statistics.fromMap(stats)));
 
   Future<List<ListCollectionResponse>> listCollections(
     String index, {
@@ -294,20 +285,18 @@ class Kuzzle {
         'from': from,
         'size': size,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              (response.result['collections'] as List<dynamic>)
-                  .map((dynamic map) => ListCollectionResponse.fromMap(map))
-                  .toList());
+          .then((response) => (response.result['collections'] as List<dynamic>)
+              .map((map) => ListCollectionResponse.fromMap(map))
+              .toList());
 
   Future<List<String>> listIndexes({bool queuable = true}) async =>
       await addNetworkQuery(<String, dynamic>{
         'controller': 'index',
         'action': 'list',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              (response.result['indexes'] as List<dynamic>)
-                  .map((dynamic index) => index as String)
-                  .toList());
+          .then((response) => (response.result['indexes'] as List<dynamic>)
+              .map((index) => index as String)
+              .toList());
 
   Future<AuthResponse> login(
     Credentials credentials, {
@@ -322,14 +311,14 @@ class Kuzzle {
           'username': credentials.username,
           'password': credentials.password,
         }
-      }).then((RawKuzzleResponse response) {
-        return AuthResponse.fromMap(response.result);
-      }).then((AuthResponse response) {
+      })
+          .then((response) => AuthResponse.fromMap(response.result))
+          .then((response) {
         if (response.id == '-1') {
           throw ResponseError(
               message: 'wrong username or password', status: 401);
         } else {
-          setJwtToken(response.jwt);
+          _jwtToken = response.jwt;
         }
         return response;
       });
@@ -338,16 +327,15 @@ class Kuzzle {
     User user,
     Credentials credentials, {
     String expiresIn,
-  }) async {
-    return await security.createUser(user, credentials);
-  }
+  }) =>
+      security.createUser(user, credentials);
 
   Future<void> logout() async => addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'logout',
         'jwt': _jwtToken,
-      }).then((RawKuzzleResponse response) {
-        setJwtToken(null);
+      }).then((response) {
+        _jwtToken = null;
       });
 
   MemoryStorage get memoryStorage => MemoryStorage(this);
@@ -357,7 +345,7 @@ class Kuzzle {
         'controller': 'server',
         'action': 'now',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['now']);
+          .then((response) => response.result['now']);
 
   // void query({bool queuable = true}) => throw ResponseError();
 
@@ -367,8 +355,7 @@ class Kuzzle {
         'controller': 'index',
         'action': 'refresh',
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              Shards.fromMap(response.result['_shards']));
+          .then((response) => Shards.fromMap(response.result['_shards']));
 
   // void removeAllListeners({Event event}) => throw ResponseError();
 
@@ -377,8 +364,8 @@ class Kuzzle {
 
   // void replayQueue() => throw ResponseError();
 
-  Future<bool> setAutoRefresh(
-    bool autoRefresh, {
+  Future<bool> setAutoRefresh({
+    @required bool autoRefresh,
     String index,
     bool queuable = true,
   }) async =>
@@ -390,20 +377,18 @@ class Kuzzle {
           'autoRefresh': autoRefresh,
         }
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result['response']);
-
-  void setDefaultIndex(String index) => defaultIndex = index;
+          .then((response) => response.result['response']);
 
   void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
       headers = newheaders;
-
-  void setJwtToken(String jwtToken) => _jwtToken = jwtToken;
 
   // void startQueuing() => throw ResponseError();
 
   // void stopQueuing() => throw ResponseError();
 
-  void unsetJwtToken() => _jwtToken = null;
+  void unsetJwtToken() {
+    _jwtToken = null;
+  }
 
   Future<CredentialsResponse> updateMyCredentials(
     Credentials credentials, {
@@ -419,8 +404,7 @@ class Kuzzle {
           'password': credentials.password,
         }
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              CredentialsResponse.fromMap(response.result));
+          .then((response) => CredentialsResponse.fromMap(response.result));
 
   Future<User> updateSelf(Map<String, dynamic> content,
           {bool queuable = true}) async =>
@@ -430,8 +414,7 @@ class Kuzzle {
         'jwt': _jwtToken,
         'body': content,
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) =>
-              User.fromMap(security, response.result));
+          .then((response) => User.fromMap(security, response.result));
 
   Future<bool> validateMyCredentials(
     LoginStrategy strategy,
@@ -448,12 +431,11 @@ class Kuzzle {
           'password': credentials.password,
         }
       }, queuable: queuable)
-          .then((RawKuzzleResponse response) => response.result);
+          .then((response) => response.result);
 
   Future<User> whoAmI() async => addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'getCurrentUser',
         'jwt': _jwtToken,
-      }).then((RawKuzzleResponse response) =>
-          User.fromMap(security, response.result));
+      }).then((response) => User.fromMap(security, response.result));
 }

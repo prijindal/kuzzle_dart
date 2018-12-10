@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'test_helpers.dart';
 
 void main() {
-  final KuzzleTestHelper kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzleTestHelper = KuzzleTestHelper();
   setUpAll(() async {
     await kuzzleTestHelper.connect();
   });
@@ -17,7 +17,5 @@ void main() {
     kuzzleTestHelper.kuzzle.security.role('id', <String, dynamic>{});
   });
 
-  tearDownAll(() {
-    kuzzleTestHelper.end();
-  });
+  tearDownAll(kuzzleTestHelper.end);
 }

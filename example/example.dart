@@ -15,52 +15,49 @@ const Credentials creds =
     Credentials(LoginStrategy.local, username: 'prijindal', password: '123456');
 
 Future<void> kuzzleConnections() async {
-  final Kuzzle kuzzle = Kuzzle(HOST, defaultIndex: DEFAULT_INDEX);
+  final kuzzle = Kuzzle(HOST, defaultIndex: DEFAULT_INDEX);
   await kuzzle.connect();
   await kuzzle.login(adminCredentials);
 
-  final List<String> indexes = await kuzzle.listIndexes();
+  final indexes = await kuzzle.listIndexes();
 
   if (indexes.contains(DEFAULT_INDEX) == false) {
     await kuzzle.createIndex(DEFAULT_INDEX);
   }
 
-  final Collection collection = kuzzle.collection(TEST_COLLECTION);
+  final collection = kuzzle.collection(TEST_COLLECTION);
 
   await collection.create();
 
-  final Room room = await collection.subscribe((RawKuzzleResponse response) {
-    print(response.state + ' ' + response.action + ' ' + response.controller);
+  final room = await collection.subscribe((response) {
+    print('${response.state} ${response.action} ${response.controller}');
     print(response.toObject());
   }, scope: RoomScope.all, state: RoomState.done, users: RoomUsersScope.all);
 
   await kuzzle.logout();
 
   try {
-    final AuthResponse response = await kuzzle.login(creds);
+    final response = await kuzzle.login(creds);
     print(response);
-  } catch (e) {
+  } on dynamic catch (e) {
     if (e is ResponseError) {
       if (e.status == 401) {
-        final User user = User(kuzzle.security, name: 'Priyanshu Jindal');
+        final user = User(kuzzle.security, name: 'Priyanshu Jindal');
         await kuzzle.register(user, creds);
       }
     }
   }
 
-  const Map<String, dynamic> message = <String, dynamic>{
-    'message': 'Hello World',
-    'echoing': 1
-  };
-  final Document document = await collection.createDocument(message);
+  const message = <String, dynamic>{'message': 'Hello World', 'echoing': 1};
+  final document = await collection.createDocument(message);
   print(document.version);
-  final bool doesDocumentExists = await document.exists();
+  final doesDocumentExists = await document.exists();
   print(doesDocumentExists);
 
   await document.publish();
   print(document.toString());
 
-  final int count = await collection.count();
+  final count = await collection.count();
   print(count);
 
   await collection
@@ -72,26 +69,26 @@ Future<void> kuzzleConnections() async {
 
   await kuzzle.login(adminCredentials);
 
-  final CollectionMapping collectionMapping = await collection.getMapping();
+  final collectionMapping = await collection.getMapping();
   print(collectionMapping);
 
   await collection.truncate();
 
   await kuzzle.deleteIndex(kuzzle.defaultIndex);
 
-  final String roomId = await room.unsubscribe();
+  final roomId = await room.unsubscribe();
   print(roomId);
 
   kuzzle.disconect();
 }
 
 void main() {
-  const bool shouldExit = true;
+  const shouldExit = true;
   if (!shouldExit) {
     kuzzleConnections();
     return;
   }
-  kuzzleConnections().then((void value) {
+  kuzzleConnections().then((value) {
     exit(0);
   });
 }

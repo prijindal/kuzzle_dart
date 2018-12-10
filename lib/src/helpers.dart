@@ -36,7 +36,7 @@ abstract class KuzzleObject extends Object {
 
   @mustCallSuper
   Map<String, dynamic> getPartialQuery() {
-    final Map<String, dynamic> query = <String, dynamic>{
+    final query = <String, dynamic>{
       'controller': getController(),
     };
     if (collection != null) {
@@ -58,7 +58,7 @@ abstract class KuzzleObject extends Object {
     Map<String, dynamic> optionalParams,
     bool queuable = true,
   }) async {
-    final Map<String, dynamic> query = getPartialQuery();
+    final query = getPartialQuery();
     query['action'] = action;
     if (body != null) {
       query['body'] = body;

@@ -7,9 +7,9 @@ class ImitationServer {
   final ImitationDatabase imitationDatabase = ImitationDatabase();
 
   String transform(String data) {
-    final dynamic jsonRequest = json.decode(data);
+    final jsonRequest = json.decode(data);
     // print(jsonRequest);
-    Map<String, dynamic> response = <String, dynamic>{};
+    var response = <String, dynamic>{};
     switch (jsonRequest['controller']) {
       case 'admin':
         response = _admin(jsonRequest);
@@ -50,8 +50,8 @@ class ImitationServer {
     return json.encode(response);
   }
 
-  Map<String, dynamic> _admin(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _admin(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'dump':
@@ -66,8 +66,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _auth(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _auth(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'checkToken':
@@ -98,8 +98,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _bulk(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _bulk(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'import':
@@ -111,13 +111,13 @@ class ImitationServer {
   }
 
   /// takes in json and returns a string
-  Map<String, dynamic> _collection(dynamic jsonRequest) {
-    final bool doesIndexExist =
+  Map<String, dynamic> _collection(jsonRequest) {
+    final doesIndexExist =
         imitationDatabase.doesIndexExist(jsonRequest['index']);
-    final bool doesCollectionExist =
+    final doesCollectionExist =
         imitationDatabase.doesCollectionExist(jsonRequest);
 
-    final Map<String, dynamic> response = <String, dynamic>{};
+    final response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'create':
         if (!doesIndexExist) {
@@ -238,8 +238,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _document(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _document(jsonRequest) {
+    final response = <String, dynamic>{};
     switch (jsonRequest['action']) {
       case 'count':
         if (imitationDatabase.doesCollectionExist(jsonRequest)) {
@@ -333,8 +333,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _index(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _index(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'create':
@@ -386,8 +386,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _ms(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _ms(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'append':
@@ -514,8 +514,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _realtime(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _realtime(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'count':
@@ -532,8 +532,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _security(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _security(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'createCredentials':
@@ -587,8 +587,8 @@ class ImitationServer {
     return response;
   }
 
-  Map<String, dynamic> _server(dynamic jsonRequest) {
-    final Map<String, dynamic> response = <String, dynamic>{};
+  Map<String, dynamic> _server(jsonRequest) {
+    final response = <String, dynamic>{};
 
     switch (jsonRequest['action']) {
       case 'adminExists':
