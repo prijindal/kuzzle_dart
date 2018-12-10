@@ -13,7 +13,7 @@ String stringToBytes(String str) {
   String finalString;
   try {
     finalString = int.parse(str).toRadixString(2);
-  } catch (e) {
+  } on Exception {
     finalString = utf8
         .encode(str)
         .map((a) => a.toRadixString(2))

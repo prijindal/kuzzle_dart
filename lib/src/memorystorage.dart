@@ -1,7 +1,5 @@
-import 'error.dart';
 import 'helpers.dart';
 import 'kuzzle.dart';
-import 'response.dart';
 
 class MemoryStorage extends KuzzleObject {
   MemoryStorage(Kuzzle kuzzle) : super(null, kuzzle);
