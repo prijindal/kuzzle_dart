@@ -190,7 +190,7 @@
     <h1>append method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">append</span>
 (<wbr><span class="parameter" id="append-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="append-param-value"><span class="type-annotation">String</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="append-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -198,14 +198,13 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; append(String key, String value,
-        {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; append(String key, String value, {bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;append&#39;,
-      body: &lt;String, dynamic&gt;{
+      body: {
         &#39;value&#39;: value,
       },
-      optionalParams: &lt;String, dynamic&gt;{
+      optionalParams: {
         &#39;_id&#39;: key,
       },
       queuable: queuable,

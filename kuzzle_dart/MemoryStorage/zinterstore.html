@@ -190,7 +190,7 @@
     <h1>zinterstore method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zinterstore</span>
 (<wbr>{<span class="parameter" id="zinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -198,13 +198,12 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; zinterstore({bool queuable = true}) =&gt;
-    addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zinterstore({bool queuable = true}) =&gt; addNetworkQuery(
       &#39;zinterstore&#39;,
-      body: &lt;String, dynamic&gt;{},
-      optionalParams: &lt;String, dynamic&gt;{},
+      body: {},
+      optionalParams: {},
       queuable: queuable,
-    ).then((response) =&gt; throw ResponseError());</code></pre>
+    ).then((response) =&gt; response.result);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

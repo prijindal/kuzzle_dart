@@ -190,7 +190,7 @@
     <h1>bitop method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">bitop</span>
 (<wbr><span class="parameter" id="bitop-param-destinationKey"><span class="type-annotation">String</span> <span class="parameter-name">destinationKey</span>, </span> <span class="parameter" id="bitop-param-operation"><span class="type-annotation">String</span> <span class="parameter-name">operation</span>, </span> <span class="parameter" id="bitop-param-sourceKeys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">sourceKeys</span>, {</span> <span class="parameter" id="bitop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -198,16 +198,16 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; bitop(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; bitop(
         String destinationKey, String operation, List&lt;String&gt; sourceKeys,
         {bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;bitop&#39;,
-      body: &lt;String, dynamic&gt;{
+      body: {
         &#39;operation&#39;: operation,
         &#39;keys&#39;: sourceKeys,
       },
-      optionalParams: &lt;String, dynamic&gt;{
+      optionalParams: {
         &#39;_id&#39;: destinationKey,
       },
       queuable: queuable,
