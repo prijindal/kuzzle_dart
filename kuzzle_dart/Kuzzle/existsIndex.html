@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the createIndex method from the Kuzzle class, for the Dart programming language.">
-  <title>createIndex method - Kuzzle class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the existsIndex method from the Kuzzle class, for the Dart programming language.">
+  <title>existsIndex method - Kuzzle class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
-    <li class="self-crumb">createIndex method</li>
+    <li class="self-crumb">existsIndex method</li>
   </ol>
-  <div class="self-name">createIndex</div>
+  <div class="self-name">existsIndex</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -118,28 +118,26 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>createIndex method</h1>
+    <h1>existsIndex method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SharedAcknowledgedResponse-class.html">SharedAcknowledgedResponse</a></span>&gt;</span></span>
-      <span class="name ">createIndex</span>
-(<wbr><span class="parameter" id="createIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="createIndex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+      <span class="name ">existsIndex</span>
+(<wbr><span class="parameter" id="existsIndex-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="existsIndex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">FutureOr&lt;SharedAcknowledgedResponse&gt; createIndex(
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; existsIndex(
   String index, {
   bool queuable = true,
 }) async =&gt;
     addNetworkQuery(&lt;String, dynamic&gt;{
       &#39;index&#39;: index,
       &#39;controller&#39;: &#39;index&#39;,
-      &#39;action&#39;: &#39;create&#39;,
-    }, queuable: queuable)
-        .then((RawKuzzleResponse response) =&gt;
-            SharedAcknowledgedResponse.fromMap(response.result));</code></pre>
+      &#39;action&#39;: &#39;exists&#39;,
+    }).then((RawKuzzleResponse response) =&gt; response.result as bool);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
