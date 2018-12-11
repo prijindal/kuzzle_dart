@@ -172,17 +172,20 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mCreate',
         body: <String, dynamic>{
-          'documents': documents.map((document) => <String, dynamic>{
-                '_id': document.id,
-                'body': document.content,
-              }),
+          'documents': documents
+              .map((document) => <String, dynamic>{
+                    '_id': document.id,
+                    'body': document.content,
+                  })
+              .toList(),
         },
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
           'refresh': refresh,
         },
       ).then((response) => response.result['hits']
-          .map((document) => Document.fromMap(this, document)));
+          .map<Document>((document) => Document.fromMap(this, document))
+          .toList() as List<Document>);
 
   Future<List<Document>> mCreateOrReplaceDocument(
     List<Document> documents, {
@@ -192,19 +195,22 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mCreateOrReplace',
         body: <String, dynamic>{
-          'documents': documents.map((document) => <String, dynamic>{
-                '_id': document.id,
-                'body': document.content,
-              }),
+          'documents': documents
+              .map((document) => <String, dynamic>{
+                    '_id': document.id,
+                    'body': document.content,
+                  })
+              .toList(),
         },
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
           'refresh': refresh,
         },
       ).then((response) => response.result['hits']
-          .map((document) => Document.fromMap(this, document)));
+          .map<Document>((document) => Document.fromMap(this, document))
+          .toList() as List<Document>);
 
-  Future<RawKuzzleResponse> mDeleteDocument(
+  Future<List<String>> mDeleteDocument(
     List<String> documentIds, {
     bool queuable = true,
     String refresh = 'false',
@@ -218,9 +224,11 @@ class Collection extends KuzzleObject {
           'controller': Document.controller,
           'refresh': refresh,
         },
-      );
+      ).then((response) => response.result
+          .map<String>((documentId) => documentId as String)
+          .toList() as List<String>);
 
-  Future<RawKuzzleResponse> mGetDocument(List<String> documentIds,
+  Future<List<Document>> mGetDocument(List<String> documentIds,
           {bool queuable = true}) async =>
       addNetworkQuery(
         'mGet',
@@ -230,9 +238,11 @@ class Collection extends KuzzleObject {
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
         },
-      );
+      ).then((response) => response.result['hits']
+          .map<Document>((document) => Document.fromMap(this, document))
+          .toList() as List<Document>);
 
-  Future<RawKuzzleResponse> mReplaceDocument(
+  Future<List<Document>> mReplaceDocument(
     List<Document> documents, {
     bool queuable = true,
     String refresh = 'false',
@@ -240,17 +250,20 @@ class Collection extends KuzzleObject {
       addNetworkQuery(
         'mReplace',
         body: <String, dynamic>{
-          'documents': documents.map((document) => <String, dynamic>{
-                '_id': document.id,
-                'body': document.content,
-              }),
+          'documents': documents
+              .map((document) => <String, dynamic>{
+                    '_id': document.id,
+                    'body': document.content,
+                  })
+              .toList(),
         },
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
           'refresh': refresh,
         },
       ).then((response) => response.result['hits']
-          .map((document) => Document.fromMap(this, document)));
+          .map<Document>((document) => Document.fromMap(this, document))
+          .toList() as List<Document>);
 
   Future<RawKuzzleResponse> mUpdateDocument(
     List<Document> documents, {

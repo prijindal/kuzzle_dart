@@ -297,11 +297,55 @@ class ImitationServer {
           };
         }
         break;
+      case 'mDelete':
+        final List<dynamic> ids = jsonRequest['body']['ids'];
+        final deletedIds = ids.map((id) {
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+                  as Map<String, dynamic>)
+              .remove(id);
+          return id;
+        }).toList();
+        response['result'] = deletedIds;
+        break;
+      case 'mGet':
+        final List<dynamic> ids = jsonRequest['body']['ids'];
+        final hits = ids.map((id) {
+          final body = (imitationDatabase.db[jsonRequest['index']]
+              [jsonRequest['collection']] as Map<String, dynamic>)[id];
+          return {
+            '_id': id,
+            '_source': body,
+          };
+        }).toList();
+        response['result'] = {
+          'hits': hits,
+        };
+        break;
       case 'mCreate':
       case 'mCreateOrReplace':
-      case 'mDelete':
-      case 'mGet':
       case 'mReplace':
+        final List<dynamic> documents = jsonRequest['body']['documents'];
+        final hits = documents.map((document) {
+          String id;
+          if (document.containsKey('_id') &&
+              (imitationDatabase.db[jsonRequest['index']]
+                      [jsonRequest['collection']] as Map<String, dynamic>)
+                  .containsKey(document['_id'])) {
+            id = document['_id'];
+          } else {
+            id = Uuid().v1();
+          }
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+              as Map<String, dynamic>)[id] = document['body'];
+          return {
+            '_id': id,
+            '_source': document['body'],
+          };
+        }).toList();
+        response['result'] = {
+          'hits': hits,
+        };
+        break;
       case 'mUpdate':
       case 'createOrReplace':
       case 'replace':
