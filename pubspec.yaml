@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  geohash: any
   pedantic: any
   uuid: any
   web_socket_channel: any

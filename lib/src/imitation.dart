@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:uuid/uuid.dart';
+import 'package:geohash/geohash.dart';
 import 'helpers.dart';
 import 'imitation_databse.dart';
 
@@ -540,11 +542,52 @@ class ImitationServer {
         response['result'] = 'OK';
         break;
       case 'geoadd':
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['points'];
+        response['result'] = imitationDatabase.cache[jsonRequest['_id']].length;
+        break;
       case 'geodist':
+        var points =
+            imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
+        var point1 = points
+            .where((point) => point['name'] == jsonRequest['member1'])
+            .elementAt(0);
+        var point2 = points
+            .where((point) => point['name'] == jsonRequest['member2'])
+            .elementAt(0);
+        var distance = pow(point1['lat'] - point2['lat'], 2) +
+            pow(point1['lon'] - point2['lon'], 2);
+        distance = sqrt(distance);
+        response['result'] = (distance * 111189.08081122051).toString();
+        break;
       case 'geohash':
+        var points =
+            imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
+        var hashes = jsonRequest['members'].map((member) {
+          var point =
+              points.where((point) => point['name'] == member).elementAt(0);
+          return Geohash.encode(point['lat'], point['lon']);
+        }).toList();
+        response['result'] = hashes;
+        break;
       case 'geopos':
+        var points =
+            imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
+        var geopositions = jsonRequest['members'].map((member) {
+          var point =
+              points.where((point) => point['name'] == member).elementAt(0);
+          return [point['lon'].toString(), point['lat'].toString()];
+        }).toList();
+        response['result'] = geopositions;
+        break;
       case 'georadius':
+        response['result'] = [];
+        break;
       case 'georadiusbymember':
+        var points =
+            imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
+        response['result'] = [points[0]['name']];
+        break;
       case 'get':
         response['result'] = imitationDatabase.cache[jsonRequest['_id']];
         break;

@@ -15,7 +15,7 @@ void main() {
     test('roles crud', () {});
     test('profiles crud', () {});
     test('login/logout', () {});
-  });
+  }, skip: 'Not implemented yet');
 
   tearDownAll(kuzzleTestHelper.end);
 }
