@@ -89,63 +89,63 @@ void main() {
       expect(isValid.valid, true);
     });
 
-    test('multiple create', () async {
-      final document1 = collection.document(content: {
-        'hello': '1st document',
-      });
-      final document2 = collection.document(content: {
-        'hello': '2nd document',
-      });
-      final documents =
-          await collection.mCreateDocument([document1, document2]);
-      expect(documents.length, equals(2));
-      expect(documents[0].content, equals(document1.content));
-    });
+    group('multiple crud', () {
+      List<String> ids;
 
-    test('multiple create or replace', () async {
-      final document1 = collection.document(content: {
-        'hello': '1st document',
+      test('multiple create', () async {
+        final document1 = collection.document(content: {
+          'hello': '1st document',
+        });
+        final document2 = collection.document(content: {
+          'hello': '2nd document',
+        });
+        final documents =
+            await collection.mCreateDocument([document1, document2]);
+        expect(documents.length, equals(2));
+        expect(documents[0].content, equals(document1.content));
+        ids = documents.map((document) => document.id).toList();
       });
-      final document2 = collection.document(content: {
-        'hello': '2nd document',
+      test('multiple create or replace', () async {
+        final document1 = collection.document(content: {
+          'hello': '1st document',
+        });
+        final document2 = collection.document(content: {
+          'hello': '2nd document',
+        });
+        final documents =
+            await collection.mCreateOrReplaceDocument([document1, document2]);
+        expect(documents.length, equals(2));
+        expect(documents[0].content, equals(document1.content));
       });
-      final documents =
-          await collection.mCreateOrReplaceDocument([document1, document2]);
-      expect(documents.length, equals(2));
-      expect(documents[0].content, equals(document1.content));
-    });
 
-    test('multiple replace', () async {
-      final document1 = collection.document(content: {
-        'hello': '1st document',
+      test('multiple replace', () async {
+        final document1 = await collection.fetchDocument(ids[0]);
+        final document2 = await collection.fetchDocument(ids[1]);
+        final documents =
+            await collection.mReplaceDocument([document1, document2]);
+        expect(documents.length, equals(2));
+        expect(documents[0].content, equals(document1.content));
       });
-      final document2 = collection.document(content: {
-        'hello': '2nd document',
-      });
-      final documents =
-          await collection.mReplaceDocument([document1, document2]);
-      expect(documents.length, equals(2));
-      expect(documents[0].content, equals(document1.content));
-    });
 
-    test('multiple get and delete', () async {
-      final document1 = collection.document(content: {
-        'hello': '1st document',
-      });
-      final document2 = collection.document(content: {
-        'hello': '2nd document',
-      });
-      final savedDocuments =
-          await collection.mCreateDocument([document1, document2]);
-      final documents = await collection
-          .mGetDocument(savedDocuments.map((document) => document.id).toList());
-      expect(documents.length, 2);
-      expect(documents[0].content, equals(document1.content));
+      test('multiple get and delete', () async {
+        final document1 = collection.document(content: {
+          'hello': '1st document',
+        });
+        final document2 = collection.document(content: {
+          'hello': '2nd document',
+        });
+        final savedDocuments =
+            await collection.mCreateDocument([document1, document2]);
+        final documents = await collection.mGetDocument(
+            savedDocuments.map((document) => document.id).toList());
+        expect(documents.length, 2);
+        expect(documents[0].content, equals(document1.content));
 
-      final documentIds = await collection
-          .mDeleteDocument(documents.map((document) => document.id).toList());
-      expect(documentIds,
-          equals(savedDocuments.map((document) => document.id).toList()));
+        final documentIds = await collection
+            .mDeleteDocument(documents.map((document) => document.id).toList());
+        expect(documentIds,
+            equals(savedDocuments.map((document) => document.id).toList()));
+      });
     });
 
     tearDownAll(() async {

@@ -103,7 +103,7 @@ class Collection extends KuzzleObject {
     String documentId, {
     Map<String, dynamic> volatile,
     bool queuable = true,
-    String refresh,
+    String refresh = 'false',
   }) async =>
       addNetworkQuery(
         'delete',

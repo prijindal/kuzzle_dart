@@ -11,7 +11,7 @@ void main() {
     kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
   });
 
-  group('document', () {
+  group('memory storage', () {
     MemoryStorage memoryStorage;
     setUpAll(() async {
       memoryStorage = kuzzleTestHelper.kuzzle.memoryStorage;
@@ -77,9 +77,437 @@ void main() {
       expect(await memoryStorage.expire('num2', 200), 1);
     });
 
-    test('expexpireatire', () async {
+    test('expireat', () async {
       expect(await memoryStorage.expireat('num2', 200), 1);
     });
+
+    group('geoposition', () {
+      GeoPositionPoint point1;
+      GeoPositionPoint point2;
+      test('geoadd', () async {
+        point1 = GeoPositionPoint(lon: 1, lat: 2, name: 'First position');
+        point2 = GeoPositionPoint(lon: 5, lat: 1, name: 'Second position');
+        expect(await memoryStorage.geoadd('num1', [point1, point2]), 2);
+      });
+
+      test('geodist', () async {
+        expect(await memoryStorage.geodist('num1', point1.name, point2.name),
+            equals(458444.3246));
+      });
+
+      test('geohash', () async {
+        expect(
+            (await memoryStorage.geohash('num1', [point1.name, point2.name]))
+                .length,
+            2);
+      });
+
+      test('geopos', () async {
+        final gepositions =
+            await memoryStorage.geopos('num1', [point1.name, point2.name]);
+        expect(gepositions.length, equals(2));
+      });
+
+      test('georadius', () async {
+        expect(await memoryStorage.georadius('num1', point1.lat, point2.lon, 5),
+            []);
+      });
+
+      test('georadiusbymember', () async {
+        expect(await memoryStorage.georadiusbymember('num1', point1.name, 5),
+            [point1.name]);
+      });
+    });
+
+    group('skip', () {
+      test('getbit', () async {
+        expect(await memoryStorage.getbit('num1'), 1);
+      });
+
+      test('getrange', () async {
+        expect(await memoryStorage.getrange('num1'), 1);
+      });
+
+      test('getset', () async {
+        expect(await memoryStorage.getset('num1'), 1);
+      });
+
+      test('hdel', () async {
+        expect(await memoryStorage.hdel('num1'), 1);
+      });
+
+      test('hexists', () async {
+        expect(await memoryStorage.hexists('num1'), 1);
+      });
+
+      test('hget', () async {
+        expect(await memoryStorage.hget('num1'), 1);
+      });
+
+      test('hgetall', () async {
+        expect(await memoryStorage.hgetall('num1'), 1);
+      });
+
+      test('hincrby', () async {
+        expect(await memoryStorage.hincrby('num1'), 1);
+      });
+
+      test('hincrbyfloat', () async {
+        expect(await memoryStorage.hincrbyfloat('num1'), 1);
+      });
+
+      test('hkeys', () async {
+        expect(await memoryStorage.hkeys('num1'), 1);
+      });
+
+      test('hlen', () async {
+        expect(await memoryStorage.hlen('num1'), 1);
+      });
+
+      test('hmget', () async {
+        expect(await memoryStorage.hmget('num1'), 1);
+      });
+
+      test('hmset', () async {
+        expect(await memoryStorage.hmset('num1'), 1);
+      });
+
+      test('hscan', () async {
+        expect(await memoryStorage.hscan('num1'), 1);
+      });
+
+      test('hset', () async {
+        expect(await memoryStorage.hset('num1'), 1);
+      });
+
+      test('hsetnx', () async {
+        expect(await memoryStorage.hsetnx('num1'), 1);
+      });
+
+      test('hstrlen', () async {
+        expect(await memoryStorage.hstrlen('num1'), 1);
+      });
+
+      test('hvals', () async {
+        expect(await memoryStorage.hvals('num1'), 1);
+      });
+
+      test('incr', () async {
+        expect(await memoryStorage.incr('num1'), 1);
+      });
+
+      test('incrby', () async {
+        expect(await memoryStorage.incrby('num1'), 1);
+      });
+
+      test('incrbyfloat', () async {
+        expect(await memoryStorage.incrbyfloat('num1'), 1);
+      });
+
+      test('keys', () async {
+        expect(await memoryStorage.keys('num1'), 1);
+      });
+
+      test('lindex', () async {
+        expect(await memoryStorage.lindex('num1'), 1);
+      });
+
+      test('linsert', () async {
+        expect(await memoryStorage.linsert('num1'), 1);
+      });
+
+      test('llen', () async {
+        expect(await memoryStorage.llen('num1'), 1);
+      });
+
+      test('lpop', () async {
+        expect(await memoryStorage.lpop('num1'), 1);
+      });
+
+      test('lpush', () async {
+        expect(await memoryStorage.lpush('num1'), 1);
+      });
+
+      test('lpushx', () async {
+        expect(await memoryStorage.lpushx('num1'), 1);
+      });
+
+      test('lrange', () async {
+        expect(await memoryStorage.lrange('num1'), 1);
+      });
+
+      test('lrem', () async {
+        expect(await memoryStorage.lrem('num1'), 1);
+      });
+
+      test('lset', () async {
+        expect(await memoryStorage.lset('num1'), 1);
+      });
+
+      test('ltrim', () async {
+        expect(await memoryStorage.ltrim('num1'), 1);
+      });
+
+      test('mget', () async {
+        expect(await memoryStorage.mget('num1'), 1);
+      });
+
+      test('mset', () async {
+        expect(await memoryStorage.mset('num1'), 1);
+      });
+
+      test('msetnx', () async {
+        expect(await memoryStorage.msetnx('num1'), 1);
+      });
+
+      test('object', () async {
+        expect(await memoryStorage.object('num1'), 1);
+      });
+
+      test('persist', () async {
+        expect(await memoryStorage.persist('num1'), 1);
+      });
+
+      test('pexpire', () async {
+        expect(await memoryStorage.pexpire('num1'), 1);
+      });
+
+      test('pexpireat', () async {
+        expect(await memoryStorage.pexpireat('num1'), 1);
+      });
+
+      test('pfadd', () async {
+        expect(await memoryStorage.pfadd('num1'), 1);
+      });
+
+      test('pfcount', () async {
+        expect(await memoryStorage.pfcount('num1'), 1);
+      });
+
+      test('pfmerge', () async {
+        expect(await memoryStorage.pfmerge('num1'), 1);
+      });
+
+      test('ping', () async {
+        expect(await memoryStorage.ping('num1'), 1);
+      });
+
+      test('psetex', () async {
+        expect(await memoryStorage.psetex('num1'), 1);
+      });
+
+      test('pttl', () async {
+        expect(await memoryStorage.pttl('num1'), 1);
+      });
+
+      test('randomkey', () async {
+        expect(await memoryStorage.randomkey('num1'), 1);
+      });
+
+      test('rename', () async {
+        expect(await memoryStorage.rename('num1'), 1);
+      });
+
+      test('renamenx', () async {
+        expect(await memoryStorage.renamenx('num1'), 1);
+      });
+
+      test('rpop', () async {
+        expect(await memoryStorage.rpop('num1'), 1);
+      });
+
+      test('rpoplpush', () async {
+        expect(await memoryStorage.rpoplpush('num1'), 1);
+      });
+
+      test('rpush', () async {
+        expect(await memoryStorage.rpush('num1'), 1);
+      });
+
+      test('rpushx', () async {
+        expect(await memoryStorage.rpushx('num1'), 1);
+      });
+
+      test('sadd', () async {
+        expect(await memoryStorage.sadd('num1'), 1);
+      });
+
+      test('scan', () async {
+        expect(await memoryStorage.scan('num1'), 1);
+      });
+
+      test('scard', () async {
+        expect(await memoryStorage.scard('num1'), 1);
+      });
+
+      test('sdiff', () async {
+        expect(await memoryStorage.sdiff('num1'), 1);
+      });
+
+      test('sdiffstore', () async {
+        expect(await memoryStorage.sdiffstore('num1'), 1);
+      });
+
+      test('setex', () async {
+        expect(await memoryStorage.setex('num1'), 1);
+      });
+
+      test('setnx', () async {
+        expect(await memoryStorage.setnx('num1'), 1);
+      });
+
+      test('sinter', () async {
+        expect(await memoryStorage.sinter('num1'), 1);
+      });
+
+      test('sinterstore', () async {
+        expect(await memoryStorage.sinterstore('num1'), 1);
+      });
+
+      test('sismember', () async {
+        expect(await memoryStorage.sismember('num1'), 1);
+      });
+
+      test('smembers', () async {
+        expect(await memoryStorage.smembers('num1'), 1);
+      });
+
+      test('smove', () async {
+        expect(await memoryStorage.smove('num1'), 1);
+      });
+
+      test('sort', () async {
+        expect(await memoryStorage.sort('num1'), 1);
+      });
+
+      test('spop', () async {
+        expect(await memoryStorage.spop('num1'), 1);
+      });
+
+      test('srandmember', () async {
+        expect(await memoryStorage.srandmember('num1'), 1);
+      });
+
+      test('srem', () async {
+        expect(await memoryStorage.srem('num1'), 1);
+      });
+
+      test('sscan', () async {
+        expect(await memoryStorage.sscan('num1'), 1);
+      });
+
+      test('strlen', () async {
+        expect(await memoryStorage.strlen('num1'), 1);
+      });
+
+      test('sunion', () async {
+        expect(await memoryStorage.sunion('num1'), 1);
+      });
+
+      test('sunionstore', () async {
+        expect(await memoryStorage.sunionstore('num1'), 1);
+      });
+
+      test('time', () async {
+        expect(await memoryStorage.time('num1'), 1);
+      });
+
+      test('touch', () async {
+        expect(await memoryStorage.touch('num1'), 1);
+      });
+
+      test('ttl', () async {
+        expect(await memoryStorage.ttl('num1'), 1);
+      });
+
+      test('type', () async {
+        expect(await memoryStorage.type('num1'), 1);
+      });
+
+      test('zadd', () async {
+        expect(await memoryStorage.zadd('num1'), 1);
+      });
+
+      test('zcard', () async {
+        expect(await memoryStorage.zcard('num1'), 1);
+      });
+
+      test('zcount', () async {
+        expect(await memoryStorage.zcount('num1'), 1);
+      });
+
+      test('zincrby', () async {
+        expect(await memoryStorage.zincrby('num1'), 1);
+      });
+
+      test('zinterstore', () async {
+        expect(await memoryStorage.zinterstore('num1'), 1);
+      });
+
+      test('zlexcount', () async {
+        expect(await memoryStorage.zlexcount('num1'), 1);
+      });
+
+      test('zrange', () async {
+        expect(await memoryStorage.zrange('num1'), 1);
+      });
+
+      test('zrangebylex', () async {
+        expect(await memoryStorage.zrangebylex('num1'), 1);
+      });
+
+      test('zrangebyscore', () async {
+        expect(await memoryStorage.zrangebyscore('num1'), 1);
+      });
+
+      test('zrank', () async {
+        expect(await memoryStorage.zrank('num1'), 1);
+      });
+
+      test('zrem', () async {
+        expect(await memoryStorage.zrem('num1'), 1);
+      });
+
+      test('zremrangebylex', () async {
+        expect(await memoryStorage.zremrangebylex('num1'), 1);
+      });
+
+      test('zremrangebyrank', () async {
+        expect(await memoryStorage.zremrangebyrank('num1'), 1);
+      });
+
+      test('zremrangebyscore', () async {
+        expect(await memoryStorage.zremrangebyscore('num1'), 1);
+      });
+
+      test('zrevrange', () async {
+        expect(await memoryStorage.zrevrange('num1'), 1);
+      });
+
+      test('zrevrangebylex', () async {
+        expect(await memoryStorage.zrevrangebylex('num1'), 1);
+      });
+
+      test('zrevrangebyscore', () async {
+        expect(await memoryStorage.zrevrangebyscore('num1'), 1);
+      });
+
+      test('zrevrank', () async {
+        expect(await memoryStorage.zrevrank('num1'), 1);
+      });
+
+      test('zscan', () async {
+        expect(await memoryStorage.zscan('num1'), 1);
+      });
+
+      test('zscore', () async {
+        expect(await memoryStorage.zscore('num1'), 1);
+      });
+
+      test('zunionstore', () async {
+        expect(await memoryStorage.zunionstore('num1'), 1);
+      });
+    }, skip: 'Not implemented yet');
 
     tearDownAll(() async {
       await memoryStorage.flushdb();
