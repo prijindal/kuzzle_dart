@@ -119,79 +119,82 @@ void main() {
       });
     });
 
-    group('skip', () {
-      test('getbit', () async {
-        expect(await memoryStorage.getbit('num1'), 1);
-      });
+    test('getbit', () async {
+      expect(await memoryStorage.getbit('foo', 1), 1);
+    });
 
-      test('getrange', () async {
-        expect(await memoryStorage.getrange('num1'), 1);
-      });
+    test('getrange', () async {
+      expect(await memoryStorage.getrange('foo', 1, 2), 'ar');
+    });
 
-      test('getset', () async {
-        expect(await memoryStorage.getset('num1'), 1);
-      });
+    test('getset', () async {
+      expect(await memoryStorage.getset('foo', 'newbar'), 'bar');
+    });
 
-      test('hdel', () async {
-        expect(await memoryStorage.hdel('num1'), 1);
+    group('hash', () {
+      test('hset', () async {
+        expect(await memoryStorage.hset('hash1', 'h1', 5), 1);
       });
 
       test('hexists', () async {
-        expect(await memoryStorage.hexists('num1'), 1);
+        expect(await memoryStorage.hexists('hash1', 'h1'), 1);
       });
-
       test('hget', () async {
-        expect(await memoryStorage.hget('num1'), 1);
+        expect(await memoryStorage.hget('hash1', 'h1'), '5');
       });
 
       test('hgetall', () async {
-        expect(await memoryStorage.hgetall('num1'), 1);
+        expect(await memoryStorage.hgetall('hash1'), {'h1': '5'});
       });
 
       test('hincrby', () async {
-        expect(await memoryStorage.hincrby('num1'), 1);
+        expect(await memoryStorage.hincrby('hash1', 'h1'), 6);
       });
 
       test('hincrbyfloat', () async {
-        expect(await memoryStorage.hincrbyfloat('num1'), 1);
+        expect(await memoryStorage.hset('hash1', 'h2', 5.5), 1);
+        expect(
+            await memoryStorage.hincrbyfloat('hash1', 'h2', value: 0.1), '5.6');
       });
 
       test('hkeys', () async {
-        expect(await memoryStorage.hkeys('num1'), 1);
+        expect(await memoryStorage.hkeys('hash1'), ['h1', 'h2']);
       });
 
       test('hlen', () async {
-        expect(await memoryStorage.hlen('num1'), 1);
+        expect(await memoryStorage.hlen('hash1'), 2);
+      });
+
+      test('hdel', () async {
+        expect(await memoryStorage.hdel('hash1', ['h2']), 1);
       });
 
       test('hmget', () async {
-        expect(await memoryStorage.hmget('num1'), 1);
+        expect(await memoryStorage.hmget('hash1', ['h1']), ['6']);
       });
 
       test('hmset', () async {
-        expect(await memoryStorage.hmset('num1'), 1);
+        expect(await memoryStorage.hmset('hash1', {'h1': 2}), 'OK');
       });
 
       test('hscan', () async {
-        expect(await memoryStorage.hscan('num1'), 1);
-      });
-
-      test('hset', () async {
-        expect(await memoryStorage.hset('num1'), 1);
-      });
+        expect(await memoryStorage.hscan('hash1', '', '', ''), 1);
+      }, skip: 'Have to understand the implementation');
 
       test('hsetnx', () async {
-        expect(await memoryStorage.hsetnx('num1'), 1);
+        expect(await memoryStorage.hsetnx('hash1', 'h1', ''), 0);
+        expect(await memoryStorage.hsetnx('hash1', 'h2', '5'), 1);
       });
 
       test('hstrlen', () async {
-        expect(await memoryStorage.hstrlen('num1'), 1);
+        expect(await memoryStorage.hstrlen('hash1', 'h1'), 1);
       });
 
       test('hvals', () async {
-        expect(await memoryStorage.hvals('num1'), 1);
+        expect(await memoryStorage.hvals('hash1'), ['2', '5']);
       });
-
+    });
+    group('skip', () {
       test('incr', () async {
         expect(await memoryStorage.incr('num1'), 1);
       });

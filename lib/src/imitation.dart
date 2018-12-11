@@ -592,23 +592,134 @@ class ImitationServer {
         response['result'] = imitationDatabase.cache[jsonRequest['_id']];
         break;
       case 'getbit':
+        final bytesStr =
+            stringToBytes(imitationDatabase.cache[jsonRequest['_id']]);
+        response['result'] = int.parse(bytesStr[jsonRequest['offset']]);
+        break;
       case 'getrange':
+        final String str = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] =
+            str.substring(jsonRequest['start'], jsonRequest['end'] + 1);
+        break;
       case 'getset':
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']];
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['value'];
+        response['result'] = prevValue;
+        break;
       case 'hdel':
+        var deletedField = 0;
+        jsonRequest['body']['fields'].forEach((field) {
+          deletedField += 1;
+          (imitationDatabase.cache[jsonRequest['_id']] as Map<String, dynamic>)
+              .remove(field);
+        });
+        response['result'] = deletedField;
+        break;
       case 'hexists':
+        final doesContains =
+            imitationDatabase.cache.containsKey(jsonRequest['_id']) &&
+                imitationDatabase.cache[jsonRequest['_id']]
+                    .containsKey(jsonRequest['field']);
+        response['result'] = doesContains ? 1 : 0;
+        break;
       case 'hget':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          response['result'] = null;
+          break;
+        }
+        response['result'] =
+            imitationDatabase.cache[jsonRequest['_id']][jsonRequest['field']];
+        break;
       case 'hgetall':
+        response['result'] = imitationDatabase.cache[jsonRequest['_id']];
+        break;
       case 'hincrby':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          imitationDatabase.cache[jsonRequest['_id']] = {};
+        }
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']]
+            [jsonRequest['body']['field']];
+        var prevIntValue = int.parse(prevValue);
+        prevIntValue += jsonRequest['body']['value'];
+        imitationDatabase.cache[jsonRequest['_id']]
+            [jsonRequest['body']['field']] = prevIntValue.toString();
+        response['result'] = prevIntValue;
+        break;
       case 'hincrbyfloat':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          imitationDatabase.cache[jsonRequest['_id']] = {};
+        }
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']]
+            [jsonRequest['body']['field']];
+        var prevIntValue = double.parse(prevValue);
+        prevIntValue += jsonRequest['body']['value'];
+        imitationDatabase.cache[jsonRequest['_id']]
+            [jsonRequest['body']['field']] = prevIntValue.toString();
+        response['result'] = prevIntValue.toString();
+        break;
       case 'hkeys':
+        response['result'] =
+            imitationDatabase.cache[jsonRequest['_id']].keys.toList();
+        break;
       case 'hlen':
+        response['result'] =
+            imitationDatabase.cache[jsonRequest['_id']].keys.length;
+        break;
       case 'hmget':
+        final result = jsonRequest['fields'].map((field) {
+          return (imitationDatabase.cache[jsonRequest['_id']]
+              as Map<String, dynamic>)[field];
+        }).toList();
+        response['result'] = result;
+        break;
       case 'hmset':
+        jsonRequest['body']['entries'].map((entry) {
+          return (imitationDatabase.cache[jsonRequest['_id']]
+                  as Map<String, dynamic>)[entry['field']] =
+              entry['value'].toString();
+        }).toList();
+        response['result'] = 'OK';
+        break;
       case 'hscan':
+        break;
       case 'hset':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          imitationDatabase.cache[jsonRequest['_id']] = <String, dynamic>{};
+        }
+        imitationDatabase.cache[jsonRequest['_id']]
+                [jsonRequest['body']['field']] =
+            jsonRequest['body']['value'].toString();
+        response['result'] = 1;
+        break;
       case 'hsetnx':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          imitationDatabase.cache[jsonRequest['_id']] = <String, dynamic>{};
+        }
+        if (imitationDatabase.cache[jsonRequest['_id']]
+            .containsKey(jsonRequest['body']['field'])) {
+          response['result'] = 0;
+          break;
+        }
+        imitationDatabase.cache[jsonRequest['_id']]
+                [jsonRequest['body']['field']] =
+            jsonRequest['body']['value'].toString();
+        response['result'] = 1;
+        break;
       case 'hstrlen':
+        print(imitationDatabase.cache[jsonRequest['_id']]);
+        response['result'] = (imitationDatabase.cache[jsonRequest['_id']]
+                [jsonRequest['field']])
+            .toString()
+            .length;
+        break;
       case 'hvals':
+        response['result'] = (imitationDatabase.cache[jsonRequest['_id']]
+                as Map<String, dynamic>)
+            .values
+            .toList();
+        break;
+        break;
       case 'incr':
       case 'incrby':
       case 'incrbyfloat':
