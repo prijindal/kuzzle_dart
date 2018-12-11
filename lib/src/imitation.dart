@@ -267,7 +267,6 @@ class ImitationServer {
           };
         }
         break;
-      case 'createOrReplace':
       case 'delete':
         if (imitationDatabase.doesCollectionExist(jsonRequest)) {
           (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
@@ -304,7 +303,22 @@ class ImitationServer {
       case 'mGet':
       case 'mReplace':
       case 'mUpdate':
+      case 'createOrReplace':
       case 'replace':
+        if (imitationDatabase.doesCollectionExist(jsonRequest) &&
+            (imitationDatabase.db[jsonRequest['index']]
+                    [jsonRequest['collection']] as Map<String, dynamic>)
+                .containsKey(jsonRequest['_id'])) {
+          (imitationDatabase.db[jsonRequest['index']][jsonRequest['collection']]
+                  as Map<String, dynamic>)[jsonRequest['_id']] =
+              jsonRequest['body'];
+          response['result'] = <String, dynamic>{
+            '_id': jsonRequest['_id'],
+            '_source': jsonRequest['body'],
+            '_version': 1,
+          };
+        }
+        break;
       case 'scroll':
         response['result'] = <String, dynamic>{
           'hits': <Map<String, dynamic>>[],
@@ -607,6 +621,11 @@ class ImitationServer {
       case 'join':
       case 'list':
       case 'publish':
+        // var body = jsonRequest['body'];
+        response['result'] = {
+          'published': true,
+        };
+        break;
       case 'subscribe':
       case 'unsubscribe':
       case 'validate':

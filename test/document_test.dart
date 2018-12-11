@@ -55,6 +55,27 @@ void main() {
       expect(await document.exists(), true);
     });
 
+    test('refresh', () async {
+      expect(
+          await collection.updateDocument(document.id, <String, dynamic>{
+            'hello': 'world',
+          }),
+          true);
+      await document.refresh();
+      expect(document.content.containsKey('hello'), true);
+    });
+
+    test('save', () async {
+      document.setContent(<String, dynamic>{
+        'hello': 'bye',
+      });
+      await document.save();
+    });
+
+    test('publish', () async {
+      expect(await document.publish(), true);
+    });
+
     test('delete', () async {
       final documentId = await document.delete();
       expect(documentId, document.id);
