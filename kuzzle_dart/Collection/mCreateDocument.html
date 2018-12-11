@@ -121,17 +121,20 @@
     addNetworkQuery(
       &#39;mCreate&#39;,
       body: &lt;String, dynamic&gt;{
-        &#39;documents&#39;: documents.map((document) =&gt; &lt;String, dynamic&gt;{
-              &#39;_id&#39;: document.id,
-              &#39;body&#39;: document.content,
-            }),
+        &#39;documents&#39;: documents
+            .map((document) =&gt; &lt;String, dynamic&gt;{
+                  &#39;_id&#39;: document.id,
+                  &#39;body&#39;: document.content,
+                })
+            .toList(),
       },
       optionalParams: &lt;String, dynamic&gt;{
         &#39;controller&#39;: Document.controller,
         &#39;refresh&#39;: refresh,
       },
     ).then((response) =&gt; response.result[&#39;hits&#39;]
-        .map((document) =&gt; Document.fromMap(this, document)));</code></pre>
+        .map&lt;Document&gt;((document) =&gt; Document.fromMap(this, document))
+        .toList() as List&lt;Document&gt;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

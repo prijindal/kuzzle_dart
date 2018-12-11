@@ -105,7 +105,7 @@
     <h1>mReplaceDocument method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">mReplaceDocument</span>
 (<wbr><span class="parameter" id="mReplaceDocument-param-documents"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span> <span class="parameter-name">documents</span>, {</span> <span class="parameter" id="mReplaceDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="mReplaceDocument-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>: <span class="default-value">'false'</span></span> })
       
@@ -113,7 +113,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; mReplaceDocument(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Document&gt;&gt; mReplaceDocument(
   List&lt;Document&gt; documents, {
   bool queuable = true,
   String refresh = &#39;false&#39;,
@@ -121,17 +121,20 @@
     addNetworkQuery(
       &#39;mReplace&#39;,
       body: &lt;String, dynamic&gt;{
-        &#39;documents&#39;: documents.map((document) =&gt; &lt;String, dynamic&gt;{
-              &#39;_id&#39;: document.id,
-              &#39;body&#39;: document.content,
-            }),
+        &#39;documents&#39;: documents
+            .map((document) =&gt; &lt;String, dynamic&gt;{
+                  &#39;_id&#39;: document.id,
+                  &#39;body&#39;: document.content,
+                })
+            .toList(),
       },
       optionalParams: &lt;String, dynamic&gt;{
         &#39;controller&#39;: Document.controller,
         &#39;refresh&#39;: refresh,
       },
     ).then((response) =&gt; response.result[&#39;hits&#39;]
-        .map((document) =&gt; Document.fromMap(this, document)));</code></pre>
+        .map&lt;Document&gt;((document) =&gt; Document.fromMap(this, document))
+        .toList() as List&lt;Document&gt;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -105,7 +105,7 @@
     <h1>mDeleteDocument method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">mDeleteDocument</span>
 (<wbr><span class="parameter" id="mDeleteDocument-param-documentIds"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">documentIds</span>, {</span> <span class="parameter" id="mDeleteDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="mDeleteDocument-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>: <span class="default-value">'false'</span></span> })
       
@@ -113,7 +113,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; mDeleteDocument(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; mDeleteDocument(
   List&lt;String&gt; documentIds, {
   bool queuable = true,
   String refresh = &#39;false&#39;,
@@ -127,7 +127,9 @@
         &#39;controller&#39;: Document.controller,
         &#39;refresh&#39;: refresh,
       },
-    );</code></pre>
+    ).then((response) =&gt; response.result
+        .map&lt;String&gt;((documentId) =&gt; documentId as String)
+        .toList() as List&lt;String&gt;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

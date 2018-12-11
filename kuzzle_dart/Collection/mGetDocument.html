@@ -105,7 +105,7 @@
     <h1>mGetDocument method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">mGetDocument</span>
 (<wbr><span class="parameter" id="mGetDocument-param-documentIds"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">documentIds</span>, {</span> <span class="parameter" id="mGetDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -113,7 +113,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; mGetDocument(List&lt;String&gt; documentIds,
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Document&gt;&gt; mGetDocument(List&lt;String&gt; documentIds,
         {bool queuable = true}) async =&gt;
     addNetworkQuery(
       &#39;mGet&#39;,
@@ -123,7 +123,9 @@
       optionalParams: &lt;String, dynamic&gt;{
         &#39;controller&#39;: Document.controller,
       },
-    );</code></pre>
+    ).then((response) =&gt; response.result[&#39;hits&#39;]
+        .map&lt;Document&gt;((document) =&gt; Document.fromMap(this, document))
+        .toList() as List&lt;Document&gt;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
