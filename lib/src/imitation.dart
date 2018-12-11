@@ -547,12 +547,12 @@ class ImitationServer {
         response['result'] = imitationDatabase.cache[jsonRequest['_id']].length;
         break;
       case 'geodist':
-        var points =
+        final points =
             imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
-        var point1 = points
+        final point1 = points
             .where((point) => point['name'] == jsonRequest['member1'])
             .elementAt(0);
-        var point2 = points
+        final point2 = points
             .where((point) => point['name'] == jsonRequest['member2'])
             .elementAt(0);
         var distance = pow(point1['lat'] - point2['lat'], 2) +
@@ -561,20 +561,20 @@ class ImitationServer {
         response['result'] = (distance * 111189.08081122051).toString();
         break;
       case 'geohash':
-        var points =
+        final points =
             imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
-        var hashes = jsonRequest['members'].map((member) {
-          var point =
+        final hashes = jsonRequest['members'].map((member) {
+          final point =
               points.where((point) => point['name'] == member).elementAt(0);
           return Geohash.encode(point['lat'], point['lon']);
         }).toList();
         response['result'] = hashes;
         break;
       case 'geopos':
-        var points =
+        final points =
             imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
-        var geopositions = jsonRequest['members'].map((member) {
-          var point =
+        final geopositions = jsonRequest['members'].map((member) {
+          final point =
               points.where((point) => point['name'] == member).elementAt(0);
           return [point['lon'].toString(), point['lat'].toString()];
         }).toList();
@@ -584,7 +584,7 @@ class ImitationServer {
         response['result'] = [];
         break;
       case 'georadiusbymember':
-        var points =
+        final points =
             imitationDatabase.cache[jsonRequest['_id']] as List<dynamic>;
         response['result'] = [points[0]['name']];
         break;

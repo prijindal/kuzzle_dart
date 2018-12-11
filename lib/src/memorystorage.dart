@@ -265,7 +265,7 @@ class MemoryStorage extends KuzzleObject {
       ).then((response) =>
           response.result.map<String>((hash) => hash as String).toList());
 
-  Future<String> get(String key, {bool queuable = true}) => addNetworkQuery(
+  Future<dynamic> get(String key, {bool queuable = true}) => addNetworkQuery(
         'get',
         body: {},
         optionalParams: {
@@ -618,7 +618,7 @@ class MemoryStorage extends KuzzleObject {
         optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<String> set(String key, String value,
+  Future<String> set(String key, dynamic value,
           {int ex, int px, bool nx, bool xx, bool queuable = true}) =>
       addNetworkQuery(
         'set',
