@@ -188,7 +188,7 @@
     <h1>hkeys method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">hkeys</span>
 (<wbr><span class="parameter" id="hkeys-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hkeys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -196,12 +196,16 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; hkeys(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; hkeys(String key, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;hkeys&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+      },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt;
+        response.result.map&lt;String&gt;((key) =&gt; key as String).toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

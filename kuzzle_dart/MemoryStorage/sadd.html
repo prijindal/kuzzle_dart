@@ -199,7 +199,9 @@
       <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; sadd(String key, {bool queuable = true}) =&gt; addNetworkQuery(
       &#39;sadd&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+      },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>

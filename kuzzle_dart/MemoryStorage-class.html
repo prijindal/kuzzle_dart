@@ -314,20 +314,20 @@
 </dd>
         <dt id="get" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="get-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future</span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the value of a key, or null if the key doesn't exist.
           
 </dd>
         <dt id="getbit" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getbit.html">getbit</a></span><span class="signature">(<wbr><span class="parameter" id="getbit-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getbit-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getbit.html">getbit</a></span><span class="signature">(<wbr><span class="parameter" id="getbit-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="getbit-param-offset"><span class="type-annotation">int</span> <span class="parameter-name">offset</span>, {</span> <span class="parameter" id="getbit-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the bit value at offset, in the string value stored in a key.
           
 </dd>
         <dt id="getController" class="callable">
@@ -340,80 +340,82 @@
           
 </dd>
         <dt id="getrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getrange.html">getrange</a></span><span class="signature">(<wbr><span class="parameter" id="getrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getrange.html">getrange</a></span><span class="signature">(<wbr><span class="parameter" id="getrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="getrange-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="getrange-param-end"><span class="type-annotation">int</span> <span class="parameter-name">end</span>, {</span> <span class="parameter" id="getrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns a substring of a key's value.
           
 </dd>
         <dt id="getset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getset.html">getset</a></span><span class="signature">(<wbr><span class="parameter" id="getset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getset.html">getset</a></span><span class="signature">(<wbr><span class="parameter" id="getset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="getset-param-value"><span class="type-annotation">String</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="getset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a new value for a key and returns the previous stored value.
           
 </dd>
         <dt id="hdel" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hdel.html">hdel</a></span><span class="signature">(<wbr><span class="parameter" id="hdel-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hdel-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hdel.html">hdel</a></span><span class="signature">(<wbr><span class="parameter" id="hdel-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hdel-param-fields"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">fields</span>, {</span> <span class="parameter" id="hdel-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes fields from a hash. <a href="kuzzle_dart/MemoryStorage/hdel.html">[...]</a>
           
 </dd>
         <dt id="hexists" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hexists.html">hexists</a></span><span class="signature">(<wbr><span class="parameter" id="hexists-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hexists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hexists.html">hexists</a></span><span class="signature">(<wbr><span class="parameter" id="hexists-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hexists-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, {</span> <span class="parameter" id="hexists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Checks if a field exists in a hash.
           
 </dd>
         <dt id="hget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hget.html">hget</a></span><span class="signature">(<wbr><span class="parameter" id="hget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hget.html">hget</a></span><span class="signature">(<wbr><span class="parameter" id="hget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hget-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, {</span> <span class="parameter" id="hget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future</span>
           </span>
           </dt>
         <dd>
-          
+          Returns the field's value of a hash.
           
 </dd>
         <dt id="hgetall" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/hgetall.html">hgetall</a></span><span class="signature">(<wbr><span class="parameter" id="hgetall-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hgetall-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns all fields and values of a hash.
           
 </dd>
         <dt id="hincrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrby.html">hincrby</a></span><span class="signature">(<wbr><span class="parameter" id="hincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrby.html">hincrby</a></span><span class="signature">(<wbr><span class="parameter" id="hincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hincrby-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, {</span> <span class="parameter" id="hincrby-param-value"><span class="type-annotation">int</span> <span class="parameter-name">value</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="hincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Increments the number stored in a hash field
+by the provided integer value.
           
 </dd>
         <dt id="hincrbyfloat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrbyfloat.html">hincrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="hincrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hincrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrbyfloat.html">hincrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="hincrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hincrbyfloat-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, {</span> <span class="parameter" id="hincrbyfloat-param-value"><span class="type-annotation">double</span> <span class="parameter-name">value</span>: <span class="default-value">1.0</span>, </span> <span class="parameter" id="hincrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Increments the number stored in a hash field
+by the provided float value.
           
 </dd>
         <dt id="hkeys" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/hkeys.html">hkeys</a></span><span class="signature">(<wbr><span class="parameter" id="hkeys-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hkeys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -426,70 +428,72 @@
           </span>
           </dt>
         <dd>
-          
+          Returns the number of fields contained in a hash.
           
 </dd>
         <dt id="hmget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmget.html">hmget</a></span><span class="signature">(<wbr><span class="parameter" id="hmget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hmget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmget.html">hmget</a></span><span class="signature">(<wbr><span class="parameter" id="hmget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hmget-param-fields"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">fields</span>, {</span> <span class="parameter" id="hmget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the values of the specified hash's fields.
           
 </dd>
         <dt id="hmset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmset.html">hmset</a></span><span class="signature">(<wbr><span class="parameter" id="hmset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmset.html">hmset</a></span><span class="signature">(<wbr><span class="parameter" id="hmset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hmset-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets multiple fields at once in a hash. <a href="kuzzle_dart/MemoryStorage/hmset.html">[...]</a>
           
 </dd>
         <dt id="hscan" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hscan.html">hscan</a></span><span class="signature">(<wbr><span class="parameter" id="hscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hscan.html">hscan</a></span><span class="signature">(<wbr><span class="parameter" id="hscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hscan-param-cursor"><span class="type-annotation">String</span> <span class="parameter-name">cursor</span>, </span> <span class="parameter" id="hscan-param-match"><span class="type-annotation">String</span> <span class="parameter-name">match</span>, </span> <span class="parameter" id="hscan-param-count"><span class="type-annotation">String</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Identical to <a href="kuzzle_dart/MemoryStorage/scan.html">scan</a>, except that hscan
+iterates the fields contained in a hash.
           
 </dd>
         <dt id="hset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hset.html">hset</a></span><span class="signature">(<wbr><span class="parameter" id="hset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hset.html">hset</a></span><span class="signature">(<wbr><span class="parameter" id="hset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hset-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, </span> <span class="parameter" id="hset-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="hset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a field and its value in a hash. <a href="kuzzle_dart/MemoryStorage/hset.html">[...]</a>
           
 </dd>
         <dt id="hsetnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hsetnx.html">hsetnx</a></span><span class="signature">(<wbr><span class="parameter" id="hsetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hsetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hsetnx.html">hsetnx</a></span><span class="signature">(<wbr><span class="parameter" id="hsetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hsetnx-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, </span> <span class="parameter" id="hsetnx-param-value"><span class="type-annotation">String</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="hsetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a field and its value in a hash,
+only if the field does not already exist.
           
 </dd>
         <dt id="hstrlen" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hstrlen.html">hstrlen</a></span><span class="signature">(<wbr><span class="parameter" id="hstrlen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hstrlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hstrlen.html">hstrlen</a></span><span class="signature">(<wbr><span class="parameter" id="hstrlen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hstrlen-param-field"><span class="type-annotation">String</span> <span class="parameter-name">field</span>, {</span> <span class="parameter" id="hstrlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the string length of a field's value in a hash.
           
 </dd>
         <dt id="hvals" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/hvals.html">hvals</a></span><span class="signature">(<wbr><span class="parameter" id="hvals-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hvals-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns all values contained in a hash.
           
 </dd>
         <dt id="incr" class="callable">
@@ -844,7 +848,7 @@
           
 </dd>
         <dt id="set" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="set-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="set-param-ex"><span class="type-annotation">int</span> <span class="parameter-name">ex</span>, </span> <span class="parameter" id="set-param-px"><span class="type-annotation">int</span> <span class="parameter-name">px</span>, </span> <span class="parameter" id="set-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>, </span> <span class="parameter" id="set-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>, </span> <span class="parameter" id="set-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="set-param-value"><span class="type-annotation">String</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="set-param-ex"><span class="type-annotation">int</span> <span class="parameter-name">ex</span>, </span> <span class="parameter" id="set-param-px"><span class="type-annotation">int</span> <span class="parameter-name">px</span>, </span> <span class="parameter" id="set-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>, </span> <span class="parameter" id="set-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>, </span> <span class="parameter" id="set-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>

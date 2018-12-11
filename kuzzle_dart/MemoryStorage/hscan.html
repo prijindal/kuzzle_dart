@@ -188,18 +188,30 @@
     <h1>hscan method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
       <span class="name ">hscan</span>
-(<wbr><span class="parameter" id="hscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="hscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hscan-param-cursor"><span class="type-annotation">String</span> <span class="parameter-name">cursor</span>, </span> <span class="parameter" id="hscan-param-match"><span class="type-annotation">String</span> <span class="parameter-name">match</span>, </span> <span class="parameter" id="hscan-param-count"><span class="type-annotation">String</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Identical to <a href="kuzzle_dart/MemoryStorage/scan.html">scan</a>, except that hscan
+iterates the fields contained in a hash.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; hscan(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;dynamic&gt;&gt; hscan(
+        String key, String cursor, String match, String count,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;hscan&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+        &#39;cursor&#39;: cursor,
+        &#39;match&#39;: match,
+        &#39;count&#39;: count,
+      },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>

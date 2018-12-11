@@ -188,18 +188,33 @@
     <h1>hmset method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
       <span class="name ">hmset</span>
-(<wbr><span class="parameter" id="hmset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="hmset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="hmset-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sets multiple fields at once in a hash.</p>
+<p>returns OK</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; hmset(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; hmset(String key, Map&lt;String, dynamic&gt; entries,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;hmset&#39;,
-      body: {},
-      optionalParams: {},
+      body: {
+        &#39;entries&#39;: entries.keys
+            .map((key) =&gt; {
+                  &#39;field&#39;: key,
+                  &#39;value&#39;: entries[key],
+                })
+            .toList(),
+      },
+      optionalParams: {
+        &#39;_id&#39;: key,
+      },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>
