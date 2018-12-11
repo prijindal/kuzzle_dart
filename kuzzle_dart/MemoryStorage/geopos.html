@@ -188,20 +188,31 @@
     <h1>geopos method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/GeoPositionPoint-class.html">GeoPositionPoint</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">geopos</span>
-(<wbr>{<span class="parameter" id="geopos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="geopos-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geopos-param-members"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="geopos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; geopos({bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;GeoPositionPoint&gt;&gt; geopos(String key, List&lt;String&gt; members,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;geopos&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+        &#39;members&#39;: members,
+      },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt; response.result
+        .map&lt;GeoPositionPoint&gt;((point) =&gt; GeoPositionPoint(
+              name: members[0],
+              lon: double.parse(point[0]),
+              lat: double.parse(point[1]),
+            ))
+        .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

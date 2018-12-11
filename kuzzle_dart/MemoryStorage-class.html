@@ -47,6 +47,7 @@
       <li><a href="kuzzle_dart/Credentials-class.html">Credentials</a></li>
       <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
       <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
+      <li><a href="kuzzle_dart/GeoPositionPoint-class.html">GeoPositionPoint</a></li>
       <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
       <li><a href="kuzzle_dart/ListCollectionResponse-class.html">ListCollectionResponse</a></li>
       <li><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></li>
@@ -258,7 +259,7 @@
           
 </dd>
         <dt id="geoadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/geoadd.html">geoadd</a></span><span class="signature">(<wbr>{<span class="parameter" id="geoadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/geoadd.html">geoadd</a></span><span class="signature">(<wbr><span class="parameter" id="geoadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geoadd-param-points"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/GeoPositionPoint-class.html">GeoPositionPoint</a></span>&gt;</span></span> <span class="parameter-name">points</span>, {</span> <span class="parameter" id="geoadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -267,8 +268,8 @@
           
 </dd>
         <dt id="geodist" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/geodist.html">geodist</a></span><span class="signature">(<wbr>{<span class="parameter" id="geodist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/geodist.html">geodist</a></span><span class="signature">(<wbr><span class="parameter" id="geodist-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geodist-param-member1"><span class="type-annotation">String</span> <span class="parameter-name">member1</span>, </span> <span class="parameter" id="geodist-param-member2"><span class="type-annotation">String</span> <span class="parameter-name">member2</span>, {</span> <span class="parameter" id="geodist-param-unit"><span class="type-annotation">String</span> <span class="parameter-name">unit</span>: <span class="default-value">'m'</span>, </span> <span class="parameter" id="geodist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">double</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -276,8 +277,8 @@
           
 </dd>
         <dt id="geohash" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/geohash.html">geohash</a></span><span class="signature">(<wbr>{<span class="parameter" id="geohash-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/geohash.html">geohash</a></span><span class="signature">(<wbr><span class="parameter" id="geohash-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geohash-param-members"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="geohash-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -285,8 +286,8 @@
           
 </dd>
         <dt id="geopos" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/geopos.html">geopos</a></span><span class="signature">(<wbr>{<span class="parameter" id="geopos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/geopos.html">geopos</a></span><span class="signature">(<wbr><span class="parameter" id="geopos-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geopos-param-members"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="geopos-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/GeoPositionPoint-class.html">GeoPositionPoint</a></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -294,8 +295,8 @@
           
 </dd>
         <dt id="georadius" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/georadius.html">georadius</a></span><span class="signature">(<wbr>{<span class="parameter" id="georadius-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/georadius.html">georadius</a></span><span class="signature">(<wbr><span class="parameter" id="georadius-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="georadius-param-lon"><span class="type-annotation">double</span> <span class="parameter-name">lon</span>, </span> <span class="parameter" id="georadius-param-lat"><span class="type-annotation">double</span> <span class="parameter-name">lat</span>, </span> <span class="parameter" id="georadius-param-distance"><span class="type-annotation">double</span> <span class="parameter-name">distance</span>, {</span> <span class="parameter" id="georadius-param-unit"><span class="type-annotation">String</span> <span class="parameter-name">unit</span>: <span class="default-value">'m'</span>, </span> <span class="parameter" id="georadius-param-options"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">options</span>, </span> <span class="parameter" id="georadius-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -303,8 +304,8 @@
           
 </dd>
         <dt id="georadiusbymember" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/georadiusbymember.html">georadiusbymember</a></span><span class="signature">(<wbr>{<span class="parameter" id="georadiusbymember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/georadiusbymember.html">georadiusbymember</a></span><span class="signature">(<wbr><span class="parameter" id="georadiusbymember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="georadiusbymember-param-member"><span class="type-annotation">String</span> <span class="parameter-name">member</span>, </span> <span class="parameter" id="georadiusbymember-param-distance"><span class="type-annotation">double</span> <span class="parameter-name">distance</span>, {</span> <span class="parameter" id="georadiusbymember-param-unit"><span class="type-annotation">String</span> <span class="parameter-name">unit</span>: <span class="default-value">'m'</span>, </span> <span class="parameter" id="georadiusbymember-param-options"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">options</span>, </span> <span class="parameter" id="georadiusbymember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -321,7 +322,7 @@
           
 </dd>
         <dt id="getbit" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getbit.html">getbit</a></span><span class="signature">(<wbr>{<span class="parameter" id="getbit-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getbit.html">getbit</a></span><span class="signature">(<wbr><span class="parameter" id="getbit-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getbit-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -339,7 +340,7 @@
           
 </dd>
         <dt id="getrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getrange.html">getrange</a></span><span class="signature">(<wbr>{<span class="parameter" id="getrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getrange.html">getrange</a></span><span class="signature">(<wbr><span class="parameter" id="getrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -348,7 +349,7 @@
           
 </dd>
         <dt id="getset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/getset.html">getset</a></span><span class="signature">(<wbr>{<span class="parameter" id="getset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/getset.html">getset</a></span><span class="signature">(<wbr><span class="parameter" id="getset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="getset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -357,7 +358,7 @@
           
 </dd>
         <dt id="hdel" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hdel.html">hdel</a></span><span class="signature">(<wbr>{<span class="parameter" id="hdel-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hdel.html">hdel</a></span><span class="signature">(<wbr><span class="parameter" id="hdel-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hdel-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -366,7 +367,7 @@
           
 </dd>
         <dt id="hexists" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hexists.html">hexists</a></span><span class="signature">(<wbr>{<span class="parameter" id="hexists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hexists.html">hexists</a></span><span class="signature">(<wbr><span class="parameter" id="hexists-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hexists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -375,7 +376,7 @@
           
 </dd>
         <dt id="hget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hget.html">hget</a></span><span class="signature">(<wbr>{<span class="parameter" id="hget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hget.html">hget</a></span><span class="signature">(<wbr><span class="parameter" id="hget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -384,7 +385,7 @@
           
 </dd>
         <dt id="hgetall" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hgetall.html">hgetall</a></span><span class="signature">(<wbr>{<span class="parameter" id="hgetall-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hgetall.html">hgetall</a></span><span class="signature">(<wbr><span class="parameter" id="hgetall-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hgetall-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -393,7 +394,7 @@
           
 </dd>
         <dt id="hincrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrby.html">hincrby</a></span><span class="signature">(<wbr>{<span class="parameter" id="hincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrby.html">hincrby</a></span><span class="signature">(<wbr><span class="parameter" id="hincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -402,7 +403,7 @@
           
 </dd>
         <dt id="hincrbyfloat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrbyfloat.html">hincrbyfloat</a></span><span class="signature">(<wbr>{<span class="parameter" id="hincrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hincrbyfloat.html">hincrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="hincrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hincrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -411,7 +412,7 @@
           
 </dd>
         <dt id="hkeys" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hkeys.html">hkeys</a></span><span class="signature">(<wbr>{<span class="parameter" id="hkeys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hkeys.html">hkeys</a></span><span class="signature">(<wbr><span class="parameter" id="hkeys-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hkeys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -420,7 +421,7 @@
           
 </dd>
         <dt id="hlen" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hlen.html">hlen</a></span><span class="signature">(<wbr>{<span class="parameter" id="hlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hlen.html">hlen</a></span><span class="signature">(<wbr><span class="parameter" id="hlen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -429,7 +430,7 @@
           
 </dd>
         <dt id="hmget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmget.html">hmget</a></span><span class="signature">(<wbr>{<span class="parameter" id="hmget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmget.html">hmget</a></span><span class="signature">(<wbr><span class="parameter" id="hmget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hmget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -438,7 +439,7 @@
           
 </dd>
         <dt id="hmset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmset.html">hmset</a></span><span class="signature">(<wbr>{<span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hmset.html">hmset</a></span><span class="signature">(<wbr><span class="parameter" id="hmset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hmset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -447,7 +448,7 @@
           
 </dd>
         <dt id="hscan" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hscan.html">hscan</a></span><span class="signature">(<wbr>{<span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hscan.html">hscan</a></span><span class="signature">(<wbr><span class="parameter" id="hscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -456,7 +457,7 @@
           
 </dd>
         <dt id="hset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hset.html">hset</a></span><span class="signature">(<wbr>{<span class="parameter" id="hset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hset.html">hset</a></span><span class="signature">(<wbr><span class="parameter" id="hset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -465,7 +466,7 @@
           
 </dd>
         <dt id="hsetnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hsetnx.html">hsetnx</a></span><span class="signature">(<wbr>{<span class="parameter" id="hsetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hsetnx.html">hsetnx</a></span><span class="signature">(<wbr><span class="parameter" id="hsetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hsetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -474,7 +475,7 @@
           
 </dd>
         <dt id="hstrlen" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hstrlen.html">hstrlen</a></span><span class="signature">(<wbr>{<span class="parameter" id="hstrlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hstrlen.html">hstrlen</a></span><span class="signature">(<wbr><span class="parameter" id="hstrlen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hstrlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -483,7 +484,7 @@
           
 </dd>
         <dt id="hvals" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/hvals.html">hvals</a></span><span class="signature">(<wbr>{<span class="parameter" id="hvals-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/hvals.html">hvals</a></span><span class="signature">(<wbr><span class="parameter" id="hvals-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="hvals-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -492,7 +493,7 @@
           
 </dd>
         <dt id="incr" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/incr.html">incr</a></span><span class="signature">(<wbr>{<span class="parameter" id="incr-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/incr.html">incr</a></span><span class="signature">(<wbr><span class="parameter" id="incr-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incr-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -501,7 +502,7 @@
           
 </dd>
         <dt id="incrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrby.html">incrby</a></span><span class="signature">(<wbr>{<span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrby.html">incrby</a></span><span class="signature">(<wbr><span class="parameter" id="incrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -510,7 +511,7 @@
           
 </dd>
         <dt id="incrbyfloat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">incrbyfloat</a></span><span class="signature">(<wbr>{<span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">incrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="incrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -519,7 +520,7 @@
           
 </dd>
         <dt id="keys" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/keys.html">keys</a></span><span class="signature">(<wbr>{<span class="parameter" id="keys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/keys.html">keys</a></span><span class="signature">(<wbr><span class="parameter" id="keys-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="keys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -528,7 +529,7 @@
           
 </dd>
         <dt id="lindex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lindex.html">lindex</a></span><span class="signature">(<wbr>{<span class="parameter" id="lindex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lindex.html">lindex</a></span><span class="signature">(<wbr><span class="parameter" id="lindex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lindex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -537,7 +538,7 @@
           
 </dd>
         <dt id="linsert" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/linsert.html">linsert</a></span><span class="signature">(<wbr>{<span class="parameter" id="linsert-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/linsert.html">linsert</a></span><span class="signature">(<wbr><span class="parameter" id="linsert-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="linsert-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -546,7 +547,7 @@
           
 </dd>
         <dt id="llen" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/llen.html">llen</a></span><span class="signature">(<wbr>{<span class="parameter" id="llen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/llen.html">llen</a></span><span class="signature">(<wbr><span class="parameter" id="llen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="llen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -555,7 +556,7 @@
           
 </dd>
         <dt id="lpop" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpop.html">lpop</a></span><span class="signature">(<wbr>{<span class="parameter" id="lpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpop.html">lpop</a></span><span class="signature">(<wbr><span class="parameter" id="lpop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -564,7 +565,7 @@
           
 </dd>
         <dt id="lpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpush.html">lpush</a></span><span class="signature">(<wbr>{<span class="parameter" id="lpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpush.html">lpush</a></span><span class="signature">(<wbr><span class="parameter" id="lpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -573,7 +574,7 @@
           
 </dd>
         <dt id="lpushx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpushx.html">lpushx</a></span><span class="signature">(<wbr>{<span class="parameter" id="lpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpushx.html">lpushx</a></span><span class="signature">(<wbr><span class="parameter" id="lpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -582,7 +583,7 @@
           
 </dd>
         <dt id="lrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrange.html">lrange</a></span><span class="signature">(<wbr>{<span class="parameter" id="lrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrange.html">lrange</a></span><span class="signature">(<wbr><span class="parameter" id="lrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -591,7 +592,7 @@
           
 </dd>
         <dt id="lrem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrem.html">lrem</a></span><span class="signature">(<wbr>{<span class="parameter" id="lrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrem.html">lrem</a></span><span class="signature">(<wbr><span class="parameter" id="lrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -600,7 +601,7 @@
           
 </dd>
         <dt id="lset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr>{<span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -609,7 +610,7 @@
           
 </dd>
         <dt id="ltrim" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/ltrim.html">ltrim</a></span><span class="signature">(<wbr>{<span class="parameter" id="ltrim-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/ltrim.html">ltrim</a></span><span class="signature">(<wbr><span class="parameter" id="ltrim-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="ltrim-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -618,7 +619,7 @@
           
 </dd>
         <dt id="mget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/mget.html">mget</a></span><span class="signature">(<wbr>{<span class="parameter" id="mget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/mget.html">mget</a></span><span class="signature">(<wbr><span class="parameter" id="mget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="mget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -627,7 +628,7 @@
           
 </dd>
         <dt id="mset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/mset.html">mset</a></span><span class="signature">(<wbr>{<span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/mset.html">mset</a></span><span class="signature">(<wbr><span class="parameter" id="mset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -636,7 +637,7 @@
           
 </dd>
         <dt id="msetnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/msetnx.html">msetnx</a></span><span class="signature">(<wbr>{<span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/msetnx.html">msetnx</a></span><span class="signature">(<wbr><span class="parameter" id="msetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -645,7 +646,7 @@
           
 </dd>
         <dt id="object" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/object.html">object</a></span><span class="signature">(<wbr>{<span class="parameter" id="object-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/object.html">object</a></span><span class="signature">(<wbr><span class="parameter" id="object-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="object-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -654,7 +655,7 @@
           
 </dd>
         <dt id="persist" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/persist.html">persist</a></span><span class="signature">(<wbr>{<span class="parameter" id="persist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/persist.html">persist</a></span><span class="signature">(<wbr><span class="parameter" id="persist-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="persist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -663,7 +664,7 @@
           
 </dd>
         <dt id="pexpire" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpire.html">pexpire</a></span><span class="signature">(<wbr>{<span class="parameter" id="pexpire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpire.html">pexpire</a></span><span class="signature">(<wbr><span class="parameter" id="pexpire-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pexpire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -672,7 +673,7 @@
           
 </dd>
         <dt id="pexpireat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpireat.html">pexpireat</a></span><span class="signature">(<wbr>{<span class="parameter" id="pexpireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpireat.html">pexpireat</a></span><span class="signature">(<wbr><span class="parameter" id="pexpireat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pexpireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -681,7 +682,7 @@
           
 </dd>
         <dt id="pfadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfadd.html">pfadd</a></span><span class="signature">(<wbr>{<span class="parameter" id="pfadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfadd.html">pfadd</a></span><span class="signature">(<wbr><span class="parameter" id="pfadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -690,7 +691,7 @@
           
 </dd>
         <dt id="pfcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfcount.html">pfcount</a></span><span class="signature">(<wbr>{<span class="parameter" id="pfcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfcount.html">pfcount</a></span><span class="signature">(<wbr><span class="parameter" id="pfcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -699,7 +700,7 @@
           
 </dd>
         <dt id="pfmerge" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfmerge.html">pfmerge</a></span><span class="signature">(<wbr>{<span class="parameter" id="pfmerge-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfmerge.html">pfmerge</a></span><span class="signature">(<wbr><span class="parameter" id="pfmerge-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfmerge-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -708,7 +709,7 @@
           
 </dd>
         <dt id="ping" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/ping.html">ping</a></span><span class="signature">(<wbr>{<span class="parameter" id="ping-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/ping.html">ping</a></span><span class="signature">(<wbr><span class="parameter" id="ping-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="ping-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -717,7 +718,7 @@
           
 </dd>
         <dt id="psetex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/psetex.html">psetex</a></span><span class="signature">(<wbr>{<span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/psetex.html">psetex</a></span><span class="signature">(<wbr><span class="parameter" id="psetex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -726,7 +727,7 @@
           
 </dd>
         <dt id="pttl" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pttl.html">pttl</a></span><span class="signature">(<wbr>{<span class="parameter" id="pttl-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pttl.html">pttl</a></span><span class="signature">(<wbr><span class="parameter" id="pttl-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pttl-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -735,7 +736,7 @@
           
 </dd>
         <dt id="randomkey" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/randomkey.html">randomkey</a></span><span class="signature">(<wbr>{<span class="parameter" id="randomkey-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/randomkey.html">randomkey</a></span><span class="signature">(<wbr><span class="parameter" id="randomkey-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="randomkey-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -744,7 +745,7 @@
           
 </dd>
         <dt id="rename" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rename.html">rename</a></span><span class="signature">(<wbr>{<span class="parameter" id="rename-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rename.html">rename</a></span><span class="signature">(<wbr><span class="parameter" id="rename-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rename-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -753,7 +754,7 @@
           
 </dd>
         <dt id="renamenx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/renamenx.html">renamenx</a></span><span class="signature">(<wbr>{<span class="parameter" id="renamenx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/renamenx.html">renamenx</a></span><span class="signature">(<wbr><span class="parameter" id="renamenx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="renamenx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -762,7 +763,7 @@
           
 </dd>
         <dt id="rpop" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpop.html">rpop</a></span><span class="signature">(<wbr>{<span class="parameter" id="rpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpop.html">rpop</a></span><span class="signature">(<wbr><span class="parameter" id="rpop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -771,7 +772,7 @@
           
 </dd>
         <dt id="rpoplpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpoplpush.html">rpoplpush</a></span><span class="signature">(<wbr>{<span class="parameter" id="rpoplpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpoplpush.html">rpoplpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpoplpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpoplpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -780,7 +781,7 @@
           
 </dd>
         <dt id="rpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpush.html">rpush</a></span><span class="signature">(<wbr>{<span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpush.html">rpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -789,7 +790,7 @@
           
 </dd>
         <dt id="rpushx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpushx.html">rpushx</a></span><span class="signature">(<wbr>{<span class="parameter" id="rpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpushx.html">rpushx</a></span><span class="signature">(<wbr><span class="parameter" id="rpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -798,7 +799,7 @@
           
 </dd>
         <dt id="sadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sadd.html">sadd</a></span><span class="signature">(<wbr>{<span class="parameter" id="sadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sadd.html">sadd</a></span><span class="signature">(<wbr><span class="parameter" id="sadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -807,7 +808,7 @@
           
 </dd>
         <dt id="scan" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/scan.html">scan</a></span><span class="signature">(<wbr>{<span class="parameter" id="scan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/scan.html">scan</a></span><span class="signature">(<wbr><span class="parameter" id="scan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="scan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -816,7 +817,7 @@
           
 </dd>
         <dt id="scard" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/scard.html">scard</a></span><span class="signature">(<wbr>{<span class="parameter" id="scard-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/scard.html">scard</a></span><span class="signature">(<wbr><span class="parameter" id="scard-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="scard-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -825,7 +826,7 @@
           
 </dd>
         <dt id="sdiff" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiff.html">sdiff</a></span><span class="signature">(<wbr>{<span class="parameter" id="sdiff-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiff.html">sdiff</a></span><span class="signature">(<wbr><span class="parameter" id="sdiff-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sdiff-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -834,7 +835,7 @@
           
 </dd>
         <dt id="sdiffstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiffstore.html">sdiffstore</a></span><span class="signature">(<wbr>{<span class="parameter" id="sdiffstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiffstore.html">sdiffstore</a></span><span class="signature">(<wbr><span class="parameter" id="sdiffstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sdiffstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -852,7 +853,7 @@
           
 </dd>
         <dt id="setex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/setex.html">setex</a></span><span class="signature">(<wbr>{<span class="parameter" id="setex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/setex.html">setex</a></span><span class="signature">(<wbr><span class="parameter" id="setex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="setex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -861,7 +862,7 @@
           
 </dd>
         <dt id="setnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/setnx.html">setnx</a></span><span class="signature">(<wbr>{<span class="parameter" id="setnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/setnx.html">setnx</a></span><span class="signature">(<wbr><span class="parameter" id="setnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="setnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -870,7 +871,7 @@
           
 </dd>
         <dt id="sinter" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinter.html">sinter</a></span><span class="signature">(<wbr>{<span class="parameter" id="sinter-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinter.html">sinter</a></span><span class="signature">(<wbr><span class="parameter" id="sinter-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sinter-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -879,7 +880,7 @@
           
 </dd>
         <dt id="sinterstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinterstore.html">sinterstore</a></span><span class="signature">(<wbr>{<span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinterstore.html">sinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="sinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -888,7 +889,7 @@
           
 </dd>
         <dt id="sismember" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sismember.html">sismember</a></span><span class="signature">(<wbr>{<span class="parameter" id="sismember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sismember.html">sismember</a></span><span class="signature">(<wbr><span class="parameter" id="sismember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sismember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -897,7 +898,7 @@
           
 </dd>
         <dt id="smembers" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/smembers.html">smembers</a></span><span class="signature">(<wbr>{<span class="parameter" id="smembers-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/smembers.html">smembers</a></span><span class="signature">(<wbr><span class="parameter" id="smembers-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="smembers-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -906,7 +907,7 @@
           
 </dd>
         <dt id="smove" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/smove.html">smove</a></span><span class="signature">(<wbr>{<span class="parameter" id="smove-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/smove.html">smove</a></span><span class="signature">(<wbr><span class="parameter" id="smove-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="smove-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -915,7 +916,7 @@
           
 </dd>
         <dt id="sort" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sort.html">sort</a></span><span class="signature">(<wbr>{<span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sort.html">sort</a></span><span class="signature">(<wbr><span class="parameter" id="sort-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -924,7 +925,7 @@
           
 </dd>
         <dt id="spop" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/spop.html">spop</a></span><span class="signature">(<wbr>{<span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/spop.html">spop</a></span><span class="signature">(<wbr><span class="parameter" id="spop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -933,7 +934,7 @@
           
 </dd>
         <dt id="srandmember" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/srandmember.html">srandmember</a></span><span class="signature">(<wbr>{<span class="parameter" id="srandmember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/srandmember.html">srandmember</a></span><span class="signature">(<wbr><span class="parameter" id="srandmember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="srandmember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -942,7 +943,7 @@
           
 </dd>
         <dt id="srem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/srem.html">srem</a></span><span class="signature">(<wbr>{<span class="parameter" id="srem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/srem.html">srem</a></span><span class="signature">(<wbr><span class="parameter" id="srem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="srem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -951,7 +952,7 @@
           
 </dd>
         <dt id="sscan" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sscan.html">sscan</a></span><span class="signature">(<wbr>{<span class="parameter" id="sscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sscan.html">sscan</a></span><span class="signature">(<wbr><span class="parameter" id="sscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -960,7 +961,7 @@
           
 </dd>
         <dt id="strlen" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/strlen.html">strlen</a></span><span class="signature">(<wbr>{<span class="parameter" id="strlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/strlen.html">strlen</a></span><span class="signature">(<wbr><span class="parameter" id="strlen-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="strlen-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -969,7 +970,7 @@
           
 </dd>
         <dt id="sunion" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunion.html">sunion</a></span><span class="signature">(<wbr>{<span class="parameter" id="sunion-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunion.html">sunion</a></span><span class="signature">(<wbr><span class="parameter" id="sunion-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sunion-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -978,7 +979,7 @@
           
 </dd>
         <dt id="sunionstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunionstore.html">sunionstore</a></span><span class="signature">(<wbr>{<span class="parameter" id="sunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunionstore.html">sunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="sunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -987,7 +988,7 @@
           
 </dd>
         <dt id="time" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/time.html">time</a></span><span class="signature">(<wbr>{<span class="parameter" id="time-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/time.html">time</a></span><span class="signature">(<wbr><span class="parameter" id="time-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="time-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -996,7 +997,7 @@
           
 </dd>
         <dt id="touch" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/touch.html">touch</a></span><span class="signature">(<wbr>{<span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/touch.html">touch</a></span><span class="signature">(<wbr><span class="parameter" id="touch-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1005,7 +1006,7 @@
           
 </dd>
         <dt id="ttl" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/ttl.html">ttl</a></span><span class="signature">(<wbr>{<span class="parameter" id="ttl-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/ttl.html">ttl</a></span><span class="signature">(<wbr><span class="parameter" id="ttl-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="ttl-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1014,7 +1015,7 @@
           
 </dd>
         <dt id="type" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/type.html">type</a></span><span class="signature">(<wbr>{<span class="parameter" id="type-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/type.html">type</a></span><span class="signature">(<wbr><span class="parameter" id="type-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="type-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1023,7 +1024,7 @@
           
 </dd>
         <dt id="zadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zadd.html">zadd</a></span><span class="signature">(<wbr>{<span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zadd.html">zadd</a></span><span class="signature">(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1032,7 +1033,7 @@
           
 </dd>
         <dt id="zcard" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcard.html">zcard</a></span><span class="signature">(<wbr>{<span class="parameter" id="zcard-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcard.html">zcard</a></span><span class="signature">(<wbr><span class="parameter" id="zcard-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zcard-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1041,7 +1042,7 @@
           
 </dd>
         <dt id="zcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcount.html">zcount</a></span><span class="signature">(<wbr>{<span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcount.html">zcount</a></span><span class="signature">(<wbr><span class="parameter" id="zcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1050,7 +1051,7 @@
           
 </dd>
         <dt id="zincrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zincrby.html">zincrby</a></span><span class="signature">(<wbr>{<span class="parameter" id="zincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zincrby.html">zincrby</a></span><span class="signature">(<wbr><span class="parameter" id="zincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1059,7 +1060,7 @@
           
 </dd>
         <dt id="zinterstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zinterstore.html">zinterstore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zinterstore.html">zinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="zinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1068,7 +1069,7 @@
           
 </dd>
         <dt id="zlexcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zlexcount.html">zlexcount</a></span><span class="signature">(<wbr>{<span class="parameter" id="zlexcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zlexcount.html">zlexcount</a></span><span class="signature">(<wbr><span class="parameter" id="zlexcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zlexcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1077,7 +1078,7 @@
           
 </dd>
         <dt id="zrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1086,7 +1087,7 @@
           
 </dd>
         <dt id="zrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1095,7 +1096,7 @@
           
 </dd>
         <dt id="zrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1104,7 +1105,7 @@
           
 </dd>
         <dt id="zrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrank.html">zrank</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrank.html">zrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1113,7 +1114,7 @@
           
 </dd>
         <dt id="zrem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrem.html">zrem</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrem.html">zrem</a></span><span class="signature">(<wbr><span class="parameter" id="zrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1122,7 +1123,7 @@
           
 </dd>
         <dt id="zremrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">zremrangebylex</a></span><span class="signature">(<wbr>{<span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">zremrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1131,7 +1132,7 @@
           
 </dd>
         <dt id="zremrangebyrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">zremrangebyrank</a></span><span class="signature">(<wbr>{<span class="parameter" id="zremrangebyrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">zremrangebyrank</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebyrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1140,7 +1141,7 @@
           
 </dd>
         <dt id="zremrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyscore.html">zremrangebyscore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zremrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyscore.html">zremrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1149,7 +1150,7 @@
           
 </dd>
         <dt id="zrevrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrange.html">zrevrange</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrevrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrange.html">zrevrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1158,7 +1159,7 @@
           
 </dd>
         <dt id="zrevrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebylex.html">zrevrangebylex</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrevrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebylex.html">zrevrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1167,7 +1168,7 @@
           
 </dd>
         <dt id="zrevrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebyscore.html">zrevrangebyscore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebyscore.html">zrevrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1176,7 +1177,7 @@
           
 </dd>
         <dt id="zrevrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrank.html">zrevrank</a></span><span class="signature">(<wbr>{<span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrank.html">zrevrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1185,7 +1186,7 @@
           
 </dd>
         <dt id="zscan" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscan.html">zscan</a></span><span class="signature">(<wbr>{<span class="parameter" id="zscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscan.html">zscan</a></span><span class="signature">(<wbr><span class="parameter" id="zscan-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zscan-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1194,7 +1195,7 @@
           
 </dd>
         <dt id="zscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscore.html">zscore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscore.html">zscore</a></span><span class="signature">(<wbr><span class="parameter" id="zscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -1203,7 +1204,7 @@
           
 </dd>
         <dt id="zunionstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zunionstore.html">zunionstore</a></span><span class="signature">(<wbr>{<span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zunionstore.html">zunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="zunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>

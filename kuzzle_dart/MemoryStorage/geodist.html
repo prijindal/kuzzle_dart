@@ -188,20 +188,27 @@
     <h1>geodist method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">double</span>&gt;</span></span>
       <span class="name ">geodist</span>
-(<wbr>{<span class="parameter" id="geodist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="geodist-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="geodist-param-member1"><span class="type-annotation">String</span> <span class="parameter-name">member1</span>, </span> <span class="parameter" id="geodist-param-member2"><span class="type-annotation">String</span> <span class="parameter-name">member2</span>, {</span> <span class="parameter" id="geodist-param-unit"><span class="type-annotation">String</span> <span class="parameter-name">unit</span>: <span class="default-value">'m'</span>, </span> <span class="parameter" id="geodist-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; geodist({bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;double&gt; geodist(String key, String member1, String member2,
+        {String unit = &#39;m&#39;, bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;geodist&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+        &#39;member1&#39;: member1,
+        &#39;member2&#39;: member2,
+        &#39;unit&#39;: unit,
+      },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt; double.parse(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

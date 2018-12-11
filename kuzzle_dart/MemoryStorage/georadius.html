@@ -188,20 +188,37 @@
     <h1>georadius method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">georadius</span>
-(<wbr>{<span class="parameter" id="georadius-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="georadius-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="georadius-param-lon"><span class="type-annotation">double</span> <span class="parameter-name">lon</span>, </span> <span class="parameter" id="georadius-param-lat"><span class="type-annotation">double</span> <span class="parameter-name">lat</span>, </span> <span class="parameter" id="georadius-param-distance"><span class="type-annotation">double</span> <span class="parameter-name">distance</span>, {</span> <span class="parameter" id="georadius-param-unit"><span class="type-annotation">String</span> <span class="parameter-name">unit</span>: <span class="default-value">'m'</span>, </span> <span class="parameter" id="georadius-param-options"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">options</span>, </span> <span class="parameter" id="georadius-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; georadius({bool queuable = true}) =&gt; addNetworkQuery(
-      &#39;append&#39;,
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;int&gt;&gt; georadius(
+  String key,
+  double lon,
+  double lat,
+  double distance, {
+  String unit = &#39;m&#39;,
+  List&lt;String&gt; options,
+  bool queuable = true,
+}) =&gt;
+    addNetworkQuery(
+      &#39;georadius&#39;,
       body: {},
-      optionalParams: {},
+      optionalParams: {
+        &#39;_id&#39;: key,
+        &#39;lon&#39;: lon,
+        &#39;lat&#39;: lat,
+        &#39;distance&#39;: distance,
+        &#39;unit&#39;: unit,
+        &#39;options&#39;: options == null ? [] : options,
+      },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt;
+        response.result.map&lt;int&gt;((hash) =&gt; hash as int).toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
