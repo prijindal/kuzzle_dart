@@ -846,6 +846,18 @@ class ImitationServer {
         response['result'] = 1;
         break;
       case 'object':
+        switch (jsonRequest['subcommand']) {
+          case 'refcount':
+            response['result'] = 1;
+            break;
+          case 'encoding':
+            response['result'] = 'embstr';
+            break;
+          case 'idletime':
+            response['result'] = 0;
+            break;
+        }
+        break;
       case 'persist':
       case 'pexpire':
       case 'pexpireat':
@@ -853,6 +865,8 @@ class ImitationServer {
       case 'pfcount':
       case 'pfmerge':
       case 'ping':
+        response['result'] = 'PONG';
+        break;
       case 'psetex':
       case 'pttl':
       case 'randomkey':

@@ -276,11 +276,17 @@ void main() {
         expect(await memoryStorage.msetnx({'mul3': 3}), 1);
       });
     });
-    group('skip', () {
-      test('object', () async {
-        expect(await memoryStorage.object('num1'), 1);
-      });
+    test('object', () async {
+      expect(await memoryStorage.object('num1', 'refcount'), 1);
+      expect(await memoryStorage.object('num1', 'encoding'), 'embstr');
+      expect(await memoryStorage.object('num1', 'idletime'), 0);
+    });
 
+    test('ping', () async {
+      expect(await memoryStorage.ping(), 'PONG');
+    });
+
+    group('persist', () {
       test('persist', () async {
         expect(await memoryStorage.persist('num1'), 1);
       });
@@ -305,10 +311,6 @@ void main() {
         expect(await memoryStorage.pfmerge('num1'), 1);
       });
 
-      test('ping', () async {
-        expect(await memoryStorage.ping('num1'), 1);
-      });
-
       test('psetex', () async {
         expect(await memoryStorage.psetex('num1'), 1);
       });
@@ -316,7 +318,8 @@ void main() {
       test('pttl', () async {
         expect(await memoryStorage.pttl('num1'), 1);
       });
-
+    }, skip: 'Not implemented yet');
+    group('skip', () {
       test('randomkey', () async {
         expect(await memoryStorage.randomkey('num1'), 1);
       });

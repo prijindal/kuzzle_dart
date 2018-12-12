@@ -794,14 +794,22 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) => response.result);
 
-  Future<int> object(String key, {bool queuable = true}) => addNetworkQuery(
+  /// Inspects the low-level properties of a key.
+  ///
+  /// /// [subcommand] can be one of refcount|encoding|idletime
+  /// returns object inspection result
+  Future<dynamic> object(String key, String subcommand,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'object',
         body: {},
         optionalParams: {
           '_id': key,
+          'subcommand': subcommand,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<int> persist(String key, {bool queuable = true}) => addNetworkQuery(
         'persist',
         body: {},
@@ -850,12 +858,10 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> ping(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Pings the memory storage database.
+  Future<String> ping({bool queuable = true}) => addNetworkQuery(
         'ping',
-        body: {},
-        optionalParams: {
-          '_id': key,
-        },
         queuable: queuable,
       ).then((response) => response.result);
   Future<int> psetex(String key, {bool queuable = true}) => addNetworkQuery(
