@@ -803,7 +803,7 @@ only if the field does not already exist.
           
 </dd>
         <dt id="sadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sadd.html">sadd</a></span><span class="signature">(<wbr><span class="parameter" id="sadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sadd.html">sadd</a></span><span class="signature">(<wbr><span class="parameter" id="sadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="sadd-param-members"><span class="type-annotation">List</span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="sadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
@@ -826,25 +826,26 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Returns the number of members stored in a set of unique values.
           
 </dd>
         <dt id="sdiff" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiff.html">sdiff</a></span><span class="signature">(<wbr><span class="parameter" id="sdiff-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sdiff-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiff.html">sdiff</a></span><span class="signature">(<wbr><span class="parameter" id="sdiff-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="sdiff-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="sdiff-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the difference between the set of unique values
+stored at key and the other provided sets.
           
 </dd>
         <dt id="sdiffstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiffstore.html">sdiffstore</a></span><span class="signature">(<wbr><span class="parameter" id="sdiffstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sdiffstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sdiffstore.html">sdiffstore</a></span><span class="signature">(<wbr><span class="parameter" id="sdiffstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="sdiffstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, </span> <span class="parameter" id="sdiffstore-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="sdiffstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Computes the difference between the set of unique values stored at key and <a href="kuzzle_dart/MemoryStorage/sdiffstore.html">[...]</a>
           
 </dd>
         <dt id="set" class="callable">
@@ -853,106 +854,113 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Creates a key holding the provided value, <a href="kuzzle_dart/MemoryStorage/set.html">[...]</a>
           
 </dd>
         <dt id="setex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/setex.html">setex</a></span><span class="signature">(<wbr><span class="parameter" id="setex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="setex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/setex.html">setex</a></span><span class="signature">(<wbr><span class="parameter" id="setex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="setex-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="setex-param-seconds"><span class="type-annotation">int</span> <span class="parameter-name">seconds</span>, {</span> <span class="parameter" id="setex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a value and a time to live (in seconds) on a key.
+If the key already exists, it is overwritten.
           
 </dd>
         <dt id="setnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/setnx.html">setnx</a></span><span class="signature">(<wbr><span class="parameter" id="setnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="setnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/setnx.html">setnx</a></span><span class="signature">(<wbr><span class="parameter" id="setnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="setnx-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="setnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a value on a key, only if it does not already exist.
           
 </dd>
         <dt id="sinter" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinter.html">sinter</a></span><span class="signature">(<wbr><span class="parameter" id="sinter-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sinter-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinter.html">sinter</a></span><span class="signature">(<wbr><span class="parameter" id="sinter-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="sinter-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the intersection of the provided sets of unique values.
           
 </dd>
         <dt id="sinterstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinterstore.html">sinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="sinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sinterstore.html">sinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="sinterstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, </span> <span class="parameter" id="sinterstore-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Computes the intersection of the provided sets of unique values <a href="kuzzle_dart/MemoryStorage/sinterstore.html">[...]</a>
           
 </dd>
         <dt id="sismember" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sismember.html">sismember</a></span><span class="signature">(<wbr><span class="parameter" id="sismember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sismember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sismember.html">sismember</a></span><span class="signature">(<wbr><span class="parameter" id="sismember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="sismember-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="sismember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Checks if member is a member of the set of unique values stored at key.
           
 </dd>
         <dt id="smembers" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/smembers.html">smembers</a></span><span class="signature">(<wbr><span class="parameter" id="smembers-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="smembers-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the members of a set of unique values.
           
 </dd>
         <dt id="smove" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/smove.html">smove</a></span><span class="signature">(<wbr><span class="parameter" id="smove-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="smove-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/smove.html">smove</a></span><span class="signature">(<wbr><span class="parameter" id="smove-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="smove-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, </span> <span class="parameter" id="smove-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="smove-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Moves a member from a set of unique values to another.
           
 </dd>
         <dt id="sort" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sort.html">sort</a></span><span class="signature">(<wbr><span class="parameter" id="sort-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sort.html">sort</a></span><span class="signature">(<wbr><span class="parameter" id="sort-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sort-param-alpha"><span class="type-annotation">String</span> <span class="parameter-name">alpha</span>: <span class="default-value">'false'</span>, </span> <span class="parameter" id="sort-param-direction"><span class="type-annotation">String</span> <span class="parameter-name">direction</span>: <span class="default-value">'ASC'</span>, </span> <span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sorts and returns elements contained in a list,
+a set of unique values or a sorted set.
+By default, sorting is numeric and elements are compared
+by their value interpreted as double precision floating point number. <a href="kuzzle_dart/MemoryStorage/sort.html">[...]</a>
           
 </dd>
         <dt id="spop" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/spop.html">spop</a></span><span class="signature">(<wbr><span class="parameter" id="spop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/spop.html">spop</a></span><span class="signature">(<wbr><span class="parameter" id="spop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="spop-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes and returns one or more elements at random
+from a set of unique values.
+If multiple elements are removed, the
+result set will be an array of removed elements, instead of a string.
           
 </dd>
         <dt id="srandmember" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/srandmember.html">srandmember</a></span><span class="signature">(<wbr><span class="parameter" id="srandmember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="srandmember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/srandmember.html">srandmember</a></span><span class="signature">(<wbr><span class="parameter" id="srandmember-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="srandmember-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="srandmember-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns one or more members of a set of unique values, at random. <a href="kuzzle_dart/MemoryStorage/srandmember.html">[...]</a>
           
 </dd>
         <dt id="srem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/srem.html">srem</a></span><span class="signature">(<wbr><span class="parameter" id="srem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="srem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/srem.html">srem</a></span><span class="signature">(<wbr><span class="parameter" id="srem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="srem-param-members"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="srem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes members from a set of unique values. <a href="kuzzle_dart/MemoryStorage/srem.html">[...]</a>
           
 </dd>
         <dt id="sscan" class="callable">
@@ -970,25 +978,27 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Returns the length of a value stored at key.
           
 </dd>
         <dt id="sunion" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunion.html">sunion</a></span><span class="signature">(<wbr><span class="parameter" id="sunion-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sunion-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunion.html">sunion</a></span><span class="signature">(<wbr><span class="parameter" id="sunion-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="sunion-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the union of sets of unique values.
           
 </dd>
         <dt id="sunionstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunionstore.html">sunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="sunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/sunionstore.html">sunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="sunionstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, </span> <span class="parameter" id="sunionstore-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="sunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Computes the union of multiple sets of unique values and
+stores it in a new set at destination key.
+If the destination key already exists, it is overwritten.
           
 </dd>
         <dt id="time" class="callable">

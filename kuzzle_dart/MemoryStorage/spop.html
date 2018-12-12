@@ -188,17 +188,27 @@
     <h1>spop method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
       <span class="name ">spop</span>
-(<wbr><span class="parameter" id="spop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="spop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="spop-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="spop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Removes and returns one or more elements at random
+from a set of unique values.
+If multiple elements are removed, the
+result set will be an array of removed elements, instead of a string.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; spop(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;dynamic&gt;&gt; spop(String key,
+        {int count = 1, bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;spop&#39;,
-      body: {},
+      body: {
+        &#39;count&#39;: count,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },

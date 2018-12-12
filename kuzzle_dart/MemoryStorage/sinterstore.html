@@ -190,19 +190,26 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">sinterstore</span>
-(<wbr><span class="parameter" id="sinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="sinterstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, </span> <span class="parameter" id="sinterstore-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="sinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Computes the intersection of the provided sets of unique values</p>
+<p>and stores the result in the destination key.
+If the destination key already exists, it is overwritten.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; sinterstore(String key, {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; sinterstore(List&lt;String&gt; keys, String destination,
+        {bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;sinterstore&#39;,
-      body: {},
-      optionalParams: {
-        &#39;_id&#39;: key,
+      body: {
+        &#39;keys&#39;: keys,
+        &#39;destination&#39;: destination,
       },
+      optionalParams: {},
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>

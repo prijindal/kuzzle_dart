@@ -188,17 +188,38 @@
     <h1>sort method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
       <span class="name ">sort</span>
-(<wbr><span class="parameter" id="sort-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="sort-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="sort-param-alpha"><span class="type-annotation">String</span> <span class="parameter-name">alpha</span>: <span class="default-value">'false'</span>, </span> <span class="parameter" id="sort-param-direction"><span class="type-annotation">String</span> <span class="parameter-name">direction</span>: <span class="default-value">'ASC'</span>, </span> <span class="parameter" id="sort-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sorts and returns elements contained in a list,
+a set of unique values or a sorted set.
+By default, sorting is numeric and elements are compared
+by their value interpreted as double precision floating point number.</p>
+<p>Optional arguments may be provided:</p><ul><li>alpha: performs an alphanumerical sort instead of a numeric one</li><li>by: instead of sorting by values directly, sorts by values contained in external keys, using a pattern completed by values of the list/set/sorted set to sort</li><li>direction: sort in ascendant or descendant order</li><li>get: instead of returning the sorted values directly, returns the
+   values contained in external keys, using patterns
+  completed by the sorted values</li><li>limit: limits the result set to a range of matching elements
+   (similar to SELECT LIMIT offset, count in SQL).
+   Format: <code>&lt;offset(int)&gt;, &lt;count(int)&gt;</code></li><li>store: instead of returning the result set,
+   stores it in a list at destination key</li></ul>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; sort(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;dynamic&gt;&gt; sort(
+  String key, {
+  String alpha = &#39;false&#39;,
+  String direction = &#39;ASC&#39;,
+  bool queuable = true,
+}) =&gt;
+    addNetworkQuery(
       &#39;sort&#39;,
-      body: {},
+      body: {
+        &#39;alpha&#39;: alpha,
+        &#39;direction&#39;: direction,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },

@@ -193,6 +193,13 @@
 (<wbr><span class="parameter" id="set-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="set-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="set-param-ex"><span class="type-annotation">int</span> <span class="parameter-name">ex</span>, </span> <span class="parameter" id="set-param-px"><span class="type-annotation">int</span> <span class="parameter-name">px</span>, </span> <span class="parameter" id="set-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>, </span> <span class="parameter" id="set-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>, </span> <span class="parameter" id="set-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
+    <section class="desc markdown">
+      <p>Creates a key holding the provided value,</p>
+<p>or overwrites it if it already exists.
+Additional options can be provided:</p><ul><li>ex: set the specified expire time, in seconds</li><li>px: set the specified expire time, in milliseconds</li><li>nx: only set the key if it does not already exist</li><li>xx: only set the key if it already exists
+Note: setting ex and px options lead to a BadRequestError as
+these options are mutually exclusive. Same thing goes for nx and xx.</li></ul>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
