@@ -350,87 +350,102 @@ void main() {
     test('renamenx', () async {
       expect(await memoryStorage.renamenx('number1', 'num1'), 1);
     });
-    group('skip', () {
+    test('setex', () async {
+      expect(await memoryStorage.setex('temp1', 2, 300), 'OK');
+    });
+
+    test('setnx', () async {
+      expect(await memoryStorage.setnx('num1', 4), 0);
+      expect(await memoryStorage.setnx('num7', 4), 1);
+    });
+    group('sets', () {
       test('sadd', () async {
-        expect(await memoryStorage.sadd('num1'), 1);
+        expect(await memoryStorage.sadd('set1', ['svalue1', 'svalue2']), 2);
       });
 
       test('scan', () async {
         expect(await memoryStorage.scan('num1'), 1);
-      });
+      }, skip: 'Not implemented yet');
 
       test('scard', () async {
-        expect(await memoryStorage.scard('num1'), 1);
+        expect(await memoryStorage.scard('set1'), 2);
       });
 
       test('sdiff', () async {
-        expect(await memoryStorage.sdiff('num1'), 1);
+        expect(await memoryStorage.sadd('set2', ['svalue3', 'svalue4']), 2);
+        expect(await memoryStorage.sadd('set3', ['svalue1', 'svalue3']), 2);
+        expect(await memoryStorage.sdiff('set1', ['set2']),
+            ['svalue1', 'svalue2']);
+        expect(await memoryStorage.sdiff('set1', ['set3']), ['svalue2']);
       });
 
       test('sdiffstore', () async {
-        expect(await memoryStorage.sdiffstore('num1'), 1);
-      });
-
-      test('setex', () async {
-        expect(await memoryStorage.setex('num1'), 1);
-      });
-
-      test('setnx', () async {
-        expect(await memoryStorage.setnx('num1'), 1);
+        expect(await memoryStorage.sdiffstore('set1', ['set3'], 'set4'), 1);
       });
 
       test('sinter', () async {
-        expect(await memoryStorage.sinter('num1'), 1);
+        expect(await memoryStorage.sinter(['set1', 'set2']), []);
+        expect(await memoryStorage.sinter(['set1', 'set3']), ['svalue1']);
       });
 
       test('sinterstore', () async {
-        expect(await memoryStorage.sinterstore('num1'), 1);
+        expect(await memoryStorage.sinterstore(['set1', 'set2'], 'set5'), 0);
       });
 
       test('sismember', () async {
-        expect(await memoryStorage.sismember('num1'), 1);
+        expect(await memoryStorage.sismember('set1', 'svalue3'), 0);
+        expect(await memoryStorage.sismember('set1', 'svalue1'), 1);
       });
 
       test('smembers', () async {
-        expect(await memoryStorage.smembers('num1'), 1);
+        expect(await memoryStorage.smembers('set1'), ['svalue1', 'svalue2']);
       });
 
       test('smove', () async {
-        expect(await memoryStorage.smove('num1'), 1);
+        expect(await memoryStorage.smove('set4', 'svalue2', 'set5'), 1);
       });
 
       test('sort', () async {
-        expect(await memoryStorage.sort('num1'), 1);
+        expect(await memoryStorage.sort('set1', direction: 'DESC'),
+            ['svalue2', 'svalue1']);
       });
 
       test('spop', () async {
-        expect(await memoryStorage.spop('num1'), 1);
+        final value = await memoryStorage.spop('set1');
+        expect(
+            ['svalue1', 'svalue2'].indexOf(value[0]), greaterThanOrEqualTo(0));
       });
 
       test('srandmember', () async {
-        expect(await memoryStorage.srandmember('num1'), 1);
+        final value = await memoryStorage.srandmember('set1');
+        expect(['svalue1', 'svalue2'].indexOf(value), greaterThanOrEqualTo(0));
       });
 
       test('srem', () async {
-        expect(await memoryStorage.srem('num1'), 1);
+        expect(await memoryStorage.srem('set5', ['svalue2']), 1);
       });
 
       test('sscan', () async {
-        expect(await memoryStorage.sscan('num1'), 1);
-      });
+        expect(await memoryStorage.sscan('set1'), 1);
+      }, skip: 'Not implemented yet');
 
       test('strlen', () async {
         expect(await memoryStorage.strlen('num1'), 1);
       });
 
       test('sunion', () async {
-        expect(await memoryStorage.sunion('num1'), 1);
+        expect(await memoryStorage.sadd('set1', ['svalue1', 'svalue2']), 1);
+        expect(await memoryStorage.sadd('set2', ['svalue3', 'svalue4']), 0);
+        expect(await memoryStorage.sadd('set3', ['svalue1', 'svalue3']), 0);
+        expect(await memoryStorage.sunion(['set1', 'set3']),
+            containsAll(['svalue1', 'svalue3', 'svalue2']));
       });
 
       test('sunionstore', () async {
-        expect(await memoryStorage.sunionstore('num1'), 1);
+        expect(await memoryStorage.sunionstore(['set1', 'set3'], 'set6'), 3);
       });
-
+    });
+    group('skip', () {
       test('time', () async {
         expect(await memoryStorage.time('num1'), 1);
       });

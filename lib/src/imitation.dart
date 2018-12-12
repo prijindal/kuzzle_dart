@@ -940,30 +940,153 @@ class ImitationServer {
         response['result'] = list.length;
         break;
       case 'sadd':
+        Set set;
+        if (imitationDatabase.cache.containsKey(jsonRequest['_id']) &&
+            imitationDatabase.cache[jsonRequest['_id']] != null) {
+          set = imitationDatabase.cache[jsonRequest['_id']];
+        } else {
+          set = Set();
+        }
+        var count = 0;
+        for (var member in jsonRequest['body']['members']) {
+          if (!set.contains(member)) {
+            set.add(member);
+            count += 1;
+          }
+        }
+        imitationDatabase.cache[jsonRequest['_id']] = set;
+        response['result'] = count;
+        break;
       case 'scan':
       case 'scard':
+        response['result'] =
+            (imitationDatabase.cache[jsonRequest['_id']] as Set).length;
+        break;
       case 'sdiff':
+        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        for (var key in jsonRequest['keys']) {
+          mainSet = mainSet.difference(imitationDatabase.cache[key] as Set);
+        }
+        response['result'] = mainSet.toList();
+        break;
       case 'sdiffstore':
+        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        for (var key in jsonRequest['body']['keys']) {
+          mainSet = mainSet.difference(imitationDatabase.cache[key] as Set);
+        }
+        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
+        response['result'] = mainSet.length;
+        break;
       case 'set':
         imitationDatabase.cache[jsonRequest['_id']] =
             jsonRequest['body']['value'];
         response['result'] = 'OK';
         break;
       case 'setex':
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['value'];
+        response['result'] = 'OK';
+        break;
       case 'setnx':
+        if (imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          response['result'] = 0;
+          break;
+        }
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['value'];
+        response['result'] = 1;
+        break;
       case 'sinter':
+        var mainSet;
+        for (var key in jsonRequest['keys']) {
+          mainSet ??= imitationDatabase.cache[key];
+          mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
+        }
+        response['result'] = mainSet.toList();
+        break;
       case 'sinterstore':
+        var mainSet;
+        for (var key in jsonRequest['body']['keys']) {
+          mainSet ??= imitationDatabase.cache[key];
+          mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
+        }
+        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
+        response['result'] = mainSet.length;
+        break;
       case 'sismember':
+        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        final doesContains = mainSet.contains(jsonRequest['member']);
+        response['result'] = doesContains ? 1 : 0;
+        break;
       case 'smembers':
+        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        response['result'] = mainSet.toList();
+        break;
       case 'smove':
+        (imitationDatabase.cache[jsonRequest['_id']] as Set)
+            .remove(jsonRequest['body']['member']);
+        (imitationDatabase.cache[jsonRequest['body']['destination']] as Set)
+            .add(jsonRequest['body']['member']);
+        response['result'] = 1;
+        break;
       case 'sort':
+        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        var mainList = mainSet.toList();
+        mainList.sort();
+        if (jsonRequest['body']['direction'] == 'DESC') {
+          mainList = mainList.reversed.toList();
+        }
+        response['result'] = mainList;
+        break;
       case 'spop':
+        final removedList = [];
+        for (var i = 0; i < jsonRequest['body']['count']; i++) {
+          final randKey = Random().nextInt(
+              (imitationDatabase.cache[jsonRequest['_id']] as Set).length);
+          var deleteValue = (imitationDatabase.cache[jsonRequest['_id']] as Set)
+              .toList()[randKey];
+          removedList.add(deleteValue);
+          (imitationDatabase.cache[jsonRequest['_id']] as Set)
+              .remove(deleteValue);
+        }
+        response['result'] = removedList;
+        break;
       case 'srandmember':
+        final randKey = Random().nextInt(
+            (imitationDatabase.cache[jsonRequest['_id']] as Set).length);
+        response['result'] =
+            (imitationDatabase.cache[jsonRequest['_id']] as Set)
+                .toList()[randKey];
+        break;
       case 'srem':
+        var count = 0;
+        for (var member in jsonRequest['body']['members']) {
+          (imitationDatabase.cache[jsonRequest['_id']] as Set).remove(member);
+          count += 1;
+        }
+        response['result'] = count;
+        break;
       case 'sscan':
       case 'strlen':
+        response['result'] = 1;
+        break;
       case 'sunion':
+        Set mainSet;
+        for (var key in jsonRequest['keys']) {
+          mainSet ??= imitationDatabase.cache[key];
+          mainSet = mainSet.union(imitationDatabase.cache[key] as Set);
+        }
+        response['result'] = mainSet.toList();
+        break;
       case 'sunionstore':
+        Set mainSet;
+        for (var key in jsonRequest['body']['keys']) {
+          mainSet ??= imitationDatabase.cache[key];
+          mainSet = mainSet.union(imitationDatabase.cache[key] as Set);
+        }
+        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
+        response['result'] = mainSet.length;
+        break;
       case 'time':
       case 'touch':
       case 'ttl':

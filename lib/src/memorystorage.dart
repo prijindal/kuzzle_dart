@@ -1026,14 +1026,18 @@ class MemoryStorage extends KuzzleObject {
   /// Adds members to a set of unique values stored at key.
   ///
   /// If the key does not exist, it is created beforehand.
-  Future<int> sadd(String key, {bool queuable = true}) => addNetworkQuery(
+  Future<int> sadd(String key, List<dynamic> members, {bool queuable = true}) =>
+      addNetworkQuery(
         'sadd',
-        body: {},
+        body: {
+          'members': members,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<int> scan(String key, {bool queuable = true}) => addNetworkQuery(
         'scan',
         body: {},
@@ -1042,6 +1046,8 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the number of members stored in a set of unique values.
   Future<int> scard(String key, {bool queuable = true}) => addNetworkQuery(
         'scard',
         body: {},
@@ -1050,22 +1056,50 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sdiff(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the difference between the set of unique values
+  /// stored at key and the other provided sets.
+  Future<List<dynamic>> sdiff(String key, List<String> keys,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'sdiff',
         body: {},
         optionalParams: {
           '_id': key,
+          'keys': keys,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sdiffstore(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Computes the difference between the set of unique values stored at key and
+  ///
+  /// the other provided sets, and stores the result in the
+  /// key stored at destination.
+  ///If the destination key already exists, it is overwritten.
+  Future<int> sdiffstore(String key, List<String> keys, String destination,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'sdiffstore',
-        body: {},
+        body: {
+          'keys': keys,
+          'destination': destination,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Creates a key holding the provided value,
+  ///
+  /// or overwrites it if it already exists.
+  /// Additional options can be provided:
+  ///   * ex: set the specified expire time, in seconds
+  ///   * px: set the specified expire time, in milliseconds
+  ///   * nx: only set the key if it does not already exist
+  ///   * xx: only set the key if it already exists
+  /// Note: setting ex and px options lead to a BadRequestError as
+  /// these options are mutually exclusive. Same thing goes for nx and xx.
   Future<String> set(String key, dynamic value,
           {int ex, int px, bool nx, bool xx, bool queuable = true}) =>
       addNetworkQuery(
@@ -1082,48 +1116,78 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> setex(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets a value and a time to live (in seconds) on a key.
+  /// If the key already exists, it is overwritten.
+  Future<String> setex(String key, dynamic value, int seconds,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'setex',
-        body: {},
+        body: {
+          'value': value,
+          'seconds': seconds,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> setnx(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets a value on a key, only if it does not already exist.
+  Future<int> setnx(String key, dynamic value, {bool queuable = true}) =>
+      addNetworkQuery(
         'setnx',
-        body: {},
+        body: {
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sinter(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the intersection of the provided sets of unique values.
+  Future<List<dynamic>> sinter(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'sinter',
         body: {},
         optionalParams: {
-          '_id': key,
+          'keys': keys,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sinterstore(String key, {bool queuable = true}) =>
+
+  /// Computes the intersection of the provided sets of unique values
+  ///
+  /// and stores the result in the destination key.
+  /// If the destination key already exists, it is overwritten.
+  Future<int> sinterstore(List<String> keys, String destination,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'sinterstore',
-        body: {},
-        optionalParams: {
-          '_id': key,
+        body: {
+          'keys': keys,
+          'destination': destination,
         },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sismember(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Checks if member is a member of the set of unique values stored at key.
+  Future<int> sismember(String key, dynamic member, {bool queuable = true}) =>
+      addNetworkQuery(
         'sismember',
         body: {},
         optionalParams: {
           '_id': key,
+          'member': member,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> smembers(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the members of a set of unique values.
+  Future<List<dynamic>> smembers(String key, {bool queuable = true}) =>
+      addNetworkQuery(
         'smembers',
         body: {},
         optionalParams: {
@@ -1131,42 +1195,104 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> smove(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Moves a member from a set of unique values to another.
+  Future<int> smove(String key, dynamic member, String destination,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'smove',
-        body: {},
+        body: {
+          'member': member,
+          'destination': destination,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sort(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sorts and returns elements contained in a list,
+  /// a set of unique values or a sorted set.
+  /// By default, sorting is numeric and elements are compared
+  /// by their value interpreted as double precision floating point number.
+  ///
+  /// Optional arguments may be provided:
+  ///
+  ///   * alpha: performs an alphanumerical sort instead of a numeric one
+  ///   * by: instead of sorting by values directly, sorts by values contained in external keys, using a pattern completed by values of the list/set/sorted set to sort
+  ///   * direction: sort in ascendant or descendant order
+  ///   * get: instead of returning the sorted values directly, returns the
+  ///    values contained in external keys, using patterns
+  ///   completed by the sorted values
+  ///   * limit: limits the result set to a range of matching elements
+  ///    (similar to SELECT LIMIT offset, count in SQL).
+  ///    Format: [<offset(int)>, <count(int)>]
+  ///   * store: instead of returning the result set,
+  ///    stores it in a list at destination key
+  Future<List<dynamic>> sort(
+    String key, {
+    String alpha = 'false',
+    String direction = 'ASC',
+    bool queuable = true,
+  }) =>
+      addNetworkQuery(
         'sort',
-        body: {},
+        body: {
+          'alpha': alpha,
+          'direction': direction,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> spop(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes and returns one or more elements at random
+  /// from a set of unique values.
+  /// If multiple elements are removed, the
+  /// result set will be an array of removed elements, instead of a string.
+  Future<List<dynamic>> spop(String key,
+          {int count = 1, bool queuable = true}) =>
+      addNetworkQuery(
         'spop',
-        body: {},
+        body: {
+          'count': count,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> srandmember(String key, {bool queuable = true}) =>
+
+  /// Returns one or more members of a set of unique values, at random.
+  ///
+  /// If count is provided and is positive, the returned values are unique.
+  /// If count is negative, a set member can be returned multiple times.
+  ///
+  /// If more than 1 member is returned,
+  /// the result set will be an array of values instead of a string.
+  Future<String> srandmember(String key,
+          {int count = 1, bool queuable = true}) =>
       addNetworkQuery(
         'srandmember',
-        body: {},
+        body: {
+          'count': count,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> srem(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes members from a set of unique values.
+  ///
+  /// returns number of removed members
+  Future<int> srem(String key, List<String> members, {bool queuable = true}) =>
+      addNetworkQuery(
         'srem',
-        body: {},
+        body: {
+          'members': members,
+        },
         optionalParams: {
           '_id': key,
         },
@@ -1180,6 +1306,8 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the length of a value stored at key.
   Future<int> strlen(String key, {bool queuable = true}) => addNetworkQuery(
         'strlen',
         body: {},
@@ -1188,21 +1316,30 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sunion(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the union of sets of unique values.
+  Future<List<dynamic>> sunion(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'sunion',
         body: {},
         optionalParams: {
-          '_id': key,
+          'keys': keys,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> sunionstore(String key, {bool queuable = true}) =>
+
+  /// Computes the union of multiple sets of unique values and
+  /// stores it in a new set at destination key.
+  /// If the destination key already exists, it is overwritten.
+  Future<int> sunionstore(List<String> keys, String destination,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'sunionstore',
-        body: {},
-        optionalParams: {
-          '_id': key,
+        body: {
+          'keys': keys,
+          'destination': destination,
         },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
   Future<int> time(String key, {bool queuable = true}) => addNetworkQuery(
