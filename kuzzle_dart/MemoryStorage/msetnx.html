@@ -190,18 +190,29 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">msetnx</span>
-(<wbr><span class="parameter" id="msetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="msetnx-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sets the provided keys to their respective values,</p>
+<p>only if they do not exist.
+If a key exists, then the whole operation is aborted and no key is set.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; msetnx(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; msetnx(Map&lt;String, dynamic&gt; entries, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;msetnx&#39;,
-      body: {},
-      optionalParams: {
-        &#39;_id&#39;: key,
+      body: {
+        &#39;entries&#39;: entries.keys
+            .map((key) =&gt; {
+                  &#39;key&#39;: key,
+                  &#39;value&#39;: entries[key],
+                })
+            .toList(),
       },
+      optionalParams: {},
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>

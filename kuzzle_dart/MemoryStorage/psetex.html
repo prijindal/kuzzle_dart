@@ -188,17 +188,27 @@
     <h1>psetex method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
       <span class="name ">psetex</span>
-(<wbr><span class="parameter" id="psetex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="psetex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="psetex-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="psetex-param-milliseconds"><span class="type-annotation">int</span> <span class="parameter-name">milliseconds</span>, {</span> <span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sets a key with the provided value,and an expiration delay</p>
+<p>expressed in milliseconds.
+If the key does not exist, it is created beforehand.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; psetex(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; psetex(String key, dynamic value, int milliseconds,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;psetex&#39;,
-      body: {},
+      body: {
+        &#39;value&#39;: value,
+        &#39;milliseconds&#39;: milliseconds,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },

@@ -623,39 +623,39 @@ only if the field does not already exist.
           
 </dd>
         <dt id="mget" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/mget.html">mget</a></span><span class="signature">(<wbr><span class="parameter" id="mget-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="mget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/mget.html">mget</a></span><span class="signature">(<wbr><span class="parameter" id="mget-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="mget-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the values of the provided keys.
           
 </dd>
         <dt id="mset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/mset.html">mset</a></span><span class="signature">(<wbr><span class="parameter" id="mset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/mset.html">mset</a></span><span class="signature">(<wbr><span class="parameter" id="mset-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets the provided keys to their respective values. <a href="kuzzle_dart/MemoryStorage/mset.html">[...]</a>
           
 </dd>
         <dt id="msetnx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/msetnx.html">msetnx</a></span><span class="signature">(<wbr><span class="parameter" id="msetnx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/msetnx.html">msetnx</a></span><span class="signature">(<wbr><span class="parameter" id="msetnx-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="msetnx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets the provided keys to their respective values, <a href="kuzzle_dart/MemoryStorage/msetnx.html">[...]</a>
           
 </dd>
         <dt id="object" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/object.html">object</a></span><span class="signature">(<wbr><span class="parameter" id="object-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="object-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/object.html">object</a></span><span class="signature">(<wbr><span class="parameter" id="object-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="object-param-subcommand"><span class="type-annotation">String</span> <span class="parameter-name">subcommand</span>, {</span> <span class="parameter" id="object-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future</span>
           </span>
           </dt>
         <dd>
-          
+          Inspects the low-level properties of a key. <a href="kuzzle_dart/MemoryStorage/object.html">[...]</a>
           
 </dd>
         <dt id="persist" class="callable">
@@ -664,70 +664,70 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Removes the expiration delay or timestamp from a key, <a href="kuzzle_dart/MemoryStorage/persist.html">[...]</a>
           
 </dd>
         <dt id="pexpire" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpire.html">pexpire</a></span><span class="signature">(<wbr><span class="parameter" id="pexpire-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pexpire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpire.html">pexpire</a></span><span class="signature">(<wbr><span class="parameter" id="pexpire-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="pexpire-param-milliseconds"><span class="type-annotation">int</span> <span class="parameter-name">milliseconds</span>, {</span> <span class="parameter" id="pexpire-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a timeout (in milliseconds) on a key. <a href="kuzzle_dart/MemoryStorage/pexpire.html">[...]</a>
           
 </dd>
         <dt id="pexpireat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpireat.html">pexpireat</a></span><span class="signature">(<wbr><span class="parameter" id="pexpireat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pexpireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pexpireat.html">pexpireat</a></span><span class="signature">(<wbr><span class="parameter" id="pexpireat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="pexpireat-param-timestamp"><span class="type-annotation">int</span> <span class="parameter-name">timestamp</span>, {</span> <span class="parameter" id="pexpireat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets an expiration timestamp on a key. <a href="kuzzle_dart/MemoryStorage/pexpireat.html">[...]</a>
           
 </dd>
         <dt id="pfadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfadd.html">pfadd</a></span><span class="signature">(<wbr><span class="parameter" id="pfadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfadd.html">pfadd</a></span><span class="signature">(<wbr><span class="parameter" id="pfadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="pfadd-param-elements"><span class="type-annotation">List</span> <span class="parameter-name">elements</span>, {</span> <span class="parameter" id="pfadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Adds elements to a HyperLogLog data structure.
           
 </dd>
         <dt id="pfcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfcount.html">pfcount</a></span><span class="signature">(<wbr><span class="parameter" id="pfcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfcount.html">pfcount</a></span><span class="signature">(<wbr><span class="parameter" id="pfcount-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="pfcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the probabilistic cardinality of a HyperLogLog data structure, <a href="kuzzle_dart/MemoryStorage/pfcount.html">[...]</a>
           
 </dd>
         <dt id="pfmerge" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfmerge.html">pfmerge</a></span><span class="signature">(<wbr><span class="parameter" id="pfmerge-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="pfmerge-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/pfmerge.html">pfmerge</a></span><span class="signature">(<wbr><span class="parameter" id="pfmerge-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="pfmerge-param-sources"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">sources</span>, {</span> <span class="parameter" id="pfmerge-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Merges multiple HyperLogLog data structures into an unique HyperLogLog <a href="kuzzle_dart/MemoryStorage/pfmerge.html">[...]</a>
           
 </dd>
         <dt id="ping" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/ping.html">ping</a></span><span class="signature">(<wbr><span class="parameter" id="ping-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="ping-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/ping.html">ping</a></span><span class="signature">(<wbr>{<span class="parameter" id="ping-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Pings the memory storage database.
           
 </dd>
         <dt id="psetex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/psetex.html">psetex</a></span><span class="signature">(<wbr><span class="parameter" id="psetex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/psetex.html">psetex</a></span><span class="signature">(<wbr><span class="parameter" id="psetex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="psetex-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="psetex-param-milliseconds"><span class="type-annotation">int</span> <span class="parameter-name">milliseconds</span>, {</span> <span class="parameter" id="psetex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets a key with the provided value,and an expiration delay <a href="kuzzle_dart/MemoryStorage/psetex.html">[...]</a>
           
 </dd>
         <dt id="pttl" class="callable">
@@ -736,7 +736,7 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Returns the remaining time to live of a key, in milliseconds.
           
 </dd>
         <dt id="randomkey" class="callable">

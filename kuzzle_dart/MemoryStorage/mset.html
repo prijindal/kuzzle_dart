@@ -188,20 +188,31 @@
     <h1>mset method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
       <span class="name ">mset</span>
-(<wbr><span class="parameter" id="mset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="mset-param-entries"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">entries</span>, {</span> <span class="parameter" id="mset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sets the provided keys to their respective values.</p>
+<p>If a key does not exist, it is created.
+Otherwise, the key's value is overwritten.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; mset(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; mset(Map&lt;String, dynamic&gt; entries, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;mset&#39;,
-      body: {},
-      optionalParams: {
-        &#39;_id&#39;: key,
+      body: {
+        &#39;entries&#39;: entries.keys
+            .map((key) =&gt; {
+                  &#39;key&#39;: key,
+                  &#39;value&#39;: entries[key],
+                })
+            .toList(),
       },
+      optionalParams: {},
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>
