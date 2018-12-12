@@ -605,7 +605,7 @@ only if the field does not already exist.
           
 </dd>
         <dt id="lset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lset-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="lset-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lset-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="lset-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
@@ -740,66 +740,66 @@ only if the field does not already exist.
           
 </dd>
         <dt id="randomkey" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/randomkey.html">randomkey</a></span><span class="signature">(<wbr><span class="parameter" id="randomkey-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="randomkey-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/randomkey.html">randomkey</a></span><span class="signature">(<wbr>{<span class="parameter" id="randomkey-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns a random key from the memory storage.
           
 </dd>
         <dt id="rename" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rename.html">rename</a></span><span class="signature">(<wbr><span class="parameter" id="rename-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rename-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rename.html">rename</a></span><span class="signature">(<wbr><span class="parameter" id="rename-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="rename-param-newkey"><span class="type-annotation">String</span> <span class="parameter-name">newkey</span>, {</span> <span class="parameter" id="rename-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Renames a key to newkey. If newkey already exists, it is overwritten.
           
 </dd>
         <dt id="renamenx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/renamenx.html">renamenx</a></span><span class="signature">(<wbr><span class="parameter" id="renamenx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="renamenx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/renamenx.html">renamenx</a></span><span class="signature">(<wbr><span class="parameter" id="renamenx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="renamenx-param-newkey"><span class="type-annotation">String</span> <span class="parameter-name">newkey</span>, {</span> <span class="parameter" id="renamenx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Renames a key to newkey, only if newkey does not already exist.
           
 </dd>
         <dt id="rpop" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/rpop.html">rpop</a></span><span class="signature">(<wbr><span class="parameter" id="rpop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes the last element of a list and returns it.
           
 </dd>
         <dt id="rpoplpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpoplpush.html">rpoplpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpoplpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpoplpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpoplpush.html">rpoplpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpoplpush-param-source"><span class="type-annotation">String</span> <span class="parameter-name">source</span>, </span> <span class="parameter" id="rpoplpush-param-destination"><span class="type-annotation">String</span> <span class="parameter-name">destination</span>, {</span> <span class="parameter" id="rpoplpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future</span>
           </span>
           </dt>
         <dd>
-          
+          Removes the last element of the list at source and <a href="kuzzle_dart/MemoryStorage/rpoplpush.html">[...]</a>
           
 </dd>
         <dt id="rpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpush.html">rpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpush.html">rpush</a></span><span class="signature">(<wbr><span class="parameter" id="rpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="rpush-param-values"><span class="type-annotation">List</span> <span class="parameter-name">values</span>, {</span> <span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Appends the specified values at the end of a list. <a href="kuzzle_dart/MemoryStorage/rpush.html">[...]</a>
           
 </dd>
         <dt id="rpushx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpushx.html">rpushx</a></span><span class="signature">(<wbr><span class="parameter" id="rpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/rpushx.html">rpushx</a></span><span class="signature">(<wbr><span class="parameter" id="rpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="rpushx-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="rpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Appends the specified value at the end of a list, <a href="kuzzle_dart/MemoryStorage/rpushx.html">[...]</a>
           
 </dd>
         <dt id="sadd" class="callable">

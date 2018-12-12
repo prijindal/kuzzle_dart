@@ -190,15 +190,24 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">rpush</span>
-(<wbr><span class="parameter" id="rpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="rpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="rpush-param-values"><span class="type-annotation">List</span> <span class="parameter-name">values</span>, {</span> <span class="parameter" id="rpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Appends the specified values at the end of a list.</p>
+<p>If the key does not exist, it is created holding an empty list
+before performing the operation.
+returns updated number of elements in the list</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; rpush(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; rpush(String key, List&lt;dynamic&gt; values, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;rpush&#39;,
-      body: {},
+      body: {
+        &#39;values&#39;: values,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },
