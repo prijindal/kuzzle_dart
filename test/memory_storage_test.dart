@@ -1,6 +1,6 @@
 import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
-import 'package:kuzzle_dart/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle_dart.dart';
 
 import 'test_helpers.dart';
 

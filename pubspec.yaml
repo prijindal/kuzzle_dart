@@ -1,4 +1,4 @@
-name: kuzzle_dart
+name: kuzzle
 version: 0.0.1
 
 description: A library to communicate with kuzzle API

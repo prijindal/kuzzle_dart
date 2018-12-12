@@ -667,18 +667,18 @@ class ImitationServer {
             imitationDatabase.cache[jsonRequest['_id']].keys.length;
         break;
       case 'hmget':
-        final result = jsonRequest['fields'].map((field) {
-          return (imitationDatabase.cache[jsonRequest['_id']]
-              as Map<String, dynamic>)[field];
-        }).toList();
+        final result = jsonRequest['fields']
+            .map((field) => (imitationDatabase.cache[jsonRequest['_id']]
+                as Map<String, dynamic>)[field])
+            .toList();
         response['result'] = result;
         break;
       case 'hmset':
-        jsonRequest['body']['entries'].map((entry) {
-          return (imitationDatabase.cache[jsonRequest['_id']]
-                  as Map<String, dynamic>)[entry['field']] =
-              entry['value'].toString();
-        }).toList();
+        jsonRequest['body']['entries']
+            .map((entry) => (imitationDatabase.cache[jsonRequest['_id']]
+                    as Map<String, dynamic>)[entry['field']] =
+                entry['value'].toString())
+            .toList();
         response['result'] = 'OK';
         break;
       case 'hscan':

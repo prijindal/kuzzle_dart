@@ -1,5 +1,5 @@
 import 'dart:io' show exit;
-import 'package:kuzzle_dart/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle_dart.dart';
 
 const String HOST = 'localhost';
 const String DEFAULT_INDEX = 'testindex';

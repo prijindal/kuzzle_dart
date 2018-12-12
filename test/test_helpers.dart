@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:kuzzle_dart/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle_dart.dart';
 import 'package:web_socket_channel/io.dart';
 
-import 'package:kuzzle_dart/src/imitation.dart';
+import 'package:kuzzle/src/imitation.dart';
 
 void onServerTransformData(WebSocket webSocket) {
   final imitationServer = ImitationServer();

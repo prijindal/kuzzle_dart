@@ -9,7 +9,7 @@ It uses websocket to do the same.
 ## Getting Started
 
 ```dart
-import 'package:kuzzle_dart/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle_dart.dart';
 final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
 
 void setup() async {
