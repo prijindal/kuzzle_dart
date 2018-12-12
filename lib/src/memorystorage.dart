@@ -714,7 +714,7 @@ class MemoryStorage extends KuzzleObject {
   /// Sets the list element at index with the provided value.
   ///
   /// An error is returned for out of range indexes.
-  Future<String> lset(String key, dynamic value, int index,
+  Future<String> lset(String key, int index, dynamic value,
           {bool queuable = true}) =>
       addNetworkQuery(
         'lset',
@@ -931,31 +931,43 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> randomkey(String key, {bool queuable = true}) => addNetworkQuery(
-        'append',
+
+  /// Returns a random key from the memory storage.
+  Future<String> randomkey({bool queuable = true}) => addNetworkQuery(
+        'randomkey',
         body: {},
-        optionalParams: {
-          '_id': key,
-        },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> rename(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Renames a key to newkey. If newkey already exists, it is overwritten.
+  Future<String> rename(String key, String newkey, {bool queuable = true}) =>
+      addNetworkQuery(
         'rename',
-        body: {},
+        body: {
+          'newkey': newkey,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> renamenx(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Renames a key to newkey, only if newkey does not already exist.
+  Future<int> renamenx(String key, String newkey, {bool queuable = true}) =>
+      addNetworkQuery(
         'renamenx',
-        body: {},
+        body: {
+          'newkey': newkey,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> rpop(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes the last element of a list and returns it.
+  Future<String> rpop(String key, {bool queuable = true}) => addNetworkQuery(
         'rpop',
         body: {},
         optionalParams: {
@@ -963,25 +975,48 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> rpoplpush(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes the last element of the list at source and
+  ///
+  /// pushes it back at the start of the list at destination.
+  Future<dynamic> rpoplpush(String source, String destination,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'rpoplpush',
-        body: {},
-        optionalParams: {
-          '_id': key,
+        body: {
+          'source': source,
+          'destination': destination,
         },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> rpush(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Appends the specified values at the end of a list.
+  ///
+  /// If the key does not exist, it is created holding an empty list
+  /// before performing the operation.
+  /// returns updated number of elements in the list
+  Future<int> rpush(String key, List<dynamic> values, {bool queuable = true}) =>
+      addNetworkQuery(
         'rpush',
-        body: {},
+        body: {
+          'values': values,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> rpushx(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Appends the specified value at the end of a list,
+  ///
+  /// only if the key already exists and if it holds a list.
+  Future<int> rpushx(String key, dynamic value, {bool queuable = true}) =>
+      addNetworkQuery(
         'rpushx',
-        body: {},
+        body: {
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },

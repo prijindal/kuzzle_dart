@@ -818,7 +818,7 @@ class ImitationServer {
       case 'ltrim':
         final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
         list.removeRange(
-            jsonRequest['body']['start'], jsonRequest['body']['stop']);
+            jsonRequest['body']['start'] - 1, jsonRequest['body']['stop'] - 1);
         response['result'] = 'OK';
         break;
       case 'mget':
@@ -892,9 +892,40 @@ class ImitationServer {
       case 'rename':
       case 'renamenx':
       case 'rpop':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] = list.removeLast().toString();
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        break;
       case 'rpoplpush':
+        final List<dynamic> list =
+            imitationDatabase.cache[jsonRequest['body']['source']];
+        final last = list.removeLast();
+        if (!imitationDatabase.cache
+            .containsKey(jsonRequest['body']['destination'])) {
+          imitationDatabase.cache[jsonRequest['body']['destination']] = [];
+        }
+        (imitationDatabase.cache[jsonRequest['body']['destination']]
+                as List<dynamic>)
+            .insert(0, last);
+        response['result'] = last.toString();
+        break;
       case 'rpush':
+        List<dynamic> list;
+        if (imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          list = imitationDatabase.cache[jsonRequest['_id']];
+        } else {
+          list = <dynamic>[];
+        }
+        list.insertAll(list.length, jsonRequest['body']['values']);
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = list.length;
+        break;
       case 'rpushx':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        list.insert(list.length, jsonRequest['body']['value']);
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = list.length;
+        break;
       case 'sadd':
       case 'scan':
       case 'scard':

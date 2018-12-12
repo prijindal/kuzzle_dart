@@ -256,11 +256,27 @@ void main() {
       });
 
       test('lset', () async {
-        expect(await memoryStorage.lset('list1', 4, 2), 'OK');
+        expect(await memoryStorage.lset('list1', 2, 4), 'OK');
       });
 
       test('ltrim', () async {
         expect(await memoryStorage.ltrim('list1', 1, 2), 'OK');
+      });
+
+      test('rpop', () async {
+        expect(await memoryStorage.rpop('list1'), '4');
+      });
+
+      test('rpoplpush', () async {
+        expect(await memoryStorage.rpoplpush('list1', 'list2'), '55');
+      });
+
+      test('rpush', () async {
+        expect(await memoryStorage.rpush('list1', [2, 3]), 2);
+      });
+
+      test('rpushx', () async {
+        expect(await memoryStorage.rpushx('list1', 4), 3);
       });
     });
     group('multiple', () {
@@ -323,31 +339,17 @@ void main() {
     });
     group('skip', () {
       test('randomkey', () async {
-        expect(await memoryStorage.randomkey('num1'), 1);
+        final keys = await memoryStorage.keys();
+        final randomKey = await memoryStorage.randomkey();
+        expect(keys.indexOf(randomKey), greaterThanOrEqualTo(0));
       });
 
       test('rename', () async {
-        expect(await memoryStorage.rename('num1'), 1);
+        expect(await memoryStorage.rename('num1', 'number1'), 'OK');
       });
 
       test('renamenx', () async {
-        expect(await memoryStorage.renamenx('num1'), 1);
-      });
-
-      test('rpop', () async {
-        expect(await memoryStorage.rpop('num1'), 1);
-      });
-
-      test('rpoplpush', () async {
-        expect(await memoryStorage.rpoplpush('num1'), 1);
-      });
-
-      test('rpush', () async {
-        expect(await memoryStorage.rpush('num1'), 1);
-      });
-
-      test('rpushx', () async {
-        expect(await memoryStorage.rpushx('num1'), 1);
+        expect(await memoryStorage.renamenx('number1', 'num1'), 1);
       });
 
       test('sadd', () async {
