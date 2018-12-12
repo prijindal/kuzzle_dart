@@ -532,9 +532,16 @@ class ImitationServer {
         response['result'] = existsCount;
         break;
       case 'expire':
+        Future.delayed(
+            Duration(
+              seconds: jsonRequest['body']['seconds'],
+            ), () {
+          imitationDatabase.cache.remove(jsonRequest['_id']);
+        });
         response['result'] = 1;
         break;
       case 'expireat':
+        imitationDatabase.cache.remove(jsonRequest['_id']);
         response['result'] = 1;
         break;
       case 'flushdb':
@@ -721,9 +728,30 @@ class ImitationServer {
         break;
         break;
       case 'incr':
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']];
+        var prevValueInt = int.parse(prevValue);
+        prevValueInt += 1;
+        imitationDatabase.cache[jsonRequest['_id']] = prevValueInt.toString();
+        response['result'] = prevValueInt;
+        break;
       case 'incrby':
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']];
+        var prevValueInt = int.parse(prevValue);
+        prevValueInt += jsonRequest['body']['value'];
+        imitationDatabase.cache[jsonRequest['_id']] = prevValueInt.toString();
+        response['result'] = prevValueInt;
+        break;
       case 'incrbyfloat':
+        final String prevValue = imitationDatabase.cache[jsonRequest['_id']];
+        var prevValueDouble = double.parse(prevValue);
+        prevValueDouble += jsonRequest['body']['value'];
+        imitationDatabase.cache[jsonRequest['_id']] =
+            prevValueDouble.toString();
+        response['result'] = prevValueDouble.toString();
+        break;
       case 'keys':
+        response['result'] = imitationDatabase.cache.keys.toList();
+        break;
       case 'lindex':
       case 'linsert':
       case 'llen':

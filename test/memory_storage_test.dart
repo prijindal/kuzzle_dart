@@ -194,23 +194,31 @@ void main() {
         expect(await memoryStorage.hvals('hash1'), ['2', '5']);
       });
     });
-    group('skip', () {
-      test('incr', () async {
-        expect(await memoryStorage.incr('num1'), 1);
-      });
+    test('incr', () async {
+      expect(await memoryStorage.set('num1', '2'), 'OK');
+      expect(await memoryStorage.incr('num1'), 3);
+      expect(await memoryStorage.get('num1'), '3');
+    });
 
-      test('incrby', () async {
-        expect(await memoryStorage.incrby('num1'), 1);
-      });
+    test('incrby', () async {
+      expect(await memoryStorage.set('num1', '2'), 'OK');
+      expect(await memoryStorage.incrby('num1', 4), 6);
+      expect(await memoryStorage.get('num1'), '6');
+    });
 
-      test('incrbyfloat', () async {
-        expect(await memoryStorage.incrbyfloat('num1'), 1);
-      });
+    test('incrbyfloat', () async {
+      expect(await memoryStorage.set('num1', '2'), 'OK');
+      expect(await memoryStorage.incrbyfloat('num1', 0.1), 2.1);
+      expect(await memoryStorage.get('num1'), '2.1');
+    });
 
-      test('keys', () async {
-        expect(await memoryStorage.keys('num1'), 1);
-      });
+    test('keys', () async {
+      final keys = await memoryStorage.keys()
+        ..sort();
+      expect(keys, ['foo', 'hash1', 'hello', 'num1', 'num3']);
+    });
 
+    group('list', () {
       test('lindex', () async {
         expect(await memoryStorage.lindex('num1'), 1);
       });
@@ -250,7 +258,8 @@ void main() {
       test('ltrim', () async {
         expect(await memoryStorage.ltrim('num1'), 1);
       });
-
+    }, skip: 'Not implemented yet');
+    group('skip', () {
       test('mget', () async {
         expect(await memoryStorage.mget('num1'), 1);
       });

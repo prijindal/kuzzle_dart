@@ -526,6 +526,10 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) => response.result);
 
+  /// Increments the number stored at key by 1.
+  ///
+  /// If the key does not exist, it is set to 0 before performing the operation.
+  /// returns updated key value
   Future<int> incr(String key, {bool queuable = true}) => addNetworkQuery(
         'incr',
         body: {},
@@ -534,31 +538,51 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> incrby(String key, {bool queuable = true}) => addNetworkQuery(
-        'incrby',
-        body: {},
-        optionalParams: {
-          '_id': key,
-        },
-        queuable: queuable,
-      ).then((response) => response.result);
-  Future<int> incrbyfloat(String key, {bool queuable = true}) =>
+
+  /// Increments the number stored at key by the provided integer value.
+  ///
+  /// If the key does not exist, it is set to 0 before performing the operation.
+  /// returns updated key value
+  Future<int> incrby(String key, int value, {bool queuable = true}) =>
       addNetworkQuery(
-        'append',
-        body: {},
+        'incrby',
+        body: {
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> keys(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Increments the number stored at key by the provided float value.
+  ///
+  /// If the key does not exist, it is set to 0 before performing the operation.
+  /// returns updated key value
+  Future<double> incrbyfloat(String key, double value,
+          {bool queuable = true}) =>
+      addNetworkQuery(
+        'incrbyfloat',
+        body: {
+          'value': value,
+        },
+        optionalParams: {
+          '_id': key,
+        },
+        queuable: queuable,
+      ).then((response) => double.parse(response.result));
+
+  /// Returns all keys matching the provided pattern.
+  Future<List<String>> keys({String pattern = '*', bool queuable = true}) =>
+      addNetworkQuery(
         'keys',
         body: {},
         optionalParams: {
-          '_id': key,
+          'pattern': pattern,
         },
         queuable: queuable,
-      ).then((response) => response.result);
+      ).then((response) =>
+          response.result.map<String>((key) => key as String).toList());
   Future<int> lindex(String key, {bool queuable = true}) => addNetworkQuery(
         'lindex',
         body: {},
