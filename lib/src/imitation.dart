@@ -861,14 +861,33 @@ class ImitationServer {
       case 'persist':
       case 'pexpire':
       case 'pexpireat':
+        response['result'] = 1;
+        break;
       case 'pfadd':
+        imitationDatabase.cache[jsonRequest['_id']] =
+            jsonRequest['body']['elements'];
+        response['result'] = 1;
+        break;
       case 'pfcount':
+        var length = 0;
+        for (var key in jsonRequest['keys']) {
+          length += imitationDatabase.cache[key].length;
+        }
+        response['result'] = length;
+        break;
       case 'pfmerge':
+        response['result'] = 'OK';
+        break;
       case 'ping':
         response['result'] = 'PONG';
         break;
       case 'psetex':
+        response['result'] = 'OK';
+        break;
       case 'pttl':
+      case 'psetex':
+        response['result'] = 147;
+        break;
       case 'randomkey':
       case 'rename':
       case 'renamenx':

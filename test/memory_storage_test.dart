@@ -287,38 +287,40 @@ void main() {
     });
 
     group('persist', () {
-      test('persist', () async {
-        expect(await memoryStorage.persist('num1'), 1);
-      });
-
       test('pexpire', () async {
-        expect(await memoryStorage.pexpire('num1'), 1);
+        expect(await memoryStorage.pexpire('num1', 200), 1);
       });
 
       test('pexpireat', () async {
-        expect(await memoryStorage.pexpireat('num1'), 1);
-      });
-
-      test('pfadd', () async {
-        expect(await memoryStorage.pfadd('num1'), 1);
-      });
-
-      test('pfcount', () async {
-        expect(await memoryStorage.pfcount('num1'), 1);
-      });
-
-      test('pfmerge', () async {
-        expect(await memoryStorage.pfmerge('num1'), 1);
+        expect(await memoryStorage.pexpireat('num1', 100201210), 1);
       });
 
       test('psetex', () async {
-        expect(await memoryStorage.psetex('num1'), 1);
+        expect(await memoryStorage.psetex('num1', 4, 200), 'OK');
       });
 
       test('pttl', () async {
-        expect(await memoryStorage.pttl('num1'), 1);
+        expect(await memoryStorage.pttl('num1'), lessThanOrEqualTo(200));
       });
-    }, skip: 'Not implemented yet');
+
+      test('persist', () async {
+        expect(await memoryStorage.persist('num1'), 1);
+      });
+    });
+
+    group('HyperLogLog', () {
+      test('pfadd', () async {
+        expect(await memoryStorage.pfadd('hyperlog1', ['hlog1', 'hlog2']), 1);
+      });
+
+      test('pfcount', () async {
+        expect(await memoryStorage.pfcount(['hyperlog1']), 2);
+      });
+
+      test('pfmerge', () async {
+        expect(await memoryStorage.pfmerge('hyperlog1', ['hyperlog2']), 'OK');
+      });
+    });
     group('skip', () {
       test('randomkey', () async {
         expect(await memoryStorage.randomkey('num1'), 1);

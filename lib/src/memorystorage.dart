@@ -810,6 +810,9 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) => response.result);
 
+  /// Removes the expiration delay or timestamp from a key,
+  ///
+  /// making it persistent.
   Future<int> persist(String key, {bool queuable = true}) => addNetworkQuery(
         'persist',
         body: {},
@@ -818,41 +821,77 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> pexpire(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets a timeout (in milliseconds) on a key.
+  ///
+  /// After the timeout has expired, the key will automatically be deleted.
+  Future<int> pexpire(String key, int milliseconds, {bool queuable = true}) =>
+      addNetworkQuery(
         'pexpire',
-        body: {},
+        body: {
+          'milliseconds': milliseconds,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> pexpireat(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets an expiration timestamp on a key.
+  ///
+  /// After the timestamp has been reached,
+  /// the key will automatically be deleted.
+  /// The timestamp parameter accepts an Epoch [timestamp], in milliseconds.
+  Future<int> pexpireat(String key, int timestamp, {bool queuable = true}) =>
+      addNetworkQuery(
         'pexpireat',
-        body: {},
+        body: {
+          'timestamp': timestamp,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> pfadd(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Adds elements to a HyperLogLog data structure.
+  Future<int> pfadd(String key, List<dynamic> elements,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'pfadd',
-        body: {},
+        body: {
+          'elements': elements,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> pfcount(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the probabilistic cardinality of a HyperLogLog data structure,
+  ///
+  /// or of the merged HyperLogLog structures if more than 1 is provided
+  /// (see pfadd).
+  Future<int> pfcount(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'pfcount',
         body: {},
         optionalParams: {
-          '_id': key,
+          'keys': keys,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> pfmerge(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Merges multiple HyperLogLog data structures into an unique HyperLogLog
+  ///
+  /// approximating the cardinality of the union of the source structures.
+  Future<String> pfmerge(String key, List<String> sources,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'pfmerge',
-        body: {},
+        body: {
+          'sources': sources,
+        },
         optionalParams: {
           '_id': key,
         },
@@ -864,14 +903,26 @@ class MemoryStorage extends KuzzleObject {
         'ping',
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> psetex(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets a key with the provided value,and an expiration delay
+  ///
+  /// expressed in milliseconds.
+  /// If the key does not exist, it is created beforehand.
+  Future<String> psetex(String key, dynamic value, int milliseconds,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'psetex',
-        body: {},
+        body: {
+          'value': value,
+          'milliseconds': milliseconds,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the remaining time to live of a key, in milliseconds.
   Future<int> pttl(String key, {bool queuable = true}) => addNetworkQuery(
         'pttl',
         body: {},
