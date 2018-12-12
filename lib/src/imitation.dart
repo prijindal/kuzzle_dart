@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
 import 'package:uuid/uuid.dart';
@@ -940,12 +941,12 @@ class ImitationServer {
         response['result'] = list.length;
         break;
       case 'sadd':
-        Set set;
+        HashSet set;
         if (imitationDatabase.cache.containsKey(jsonRequest['_id']) &&
             imitationDatabase.cache[jsonRequest['_id']] != null) {
           set = imitationDatabase.cache[jsonRequest['_id']];
         } else {
-          set = Set();
+          set = HashSet();
         }
         var count = 0;
         for (var member in jsonRequest['body']['members']) {
@@ -960,22 +961,27 @@ class ImitationServer {
       case 'scan':
       case 'scard':
         response['result'] =
-            (imitationDatabase.cache[jsonRequest['_id']] as Set).length;
+            (imitationDatabase.cache[jsonRequest['_id']] as HashSet).length;
         break;
       case 'sdiff':
-        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        var mainHashSet =
+            imitationDatabase.cache[jsonRequest['_id']] as HashSet;
         for (var key in jsonRequest['keys']) {
-          mainSet = mainSet.difference(imitationDatabase.cache[key] as Set);
+          mainHashSet =
+              mainHashSet.difference(imitationDatabase.cache[key] as HashSet);
         }
-        response['result'] = mainSet.toList();
+        response['result'] = mainHashSet.toList();
         break;
       case 'sdiffstore':
-        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        var mainHashSet =
+            imitationDatabase.cache[jsonRequest['_id']] as HashSet;
         for (var key in jsonRequest['body']['keys']) {
-          mainSet = mainSet.difference(imitationDatabase.cache[key] as Set);
+          mainHashSet =
+              mainHashSet.difference(imitationDatabase.cache[key] as HashSet);
         }
-        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
-        response['result'] = mainSet.length;
+        imitationDatabase.cache[jsonRequest['body']['destination']] =
+            mainHashSet;
+        response['result'] = mainHashSet.length;
         break;
       case 'set':
         imitationDatabase.cache[jsonRequest['_id']] =
@@ -997,41 +1003,47 @@ class ImitationServer {
         response['result'] = 1;
         break;
       case 'sinter':
-        Set mainSet;
+        HashSet mainHashSet;
         for (var key in jsonRequest['keys']) {
-          mainSet ??= imitationDatabase.cache[key];
-          mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
+          mainHashSet ??= imitationDatabase.cache[key];
+          mainHashSet =
+              mainHashSet.intersection(imitationDatabase.cache[key] as HashSet);
         }
-        response['result'] = mainSet.toList();
+        response['result'] = mainHashSet.toList();
         break;
       case 'sinterstore':
-        Set mainSet;
+        HashSet mainHashSet;
         for (var key in jsonRequest['body']['keys']) {
-          mainSet ??= imitationDatabase.cache[key];
-          mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
+          mainHashSet ??= imitationDatabase.cache[key];
+          mainHashSet =
+              mainHashSet.intersection(imitationDatabase.cache[key] as HashSet);
         }
-        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
-        response['result'] = mainSet.length;
+        imitationDatabase.cache[jsonRequest['body']['destination']] =
+            mainHashSet;
+        response['result'] = mainHashSet.length;
         break;
       case 'sismember':
-        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
-        final doesContains = mainSet.contains(jsonRequest['member']);
+        final mainHashSet =
+            imitationDatabase.cache[jsonRequest['_id']] as HashSet;
+        final doesContains = mainHashSet.contains(jsonRequest['member']);
         response['result'] = doesContains ? 1 : 0;
         break;
       case 'smembers':
-        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
-        response['result'] = mainSet.toList();
+        final mainHashSet =
+            imitationDatabase.cache[jsonRequest['_id']] as HashSet;
+        response['result'] = mainHashSet.toList();
         break;
       case 'smove':
-        (imitationDatabase.cache[jsonRequest['_id']] as Set)
+        (imitationDatabase.cache[jsonRequest['_id']] as HashSet)
             .remove(jsonRequest['body']['member']);
-        (imitationDatabase.cache[jsonRequest['body']['destination']] as Set)
+        (imitationDatabase.cache[jsonRequest['body']['destination']] as HashSet)
             .add(jsonRequest['body']['member']);
         response['result'] = 1;
         break;
       case 'sort':
-        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
-        var mainList = mainSet.toList();
+        final mainHashSet =
+            imitationDatabase.cache[jsonRequest['_id']] as HashSet;
+        var mainList = mainHashSet.toList();
         mainList.sort();
         if (jsonRequest['body']['direction'] == 'DESC') {
           mainList = mainList.reversed.toList();
@@ -1042,27 +1054,28 @@ class ImitationServer {
         final removedList = [];
         for (var i = 0; i < jsonRequest['body']['count']; i++) {
           final randKey = Random().nextInt(
-              (imitationDatabase.cache[jsonRequest['_id']] as Set).length);
+              (imitationDatabase.cache[jsonRequest['_id']] as HashSet).length);
           final deleteValue =
-              (imitationDatabase.cache[jsonRequest['_id']] as Set)
+              (imitationDatabase.cache[jsonRequest['_id']] as HashSet)
                   .toList()[randKey];
           removedList.add(deleteValue);
-          (imitationDatabase.cache[jsonRequest['_id']] as Set)
+          (imitationDatabase.cache[jsonRequest['_id']] as HashSet)
               .remove(deleteValue);
         }
         response['result'] = removedList;
         break;
       case 'srandmember':
         final randKey = Random().nextInt(
-            (imitationDatabase.cache[jsonRequest['_id']] as Set).length);
+            (imitationDatabase.cache[jsonRequest['_id']] as HashSet).length);
         response['result'] =
-            (imitationDatabase.cache[jsonRequest['_id']] as Set)
+            (imitationDatabase.cache[jsonRequest['_id']] as HashSet)
                 .toList()[randKey];
         break;
       case 'srem':
         var count = 0;
         for (var member in jsonRequest['body']['members']) {
-          (imitationDatabase.cache[jsonRequest['_id']] as Set).remove(member);
+          (imitationDatabase.cache[jsonRequest['_id']] as HashSet)
+              .remove(member);
           count += 1;
         }
         response['result'] = count;
@@ -1072,21 +1085,24 @@ class ImitationServer {
         response['result'] = 1;
         break;
       case 'sunion':
-        Set mainSet;
+        HashSet mainHashSet;
         for (var key in jsonRequest['keys']) {
-          mainSet ??= imitationDatabase.cache[key];
-          mainSet = mainSet.union(imitationDatabase.cache[key] as Set);
+          mainHashSet ??= imitationDatabase.cache[key];
+          mainHashSet =
+              mainHashSet.union(imitationDatabase.cache[key] as HashSet);
         }
-        response['result'] = mainSet.toList();
+        response['result'] = mainHashSet.toList();
         break;
       case 'sunionstore':
-        Set mainSet;
+        HashSet mainHashSet;
         for (var key in jsonRequest['body']['keys']) {
-          mainSet ??= imitationDatabase.cache[key];
-          mainSet = mainSet.union(imitationDatabase.cache[key] as Set);
+          mainHashSet ??= imitationDatabase.cache[key];
+          mainHashSet =
+              mainHashSet.union(imitationDatabase.cache[key] as HashSet);
         }
-        imitationDatabase.cache[jsonRequest['body']['destination']] = mainSet;
-        response['result'] = mainSet.length;
+        imitationDatabase.cache[jsonRequest['body']['destination']] =
+            mainHashSet;
+        response['result'] = mainHashSet.length;
         break;
       case 'time':
         final now = DateTime.now();
@@ -1096,8 +1112,29 @@ class ImitationServer {
         ];
         break;
       case 'touch':
+        var count = 0;
+        for (var key in jsonRequest['body']['keys']) {
+          if (imitationDatabase.cache.containsKey(key)) {
+            count += 1;
+          }
+        }
+        response['result'] = count;
+        break;
       case 'ttl':
+        response['result'] = -1;
+        break;
       case 'type':
+        final data = imitationDatabase.cache[jsonRequest['_id']];
+        String type;
+        if (data is String) {
+          type = 'string';
+        } else if (data is HashSet) {
+          type = 'set';
+        } else if (data is Map) {
+          type = 'hash';
+        }
+        response['result'] = type;
+        break;
       case 'zadd':
       case 'zcard':
       case 'zcount':

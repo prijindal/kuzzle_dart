@@ -1351,14 +1351,20 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) =>
           response.result.map<String>((a) => a as String).toList());
-  Future<int> touch(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Alters the last access time of one or multiple keys.
+  ///
+  /// A key is ignored if it does not exist.
+  Future<int> touch(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'touch',
-        body: {},
-        optionalParams: {
-          '_id': key,
-        },
+        body: {'keys': keys},
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the remaining time to live of a key, in seconds,
+  ///
+  /// or a negative value if the key does not exist or if it is persistent.
   Future<int> ttl(String key, {bool queuable = true}) => addNetworkQuery(
         'ttl',
         body: {},
@@ -1367,7 +1373,9 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> type(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the type of the value held by a key.
+  Future<String> type(String key, {bool queuable = true}) => addNetworkQuery(
         'type',
         body: {},
         optionalParams: {

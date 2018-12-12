@@ -375,8 +375,9 @@ void main() {
         expect(await memoryStorage.sadd('set2', ['svalue3', 'svalue4']), 2);
         expect(await memoryStorage.sadd('set3', ['svalue1', 'svalue3']), 2);
         expect(await memoryStorage.sdiff('set1', ['set2']),
-            ['svalue1', 'svalue2']);
-        expect(await memoryStorage.sdiff('set1', ['set3']), ['svalue2']);
+            containsAll(['svalue1', 'svalue2']));
+        expect(await memoryStorage.sdiff('set1', ['set3']),
+            containsAll(['svalue2']));
       });
 
       test('sdiffstore', () async {
@@ -398,7 +399,8 @@ void main() {
       });
 
       test('smembers', () async {
-        expect(await memoryStorage.smembers('set1'), ['svalue1', 'svalue2']);
+        expect(await memoryStorage.smembers('set1'),
+            containsAll(['svalue1', 'svalue2']));
       });
 
       test('smove', () async {
@@ -451,19 +453,21 @@ void main() {
           (DateTime.now().millisecondsSinceEpoch / 1000).floor().toString());
     });
 
+    test('touch', () async {
+      expect(await memoryStorage.touch(['num1', 'num2', 'set1']), 2);
+    });
+
+    test('ttl', () async {
+      expect(await memoryStorage.ttl('num1'), -1);
+    });
+
+    test('type', () async {
+      expect(await memoryStorage.type('num1'), 'string');
+      expect(await memoryStorage.type('set1'), 'set');
+      expect(await memoryStorage.type('hash1'), 'hash');
+    });
+
     group('skip', () {
-      test('touch', () async {
-        expect(await memoryStorage.touch('num1'), 1);
-      });
-
-      test('ttl', () async {
-        expect(await memoryStorage.ttl('num1'), 1);
-      });
-
-      test('type', () async {
-        expect(await memoryStorage.type('num1'), 1);
-      });
-
       test('zadd', () async {
         expect(await memoryStorage.zadd('num1'), 1);
       });
