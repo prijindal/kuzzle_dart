@@ -502,34 +502,34 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Increments the number stored at key by 1. <a href="kuzzle_dart/MemoryStorage/incr.html">[...]</a>
           
 </dd>
         <dt id="incrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrby.html">incrby</a></span><span class="signature">(<wbr><span class="parameter" id="incrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrby.html">incrby</a></span><span class="signature">(<wbr><span class="parameter" id="incrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="incrby-param-value"><span class="type-annotation">int</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Increments the number stored at key by the provided integer value. <a href="kuzzle_dart/MemoryStorage/incrby.html">[...]</a>
           
 </dd>
         <dt id="incrbyfloat" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">incrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="incrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">incrbyfloat</a></span><span class="signature">(<wbr><span class="parameter" id="incrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="incrbyfloat-param-value"><span class="type-annotation">double</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">double</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Increments the number stored at key by the provided float value. <a href="kuzzle_dart/MemoryStorage/incrbyfloat.html">[...]</a>
           
 </dd>
         <dt id="keys" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/keys.html">keys</a></span><span class="signature">(<wbr><span class="parameter" id="keys-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="keys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/keys.html">keys</a></span><span class="signature">(<wbr>{<span class="parameter" id="keys-param-pattern"><span class="type-annotation">String</span> <span class="parameter-name">pattern</span>: <span class="default-value">'*'</span>, </span> <span class="parameter" id="keys-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns all keys matching the provided pattern.
           
 </dd>
         <dt id="lindex" class="callable">

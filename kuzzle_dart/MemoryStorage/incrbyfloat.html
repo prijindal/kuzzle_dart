@@ -188,23 +188,31 @@
     <h1>incrbyfloat method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">double</span>&gt;</span></span>
       <span class="name ">incrbyfloat</span>
-(<wbr><span class="parameter" id="incrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="incrbyfloat-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="incrbyfloat-param-value"><span class="type-annotation">double</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="incrbyfloat-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Increments the number stored at key by the provided float value.</p>
+<p>If the key does not exist, it is set to 0 before performing the operation.
+returns updated key value</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; incrbyfloat(String key, {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;double&gt; incrbyfloat(String key, double value,
+        {bool queuable = true}) =&gt;
     addNetworkQuery(
-      &#39;append&#39;,
-      body: {},
+      &#39;incrbyfloat&#39;,
+      body: {
+        &#39;value&#39;: value,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt; double.parse(response.result));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

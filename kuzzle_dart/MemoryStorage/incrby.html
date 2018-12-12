@@ -190,15 +190,23 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">incrby</span>
-(<wbr><span class="parameter" id="incrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="incrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="incrby-param-value"><span class="type-annotation">int</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="incrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Increments the number stored at key by the provided integer value.</p>
+<p>If the key does not exist, it is set to 0 before performing the operation.
+returns updated key value</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; incrby(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; incrby(String key, int value, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;incrby&#39;,
-      body: {},
+      body: {
+        &#39;value&#39;: value,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },
