@@ -219,46 +219,50 @@ void main() {
     });
 
     group('list', () {
-      test('lindex', () async {
-        expect(await memoryStorage.lindex('num1'), 1);
+      setUpAll(() async {
+        expect(await memoryStorage.lpush('list1', [1]), 1);
       });
+      test('lindex', () async {
+        expect(await memoryStorage.lindex('list1', 0), 1);
+      }, skip: 'Maybe an issue with kuzzle?');
 
       test('linsert', () async {
-        expect(await memoryStorage.linsert('num1'), 1);
+        expect(await memoryStorage.linsert('list1', 1, 2), 2);
       });
 
       test('llen', () async {
-        expect(await memoryStorage.llen('num1'), 1);
+        expect(await memoryStorage.llen('list1'), 2);
       });
 
       test('lpop', () async {
-        expect(await memoryStorage.lpop('num1'), 1);
+        expect(await memoryStorage.lpop('list1'), '2');
       });
 
       test('lpush', () async {
-        expect(await memoryStorage.lpush('num1'), 1);
+        expect(await memoryStorage.lpush('list1', [55, 89]), 3);
       });
 
       test('lpushx', () async {
-        expect(await memoryStorage.lpushx('num1'), 1);
+        expect(await memoryStorage.lpushx('list2', 3), 0);
+        expect(await memoryStorage.lpushx('list1', 2), 4);
       });
 
       test('lrange', () async {
-        expect(await memoryStorage.lrange('num1'), 1);
+        expect(await memoryStorage.lrange('list1', 1, 2), ['89', '55']);
       });
 
       test('lrem', () async {
-        expect(await memoryStorage.lrem('num1'), 1);
+        expect(await memoryStorage.lrem('list1', '2', 0), 1);
       });
 
       test('lset', () async {
-        expect(await memoryStorage.lset('num1'), 1);
+        expect(await memoryStorage.lset('list1', 4, 2), 'OK');
       });
 
       test('ltrim', () async {
-        expect(await memoryStorage.ltrim('num1'), 1);
+        expect(await memoryStorage.ltrim('list1', 1, 2), 'OK');
       });
-    }, skip: 'Not implemented yet');
+    });
     group('skip', () {
       test('mget', () async {
         expect(await memoryStorage.mget('num1'), 1);

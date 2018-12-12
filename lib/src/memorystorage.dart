@@ -583,22 +583,44 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) =>
           response.result.map<String>((key) => key as String).toList());
-  Future<int> lindex(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the element at the provided index in a list.
+  Future<dynamic> lindex(String key, int index, {bool queuable = true}) =>
+      addNetworkQuery(
         'lindex',
         body: {},
         optionalParams: {
+          'index': index.toString(),
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> linsert(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Inserts a value in a list,
+  ///
+  /// either before or after the reference pivot value.
+  /// returns updated number of items in the list
+  /// ```redis
+  /// redis> LINSERT mylist BEFORE "World" "There"
+  /// (integer) 3
+  /// ```
+  /// returns updated number of items in the list>
+  Future<int> linsert(String key, dynamic pivot, dynamic value,
+          {String position = 'before', bool queuable = true}) =>
+      addNetworkQuery(
         'linsert',
-        body: {},
+        body: {
+          'pivot': pivot,
+          'value': value,
+          'position': position,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the length of a list.
   Future<int> llen(String key, {bool queuable = true}) => addNetworkQuery(
         'llen',
         body: {},
@@ -607,7 +629,9 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lpop(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes and returns the first element of a list.
+  Future<dynamic> lpop(String key, {bool queuable = true}) => addNetworkQuery(
         'lpop',
         body: {},
         optionalParams: {
@@ -615,54 +639,112 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lpush(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Prepends the specified values to a list.
+  ///
+  /// If the key does not exist, it is created holding an
+  /// empty listbefore performing the operation.
+  /// returns updated number of elements in the list
+  Future<int> lpush(String key, List<dynamic> values, {bool queuable = true}) =>
+      addNetworkQuery(
         'lpush',
-        body: {},
+        body: {
+          'values': values,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lpushx(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Prepends the specified value to a list,
+  ///
+  /// only if the key already exists and if it holds a list.
+  Future<int> lpushx(String key, dynamic value, {bool queuable = true}) =>
+      addNetworkQuery(
         'lpushx',
-        body: {},
+        body: {
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lrange(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the list elements between the start and stop positions.
+  Future<List<dynamic>> lrange(String key, int start, int stop,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'lrange',
         body: {},
         optionalParams: {
           '_id': key,
+          'start': start,
+          'stop': stop,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lrem(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes the first count occurences of elements equal to value from a list.
+  ///
+  /// The count argument influences the operation in the following ways:
+  ///   * count > 0: Remove elements equal to value moving from head to tail.
+  ///   * count < 0: Remove elements equal to value moving from tail to head.
+  ///   * count = 0: Remove all elements equal to value.
+  /// For example, LREM list -2 "hello" will
+  /// remove the last two occurrences of "hello" in the list stored at list.
+  /// Note that non-existing keys are treated like empty lists,
+  /// so when key does not exist, the command will always return 0.
+  /// returns number of removed elements
+  Future<int> lrem(String key, dynamic value, int count,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'lrem',
-        body: {},
+        body: {
+          'value': value,
+          'count': count,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> lset(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets the list element at index with the provided value.
+  ///
+  /// An error is returned for out of range indexes.
+  Future<String> lset(String key, dynamic value, int index,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'lset',
-        body: {},
+        body: {
+          'index': index,
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> ltrim(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Trims an existing list
+  ///
+  /// so that it will contain only the specified range of elements specified.
+  Future<String> ltrim(String key, int start, int stop,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'ltrim',
-        body: {},
+        body: {
+          'start': start,
+          'stop': stop,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<int> mget(String key, {bool queuable = true}) => addNetworkQuery(
         'mget',
         body: {},
@@ -863,7 +945,7 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<String> set(String key, String value,
+  Future<String> set(String key, dynamic value,
           {int ex, int px, bool nx, bool xx, bool queuable = true}) =>
       addNetworkQuery(
         'set',

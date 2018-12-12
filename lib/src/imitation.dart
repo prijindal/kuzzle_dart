@@ -714,7 +714,6 @@ class ImitationServer {
         response['result'] = 1;
         break;
       case 'hstrlen':
-        print(imitationDatabase.cache[jsonRequest['_id']]);
         response['result'] = (imitationDatabase.cache[jsonRequest['_id']]
                 [jsonRequest['field']])
             .toString()
@@ -753,15 +752,75 @@ class ImitationServer {
         response['result'] = imitationDatabase.cache.keys.toList();
         break;
       case 'lindex':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] = list[jsonRequest['index']];
+        break;
       case 'linsert':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        final index = list.indexOf(jsonRequest['body']['pivot']);
+        list.insert(index, jsonRequest['body']['value']);
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = list.length;
+        break;
       case 'llen':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] = list.length;
+        break;
       case 'lpop':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] = list.removeAt(0).toString();
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        break;
       case 'lpush':
+        List<dynamic> list;
+        if (imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          list = imitationDatabase.cache[jsonRequest['_id']];
+        } else {
+          list = <dynamic>[];
+        }
+        list.insertAll(0,
+            (jsonRequest['body']['values'] as List<dynamic>).reversed.toList());
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = list.length;
+        break;
       case 'lpushx':
+        if (!imitationDatabase.cache.containsKey(jsonRequest['_id'])) {
+          response['result'] = 0;
+          break;
+        }
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        list.insert(0, jsonRequest['body']['value']);
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = list.length;
+        break;
       case 'lrange':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        response['result'] = list
+            .getRange(jsonRequest['start'], jsonRequest['stop'] + 1)
+            .toList()
+            .map((dynamic a) => a.toString())
+            .toList();
+        break;
       case 'lrem':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        bool condFn(dynamic value) =>
+            value.toString() == jsonRequest['body']['value'].toString();
+        final length = list.where(condFn).length;
+        list.removeWhere(condFn);
+        imitationDatabase.cache[jsonRequest['_id']] = list;
+        response['result'] = length;
+        break;
       case 'lset':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        list[jsonRequest['body']['index']] = jsonRequest['body']['value'];
+        response['result'] = 'OK';
+        break;
       case 'ltrim':
+        final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
+        list.removeRange(
+            jsonRequest['body']['start'], jsonRequest['body']['stop']);
+        response['result'] = 'OK';
+        break;
       case 'mget':
       case 'mset':
       case 'msetnx':
