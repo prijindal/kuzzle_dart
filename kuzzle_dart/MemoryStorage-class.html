@@ -1011,12 +1011,12 @@ If the destination key already exists, it is overwritten.
           
 </dd>
         <dt id="touch" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/touch.html">touch</a></span><span class="signature">(<wbr><span class="parameter" id="touch-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/touch.html">touch</a></span><span class="signature">(<wbr><span class="parameter" id="touch-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Alters the last access time of one or multiple keys. <a href="kuzzle_dart/MemoryStorage/touch.html">[...]</a>
           
 </dd>
         <dt id="ttl" class="callable">
@@ -1025,16 +1025,16 @@ If the destination key already exists, it is overwritten.
           </span>
           </dt>
         <dd>
-          
+          Returns the remaining time to live of a key, in seconds, <a href="kuzzle_dart/MemoryStorage/ttl.html">[...]</a>
           
 </dd>
         <dt id="type" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/type.html">type</a></span><span class="signature">(<wbr><span class="parameter" id="type-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="type-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the type of the value held by a key.
           
 </dd>
         <dt id="zadd" class="callable">

@@ -190,18 +190,20 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">touch</span>
-(<wbr><span class="parameter" id="touch-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="touch-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="touch-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Alters the last access time of one or multiple keys.</p>
+<p>A key is ignored if it does not exist.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; touch(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; touch(List&lt;String&gt; keys, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;touch&#39;,
-      body: {},
-      optionalParams: {
-        &#39;_id&#39;: key,
-      },
+      body: {&#39;keys&#39;: keys},
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
     </section>
