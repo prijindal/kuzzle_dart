@@ -1022,6 +1022,10 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Adds members to a set of unique values stored at key.
+  ///
+  /// If the key does not exist, it is created beforehand.
   Future<int> sadd(String key, {bool queuable = true}) => addNetworkQuery(
         'sadd',
         body: {},

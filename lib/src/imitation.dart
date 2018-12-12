@@ -889,8 +889,21 @@ class ImitationServer {
         response['result'] = 147;
         break;
       case 'randomkey':
+        final randKey = Random().nextInt(imitationDatabase.cache.length);
+        response['result'] = imitationDatabase.cache.keys.elementAt(randKey);
+        break;
       case 'rename':
+        final value = imitationDatabase.cache[jsonRequest['_id']];
+        imitationDatabase.cache[jsonRequest['body']['newkey']] = value;
+        imitationDatabase.cache.remove(jsonRequest['_id']);
+        response['result'] = 'OK';
+        break;
       case 'renamenx':
+        final value = imitationDatabase.cache[jsonRequest['_id']];
+        imitationDatabase.cache[jsonRequest['body']['newkey']] = value;
+        imitationDatabase.cache.remove(jsonRequest['_id']);
+        response['result'] = 1;
+        break;
       case 'rpop':
         final List<dynamic> list = imitationDatabase.cache[jsonRequest['_id']];
         response['result'] = list.removeLast().toString();

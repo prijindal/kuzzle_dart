@@ -337,21 +337,20 @@ void main() {
         expect(await memoryStorage.pfmerge('hyperlog1', ['hyperlog2']), 'OK');
       });
     });
+    test('randomkey', () async {
+      final keys = await memoryStorage.keys();
+      final randomKey = await memoryStorage.randomkey();
+      expect(keys.indexOf(randomKey), greaterThanOrEqualTo(0));
+    });
+
+    test('rename', () async {
+      expect(await memoryStorage.rename('num1', 'number1'), 'OK');
+    });
+
+    test('renamenx', () async {
+      expect(await memoryStorage.renamenx('number1', 'num1'), 1);
+    });
     group('skip', () {
-      test('randomkey', () async {
-        final keys = await memoryStorage.keys();
-        final randomKey = await memoryStorage.randomkey();
-        expect(keys.indexOf(randomKey), greaterThanOrEqualTo(0));
-      });
-
-      test('rename', () async {
-        expect(await memoryStorage.rename('num1', 'number1'), 'OK');
-      });
-
-      test('renamenx', () async {
-        expect(await memoryStorage.renamenx('number1', 'num1'), 1);
-      });
-
       test('sadd', () async {
         expect(await memoryStorage.sadd('num1'), 1);
       });
