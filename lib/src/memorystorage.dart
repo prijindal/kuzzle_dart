@@ -745,30 +745,55 @@ class MemoryStorage extends KuzzleObject {
         queuable: queuable,
       ).then((response) => response.result);
 
-  Future<int> mget(String key, {bool queuable = true}) => addNetworkQuery(
+  /// Returns the values of the provided keys.
+  Future<List<dynamic>> mget(List<String> keys, {bool queuable = true}) =>
+      addNetworkQuery(
         'mget',
         body: {},
         optionalParams: {
-          '_id': key,
+          'keys': keys,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> mset(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets the provided keys to their respective values.
+  ///
+  /// If a key does not exist, it is created.
+  /// Otherwise, the key's value is overwritten.
+  Future<String> mset(Map<String, dynamic> entries, {bool queuable = true}) =>
+      addNetworkQuery(
         'mset',
-        body: {},
-        optionalParams: {
-          '_id': key,
+        body: {
+          'entries': entries.keys
+              .map((key) => {
+                    'key': key,
+                    'value': entries[key],
+                  })
+              .toList(),
         },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> msetnx(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Sets the provided keys to their respective values,
+  ///
+  /// only if they do not exist.
+  /// If a key exists, then the whole operation is aborted and no key is set.
+  Future<int> msetnx(Map<String, dynamic> entries, {bool queuable = true}) =>
+      addNetworkQuery(
         'msetnx',
-        body: {},
-        optionalParams: {
-          '_id': key,
+        body: {
+          'entries': entries.keys
+              .map((key) => {
+                    'key': key,
+                    'value': entries[key],
+                  })
+              .toList(),
         },
+        optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
+
   Future<int> object(String key, {bool queuable = true}) => addNetworkQuery(
         'object',
         body: {},

@@ -263,19 +263,20 @@ void main() {
         expect(await memoryStorage.ltrim('list1', 1, 2), 'OK');
       });
     });
-    group('skip', () {
-      test('mget', () async {
-        expect(await memoryStorage.mget('num1'), 1);
-      });
-
+    group('multiple', () {
       test('mset', () async {
-        expect(await memoryStorage.mset('num1'), 1);
+        expect(await memoryStorage.mset({'mul1': 4, 'mul2': 5}), 'OK');
+      });
+      test('mget', () async {
+        expect(await memoryStorage.mget(['mul1', 'mul2']), ['4', '5']);
       });
 
       test('msetnx', () async {
-        expect(await memoryStorage.msetnx('num1'), 1);
+        expect(await memoryStorage.msetnx({'mul2': 8, 'mul3': 3}), 0);
+        expect(await memoryStorage.msetnx({'mul3': 3}), 1);
       });
-
+    });
+    group('skip', () {
       test('object', () async {
         expect(await memoryStorage.object('num1'), 1);
       });

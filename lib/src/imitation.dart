@@ -822,8 +822,29 @@ class ImitationServer {
         response['result'] = 'OK';
         break;
       case 'mget':
+        final List<dynamic> keys = jsonRequest['keys'];
+        response['result'] =
+            keys.map((key) => imitationDatabase.cache[key].toString()).toList();
+        break;
       case 'mset':
+        final List<dynamic> entries = jsonRequest['body']['entries'];
+        for (var entry in entries) {
+          imitationDatabase.cache[entry['key']] = entry['value'];
+        }
+        response['result'] = 'OK';
+        break;
       case 'msetnx':
+        final List<dynamic> entries = jsonRequest['body']['entries'];
+        for (var entry in entries) {
+          if (imitationDatabase.cache.containsKey(entry['key'])) {
+            response['result'] = 0;
+            return response;
+          } else {
+            imitationDatabase.cache[entry['key']] = entry['value'];
+          }
+        }
+        response['result'] = 1;
+        break;
       case 'object':
       case 'persist':
       case 'pexpire':
