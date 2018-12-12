@@ -997,7 +997,7 @@ class ImitationServer {
         response['result'] = 1;
         break;
       case 'sinter':
-        var mainSet;
+        Set mainSet;
         for (var key in jsonRequest['keys']) {
           mainSet ??= imitationDatabase.cache[key];
           mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
@@ -1005,7 +1005,7 @@ class ImitationServer {
         response['result'] = mainSet.toList();
         break;
       case 'sinterstore':
-        var mainSet;
+        Set mainSet;
         for (var key in jsonRequest['body']['keys']) {
           mainSet ??= imitationDatabase.cache[key];
           mainSet = mainSet.intersection(imitationDatabase.cache[key] as Set);
@@ -1019,7 +1019,7 @@ class ImitationServer {
         response['result'] = doesContains ? 1 : 0;
         break;
       case 'smembers':
-        var mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
+        final mainSet = imitationDatabase.cache[jsonRequest['_id']] as Set;
         response['result'] = mainSet.toList();
         break;
       case 'smove':
@@ -1043,8 +1043,9 @@ class ImitationServer {
         for (var i = 0; i < jsonRequest['body']['count']; i++) {
           final randKey = Random().nextInt(
               (imitationDatabase.cache[jsonRequest['_id']] as Set).length);
-          var deleteValue = (imitationDatabase.cache[jsonRequest['_id']] as Set)
-              .toList()[randKey];
+          final deleteValue =
+              (imitationDatabase.cache[jsonRequest['_id']] as Set)
+                  .toList()[randKey];
           removedList.add(deleteValue);
           (imitationDatabase.cache[jsonRequest['_id']] as Set)
               .remove(deleteValue);
@@ -1088,6 +1089,12 @@ class ImitationServer {
         response['result'] = mainSet.length;
         break;
       case 'time':
+        final now = DateTime.now();
+        response['result'] = [
+          (now.millisecondsSinceEpoch / 1000).floor().toString(),
+          now.microsecond.toString()
+        ];
+        break;
       case 'touch':
       case 'ttl':
       case 'type':

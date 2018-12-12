@@ -445,11 +445,13 @@ void main() {
         expect(await memoryStorage.sunionstore(['set1', 'set3'], 'set6'), 3);
       });
     });
-    group('skip', () {
-      test('time', () async {
-        expect(await memoryStorage.time('num1'), 1);
-      });
+    test('time', () async {
+      final time = await memoryStorage.time();
+      expect(time[0],
+          (DateTime.now().millisecondsSinceEpoch / 1000).floor().toString());
+    });
 
+    group('skip', () {
       test('touch', () async {
         expect(await memoryStorage.touch('num1'), 1);
       });

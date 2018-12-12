@@ -1342,14 +1342,15 @@ class MemoryStorage extends KuzzleObject {
         optionalParams: {},
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> time(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the current server time as a two items list:a timestamp in Epochs
+  ///
+  /// and the number of microseconds already elapsed in the current second.
+  Future<List<String>> time({bool queuable = true}) => addNetworkQuery(
         'time',
-        body: {},
-        optionalParams: {
-          '_id': key,
-        },
         queuable: queuable,
-      ).then((response) => response.result);
+      ).then((response) =>
+          response.result.map<String>((a) => a as String).toList());
   Future<int> touch(String key, {bool queuable = true}) => addNetworkQuery(
         'touch',
         body: {},
