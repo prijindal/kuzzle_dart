@@ -533,21 +533,21 @@ only if the field does not already exist.
           
 </dd>
         <dt id="lindex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lindex.html">lindex</a></span><span class="signature">(<wbr><span class="parameter" id="lindex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lindex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lindex.html">lindex</a></span><span class="signature">(<wbr><span class="parameter" id="lindex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lindex-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="lindex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future</span>
           </span>
           </dt>
         <dd>
-          
+          Returns the element at the provided index in a list.
           
 </dd>
         <dt id="linsert" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/linsert.html">linsert</a></span><span class="signature">(<wbr><span class="parameter" id="linsert-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="linsert-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/linsert.html">linsert</a></span><span class="signature">(<wbr><span class="parameter" id="linsert-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="linsert-param-pivot"><span class="type-annotation">dynamic</span> <span class="parameter-name">pivot</span>, </span> <span class="parameter" id="linsert-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="linsert-param-position"><span class="type-annotation">String</span> <span class="parameter-name">position</span>: <span class="default-value">'before'</span>, </span> <span class="parameter" id="linsert-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Inserts a value in a list, <a href="kuzzle_dart/MemoryStorage/linsert.html">[...]</a>
           
 </dd>
         <dt id="llen" class="callable">
@@ -556,70 +556,70 @@ only if the field does not already exist.
           </span>
           </dt>
         <dd>
-          
+          Returns the length of a list.
           
 </dd>
         <dt id="lpop" class="callable">
           <span class="name"><a href="kuzzle_dart/MemoryStorage/lpop.html">lpop</a></span><span class="signature">(<wbr><span class="parameter" id="lpop-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpop-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future</span>
           </span>
           </dt>
         <dd>
-          
+          Removes and returns the first element of a list.
           
 </dd>
         <dt id="lpush" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpush.html">lpush</a></span><span class="signature">(<wbr><span class="parameter" id="lpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpush.html">lpush</a></span><span class="signature">(<wbr><span class="parameter" id="lpush-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lpush-param-values"><span class="type-annotation">List</span> <span class="parameter-name">values</span>, {</span> <span class="parameter" id="lpush-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Prepends the specified values to a list. <a href="kuzzle_dart/MemoryStorage/lpush.html">[...]</a>
           
 </dd>
         <dt id="lpushx" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpushx.html">lpushx</a></span><span class="signature">(<wbr><span class="parameter" id="lpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lpushx.html">lpushx</a></span><span class="signature">(<wbr><span class="parameter" id="lpushx-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lpushx-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="lpushx-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Prepends the specified value to a list, <a href="kuzzle_dart/MemoryStorage/lpushx.html">[...]</a>
           
 </dd>
         <dt id="lrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrange.html">lrange</a></span><span class="signature">(<wbr><span class="parameter" id="lrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrange.html">lrange</a></span><span class="signature">(<wbr><span class="parameter" id="lrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lrange-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="lrange-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="lrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the list elements between the start and stop positions.
           
 </dd>
         <dt id="lrem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrem.html">lrem</a></span><span class="signature">(<wbr><span class="parameter" id="lrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lrem.html">lrem</a></span><span class="signature">(<wbr><span class="parameter" id="lrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lrem-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="lrem-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="lrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes the first count occurences of elements equal to value from a list. <a href="kuzzle_dart/MemoryStorage/lrem.html">[...]</a>
           
 </dd>
         <dt id="lset" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/lset.html">lset</a></span><span class="signature">(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lset-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="lset-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Sets the list element at index with the provided value. <a href="kuzzle_dart/MemoryStorage/lset.html">[...]</a>
           
 </dd>
         <dt id="ltrim" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/ltrim.html">ltrim</a></span><span class="signature">(<wbr><span class="parameter" id="ltrim-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="ltrim-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/ltrim.html">ltrim</a></span><span class="signature">(<wbr><span class="parameter" id="ltrim-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="ltrim-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="ltrim-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="ltrim-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Trims an existing list <a href="kuzzle_dart/MemoryStorage/ltrim.html">[...]</a>
           
 </dd>
         <dt id="mget" class="callable">
@@ -848,7 +848,7 @@ only if the field does not already exist.
           
 </dd>
         <dt id="set" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="set-param-value"><span class="type-annotation">String</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="set-param-ex"><span class="type-annotation">int</span> <span class="parameter-name">ex</span>, </span> <span class="parameter" id="set-param-px"><span class="type-annotation">int</span> <span class="parameter-name">px</span>, </span> <span class="parameter" id="set-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>, </span> <span class="parameter" id="set-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>, </span> <span class="parameter" id="set-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="set-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="set-param-ex"><span class="type-annotation">int</span> <span class="parameter-name">ex</span>, </span> <span class="parameter" id="set-param-px"><span class="type-annotation">int</span> <span class="parameter-name">px</span>, </span> <span class="parameter" id="set-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>, </span> <span class="parameter" id="set-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>, </span> <span class="parameter" id="set-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
           </dt>

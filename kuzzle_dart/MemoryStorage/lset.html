@@ -188,17 +188,26 @@
     <h1>lset method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
       <span class="name ">lset</span>
-(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="lset-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="lset-param-value"><span class="type-annotation">dynamic</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="lset-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="lset-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Sets the list element at index with the provided value.</p>
+<p>An error is returned for out of range indexes.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; lset(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; lset(String key, dynamic value, int index,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;lset&#39;,
-      body: {},
+      body: {
+        &#39;index&#39;: index,
+        &#39;value&#39;: value,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },
