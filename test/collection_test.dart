@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 import 'package:kuzzle/kuzzle_dart.dart';
 
-import 'helpers/kuzzle_test.dart';
+import 'helpers/kuzzle.dart';
 
 void main() {
   final kuzzleTestHelper = KuzzleTestHelper();
