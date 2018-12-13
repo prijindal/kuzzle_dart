@@ -26,7 +26,7 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
-    <li class="self-crumb">zrevrank method</li>
+    <li class="self-crumb">zrevrank&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
   </ol>
   <div class="self-name">zrevrank</div>
   <form class="search navbar-right" role="search">
@@ -185,12 +185,12 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>zrevrank method</h1>
+    <h1>zrevrank&lt;<wbr><span class="type-parameter">T</span>&gt; method</h1>
 
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zrevrank</span>
-(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrank-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrank-param-member"><span class="type-annotation">T</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -201,7 +201,7 @@ with scores in descending order.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrevrank(String key, dynamic member, {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrevrank&lt;T&gt;(String key, T member, {bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;zrevrank&#39;,
       body: {},

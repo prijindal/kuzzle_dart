@@ -26,7 +26,7 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
-    <li class="self-crumb">zadd method</li>
+    <li class="self-crumb">zadd&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
   </ol>
   <div class="self-name">zadd</div>
   <form class="search navbar-right" role="search">
@@ -185,12 +185,12 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>zadd method</h1>
+    <h1>zadd&lt;<wbr><span class="type-parameter">T</span>&gt; method</h1>
 
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zadd</span>
-(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zadd-param-elements"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">int</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">elements</span>, {</span> <span class="parameter" id="zadd-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-ch"><span class="type-annotation">bool</span> <span class="parameter-name">ch</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-incr"><span class="type-annotation">bool</span> <span class="parameter-name">incr</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zadd-param-elements"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">double</span>&gt;</span></span> <span class="parameter-name">elements</span>, {</span> <span class="parameter" id="zadd-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-ch"><span class="type-annotation">bool</span> <span class="parameter-name">ch</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-incr"><span class="type-annotation">bool</span> <span class="parameter-name">incr</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -209,9 +209,9 @@ returns number of added elements</li></ul>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zadd(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zadd&lt;T&gt;(
   String key,
-  Map&lt;int, dynamic&gt; elements, {
+  Map&lt;T, double&gt; elements, {
   bool nx = false,
   bool xx = false,
   bool ch = false,
@@ -223,8 +223,8 @@ returns number of added elements</li></ul>
       body: {
         &#39;elements&#39;: elements.keys
             .map((key) =&gt; {
-                  &#39;field&#39;: key,
-                  &#39;value&#39;: elements[key],
+                  &#39;member&#39;: key,
+                  &#39;score&#39;: elements[key],
                 })
             .toList(),
         &#39;nx&#39;: nx,

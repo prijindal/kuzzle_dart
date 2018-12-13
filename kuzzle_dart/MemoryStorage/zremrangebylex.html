@@ -26,7 +26,7 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
-    <li class="self-crumb">zremrangebylex method</li>
+    <li class="self-crumb">zremrangebylex&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
   </ol>
   <div class="self-name">zremrangebylex</div>
   <form class="search navbar-right" role="search">
@@ -185,12 +185,12 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>zremrangebylex method</h1>
+    <h1>zremrangebylex&lt;<wbr><span class="type-parameter">T</span>&gt; method</h1>
 
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zremrangebylex</span>
-(<wbr><span class="parameter" id="zremrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zremrangebylex-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zremrangebylex-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><span class="parameter" id="zremrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zremrangebylex-param-min"><span class="type-annotation">T</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zremrangebylex-param-max"><span class="type-annotation">T</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -202,7 +202,7 @@ returns no. of removed members</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zremrangebylex(String key, int min, int max,
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zremrangebylex&lt;T&gt;(String key, T min, T max,
         {bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;zremrangebylex&#39;,

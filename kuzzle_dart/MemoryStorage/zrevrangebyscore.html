@@ -26,7 +26,7 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
-    <li class="self-crumb">zrevrangebyscore method</li>
+    <li class="self-crumb">zrevrangebyscore&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
   </ol>
   <div class="self-name">zrevrangebyscore</div>
   <form class="search navbar-right" role="search">
@@ -185,34 +185,36 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>zrevrangebyscore method</h1>
+    <h1>zrevrangebyscore&lt;<wbr><span class="type-parameter">T</span>&gt; method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">zrevrangebyscore</span>
-(<wbr><span class="parameter" id="zrevrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrangebyscore-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrevrangebyscore-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><span class="parameter" id="zrevrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrangebyscore-param-min"><span class="type-annotation">double</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrevrangebyscore-param-max"><span class="type-annotation">double</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrevrangebyscore-param-limit"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">limit</span>, </span> <span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     <section class="desc markdown">
-      <p>Identical to zrangebyscore,
+      <p>Identical to <a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a>,
 except that the sorted set is traversed in descending order.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrevrangebyscore(String key, int min, int max,
-        {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;T&gt;&gt; zrevrangebyscore&lt;T&gt;(String key, double min, double max,
+        {List&lt;String&gt; limit, bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;zrevrangebyscore&#39;,
-      body: {
-        &#39;min&#39;: min,
-        &#39;max&#39;: max,
-      },
+      body: {},
       optionalParams: {
         &#39;_id&#39;: key,
+        &#39;min&#39;: min,
+        &#39;max&#39;: max,
+        &#39;limit&#39;: limit,
       },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt; (response.result as List&lt;dynamic&gt;)
+        .map&lt;T&gt;((dynamic element) =&gt; element as T)
+        .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
