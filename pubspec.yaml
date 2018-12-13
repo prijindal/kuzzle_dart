@@ -16,5 +16,4 @@ dependencies:
 
 dev_dependencies:
   test: any
-  test_coverage: any
-
+  coverage: any

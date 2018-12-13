@@ -1,10 +1,27 @@
 language: dart
 sudo: false
-dart: dev
+dart:
+  - stable
+  - dev
+
+services:
+  - docker
+
+before_script:
+  - mkdir kuzzle-docker
+  - cd kuzzle-docker
+  - wget http://kuzzle.io/docker-compose.yml
+  - sysctl -w vm.max_map_count=262144
+  - docker-compose up -d
+  - until curl "http://localhost:7512/?pretty"; do sleep 10; done
+  - cd ../
+  - ./adminauth.sh
+  - pub get
 
 script:
   - dartanalyzer lib test --fatal-warnings
-  - pub run test_coverage -j 1
+  - pub run test
+  - ./coverage.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
@@ -22,3 +39,4 @@ deploy:
   local-dir: doc/api
   on:
     branch: master
+    condition: $TRAVIS_DART_VERSION=stable

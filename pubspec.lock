@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "2.0.2"
   coverage:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: coverage
       url: "https://pub.dartlang.org"
@@ -134,13 +134,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1+1"
-  json_annotation:
-    dependency: transitive
-    description:
-      name: json_annotation
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   json_rpc_2:
     dependency: transitive
     description:
@@ -155,13 +148,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.7"
-  lcov:
-    dependency: transitive
-    description:
-      name: lcov
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.5.0"
   logging:
     dependency: transitive
     description:
@@ -351,13 +337,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0+1"
-  test_coverage:
-    dependency: "direct dev"
-    description:
-      name: test_coverage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3"
   typed_data:
     dependency: transitive
     description:

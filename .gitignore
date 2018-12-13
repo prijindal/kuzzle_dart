@@ -8,6 +8,6 @@ pubspec.lock
 
 build/
 
-test/.test_coverage.dart
+# test/.test_coverage.dart
 coverage/
 doc/
