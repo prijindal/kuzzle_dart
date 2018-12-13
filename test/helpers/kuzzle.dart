@@ -21,7 +21,7 @@ class KuzzleTestHelper {
   StreamSubscription<dynamic> streamSubscription;
   Kuzzle kuzzle;
 
-  Future<void> connect({bool isImitation = true}) async {
+  Future<void> connect({bool isImitation = false}) async {
     if (isImitation) {
       server = await HttpServer.bind('localhost', 0);
       streamSubscription = server
