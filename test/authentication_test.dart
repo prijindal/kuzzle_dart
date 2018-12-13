@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
 
-import 'test_helpers.dart';
+import 'helpers/kuzzle_test.dart';
 
 void main() {
   final kuzzleTestHelper = KuzzleTestHelper();

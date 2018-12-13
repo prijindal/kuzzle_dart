@@ -2,7 +2,7 @@ import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
 import 'package:kuzzle/kuzzle_dart.dart';
 
-import 'test_helpers.dart';
+import 'helpers/kuzzle_test.dart';
 
 void main() {
   final kuzzleTestHelper = KuzzleTestHelper();
@@ -33,13 +33,15 @@ void main() {
       });
 
       test('AND', () async {
-        expect(await memoryStorage.bitop('num3', 'AND', ['num1', 'num2']),
+        expect(
+            await memoryStorage.bitop('num3', 'AND', <String>['num1', 'num2']),
             equals(1));
         expect(await memoryStorage.get('num3'), equals('0'));
       });
 
       test('OR', () async {
-        expect(await memoryStorage.bitop('num3', 'OR', ['num1', 'num2']),
+        expect(
+            await memoryStorage.bitop('num3', 'OR', <String>['num1', 'num2']),
             equals(1));
         expect(await memoryStorage.get('num3'), equals('6'));
       });
@@ -64,13 +66,13 @@ void main() {
     });
 
     test('del', () async {
-      expect(await memoryStorage.del(['num1', 'num2']), equals(2));
+      expect(await memoryStorage.del(<String>['num1', 'num2']), equals(2));
     });
 
     test('exists', () async {
-      expect(await memoryStorage.exists(['num1', 'num2']), equals(0));
+      expect(await memoryStorage.exists(<String>['num1', 'num2']), equals(0));
       expect(await memoryStorage.set('num2', '4'), 'OK');
-      expect(await memoryStorage.exists(['num1', 'num2']), equals(1));
+      expect(await memoryStorage.exists(<String>['num1', 'num2']), equals(1));
     });
 
     test('expire', () async {
@@ -87,7 +89,10 @@ void main() {
       test('geoadd', () async {
         point1 = GeoPositionPoint(lon: 1, lat: 2, name: 'First position');
         point2 = GeoPositionPoint(lon: 5, lat: 1, name: 'Second position');
-        expect(await memoryStorage.geoadd('num1', [point1, point2]), 2);
+        expect(
+            await memoryStorage
+                .geoadd('num1', <GeoPositionPoint>[point1, point2]),
+            2);
       });
 
       test('geodist', () async {
@@ -97,25 +102,26 @@ void main() {
 
       test('geohash', () async {
         expect(
-            (await memoryStorage.geohash('num1', [point1.name, point2.name]))
+            (await memoryStorage
+                    .geohash('num1', <String>[point1.name, point2.name]))
                 .length,
             2);
       });
 
       test('geopos', () async {
-        final gepositions =
-            await memoryStorage.geopos('num1', [point1.name, point2.name]);
+        final gepositions = await memoryStorage
+            .geopos('num1', <String>[point1.name, point2.name]);
         expect(gepositions.length, equals(2));
       });
 
       test('georadius', () async {
         expect(await memoryStorage.georadius('num1', point1.lat, point2.lon, 5),
-            []);
+            <int>[]);
       });
 
       test('georadiusbymember', () async {
         expect(await memoryStorage.georadiusbymember('num1', point1.name, 5),
-            [point1.name]);
+            <String>[point1.name]);
       });
     });
 
@@ -144,7 +150,8 @@ void main() {
       });
 
       test('hgetall', () async {
-        expect(await memoryStorage.hgetall('hash1'), {'h1': '5'});
+        expect(
+            await memoryStorage.hgetall('hash1'), <String, dynamic>{'h1': '5'});
       });
 
       test('hincrby', () async {
@@ -158,7 +165,7 @@ void main() {
       });
 
       test('hkeys', () async {
-        expect(await memoryStorage.hkeys('hash1'), ['h1', 'h2']);
+        expect(await memoryStorage.hkeys('hash1'), <String>['h1', 'h2']);
       });
 
       test('hlen', () async {
@@ -166,15 +173,17 @@ void main() {
       });
 
       test('hdel', () async {
-        expect(await memoryStorage.hdel('hash1', ['h2']), 1);
+        expect(await memoryStorage.hdel('hash1', <String>['h2']), 1);
       });
 
       test('hmget', () async {
-        expect(await memoryStorage.hmget('hash1', ['h1']), ['6']);
+        expect(
+            await memoryStorage.hmget('hash1', <String>['h1']), <String>['6']);
       });
 
       test('hmset', () async {
-        expect(await memoryStorage.hmset('hash1', {'h1': 2}), 'OK');
+        expect(await memoryStorage.hmset('hash1', <String, dynamic>{'h1': 2}),
+            'OK');
       });
 
       test('hscan', () async {
@@ -191,7 +200,7 @@ void main() {
       });
 
       test('hvals', () async {
-        expect(await memoryStorage.hvals('hash1'), ['2', '5']);
+        expect(await memoryStorage.hvals('hash1'), <String>['2', '5']);
       });
     });
     test('incr', () async {
@@ -213,9 +222,9 @@ void main() {
     });
 
     test('keys', () async {
-      final keys = await memoryStorage.keys()
-        ..sort();
-      expect(keys, ['foo', 'hash1', 'hello', 'num1', 'num3']);
+      final keys = await memoryStorage.keys();
+      expect(
+          keys, containsAll(<String>['foo', 'hash1', 'hello', 'num1', 'num3']));
     });
 
     group('list', () {
@@ -469,87 +478,87 @@ void main() {
 
     group('skip', () {
       test('zadd', () async {
-        expect(await memoryStorage.zadd('num1'), 1);
+        expect(await memoryStorage.zadd('zset1', <int, dynamic>{}), 1);
       });
 
       test('zcard', () async {
-        expect(await memoryStorage.zcard('num1'), 1);
+        expect(await memoryStorage.zcard('zset1'), 1);
       });
 
       test('zcount', () async {
-        expect(await memoryStorage.zcount('num1'), 1);
+        expect(await memoryStorage.zcount('zset1', 0, 10), 1);
       });
 
       test('zincrby', () async {
-        expect(await memoryStorage.zincrby('num1'), 1);
+        expect(await memoryStorage.zincrby('zset1', 1), 1);
       });
 
       test('zinterstore', () async {
-        expect(await memoryStorage.zinterstore('num1'), 1);
+        expect(await memoryStorage.zinterstore('zset1', []), 1);
       });
 
       test('zlexcount', () async {
-        expect(await memoryStorage.zlexcount('num1'), 1);
+        expect(await memoryStorage.zlexcount('zset1', 1, 2), 1);
       });
 
       test('zrange', () async {
-        expect(await memoryStorage.zrange('num1'), 1);
+        expect(await memoryStorage.zrange('zset1', 1, 2), 1);
       });
 
       test('zrangebylex', () async {
-        expect(await memoryStorage.zrangebylex('num1'), 1);
+        expect(await memoryStorage.zrangebylex('zset1', 1, 2), 1);
       });
 
       test('zrangebyscore', () async {
-        expect(await memoryStorage.zrangebyscore('num1'), 1);
+        expect(await memoryStorage.zrangebyscore('zset1', 1, 2), 1);
       });
 
       test('zrank', () async {
-        expect(await memoryStorage.zrank('num1'), 1);
+        expect(await memoryStorage.zrank('zset1', ''), 1);
       });
 
       test('zrem', () async {
-        expect(await memoryStorage.zrem('num1'), 1);
+        expect(await memoryStorage.zrem('zset1', []), 1);
       });
 
       test('zremrangebylex', () async {
-        expect(await memoryStorage.zremrangebylex('num1'), 1);
+        expect(await memoryStorage.zremrangebylex('zset1', 1, 2), 1);
       });
 
       test('zremrangebyrank', () async {
-        expect(await memoryStorage.zremrangebyrank('num1'), 1);
+        expect(await memoryStorage.zremrangebyrank('zset1', 1, 2), 1);
       });
 
       test('zremrangebyscore', () async {
-        expect(await memoryStorage.zremrangebyscore('num1'), 1);
+        expect(await memoryStorage.zremrangebyscore('zset1', 1, 2), 1);
       });
 
       test('zrevrange', () async {
-        expect(await memoryStorage.zrevrange('num1'), 1);
+        expect(await memoryStorage.zrevrange('zset1', 1, 2), 1);
       });
 
       test('zrevrangebylex', () async {
-        expect(await memoryStorage.zrevrangebylex('num1'), 1);
+        expect(await memoryStorage.zrevrangebylex('zset1', 1, 2), 1);
       });
 
       test('zrevrangebyscore', () async {
-        expect(await memoryStorage.zrevrangebyscore('num1'), 1);
+        expect(await memoryStorage.zrevrangebyscore('zset1', 1, 2), 1);
       });
 
       test('zrevrank', () async {
-        expect(await memoryStorage.zrevrank('num1'), 1);
+        expect(await memoryStorage.zrevrank('zset1', 1), 1);
       });
 
       test('zscan', () async {
-        expect(await memoryStorage.zscan('num1'), 1);
-      });
+        expect(await memoryStorage.zscan('zset1'), 1);
+      }, skip: 'Not implemented yet');
 
       test('zscore', () async {
-        expect(await memoryStorage.zscore('num1'), 1);
+        expect(await memoryStorage.zscore('zset1', 1), 1);
       });
 
       test('zunionstore', () async {
-        expect(await memoryStorage.zunionstore('num1'), 1);
+        expect(await memoryStorage.zunionstore('zset1', []), 1);
       });
     }, skip: 'Not implemented yet');
 

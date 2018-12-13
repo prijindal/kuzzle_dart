@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:kuzzle/kuzzle_dart.dart';
 import 'package:web_socket_channel/io.dart';
 
-import 'package:kuzzle/src/imitation.dart';
+import 'imitation.dart';
 
 void onServerTransformData(WebSocket webSocket) {
   final imitationServer = ImitationServer();

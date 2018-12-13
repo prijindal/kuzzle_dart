@@ -1,7 +1,6 @@
 class ImitationDatabase {
   // {index: {collection: {documentid:documentbody}}}
   final Map<String, dynamic> db = <String, dynamic>{};
-  final Map<String, dynamic> cache = <String, dynamic>{};
 
   bool doesIndexExist(String index) => db.containsKey(index);
   bool doesCollectionExist(Map<String, dynamic> jsonRequest) =>

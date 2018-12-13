@@ -1383,14 +1383,54 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zadd(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Adds the specified elements to the sorted set stored at [key].
+  ///
+  /// If the key does not exist, it is created, holding an empty sorted set.
+  /// If it already exists and does not hold a sorted set, an error is returned.
+  /// Scores are expressed as floating point numbers.
+  ///
+  /// If a member to insert is already in the sorted set, its score is updated
+  /// and the member is reinserted at the right position in the set.
+  /// Optional parameters may be provided to change the default behavior:
+  ///   * [nx]: only add new elements, do not update existing ones
+  ///   * [xx]: never add new elements, update only existing ones
+  ///   * [ch]: instead of returning the number of added elements,
+  ///    returns the number of changes performed
+  ///   * [incr]: instead of adding elements,
+  ///    increments the existing member with the provided score.
+  ///    Only one score/element pair can be specified if this option is set
+  /// returns number of added elements
+  Future<int> zadd(
+    String key,
+    Map<int, dynamic> elements, {
+    bool nx = false,
+    bool xx = false,
+    bool ch = false,
+    bool incr = false,
+    bool queuable = true,
+  }) =>
+      addNetworkQuery(
         'zadd',
-        body: {},
+        body: {
+          'elements': elements.keys
+              .map((key) => {
+                    'field': key,
+                    'value': elements[key],
+                  })
+              .toList(),
+          'nx': nx,
+          'xx': xx,
+          'ch': ch,
+          'incr': incr,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
+
+  /// Returns the number of elements held by a sorted set.
   Future<int> zcard(String key, {bool queuable = true}) => addNetworkQuery(
         'zcard',
         body: {},
@@ -1399,32 +1439,75 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zcount(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the number of elements held by a sorted set with a
+  /// score between the provided min and max values.
+  ///
+  /// By default, the provided min and max values are inclusive.
+  /// This behavior can be changed using the syntax in [zrangebyscore].
+  Future<int> zcount(String key, int min, int max, {bool queuable = true}) =>
+      addNetworkQuery(
         'zcount',
         body: {},
         optionalParams: {
           '_id': key,
+          'min': min,
+          'max': max,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zincrby(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Increments the score of a member in a sorted set by the provided value.
+  ///
+  /// returns new score value
+  Future<int> zincrby(String key, dynamic member,
+          {int value = 1, bool queuable = true}) =>
+      addNetworkQuery(
         'zincrby',
-        body: {},
+        body: {
+          'member': member,
+          'value': value,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
-      ).then((response) => response.result);
-  Future<int> zinterstore(String key, {bool queuable = true}) =>
+      ).then((response) => response.result as int);
+
+  /// Computes the intersection of the provided sorted sets given by
+  /// the specified keys,and stores the result in a new sorted set at key.
+  ///
+  /// Optional Parameters:
+  ///   * [weights]: specifies a multiplication factor for each input sorted set
+  ///   * [aggregate] (default: sum): specifies how
+  ///    members' scores are aggregated during the intersection
+  /// returns the number of elements in the new sorted set>
+  Future<int> zinterstore(
+    String key,
+    List<String> keys, {
+    List<String> weights,
+    String aggregate,
+    bool queuable = true,
+  }) =>
       addNetworkQuery(
         'zinterstore',
-        body: {},
+        body: {
+          'keys': keys,
+          'weights': weights,
+          'aggregate': aggregate,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zlexcount(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Counts elements in a sorted set where all members have equal score,
+  /// using lexicographical ordering.
+  ///
+  /// The min and max values are inclusive by default.
+  Future<int> zlexcount(String key, int min, int max, {bool queuable = true}) =>
+      addNetworkQuery(
         'zlexcount',
         body: {},
         optionalParams: {
@@ -1432,76 +1515,151 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrange(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns elements from a sorted set depending on their position,
+  /// from a start position index to a stop position index (inclusive).
+  ///
+  /// The withscores option includes the respective elements' scores
+  Future<List<String>> zrange(String key, int start, int stop,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'zrange',
         body: {},
         optionalParams: {
           '_id': key,
+          'start': start,
+          'stop': stop,
         },
         queuable: queuable,
-      ).then((response) => response.result);
-  Future<int> zrangebylex(String key, {bool queuable = true}) =>
+      ).then((response) => (response.result as List<dynamic>)
+          .map<String>((dynamic element) => element as String)
+          .toList());
+
+  /// Returns elements in a sorted set where all members have equal score,
+  /// using lexicographical ordering.
+  ///
+  /// The min and max values are inclusive by default.
+  /// The optional [limit] argument can be used to only get a range
+  /// of the matching elements (similar to SELECT LIMIT offset, count in SQL).
+  Future<int> zrangebylex(String key, int min, int max,
+          {List<String> limit, bool queuable = true}) =>
       addNetworkQuery(
         'zrangebylex',
         body: {},
         optionalParams: {
           '_id': key,
+          'min': min,
+          'max': max,
+          'limit': limit,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrangebyscore(String key, {bool queuable = true}) =>
+
+  /// Returns all the elements in the sorted set at key with a
+  /// score between min and max (inclusive).
+  /// The elements are considered to be ordered from low to high scores.
+  ///
+  /// The optional [limit] argument can be used to only get a range
+  /// of the matching elements (similar to SELECT LIMIT offset, count in SQL).
+  Future<int> zrangebyscore(String key, int min, int max,
+          {List<String> limit, bool queuable = true}) =>
       addNetworkQuery(
         'zrangebyscore',
         body: {},
         optionalParams: {
           '_id': key,
+          'min': min,
+          'max': max,
+          'limit': limit,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrank(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the position of an element in a sorted set,
+  /// with scores in ascending order.
+  /// The index returned is 0-based (the lowest score member has an index of 0).
+  Future<int> zrank(String key, dynamic member, {bool queuable = true}) =>
+      addNetworkQuery(
         'zrank',
         body: {},
         optionalParams: {
           '_id': key,
+          'member': member,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrem(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Removes members from a sorted set.
+  Future<int> zrem(String key, List<String> members, {bool queuable = true}) =>
+      addNetworkQuery(
         'zrem',
-        body: {},
+        body: {
+          'members': members,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zremrangebylex(String key, {bool queuable = true}) =>
+
+  /// Removes members from a sorted set where all elements have the same score,
+  /// using lexicographical ordering.
+  ///
+  /// The min and max interval are inclusive.
+  /// returns no. of removed members
+  Future<int> zremrangebylex(String key, int min, int max,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'zremrangebylex',
-        body: {},
+        body: {
+          'min': min,
+          'max': max,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zremrangebyrank(String key, {bool queuable = true}) =>
+
+  /// Removes members from a sorted set with their
+  /// position in the set between start and stop (inclusive).
+  ///
+  /// Positions are 0-based, meaning the first member has a position of 0.
+  Future<int> zremrangebyrank(String key, int start, int stop,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'zremrangebyrank',
-        body: {},
+        body: {
+          'start': start,
+          'stop': stop,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zremrangebyscore(String key, {bool queuable = true}) =>
+
+  /// Removes members from a sorted set with a score between min and max.
+  ///The min and max values are inclusive
+  Future<int> zremrangebyscore(String key, int min, int max,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'zremrangebyscore',
-        body: {},
+        body: {
+          'min': min,
+          'max': max,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrevrange(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Identical to [zrange],
+  /// except that the sorted set is traversed in descending order.
+  Future<int> zrevrange(String key, int start, int stop,
+          {bool queuable = true}) =>
+      addNetworkQuery(
         'zrevrange',
         body: {},
         optionalParams: {
@@ -1509,29 +1667,50 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrevrangebylex(String key, {bool queuable = true}) =>
+
+  /// Identical to [zrangebylex],
+  /// except that the sorted set is traversed in descending order.
+  Future<int> zrevrangebylex(String key, int min, int max,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'zrevrangebylex',
-        body: {},
+        body: {
+          'min': min,
+          'max': max,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrevrangebyscore(String key, {bool queuable = true}) =>
+
+  /// Identical to zrangebyscore,
+  /// except that the sorted set is traversed in descending order.
+  Future<int> zrevrangebyscore(String key, int min, int max,
+          {bool queuable = true}) =>
       addNetworkQuery(
         'zrevrangebyscore',
-        body: {},
+        body: {
+          'min': min,
+          'max': max,
+        },
         optionalParams: {
           '_id': key,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zrevrank(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the position of an element in a sorted set,
+  /// with scores in descending order.
+  ///
+  /// The index returned is 0-based (the lowest score member has an index of 0).
+  Future<int> zrevrank(String key, dynamic member, {bool queuable = true}) =>
+      addNetworkQuery(
         'zrevrank',
         body: {},
         optionalParams: {
           '_id': key,
+          'member': member,
         },
         queuable: queuable,
       ).then((response) => response.result);
@@ -1543,18 +1722,35 @@ class MemoryStorage extends KuzzleObject {
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zscore(String key, {bool queuable = true}) => addNetworkQuery(
+
+  /// Returns the score of an element in a sorted set.
+  Future<int> zscore(String key, dynamic member, {bool queuable = true}) =>
+      addNetworkQuery(
         'zscore',
         body: {},
         optionalParams: {
           '_id': key,
+          'member': member,
         },
         queuable: queuable,
       ).then((response) => response.result);
-  Future<int> zunionstore(String key, {bool queuable = true}) =>
+
+  /// Computes the union of the provided sorted sets given by the
+  /// specified keys, and stores the result in a new sorted set at key.
+  Future<int> zunionstore(
+    String key,
+    List<String> keys, {
+    List<String> weights,
+    String aggregate,
+    bool queuable = true,
+  }) =>
       addNetworkQuery(
         'zunionstore',
-        body: {},
+        body: {
+          'keys': keys,
+          'weights': weights,
+          'aggregate': aggregate,
+        },
         optionalParams: {
           '_id': key,
         },
