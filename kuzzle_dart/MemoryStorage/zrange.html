@@ -188,22 +188,33 @@
     <h1>zrange method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
       <span class="name ">zrange</span>
-(<wbr><span class="parameter" id="zrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrange-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="zrange-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Returns elements from a sorted set depending on their position,
+from a start position index to a stop position index (inclusive).</p>
+<p>The withscores option includes the respective elements' scores</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrange(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;String&gt;&gt; zrange(String key, int start, int stop,
+        {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;zrange&#39;,
       body: {},
       optionalParams: {
         &#39;_id&#39;: key,
+        &#39;start&#39;: start,
+        &#39;stop&#39;: stop,
       },
       queuable: queuable,
-    ).then((response) =&gt; response.result);</code></pre>
+    ).then((response) =&gt; (response.result as List&lt;dynamic&gt;)
+        .map&lt;String&gt;((dynamic element) =&gt; element as String)
+        .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

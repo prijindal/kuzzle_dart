@@ -1038,12 +1038,12 @@ If the destination key already exists, it is overwritten.
           
 </dd>
         <dt id="zadd" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zadd.html">zadd</a></span><span class="signature">(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zadd.html">zadd</a></span><span class="signature">(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zadd-param-elements"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">int</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">elements</span>, {</span> <span class="parameter" id="zadd-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-ch"><span class="type-annotation">bool</span> <span class="parameter-name">ch</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-incr"><span class="type-annotation">bool</span> <span class="parameter-name">incr</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Adds the specified elements to the sorted set stored at <code>key</code>. <a href="kuzzle_dart/MemoryStorage/zadd.html">[...]</a>
           
 </dd>
         <dt id="zcard" class="callable">
@@ -1052,151 +1052,167 @@ If the destination key already exists, it is overwritten.
           </span>
           </dt>
         <dd>
-          
+          Returns the number of elements held by a sorted set.
           
 </dd>
         <dt id="zcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcount.html">zcount</a></span><span class="signature">(<wbr><span class="parameter" id="zcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zcount.html">zcount</a></span><span class="signature">(<wbr><span class="parameter" id="zcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zcount-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zcount-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the number of elements held by a sorted set with a
+score between the provided min and max values. <a href="kuzzle_dart/MemoryStorage/zcount.html">[...]</a>
           
 </dd>
         <dt id="zincrby" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zincrby.html">zincrby</a></span><span class="signature">(<wbr><span class="parameter" id="zincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zincrby.html">zincrby</a></span><span class="signature">(<wbr><span class="parameter" id="zincrby-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zincrby-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zincrby-param-value"><span class="type-annotation">int</span> <span class="parameter-name">value</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="zincrby-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Increments the score of a member in a sorted set by the provided value. <a href="kuzzle_dart/MemoryStorage/zincrby.html">[...]</a>
           
 </dd>
         <dt id="zinterstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zinterstore.html">zinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="zinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zinterstore.html">zinterstore</a></span><span class="signature">(<wbr><span class="parameter" id="zinterstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zinterstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="zinterstore-param-weights"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">weights</span>, </span> <span class="parameter" id="zinterstore-param-aggregate"><span class="type-annotation">String</span> <span class="parameter-name">aggregate</span>, </span> <span class="parameter" id="zinterstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Computes the intersection of the provided sorted sets given by
+the specified keys,and stores the result in a new sorted set at key. <a href="kuzzle_dart/MemoryStorage/zinterstore.html">[...]</a>
           
 </dd>
         <dt id="zlexcount" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zlexcount.html">zlexcount</a></span><span class="signature">(<wbr><span class="parameter" id="zlexcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zlexcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zlexcount.html">zlexcount</a></span><span class="signature">(<wbr><span class="parameter" id="zlexcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zlexcount-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zlexcount-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zlexcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Counts elements in a sorted set where all members have equal score,
+using lexicographical ordering. <a href="kuzzle_dart/MemoryStorage/zlexcount.html">[...]</a>
           
 </dd>
         <dt id="zrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrange-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="zrange-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="zrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns elements from a sorted set depending on their position,
+from a start position index to a stop position index (inclusive). <a href="kuzzle_dart/MemoryStorage/zrange.html">[...]</a>
           
 </dd>
         <dt id="zrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrangebylex-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrangebylex-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrangebylex-param-limit"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">limit</span>, </span> <span class="parameter" id="zrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns elements in a sorted set where all members have equal score,
+using lexicographical ordering. <a href="kuzzle_dart/MemoryStorage/zrangebylex.html">[...]</a>
           
 </dd>
         <dt id="zrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrangebyscore-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrangebyscore-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrangebyscore-param-limit"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">limit</span>, </span> <span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns all the elements in the sorted set at key with a
+score between min and max (inclusive).
+The elements are considered to be ordered from low to high scores. <a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">[...]</a>
           
 </dd>
         <dt id="zrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrank.html">zrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrank.html">zrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrank-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the position of an element in a sorted set,
+with scores in ascending order.
+The index returned is 0-based (the lowest score member has an index of 0).
           
 </dd>
         <dt id="zrem" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrem.html">zrem</a></span><span class="signature">(<wbr><span class="parameter" id="zrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrem.html">zrem</a></span><span class="signature">(<wbr><span class="parameter" id="zrem-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrem-param-members"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">members</span>, {</span> <span class="parameter" id="zrem-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes members from a sorted set.
           
 </dd>
         <dt id="zremrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">zremrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">zremrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zremrangebylex-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zremrangebylex-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zremrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes members from a sorted set where all elements have the same score,
+using lexicographical ordering. <a href="kuzzle_dart/MemoryStorage/zremrangebylex.html">[...]</a>
           
 </dd>
         <dt id="zremrangebyrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">zremrangebyrank</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebyrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">zremrangebyrank</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zremrangebyrank-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="zremrangebyrank-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="zremrangebyrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes members from a sorted set with their
+position in the set between start and stop (inclusive). <a href="kuzzle_dart/MemoryStorage/zremrangebyrank.html">[...]</a>
           
 </dd>
         <dt id="zremrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyscore.html">zremrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zremrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zremrangebyscore.html">zremrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zremrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zremrangebyscore-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zremrangebyscore-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zremrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Removes members from a sorted set with a score between min and max.
+The min and max values are inclusive
           
 </dd>
         <dt id="zrevrange" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrange.html">zrevrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrange.html">zrevrange</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrange-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrange-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="zrevrange-param-stop"><span class="type-annotation">int</span> <span class="parameter-name">stop</span>, {</span> <span class="parameter" id="zrevrange-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Identical to <a href="kuzzle_dart/MemoryStorage/zrange.html">zrange</a>,
+except that the sorted set is traversed in descending order.
           
 </dd>
         <dt id="zrevrangebylex" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebylex.html">zrevrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebylex.html">zrevrangebylex</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebylex-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrangebylex-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrevrangebylex-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrevrangebylex-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Identical to <a href="kuzzle_dart/MemoryStorage/zrangebylex.html">zrangebylex</a>,
+except that the sorted set is traversed in descending order.
           
 </dd>
         <dt id="zrevrangebyscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebyscore.html">zrevrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrangebyscore.html">zrevrangebyscore</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrangebyscore-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrevrangebyscore-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrevrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Identical to zrangebyscore,
+except that the sorted set is traversed in descending order.
           
 </dd>
         <dt id="zrevrank" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrank.html">zrevrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zrevrank.html">zrevrank</a></span><span class="signature">(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrank-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the position of an element in a sorted set,
+with scores in descending order. <a href="kuzzle_dart/MemoryStorage/zrevrank.html">[...]</a>
           
 </dd>
         <dt id="zscan" class="callable">
@@ -1209,21 +1225,22 @@ If the destination key already exists, it is overwritten.
           
 </dd>
         <dt id="zscore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscore.html">zscore</a></span><span class="signature">(<wbr><span class="parameter" id="zscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zscore.html">zscore</a></span><span class="signature">(<wbr><span class="parameter" id="zscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zscore-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns the score of an element in a sorted set.
           
 </dd>
         <dt id="zunionstore" class="callable">
-          <span class="name"><a href="kuzzle_dart/MemoryStorage/zunionstore.html">zunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="zunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/MemoryStorage/zunionstore.html">zunionstore</a></span><span class="signature">(<wbr><span class="parameter" id="zunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zunionstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="zunionstore-param-weights"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">weights</span>, </span> <span class="parameter" id="zunionstore-param-aggregate"><span class="type-annotation">String</span> <span class="parameter-name">aggregate</span>, </span> <span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Computes the union of the provided sorted sets given by the
+specified keys, and stores the result in a new sorted set at key.
           
 </dd>
         <dt id="addNetworkQuery" class="callable inherited">

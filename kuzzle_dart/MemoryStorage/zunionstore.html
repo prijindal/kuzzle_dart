@@ -190,16 +190,30 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zunionstore</span>
-(<wbr><span class="parameter" id="zunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zunionstore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zunionstore-param-keys"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">keys</span>, {</span> <span class="parameter" id="zunionstore-param-weights"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">weights</span>, </span> <span class="parameter" id="zunionstore-param-aggregate"><span class="type-annotation">String</span> <span class="parameter-name">aggregate</span>, </span> <span class="parameter" id="zunionstore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Computes the union of the provided sorted sets given by the
+specified keys, and stores the result in a new sorted set at key.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zunionstore(String key, {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zunionstore(
+  String key,
+  List&lt;String&gt; keys, {
+  List&lt;String&gt; weights,
+  String aggregate,
+  bool queuable = true,
+}) =&gt;
     addNetworkQuery(
       &#39;zunionstore&#39;,
-      body: {},
+      body: {
+        &#39;keys&#39;: keys,
+        &#39;weights&#39;: weights,
+        &#39;aggregate&#39;: aggregate,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },

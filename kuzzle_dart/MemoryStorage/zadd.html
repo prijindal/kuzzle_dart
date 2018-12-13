@@ -190,15 +190,48 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zadd</span>
-(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zadd-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zadd-param-elements"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">int</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">elements</span>, {</span> <span class="parameter" id="zadd-param-nx"><span class="type-annotation">bool</span> <span class="parameter-name">nx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-xx"><span class="type-annotation">bool</span> <span class="parameter-name">xx</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-ch"><span class="type-annotation">bool</span> <span class="parameter-name">ch</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-incr"><span class="type-annotation">bool</span> <span class="parameter-name">incr</span>: <span class="default-value">false</span>, </span> <span class="parameter" id="zadd-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Adds the specified elements to the sorted set stored at <code>key</code>.</p>
+<p>If the key does not exist, it is created, holding an empty sorted set.
+If it already exists and does not hold a sorted set, an error is returned.
+Scores are expressed as floating point numbers.</p>
+<p>If a member to insert is already in the sorted set, its score is updated
+and the member is reinserted at the right position in the set.
+Optional parameters may be provided to change the default behavior:</p><ul><li><code>nx</code>: only add new elements, do not update existing ones</li><li><code>xx</code>: never add new elements, update only existing ones</li><li><code>ch</code>: instead of returning the number of added elements,
+   returns the number of changes performed</li><li><code>incr</code>: instead of adding elements,
+   increments the existing member with the provided score.
+   Only one score/element pair can be specified if this option is set
+returns number of added elements</li></ul>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zadd(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zadd(
+  String key,
+  Map&lt;int, dynamic&gt; elements, {
+  bool nx = false,
+  bool xx = false,
+  bool ch = false,
+  bool incr = false,
+  bool queuable = true,
+}) =&gt;
+    addNetworkQuery(
       &#39;zadd&#39;,
-      body: {},
+      body: {
+        &#39;elements&#39;: elements.keys
+            .map((key) =&gt; {
+                  &#39;field&#39;: key,
+                  &#39;value&#39;: elements[key],
+                })
+            .toList(),
+        &#39;nx&#39;: nx,
+        &#39;xx&#39;: xx,
+        &#39;ch&#39;: ch,
+        &#39;incr&#39;: incr,
+      },
       optionalParams: {
         &#39;_id&#39;: key,
       },

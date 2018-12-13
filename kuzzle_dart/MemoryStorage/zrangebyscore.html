@@ -190,18 +190,29 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zrangebyscore</span>
-(<wbr><span class="parameter" id="zrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zrangebyscore-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrangebyscore-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zrangebyscore-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zrangebyscore-param-limit"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">limit</span>, </span> <span class="parameter" id="zrangebyscore-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Returns all the elements in the sorted set at key with a
+score between min and max (inclusive).
+The elements are considered to be ordered from low to high scores.</p>
+<p>The optional <code>limit</code> argument can be used to only get a range
+of the matching elements (similar to SELECT LIMIT offset, count in SQL).</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrangebyscore(String key, {bool queuable = true}) =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrangebyscore(String key, int min, int max,
+        {List&lt;String&gt; limit, bool queuable = true}) =&gt;
     addNetworkQuery(
       &#39;zrangebyscore&#39;,
       body: {},
       optionalParams: {
         &#39;_id&#39;: key,
+        &#39;min&#39;: min,
+        &#39;max&#39;: max,
+        &#39;limit&#39;: limit,
       },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>

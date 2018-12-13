@@ -190,17 +190,26 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zcount</span>
-(<wbr><span class="parameter" id="zcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zcount-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zcount-param-min"><span class="type-annotation">int</span> <span class="parameter-name">min</span>, </span> <span class="parameter" id="zcount-param-max"><span class="type-annotation">int</span> <span class="parameter-name">max</span>, {</span> <span class="parameter" id="zcount-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Returns the number of elements held by a sorted set with a
+score between the provided min and max values.</p>
+<p>By default, the provided min and max values are inclusive.
+This behavior can be changed using the syntax in <a href="kuzzle_dart/MemoryStorage/zrangebyscore.html">zrangebyscore</a>.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zcount(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zcount(String key, int min, int max, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;zcount&#39;,
       body: {},
       optionalParams: {
         &#39;_id&#39;: key,
+        &#39;min&#39;: min,
+        &#39;max&#39;: max,
       },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>

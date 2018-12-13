@@ -190,17 +190,24 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
       <span class="name ">zrevrank</span>
-(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="zrevrank-param-key"><span class="type-annotation">String</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="zrevrank-param-member"><span class="type-annotation">dynamic</span> <span class="parameter-name">member</span>, {</span> <span class="parameter" id="zrevrank-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Returns the position of an element in a sorted set,
+with scores in descending order.</p>
+<p>The index returned is 0-based (the lowest score member has an index of 0).</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrevrank(String key, {bool queuable = true}) =&gt; addNetworkQuery(
+      <pre class="language-dart"><code class="language-dart">Future&lt;int&gt; zrevrank(String key, dynamic member, {bool queuable = true}) =&gt;
+    addNetworkQuery(
       &#39;zrevrank&#39;,
       body: {},
       optionalParams: {
         &#39;_id&#39;: key,
+        &#39;member&#39;: member,
       },
       queuable: queuable,
     ).then((response) =&gt; response.result);</code></pre>
