@@ -730,7 +730,7 @@ class ImitationRedis {
         final double min = parameters['min'];
         final double max = parameters['max'];
         final rlements = [];
-        var elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
         elements.sort(ZElement.compare);
         for (var element in elements.reversed) {
           if (element.compareScore(min, max)) {

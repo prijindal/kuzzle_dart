@@ -40,4 +40,7 @@ class User extends Object {
           ).then<Profile>(
               (response) => Profile.fromMap(security, response.result)))
       .toList());
+
+  Future<String> delete({String refresh = 'false'}) =>
+      security.deleteUser(id, refresh: refresh);
 }

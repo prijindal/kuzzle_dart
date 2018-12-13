@@ -81,12 +81,39 @@ class ImitationServer {
       case 'getMyRights':
       case 'getStrategies':
       case 'login':
-        response['result'] = <String, dynamic>{
-          'uuid': Uuid().v1(),
-          'jwt': Uuid().v1(),
-          'expiresAt': 1321085955000,
-          'ttl': 360000
-        };
+        final body = jsonRequest['body'];
+        if (body != null &&
+            body['username'] == 'admin' &&
+            body['password'] == 'admin') {
+          response['result'] = <String, dynamic>{
+            'uuid': Uuid().v1(),
+            'jwt': Uuid().v1(),
+            'expiresAt': 1321085955000,
+            'ttl': 360000
+          };
+        }
+        if (!imitationDatabase.db.containsKey('users')) {
+          imitationDatabase.db['users'] = <String, dynamic>{};
+        }
+        if ((imitationDatabase.db['users'] as Map<String, dynamic>)
+            .containsKey(body['username'])) {
+          final userInfo = (imitationDatabase.db['users']
+              as Map<String, dynamic>)[body['username']];
+          if (userInfo['password'] == body['password']) {
+            response['result'] = <String, dynamic>{
+              '_id': userInfo['_id'],
+              'jwt': Uuid().v1(),
+              'expiresAt': 1321085955000,
+              'ttl': 360000
+            };
+          } else {
+            response['status'] = 401;
+            response['id'] = -1;
+          }
+        } else {
+          response['status'] = 401;
+          response['id'] = -1;
+        }
         break;
       case 'logout':
       case 'updateMyCredentials':
@@ -511,10 +538,37 @@ class ImitationServer {
       case 'createRestrictedUser':
       case 'createRole':
       case 'createUser':
+        final body = jsonRequest['body'];
+        final content = body['content'];
+        final credentials = body['credentials']['local'];
+        if (!imitationDatabase.db.containsKey('users')) {
+          imitationDatabase.db['users'] = <String, dynamic>{};
+        }
+        (imitationDatabase.db['users']
+                as Map<String, dynamic>)[credentials['username']] =
+            <String, dynamic>{
+          '_id': Uuid().v1(),
+          '_source': content,
+          'password': credentials['password'],
+          '_version': 1,
+        };
+        response['result'] = (imitationDatabase.db['users']
+            as Map<String, dynamic>)[credentials['username']];
+        break;
       case 'deleteCredentials':
       case 'deleteProfile':
       case 'deleteRole':
       case 'deleteUser':
+        final id = jsonRequest['_id'];
+        if (!imitationDatabase.db.containsKey('users')) {
+          imitationDatabase.db['users'] = <String, dynamic>{};
+        }
+        (imitationDatabase.db['users'] as Map<String, dynamic>)
+            .removeWhere((username, content) => content['_id'] == id);
+        response['result'] = {
+          '_id': id,
+        };
+        break;
       case 'getAllCredentialFields':
       case 'getCredentialFields':
       case 'getCredentials':

@@ -46,6 +46,23 @@ class Security extends KuzzleObject {
         },
       ).then((response) => User.fromMap(this, response.result));
 
+  /// Given a user [id], deletes the corresponding user from Kuzzle.
+  ///
+  /// The optional parameter [refresh] can be used with the value
+  /// wait_for in order to wait for the user's deletion to be indexed.
+  Future<String> deleteUser(
+    String id, {
+    String refresh = 'false',
+  }) =>
+      addNetworkQuery(
+        'deleteUser',
+        body: {},
+        optionalParams: {
+          '_id': id,
+          'refresh': refresh,
+        },
+      ).then((response) => response.result['_id']);
+
   Future<RawKuzzleResponse> updateUser(
     String id,
     Map<String, dynamic> body, {
