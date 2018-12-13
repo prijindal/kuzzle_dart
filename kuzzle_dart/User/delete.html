@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the User constructor from the Class User class from the kuzzle_dart library, for the Dart programming language.">
-  <title>User constructor - User class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the delete method from the User class, for the Dart programming language.">
+  <title>delete method - User class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/User-class.html">User</a></li>
-    <li class="self-crumb">User constructor</li>
+    <li class="self-crumb">delete method</li>
   </ol>
-  <div class="self-name">User</div>
+  <div class="self-name">delete</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -67,23 +67,22 @@
     
     
     </ol>
-  </div><!--/.sidebar-offcanvas-left-->
+  </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>User constructor</h1>
+    <h1>delete method</h1>
 
     <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
+      <span class="name ">delete</span>
+(<wbr>{<span class="parameter" id="delete-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>: <span class="default-value">'false'</span></span> })
       
-      <span class="name ">User</span>(<wbr><span class="parameter" id="-param-security"><span class="type-annotation"><a href="kuzzle_dart/Security-class.html">Security</a></span> <span class="parameter-name">security</span>, {</span> <span class="parameter" id="-param-id"><span class="type-annotation">String</span> <span class="parameter-name">id</span>, </span> <span class="parameter" id="-param-meta"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">meta</span>, </span> <span class="parameter" id="-param-name"><span class="type-annotation">String</span> <span class="parameter-name">name</span>, </span> <span class="parameter" id="-param-profileIds"><span class="type-annotation">List</span> <span class="parameter-name">profileIds</span></span> })
     </section>
-
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">User(this.security, {this.id, this.meta, this.name, List&lt;dynamic&gt; profileIds})
-    : profileIds = profileIds == null
-          ? &lt;String&gt;[]
-          : profileIds.map&lt;String&gt;((id) =&gt; id as String).toList();</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;String&gt; delete({String refresh = &#39;false&#39;}) =&gt;
+    security.deleteUser(id, refresh: refresh);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
