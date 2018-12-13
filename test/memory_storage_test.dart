@@ -304,7 +304,8 @@ void main() {
     test('object', () async {
       expect(await memoryStorage.object('num1', 'refcount'), 1);
       expect(await memoryStorage.object('num1', 'encoding'), 'embstr');
-      expect(await memoryStorage.object('num1', 'idletime'), 0);
+      expect(
+          await memoryStorage.object('num1', 'idletime'), lessThanOrEqualTo(1));
     });
 
     test('ping', () async {
@@ -476,77 +477,145 @@ void main() {
       expect(await memoryStorage.type('hash1'), 'hash');
     });
 
-    group('skip', () {
+    group('Sorted Set', () {
       test('zadd', () async {
-        expect(await memoryStorage.zadd('zset1', <int, dynamic>{}), 1);
+        expect(
+            await memoryStorage.zadd<String>(
+              'zset1',
+              <String, double>{
+                'zvalue1': 1,
+                'zvalue2': 4,
+                'zvalue3': 3,
+              },
+            ),
+            3);
       });
 
       test('zcard', () async {
-        expect(await memoryStorage.zcard('zset1'), 1);
+        expect(await memoryStorage.zcard('zset1'), 3);
       });
 
       test('zcount', () async {
-        expect(await memoryStorage.zcount('zset1', 0, 10), 1);
+        expect(await memoryStorage.zcount('zset1', 0, 3), 2);
+        expect(await memoryStorage.zcount('zset1', 1, 2), 1);
+        expect(await memoryStorage.zcount('zset1', 4, 5), 1);
+        expect(await memoryStorage.zcount('zset1', 6, 8), 0);
       });
 
       test('zincrby', () async {
-        expect(await memoryStorage.zincrby('zset1', 1), 1);
+        expect(await memoryStorage.zincrby<String>('zset1', 'zvalue1'), 2);
       });
 
       test('zinterstore', () async {
-        expect(await memoryStorage.zinterstore('zset1', []), 1);
+        expect(await memoryStorage.zinterstore('zset2', ['zset1']), 3);
       });
 
       test('zlexcount', () async {
-        expect(await memoryStorage.zlexcount('zset1', 1, 2), 1);
+        expect(
+            await memoryStorage.zlexcount<String>(
+                'zset1', '[zvalue1', '[zvalue5'),
+            3);
+        expect(
+            await memoryStorage.zadd<String>('zset1', {
+              'zvalue4': 1,
+            }),
+            1);
+        expect(
+            await memoryStorage.zlexcount<String>(
+                'zset1', '[zvalue1', '[zvalue5'),
+            4);
       });
 
       test('zrange', () async {
-        expect(await memoryStorage.zrange('zset1', 1, 2), 1);
+        expect(await memoryStorage.zrange<String>('zset1', 1, 2),
+            ['zvalue1', 'zvalue3']);
+        expect(await memoryStorage.zrange('zset1', 0, 2),
+            ['zvalue4', 'zvalue1', 'zvalue3']);
       });
 
       test('zrangebylex', () async {
-        expect(await memoryStorage.zrangebylex('zset1', 1, 2), 1);
+        expect(
+            await memoryStorage.zrangebylex<String>(
+                'zset1', '[zvalue1', '[zvalue4'),
+            ['zvalue4', 'zvalue1', 'zvalue3', 'zvalue2']);
+        expect(
+            await memoryStorage.zrangebylex<String>('zset1', '[a', '[w'), []);
       });
 
       test('zrangebyscore', () async {
-        expect(await memoryStorage.zrangebyscore('zset1', 1, 2), 1);
+        expect(await memoryStorage.zrangebyscore<String>('zset1', 1, 2),
+            ['zvalue4', 'zvalue1']);
       });
 
       test('zrank', () async {
-        expect(await memoryStorage.zrank('zset1', ''), 1);
+        expect(await memoryStorage.zrank<String>('zset1', 'zvalue4'), 0);
+        expect(await memoryStorage.zrank<String>('zset1', 'zvalue1'), 1);
+        expect(await memoryStorage.zrank<String>('zset1', 'zvalue3'), 2);
+        expect(await memoryStorage.zrank<String>('zset1', 'zvalue2'), 3);
       });
 
       test('zrem', () async {
-        expect(await memoryStorage.zrem('zset1', []), 1);
+        expect(
+            await memoryStorage.zrem<String>('zset1', ['zvalue4', 'zvalue3']),
+            2);
+        expect(await memoryStorage.zrange<String>('zset1', 0, 5),
+            ['zvalue1', 'zvalue2']);
       });
 
       test('zremrangebylex', () async {
-        expect(await memoryStorage.zremrangebylex('zset1', 1, 2), 1);
+        expect(
+            await memoryStorage.zremrangebylex<String>(
+                'zset1', '[zvalue1', '[zvalue5'),
+            2);
+        expect(await memoryStorage.zrange<String>('zset1', 0, 5), []);
       });
 
       test('zremrangebyrank', () async {
-        expect(await memoryStorage.zremrangebyrank('zset1', 1, 2), 1);
+        expect(
+            await memoryStorage.zadd<String>('zset1', {
+              'zvalue1': 2,
+              'zvalue4': 1,
+              'zvalue6': 50,
+              'zvalue8': 12,
+            }),
+            4);
+        expect(await memoryStorage.zremrangebyrank('zset1', 1, 2), 2);
+        expect(await memoryStorage.zrange('zset1', 0, 100),
+            ['zvalue4', 'zvalue6']);
       });
 
       test('zremrangebyscore', () async {
         expect(await memoryStorage.zremrangebyscore('zset1', 1, 2), 1);
+        expect(await memoryStorage.zrange('zset1', 0, 100), ['zvalue6']);
       });
 
       test('zrevrange', () async {
-        expect(await memoryStorage.zrevrange('zset1', 1, 2), 1);
+        expect(
+            await memoryStorage.zadd<String>('zset1', {
+              'zvalue2': 5,
+              'zvalue4': 2,
+              'zvalue8': 1,
+            }),
+            3);
+        expect(await memoryStorage.zrevrange<String>('zset1', 1, 2),
+            ['zvalue2', 'zvalue4']);
       });
 
       test('zrevrangebylex', () async {
-        expect(await memoryStorage.zrevrangebylex('zset1', 1, 2), 1);
+        expect(await memoryStorage.zrevrangebylex<String>('zset1', '[a', '[w'),
+            []);
       });
 
       test('zrevrangebyscore', () async {
-        expect(await memoryStorage.zrevrangebyscore('zset1', 1, 2), 1);
+        expect(await memoryStorage.zrevrangebyscore('zset1', 1, 2),
+            ['zvalue4', 'zvalue8']);
       });
 
       test('zrevrank', () async {
-        expect(await memoryStorage.zrevrank('zset1', 1), 1);
+        expect(await memoryStorage.zrevrank<String>('zset1', 'zvalue8'), 3);
+        expect(await memoryStorage.zrevrank<String>('zset1', 'zvalue4'), 2);
+        expect(await memoryStorage.zrevrank<String>('zset1', 'zvalue2'), 1);
+        expect(await memoryStorage.zrevrank<String>('zset1', 'zvalue6'), 0);
       });
 
       test('zscan', () async {
@@ -554,13 +623,15 @@ void main() {
       }, skip: 'Not implemented yet');
 
       test('zscore', () async {
-        expect(await memoryStorage.zscore('zset1', 1), 1);
+        expect(await memoryStorage.zscore<String>('zset1', 'zvalue2'), 5);
+        expect(await memoryStorage.zscore<String>('zset1', 'zvalue8'), 1);
+        expect(await memoryStorage.zscore<String>('zset1', 'zvalue6'), 50);
       });
 
       test('zunionstore', () async {
-        expect(await memoryStorage.zunionstore('zset1', []), 1);
+        expect(await memoryStorage.zunionstore('zset3', ['zset1', 'zset2']), 1);
       });
-    }, skip: 'Not implemented yet');
+    }, skip: 'Not Implemented yet');
 
     tearDownAll(() async {
       await memoryStorage.flushdb();
