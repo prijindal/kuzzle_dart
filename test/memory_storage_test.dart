@@ -629,9 +629,9 @@ void main() {
       });
 
       test('zunionstore', () async {
-        expect(await memoryStorage.zunionstore('zset3', ['zset1', 'zset2']), 1);
+        expect(await memoryStorage.zunionstore('zset3', ['zset1', 'zset2']), 6);
       });
-    }, skip: 'Not Implemented yet');
+    });
 
     tearDownAll(() async {
       await memoryStorage.flushdb();

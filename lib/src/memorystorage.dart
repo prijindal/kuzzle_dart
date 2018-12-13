@@ -1566,7 +1566,7 @@ class MemoryStorage extends KuzzleObject {
   ///
   /// The optional [limit] argument can be used to only get a range
   /// of the matching elements (similar to SELECT LIMIT offset, count in SQL).
-  Future<List<T>> zrangebyscore<T>(String key, int min, int max,
+  Future<List<T>> zrangebyscore<T>(String key, double min, double max,
           {List<String> limit, bool queuable = true}) =>
       addNetworkQuery(
         'zrangebyscore',
@@ -1648,7 +1648,7 @@ class MemoryStorage extends KuzzleObject {
 
   /// Removes members from a sorted set with a score between min and max.
   ///The min and max values are inclusive
-  Future<int> zremrangebyscore(String key, int min, int max,
+  Future<int> zremrangebyscore(String key, double min, double max,
           {bool queuable = true}) =>
       addNetworkQuery(
         'zremrangebyscore',
@@ -1699,7 +1699,7 @@ class MemoryStorage extends KuzzleObject {
 
   /// Identical to [zrangebyscore],
   /// except that the sorted set is traversed in descending order.
-  Future<List<T>> zrevrangebyscore<T>(String key, int min, int max,
+  Future<List<T>> zrevrangebyscore<T>(String key, double min, double max,
           {List<String> limit, bool queuable = true}) =>
       addNetworkQuery(
         'zrevrangebyscore',
@@ -1739,7 +1739,7 @@ class MemoryStorage extends KuzzleObject {
       ).then((response) => response.result);
 
   /// Returns the score of an element in a sorted set.
-  Future<int> zscore<T>(String key, T member, {bool queuable = true}) =>
+  Future<double> zscore<T>(String key, T member, {bool queuable = true}) =>
       addNetworkQuery(
         'zscore',
         body: {},
@@ -1748,7 +1748,7 @@ class MemoryStorage extends KuzzleObject {
           'member': member,
         },
         queuable: queuable,
-      ).then((response) => int.parse(response.result));
+      ).then((response) => double.parse(response.result));
 
   /// Computes the union of the provided sorted sets given by the
   /// specified keys, and stores the result in a new sorted set at key.
@@ -1760,7 +1760,7 @@ class MemoryStorage extends KuzzleObject {
     bool queuable = true,
   }) =>
       addNetworkQuery(
-        'zinterstore',
+        'zunionstore',
         body: {
           'keys': keys,
           'weights': weights,

@@ -523,28 +523,285 @@ class ImitationRedis {
         }
         return type;
       case 'zadd':
+        LinkedHashSet<ZElement> linkedHashSet;
+        final String key = parameters['_id'];
+        final List<dynamic> elements = parameters['elements'];
+        if (cache.containsKey(key)) {
+          linkedHashSet = cache[key];
+        } else {
+          linkedHashSet = LinkedHashSet<ZElement>();
+        }
+        var count = 0;
+        for (var element in elements) {
+          final member = element['member'];
+          final double score = element['score'];
+          if (!linkedHashSet.contains(member)) {
+            linkedHashSet.add(ZElement(member, score));
+            count += 1;
+          }
+        }
+        cache[key] = linkedHashSet;
+        return count;
       case 'zcard':
+        final String key = parameters['_id'];
+        final LinkedHashSet<ZElement> linkedHashSet = cache[key];
+        return linkedHashSet.length;
       case 'zcount':
+        final String key = parameters['_id'];
+        final double min = parameters['min'];
+        final double max = parameters['max'];
+        final LinkedHashSet<ZElement> linkedHashSet = cache[key];
+        var count = 0;
+        for (var element in linkedHashSet) {
+          if (element.compareScore(min, max)) {
+            count += 1;
+          }
+        }
+        return count;
       case 'zincrby':
+        final String key = parameters['_id'];
+        final member = parameters['member'];
+        final double value = parameters['value'];
+        (cache[key] as LinkedHashSet<ZElement>)
+            .where((element) => element.value == member)
+            .first
+            .score += value;
+        return (cache[key] as LinkedHashSet<ZElement>)
+            .where((element) => element.value == member)
+            .first
+            .score
+            .toString();
       case 'zinterstore':
+        final String key = parameters['_id'];
+        final List<dynamic> keys = parameters['keys'];
+        LinkedHashSet<ZElement> tempIntersection;
+        for (var keyu in keys) {
+          tempIntersection ??= cache[keyu] as LinkedHashSet<ZElement>;
+          tempIntersection = tempIntersection
+              .intersection(cache[keyu] as LinkedHashSet<ZElement>);
+        }
+        cache[key] = tempIntersection;
+        return tempIntersection.length;
       case 'zlexcount':
+        final String key = parameters['_id'];
+        final String min = parameters['min'];
+        final String max = parameters['max'];
+        var count = 0;
+        for (var element in cache[key] as LinkedHashSet<ZElement>) {
+          if (element.compareLex(min, max)) {
+            count += 1;
+          }
+        }
+        return count;
       case 'zrange':
+        final String key = parameters['_id'];
+        final int start = parameters['start'];
+        int stop = parameters['stop'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        if (stop >= elements.length) {
+          stop = elements.length - 1;
+        }
+        return elements
+            .sublist(start, stop + 1)
+            .map((element) => element.value)
+            .toList();
       case 'zrangebylex':
+        final String key = parameters['_id'];
+        final String min = parameters['min'];
+        final String max = parameters['max'];
+        final rlements = [];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements) {
+          if (element.compareLex(min, max)) {
+            rlements.add(element.value);
+          }
+        }
+        return rlements.toList();
       case 'zrangebyscore':
+        final String key = parameters['_id'];
+        final double min = parameters['min'];
+        final double max = parameters['max'];
+        final rlements = [];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements) {
+          if (element.compareScore(min, max)) {
+            rlements.add(element.value);
+          }
+        }
+        return rlements.toList();
       case 'zrank':
+        final String key = parameters['_id'];
+        final member = parameters['member'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        return elements
+            .map((element) => element.value)
+            .toList()
+            .indexOf(member);
       case 'zrem':
+        final String key = parameters['_id'];
+        final List<dynamic> members = parameters['members'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        var count = 0;
+        for (var element in elements) {
+          for (var member in members) {
+            if (element.value == member) {
+              (cache[key] as LinkedHashSet<ZElement>).remove(element);
+              count += 1;
+            }
+          }
+        }
+        return count;
       case 'zremrangebylex':
+        final String key = parameters['_id'];
+        final String min = parameters['min'];
+        final String max = parameters['max'];
+        var count = 0;
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements) {
+          if (element.compareLex(min, max)) {
+            (cache[key] as LinkedHashSet<ZElement>).remove(element);
+            count += 1;
+          }
+        }
+        return count;
       case 'zremrangebyrank':
+        final String key = parameters['_id'];
+        final int start = parameters['start'];
+        int stop = parameters['stop'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        if (stop >= elements.length) {
+          stop = elements.length - 1;
+        }
+        var count = 0;
+        for (var element in elements.sublist(start, stop + 1)) {
+          (cache[key] as LinkedHashSet<ZElement>).remove(element);
+          count += 1;
+        }
+        return count;
       case 'zremrangebyscore':
+        final String key = parameters['_id'];
+        final double min = parameters['min'];
+        final double max = parameters['max'];
+        var count = 0;
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements) {
+          if (element.compareScore(min, max)) {
+            (cache[key] as LinkedHashSet<ZElement>).remove(element);
+            count += 1;
+          }
+        }
+        return count;
       case 'zrevrange':
+        final String key = parameters['_id'];
+        final int start = parameters['start'];
+        int stop = parameters['stop'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        if (stop >= elements.length) {
+          stop = elements.length - 1;
+        }
+        return elements.reversed
+            .toList()
+            .sublist(start, stop + 1)
+            .map((element) => element.value)
+            .toList();
       case 'zrevrangebylex':
+        final String key = parameters['_id'];
+        final String min = parameters['min'];
+        final String max = parameters['max'];
+        final rlements = [];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements.reversed) {
+          if (element.compareLex(min, max)) {
+            rlements.add(element.value);
+          }
+        }
+        return rlements.toList();
       case 'zrevrangebyscore':
+        final String key = parameters['_id'];
+        final double min = parameters['min'];
+        final double max = parameters['max'];
+        final rlements = [];
+        var elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        for (var element in elements.reversed) {
+          if (element.compareScore(min, max)) {
+            rlements.add(element.value);
+          }
+        }
+        return rlements.toList();
       case 'zrevrank':
+        final String key = parameters['_id'];
+        final member = parameters['member'];
+        final elements = (cache[key] as LinkedHashSet<ZElement>).toList();
+        elements.sort(ZElement.compare);
+        return elements.reversed
+            .map((element) => element.value)
+            .toList()
+            .indexOf(member);
       case 'zscan':
+        break;
       case 'zscore':
+        final String key = parameters['_id'];
+        final member = parameters['member'];
+        return (cache[key] as LinkedHashSet<ZElement>)
+            .where((element) => element.value == member)
+            .first
+            .score
+            .toString();
+        break;
       case 'zunionstore':
+        final String key = parameters['_id'];
+        final List<dynamic> keys = parameters['keys'];
+        LinkedHashSet<ZElement> tempIntersection;
+        for (var keyu in keys) {
+          tempIntersection ??= cache[keyu] as LinkedHashSet<ZElement>;
+          tempIntersection =
+              tempIntersection.union(cache[keyu] as LinkedHashSet<ZElement>);
+        }
+        cache[key] = tempIntersection;
+        return tempIntersection.length;
       default:
         return null;
     }
   }
+}
+
+class ZElement {
+  ZElement(this.value, this.score);
+  double score;
+  dynamic value;
+
+  @override
+  bool operator ==(dynamic other) => other is ZElement && other.value == value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  bool compareScore(double min, double max) => min <= score && score <= max;
+
+  bool compareLex(String min, String max) {
+    var shouldInclude = false;
+    if (min[0] == '[' || max[0] == '[') {
+      if (value == min.substring(1) || value == max.substring(1)) {
+        shouldInclude = true;
+      }
+    }
+    if ((value as String).compareTo(min.substring(1)) > 0 &&
+        (value as String).compareTo(max.substring(1)) < 0) {
+      shouldInclude = true;
+    }
+    return shouldInclude;
+  }
+
+  static int compare(ZElement el1, ZElement el2) =>
+      (el1.score - el2.score).ceil();
 }
