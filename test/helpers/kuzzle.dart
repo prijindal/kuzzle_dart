@@ -5,12 +5,12 @@ import 'package:web_socket_channel/io.dart';
 
 import 'imitation.dart';
 
-const Credentials adminCredentials =
-    Credentials(LoginStrategy.local, username: 'admin', password: 'admin');
-
 class TestKuzzle extends Kuzzle {
   TestKuzzle({String defaultIndex, int port = 7512, this.isImitation = false})
       : super('localhost', defaultIndex: defaultIndex, port: port);
+
+  static const Credentials adminCredentials =
+      Credentials(LoginStrategy.local, username: 'admin', password: 'admin');
 
   bool isImitation;
   HttpServer server;

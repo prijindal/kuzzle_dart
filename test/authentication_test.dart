@@ -112,7 +112,7 @@ void main() {
       });
 
       test('admin login', () async {
-        await kuzzle.login(adminCredentials);
+        await kuzzle.login(TestKuzzle.adminCredentials);
       });
 
       test('search users', () async {
