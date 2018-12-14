@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the getServerInfo method from the Kuzzle class, for the Dart programming language.">
-  <title>getServerInfo method - Kuzzle class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the adminExists method from the Kuzzle class, for the Dart programming language.">
+  <title>adminExists method - Kuzzle class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
-    <li class="self-crumb">getServerInfo method</li>
+    <li class="self-crumb">adminExists method</li>
   </ol>
-  <div class="self-name">getServerInfo</div>
+  <div class="self-name">adminExists</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -122,23 +122,24 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>getServerInfo method</h1>
+    <h1>adminExists method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ServerInfo-class.html">ServerInfo</a></span>&gt;</span></span>
-      <span class="name ">getServerInfo</span>
-(<wbr>{<span class="parameter" id="getServerInfo-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+      <span class="name ">adminExists</span>
+(<wbr>{<span class="parameter" id="adminExists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
+    </section>
+    <section class="desc markdown">
+      <p>Checks if an administrator account has been created,</p>
+<p>return true if it exists and false if it does not.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;ServerInfo&gt; getServerInfo({bool queuable = true}) =&gt;
-    addNetworkQuery(&lt;String, dynamic&gt;{
-      &#39;controller&#39;: &#39;server&#39;,
-      &#39;action&#39;: &#39;info&#39;,
-    }, queuable: queuable)
-        .then((response) =&gt; ServerInfo.fromMap(response.result));</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; adminExists({bool queuable = true}) =&gt; addNetworkQuery(
+        &lt;String, dynamic&gt;{&#39;controller&#39;: &#39;server&#39;, &#39;action&#39;: &#39;adminExists&#39;})
+    .then((response) =&gt; response.result[&#39;exists&#39;] as bool);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

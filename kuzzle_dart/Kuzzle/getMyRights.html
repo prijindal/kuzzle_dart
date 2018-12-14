@@ -71,6 +71,7 @@
     
       <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/adminExists.html">adminExists</a></li>
       <li><a href="kuzzle_dart/Kuzzle/bindSubscription.html">bindSubscription</a></li>
       <li><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></li>
@@ -85,8 +86,10 @@
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getConfig.html">getConfig</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getLastStatistics.html">getLastStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>
@@ -122,7 +125,7 @@
     <h1>getMyRights method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Rights-class.html">Rights</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Rights-class.html">Rights</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">getMyRights</span>
 (<wbr>{<span class="parameter" id="getMyRights-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
@@ -130,14 +133,15 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Rights&gt; getMyRights({bool queuable = true}) async =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Rights&gt;&gt; getMyRights({bool queuable = true}) async =&gt;
     addNetworkQuery(&lt;String, dynamic&gt;{
       &#39;controller&#39;: &#39;auth&#39;,
       &#39;action&#39;: &#39;getMyRights&#39;,
       &#39;jwt&#39;: _jwtToken,
     }, queuable: queuable)
-        .then((response) =&gt;
-            response.result[&#39;hits&#39;].map((stats) =&gt; Rights.fromMap(stats)));</code></pre>
+        .then((response) =&gt; (response.result[&#39;hits&#39;] as List&lt;dynamic&gt;)
+            .map&lt;Rights&gt;((stats) =&gt; Rights.fromMap(stats))
+            .toList());</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the noSuchMethod method from the Statistics class, for the Dart programming language.">
-  <title>noSuchMethod method - Statistics class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the toMap method from the Statistics class, for the Dart programming language.">
+  <title>toMap method - Statistics class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Statistics-class.html">Statistics</a></li>
-    <li class="self-crumb">noSuchMethod method</li>
+    <li class="self-crumb">toMap method</li>
   </ol>
-  <div class="self-name">noSuchMethod</div>
+  <div class="self-name">toMap</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -67,25 +67,24 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>noSuchMethod method</h1>
+    <h1>toMap method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">dynamic</span>
-      <span class="name ">noSuchMethod</span>
-(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
-      <div class="features">inherited</div>
-    </section>
-    <section class="desc markdown">
-      <p>Invoked when a non-existent method or property is accessed.</p>
-<p>Classes can override <a href="kuzzle_dart/Statistics/noSuchMethod.html">noSuchMethod</a> to provide custom behavior.</p>
-<p>If a value is returned, it becomes the result of the original invocation.</p>
-<p>The default behavior is to throw a <code>NoSuchMethodError</code>.</p>
+      <span class="returntype">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+      <span class="name ">toMap</span>
+(<wbr>)
+      
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">@pragma(&quot;vm:entry-point&quot;)
-external dynamic noSuchMethod(Invocation invocation);</code></pre>
+      <pre class="language-dart"><code class="language-dart">Map&lt;String, dynamic&gt; toMap() =&gt; {
+      &#39;completedRequests&#39;: completedRequests,
+      &#39;failedRequests&#39;: failedRequests,
+      &#39;ongoingRequests&#39;: ongoingRequests,
+      &#39;connections&#39;: connections,
+      &#39;timestamp&#39;: timestamp,
+    };</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -311,6 +311,15 @@
           
           
 </dd>
+        <dt id="adminExists" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/adminExists.html">adminExists</a></span><span class="signature">(<wbr>{<span class="parameter" id="adminExists-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Checks if an administrator account has been created, <a href="kuzzle_dart/Kuzzle/adminExists.html">[...]</a>
+          
+</dd>
         <dt id="bindSubscription" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/bindSubscription.html">bindSubscription</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; void</span>
@@ -421,11 +430,11 @@
 </dd>
         <dt id="getAllStatistics" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></span><span class="signature">(<wbr>{<span class="parameter" id="getAllStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Kuzzle monitors its internal activities and makes regular snapshots. <a href="kuzzle_dart/Kuzzle/getAllStatistics.html">[...]</a>
           
 </dd>
         <dt id="getAutoRefresh" class="callable">
@@ -435,6 +444,15 @@
           </dt>
         <dd>
           
+          
+</dd>
+        <dt id="getConfig" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getConfig.html">getConfig</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Returns the current Kuzzle configuration.
           
 </dd>
         <dt id="getCurrentUser" class="callable">
@@ -455,6 +473,15 @@
           
           
 </dd>
+        <dt id="getLastStatistics" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getLastStatistics.html">getLastStatistics</a></span><span class="signature">(<wbr>{<span class="parameter" id="getLastStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
         <dt id="getMyCredentials" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="getMyCredentials-param-strategy"><span class="type-annotation"><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="getMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></span>&gt;</span></span>
@@ -466,7 +493,7 @@
 </dd>
         <dt id="getMyRights" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></span><span class="signature">(<wbr>{<span class="parameter" id="getMyRights-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Rights-class.html">Rights</a></span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Rights-class.html">Rights</a></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -483,12 +510,13 @@
           
 </dd>
         <dt id="getStatistics" class="callable">
-          <span class="name"><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></span><span class="signature">(<wbr><span class="parameter" id="getStatistics-param-startTime"><span class="type-annotation">String</span> <span class="parameter-name">startTime</span>, </span> <span class="parameter" id="getStatistics-param-endTime"><span class="type-annotation">String</span> <span class="parameter-name">endTime</span>, {</span> <span class="parameter" id="getStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></span><span class="signature">(<wbr><span class="parameter" id="getStatistics-param-startTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">startTime</span>, </span> <span class="parameter" id="getStatistics-param-endTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">endTime</span>, {</span> <span class="parameter" id="getStatistics-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Statistics-class.html">Statistics</a></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
-          
+          Returns statistics for snapshots made
+after a given timestamp (utc, in milliseconds).
           
 </dd>
         <dt id="getStrategies" class="callable">
@@ -710,6 +738,7 @@
     
       <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/adminExists.html">adminExists</a></li>
       <li><a href="kuzzle_dart/Kuzzle/bindSubscription.html">bindSubscription</a></li>
       <li><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></li>
@@ -724,8 +753,10 @@
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getConfig.html">getConfig</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getLastStatistics.html">getLastStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>

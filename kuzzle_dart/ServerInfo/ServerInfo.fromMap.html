@@ -66,13 +66,14 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">ServerInfo.fromMap</span>(<wbr><span class="parameter" id="fromMap-param-info"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">info</span></span>)
+      <span class="name ">ServerInfo.fromMap</span>(<wbr><span class="parameter" id="fromMap-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span></span>)
     </section>
 
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">ServerInfo.fromMap(this.info);</code></pre>
+      <pre class="language-dart"><code class="language-dart">ServerInfo.fromMap(Map&lt;String, dynamic&gt; map)
+    : info = map[&#39;serverInfo&#39;][&#39;kuzzle&#39;];</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
