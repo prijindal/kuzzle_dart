@@ -1,7 +1,20 @@
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:math';
 import 'package:geohash/geohash.dart';
-import 'package:kuzzle/src/helpers.dart';
+
+String stringToBytes(String str) {
+  String finalString;
+  try {
+    finalString = int.parse(str).toRadixString(2);
+  } on Exception {
+    finalString = utf8
+        .encode(str)
+        .map((a) => a.toRadixString(2))
+        .fold('', (initValue, value) => '$initValue$value');
+  }
+  return finalString;
+}
 
 class ImitationRedis {
   final Map<String, dynamic> cache = <String, dynamic>{};
