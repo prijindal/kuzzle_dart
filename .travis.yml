@@ -3,6 +3,11 @@ sudo: false
 dart:
   - stable
   - dev
+dart_task:
+- test: --platform vm
+- test: --platform chrome
+- dartanalyzer: --fatal-warnings lib test
+
 
 services:
   - docker
@@ -14,13 +19,9 @@ before_script:
   - ./adminauth.sh
   - pub get
 
-script:
-  - dartanalyzer lib test --fatal-warnings
-  - pub run test
-
 after_success:
-  - ./coverage.sh
-  - dartdoc
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ]; then ./coverage.sh; fi
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ]; then dartdoc; fi
 
 cache:
   directories:
