@@ -99,6 +99,11 @@ void main() {
         expect(updatedUser.source['lastname'], 'Some last name');
       });
 
+      test('whoami', () async {
+        final iAm = await kuzzleTestHelper.kuzzle.whoAmI();
+        expect(iAm.id, user.id);
+      });
+
       test('signout', () async {
         await kuzzleTestHelper.kuzzle.logout();
       });

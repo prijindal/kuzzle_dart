@@ -101,7 +101,6 @@ void main() {
     test('validate document', () async {
       final isValid = await collection.validateDocument(<String, dynamic>{});
       expect(isValid, true);
-      expect(await collection.count(), equals(0));
     });
 
     tearDownAll(() async {
