@@ -229,6 +229,10 @@ class Kuzzle {
 
   // void flushQueue() => throw ResponseError();
 
+  /// Kuzzle monitors its internal activities and makes regular snapshots.
+  ///
+  /// This command returns all the stored statistics. By default,
+  /// snapshots are made every 10 seconds and they are stored for 1 hour.
   Future<ScrollResponse<Statistics>> getAllStatistics(
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
@@ -238,6 +242,19 @@ class Kuzzle {
           .then((response) => ScrollResponse<Statistics>.fromMap(
               response.result,
               (map) => Statistics.fromMap(map as Map<String, dynamic>)));
+
+  /// Returns the current Kuzzle configuration.
+  Future<Map<String, dynamic>> getConfig() => addNetworkQuery({
+        'controller': 'server',
+        'action': 'getConfig',
+      }).then((response) => response.result);
+
+  Future<Statistics> getLastStatistics({bool queuable = true}) async =>
+      addNetworkQuery(<String, dynamic>{
+        'controller': 'server',
+        'action': 'getLastStats',
+      }, queuable: queuable)
+          .then((response) => Statistics.fromMap(response.result));
 
   Future<bool> getAutoRefresh({String index, bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{

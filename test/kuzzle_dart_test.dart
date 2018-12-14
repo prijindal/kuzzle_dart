@@ -17,8 +17,17 @@ void main() {
   test('get all statistics', () async {
     final stats = await kuzzleTestHelper.kuzzle.getAllStatistics();
     expect(stats.total, greaterThanOrEqualTo(1));
-    expect(stats.hits[stats.total - 1].completedRequests.websocket,
-        greaterThanOrEqualTo(1));
+  });
+
+  test('last staticstics', () async {
+    final stat = await kuzzleTestHelper.kuzzle.getLastStatistics();
+    print(stat);
+    expect(stat.timestamp, lessThan(DateTime.now().millisecondsSinceEpoch));
+  });
+
+  test('get config', () async {
+    final config = await kuzzleTestHelper.kuzzle.getConfig();
+    expect(config['services']['internalCache']['backend'], 'redis');
   });
 
   test('test for security constructor', () async {
