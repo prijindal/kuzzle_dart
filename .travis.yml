@@ -6,13 +6,13 @@ dart:
 dart_task:
 - test: --platform vm
 - dartanalyzer: --fatal-warnings lib test
-- dartfmt
+# - dartfmt
 
 services:
   - docker
 
 before_script:
-  - if [ $TRAVIS_DART_TEST == true ]; then ./kuzzle_docker.sh; fi
+  - if [ $TRAVIS_DART_TEST == true ]; then ./docker_launch.sh; fi
 
 after_success:
   - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
