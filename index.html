@@ -47,6 +47,15 @@
 <p>The kuzzle_dart package provides SDK for <a href="https://docs.kuzzle.io">kuzzle</a>.
 It uses websocket to do the same.</p>
 <h2 id="getting-started">Getting Started</h2>
+<p>Include this in your pubspec.yaml</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  kuzzle:
+    git: git://github.com/prijindal/kuzzle_dart.git
+
+</code></pre>
+<p>Right now i would recommend that this be used directly from the git or a tar package.
+In the future versioning of pub will be used</p>
+<h2 id="example">Example</h2>
 <pre class="language-dart"><code class="language-dart">import 'package:kuzzle/kuzzle_dart.dart';
 final Kuzzle kuzzle = Kuzzle('localhost', defaultIndex: 'playground');
 
@@ -69,6 +78,7 @@ void setup() async {
 setup();
 
 </code></pre>
+<h2 id="information">Information</h2><ul><li>Uses websocket to communicate with kuzzle, in the future http might also be used</li><li>Soon documentation will also be coming</li></ul>
       </section>
       
         <section class="summary">
