@@ -4,19 +4,18 @@ import 'package:kuzzle/kuzzle_dart.dart';
 
 import 'helpers/kuzzle.dart';
 
-void main() {
-  final kuzzleTestHelper = KuzzleTestHelper();
+Future<void> main() async {
+  final kuzzle = await kuzzleTestConstructor();
   setUpAll(() async {
-    await kuzzleTestHelper.connect();
-    kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
+    await kuzzle.connect();
+    kuzzle.defaultIndex = Uuid().v1();
   });
 
   group('collection', () {
     Collection collection;
     setUpAll(() async {
-      await kuzzleTestHelper.kuzzle
-          .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
-      collection = kuzzleTestHelper.kuzzle.collection('posts');
+      await kuzzle.createIndex(kuzzle.defaultIndex);
+      collection = kuzzle.collection('posts');
     });
     test('creation', () async {
       final createdResponse =
@@ -42,8 +41,8 @@ void main() {
       expect(collectionMapping.mappings, <String, dynamic>{});
     });
     test('list all collections', () async {
-      final listCollectionResponse = await kuzzleTestHelper.kuzzle
-          .listCollections(kuzzleTestHelper.kuzzle.defaultIndex);
+      final listCollectionResponse =
+          await kuzzle.listCollections(kuzzle.defaultIndex);
       expect(listCollectionResponse.length, greaterThanOrEqualTo(1));
       expect(listCollectionResponse[0].name, 'posts');
     });
@@ -149,10 +148,9 @@ void main() {
     });
 
     tearDownAll(() async {
-      await kuzzleTestHelper.kuzzle
-          .deleteIndex(kuzzleTestHelper.kuzzle.defaultIndex);
+      await kuzzle.deleteIndex(kuzzle.defaultIndex);
     });
   });
 
-  tearDownAll(kuzzleTestHelper.end);
+  tearDownAll(kuzzle.disconect);
 }

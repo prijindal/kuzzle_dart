@@ -16,31 +16,42 @@ void onServerTransformData(WebSocket webSocket) {
 const Credentials adminCredentials =
     Credentials(LoginStrategy.local, username: 'admin', password: 'admin');
 
-class KuzzleTestHelper {
+class TestKuzzle extends Kuzzle {
+  TestKuzzle(String host, {String defaultIndex, int port = 7512})
+      : super(host, defaultIndex: defaultIndex, port: port);
+
   HttpServer server;
   StreamSubscription<dynamic> streamSubscription;
-  Kuzzle kuzzle;
 
-  Future<void> connect({bool isImitation = false}) async {
-    if (isImitation) {
-      server = await HttpServer.bind('localhost', 0);
-      streamSubscription = server
-          .transform(WebSocketTransformer())
-          .listen(onServerTransformData);
-      kuzzle =
-          Kuzzle('localhost', port: server.port, defaultIndex: 'testindex');
-    } else {
-      kuzzle = Kuzzle('localhost', defaultIndex: 'testindex');
-    }
-    await kuzzle.connect();
-    await kuzzle.login(adminCredentials);
+  @override
+  @override
+  Future<void> connect() async {
+    await super.connect();
+    await login(adminCredentials);
   }
 
-  void end() {
-    kuzzle.disconect();
+  @override
+  void disconect() {
+    super.disconect();
     if (streamSubscription != null && server != null) {
       streamSubscription.cancel();
       server.close(force: true);
     }
   }
+}
+
+Future<TestKuzzle> kuzzleTestConstructor({bool isImitation = false}) async {
+  TestKuzzle kuzzle;
+  if (isImitation) {
+    kuzzle.server = await HttpServer.bind('localhost', 0);
+    kuzzle.streamSubscription = kuzzle.server
+        .transform(WebSocketTransformer())
+        .listen(onServerTransformData);
+    kuzzle = TestKuzzle('localhost',
+        port: kuzzle.server.port, defaultIndex: 'testindex');
+  } else {
+    kuzzle = TestKuzzle('localhost', defaultIndex: 'testindex');
+  }
+  await kuzzle.connect();
+  return kuzzle;
 }

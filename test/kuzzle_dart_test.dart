@@ -3,44 +3,44 @@ import 'package:uuid/uuid.dart';
 
 import 'helpers/kuzzle.dart';
 
-void main() {
-  final kuzzleTestHelper = KuzzleTestHelper();
+Future<void> main() async {
+  final kuzzle = await kuzzleTestConstructor();
   setUpAll(() async {
-    await kuzzleTestHelper.connect();
-    kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
+    await kuzzle.connect();
+    kuzzle.defaultIndex = Uuid().v1();
   });
 
   test('check admin', () async {
-    expect(await kuzzleTestHelper.kuzzle.adminExists(), true);
+    expect(await kuzzle.adminExists(), true);
   });
 
   test('get all statistics', () async {
-    final stats = await kuzzleTestHelper.kuzzle.getAllStatistics();
+    final stats = await kuzzle.getAllStatistics();
     expect(stats.total, greaterThanOrEqualTo(1));
   });
 
   test('last staticstics', () async {
-    final stat = await kuzzleTestHelper.kuzzle.getLastStatistics();
+    final stat = await kuzzle.getLastStatistics();
     expect(stat.timestamp, lessThan(DateTime.now().millisecondsSinceEpoch));
   });
 
   test('get config', () async {
-    final config = await kuzzleTestHelper.kuzzle.getConfig();
+    final config = await kuzzle.getConfig();
     expect(config['services']['internalCache']['backend'], 'redis');
   });
   test('get server info', () async {
-    final info = await kuzzleTestHelper.kuzzle.getServerInfo();
+    final info = await kuzzle.getServerInfo();
     expect(info.info.containsKey('api'), true);
   });
 
   test('get current time', () async {
-    final now = await kuzzleTestHelper.kuzzle.now();
+    final now = await kuzzle.now();
     expect(now, lessThanOrEqualTo(DateTime.now().millisecondsSinceEpoch));
   });
 
   test('test for security constructor', () async {
-    kuzzleTestHelper.kuzzle.security.role('id', <String, dynamic>{});
+    kuzzle.security.role('id', <String, dynamic>{});
   });
 
-  tearDownAll(kuzzleTestHelper.end);
+  tearDownAll(kuzzle.disconect);
 }
