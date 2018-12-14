@@ -1,5 +1,6 @@
 class ServerInfo {
-  ServerInfo.fromMap(this.info);
+  ServerInfo.fromMap(Map<String, dynamic> map)
+      : info = map['serverInfo']['kuzzle'];
 
   final Map<String, dynamic> info;
 }

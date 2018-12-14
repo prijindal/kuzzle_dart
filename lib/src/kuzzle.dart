@@ -256,6 +256,20 @@ class Kuzzle {
       }, queuable: queuable)
           .then((response) => Statistics.fromMap(response.result));
 
+  /// Returns statistics for snapshots made
+  /// after a given timestamp (utc, in milliseconds).
+  Future<ScrollResponse<Statistics>> getStatistics(
+          DateTime startTime, DateTime endTime, {bool queuable = true}) async =>
+      addNetworkQuery(<String, dynamic>{
+        'controller': 'server',
+        'action': 'getStats',
+        'startTime': startTime.millisecondsSinceEpoch,
+        'endTime': endTime.millisecondsSinceEpoch,
+      }, queuable: queuable)
+          .then((response) => ScrollResponse<Statistics>.fromMap(
+              response.result,
+              (map) => Statistics.fromMap(map as Map<String, dynamic>)));
+
   Future<bool> getAutoRefresh({String index, bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'index': index,
@@ -299,20 +313,6 @@ class Kuzzle {
         'action': 'info',
       }, queuable: queuable)
           .then((response) => ServerInfo.fromMap(response.result));
-
-  Future<List<Statistics>> getStatistics(
-    String startTime,
-    String endTime, {
-    bool queuable = true,
-  }) =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'getStats',
-        'startTime': startTime,
-        'endTime': endTime,
-      }, queuable: queuable)
-          .then((response) => response.result['hits']
-              .map((stats) => Statistics.fromMap(stats)));
 
   /// Get all authentication strategies registered in Kuzzle
   Future<List<String>> getStrategies({bool queuable = true}) =>

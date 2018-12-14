@@ -21,13 +21,21 @@ void main() {
 
   test('last staticstics', () async {
     final stat = await kuzzleTestHelper.kuzzle.getLastStatistics();
-    print(stat);
     expect(stat.timestamp, lessThan(DateTime.now().millisecondsSinceEpoch));
   });
 
   test('get config', () async {
     final config = await kuzzleTestHelper.kuzzle.getConfig();
     expect(config['services']['internalCache']['backend'], 'redis');
+  });
+  test('get server info', () async {
+    final info = await kuzzleTestHelper.kuzzle.getServerInfo();
+    expect(info.info.containsKey('api'), true);
+  });
+
+  test('get current time', () async {
+    final now = await kuzzleTestHelper.kuzzle.now();
+    expect(now, lessThanOrEqualTo(DateTime.now().millisecondsSinceEpoch));
   });
 
   test('test for security constructor', () async {
