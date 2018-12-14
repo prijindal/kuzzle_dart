@@ -5,7 +5,6 @@ dart:
   - dev
 dart_task:
 - test: --platform vm
-- test: --platform chrome
 - dartanalyzer: --fatal-warnings lib test
 - dartfmt
 
@@ -32,3 +31,4 @@ deploy:
   on:
     branch: master
     dart: stable
+    condition: $TRAVIS_DART_TEST == true
