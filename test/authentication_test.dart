@@ -4,8 +4,8 @@ import 'package:kuzzle/kuzzle_dart.dart';
 
 import 'helpers/kuzzle.dart';
 
-Future<void> main() async {
-  final kuzzle = await kuzzleTestConstructor();
+void main() {
+  final kuzzle = TestKuzzle();
   Credentials credentials;
   User user;
   setUpAll(() async {

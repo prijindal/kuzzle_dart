@@ -3,8 +3,8 @@ import 'package:uuid/uuid.dart';
 
 import 'helpers/kuzzle.dart';
 
-Future<void> main() async {
-  final kuzzle = await kuzzleTestConstructor();
+void main() {
+  final kuzzle = TestKuzzle();
   setUpAll(() async {
     await kuzzle.connect();
     kuzzle.defaultIndex = Uuid().v1();
