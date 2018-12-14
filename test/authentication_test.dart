@@ -62,16 +62,15 @@ void main() {
       });
 
       test('create credentials', () async {
-        final credentialsResponse = await kuzzleTestHelper.kuzzle
-            .createMyCredentials(Credentials(LoginStrategy.local,
-                username: 'alternate', password: 'alternate'));
-        expect(credentialsResponse.username, 'alternate');
+        final credentialsResponse =
+            await kuzzleTestHelper.kuzzle.createMyCredentials(credentials);
+        expect(credentialsResponse.username, credentials.username);
       });
 
       test('get credentials', () async {
         final currentUser =
             await kuzzleTestHelper.kuzzle.getMyCredentials(LoginStrategy.local);
-        expect(currentUser.username, 'alternate');
+        expect(currentUser.username, credentials.username);
         expect(currentUser.kuid, user.id);
       });
 
@@ -95,6 +94,7 @@ void main() {
       test('update self', () async {
         user.source.addAll({'lastname': 'Some last name'});
         final updatedUser = await user.update();
+        expect(updatedUser.id, user.id);
         expect(updatedUser.source['name'], user.source['name']);
         expect(updatedUser.source['lastname'], 'Some last name');
       });
@@ -106,13 +106,29 @@ void main() {
       test('admin login', () async {
         await kuzzleTestHelper.kuzzle.login(adminCredentials);
       });
+
+      test('search users', () async {
+        final searchUsers = await kuzzleTestHelper.kuzzle.searchUsers({
+          'bool': {
+            'must': [
+              {
+                'in': {
+                  'profileIds': ['anonymous', 'default']
+                }
+              }
+            ]
+          }
+        });
+        expect(searchUsers.total, 1);
+        expect(searchUsers.hits[0].id, user.id);
+      });
     });
     test('roles crud', () {});
     test('profiles crud', () {});
     test('login/logout', () {});
 
     tearDownAll(() async {
-      await user.delete();
+      await user.delete(refresh: 'wait_for_refresh');
     });
   });
 

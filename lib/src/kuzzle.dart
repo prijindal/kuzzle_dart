@@ -391,6 +391,18 @@ class Kuzzle {
 
   // void replayQueue() => throw ResponseError();
 
+  Future<SearchResponse<User>> searchUsers(Map<String, dynamic> body,
+          {bool queuable = true}) =>
+      addNetworkQuery(<String, dynamic>{
+        'controller': Security.controller,
+        'action': 'searchUsers',
+        'body': body,
+        'from': 0,
+        'size': 10,
+      }, queuable: queuable)
+          .then((response) => SearchResponse<User>.fromMap(response.result,
+              (map) => User.fromMap(security, map as Map<dynamic, dynamic>)));
+
   Future<bool> setAutoRefresh({
     @required bool autoRefresh,
     String index,

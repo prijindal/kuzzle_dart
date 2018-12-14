@@ -42,7 +42,8 @@ Future<void> kuzzleConnections() async {
   } on dynamic catch (e) {
     if (e is ResponseError) {
       if (e.status == 401) {
-        final user = User(kuzzle.security, name: 'Priyanshu Jindal');
+        final user =
+            User(kuzzle.security, source: {'name': 'Priyanshu Jindal'});
         await kuzzle.register(user, creds);
       }
     }

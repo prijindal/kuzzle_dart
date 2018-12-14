@@ -17,10 +17,9 @@ before_script:
 script:
   - dartanalyzer lib test --fatal-warnings
   - pub run test
-  - ./coverage.sh
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - ./coverage.sh
   - dartdoc
 
 cache:
