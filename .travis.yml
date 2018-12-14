@@ -7,21 +7,17 @@ dart_task:
 - test: --platform vm
 - test: --platform chrome
 - dartanalyzer: --fatal-warnings lib test
-
+- dartfmt
 
 services:
   - docker
 
 before_script:
-  - sysctl -w vm.max_map_count=262144
-  - docker-compose up -d
-  - until curl "http://localhost:7512/?pretty"; do sleep 10; done
-  - ./adminauth.sh
-  - pub get
+  - if [ $TRAVIS_DART_TEST == true ]; then ./kuzzle_docker.sh; fi
 
 after_success:
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ]; then ./coverage.sh; fi
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ]; then dartdoc; fi
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then dartdoc; fi
 
 cache:
   directories:
