@@ -78,17 +78,20 @@
       <li><a href="kuzzle_dart/Kuzzle/connectInternal.html">connectInternal</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getStrategies.html">getStrategies</a></li>
       <li><a href="kuzzle_dart/Kuzzle/listCollections.html">listCollections</a></li>
       <li><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></li>
       <li><a href="kuzzle_dart/Kuzzle/login.html">login</a></li>
@@ -97,6 +100,7 @@
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/searchUsers.html">searchUsers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
@@ -128,8 +132,11 @@
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;CheckTokenResponse&gt; checkToken(String token) async =&gt;
     addNetworkQuery(&lt;String, dynamic&gt;{
+      &#39;action&#39;: &#39;checkToken&#39;,
       &#39;controller&#39;: &#39;auth&#39;,
-      &#39;token&#39;: token,
+      &#39;body&#39;: {
+        &#39;token&#39;: token,
+      },
     }).then((response) =&gt; CheckTokenResponse.fromMap(response.result));</code></pre>
     </section>
 

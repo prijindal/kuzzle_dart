@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the deleteMyCredentials method from the Kuzzle class, for the Dart programming language.">
-  <title>deleteMyCredentials method - Kuzzle class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the searchUsers method from the Kuzzle class, for the Dart programming language.">
+  <title>searchUsers method - Kuzzle class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
-    <li class="self-crumb">deleteMyCredentials method</li>
+    <li class="self-crumb">searchUsers method</li>
   </ol>
-  <div class="self-name">deleteMyCredentials</div>
+  <div class="self-name">searchUsers</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -119,26 +119,28 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>deleteMyCredentials method</h1>
+    <h1>searchUsers method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/AcknowledgedResponse-class.html">AcknowledgedResponse</a></span>&gt;</span></span>
-      <span class="name ">deleteMyCredentials</span>
-(<wbr><span class="parameter" id="deleteMyCredentials-param-strategy"><span class="type-annotation"><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="deleteMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SearchResponse-class.html">SearchResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>&gt;</span></span>
+      <span class="name ">searchUsers</span>
+(<wbr><span class="parameter" id="searchUsers-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, {</span> <span class="parameter" id="searchUsers-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;AcknowledgedResponse&gt; deleteMyCredentials(LoginStrategy strategy,
-        {bool queuable = true}) async =&gt;
+      <pre class="language-dart"><code class="language-dart">Future&lt;SearchResponse&lt;User&gt;&gt; searchUsers(Map&lt;String, dynamic&gt; body,
+        {bool queuable = true}) =&gt;
     addNetworkQuery(&lt;String, dynamic&gt;{
-      &#39;controller&#39;: &#39;auth&#39;,
-      &#39;action&#39;: &#39;deleteMyCredentials&#39;,
-      &#39;strategy&#39;: enumToString&lt;LoginStrategy&gt;(strategy),
-      &#39;jwt&#39;: _jwtToken,
+      &#39;controller&#39;: Security.controller,
+      &#39;action&#39;: &#39;searchUsers&#39;,
+      &#39;body&#39;: body,
+      &#39;from&#39;: 0,
+      &#39;size&#39;: 10,
     }, queuable: queuable)
-        .then((response) =&gt; AcknowledgedResponse.fromMap(response.result));</code></pre>
+        .then((response) =&gt; SearchResponse&lt;User&gt;.fromMap(response.result,
+            (map) =&gt; User.fromMap(security, map as Map&lt;dynamic, dynamic&gt;)));</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

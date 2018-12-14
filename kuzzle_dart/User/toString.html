@@ -48,9 +48,9 @@
       </li>
       <li><a href="kuzzle_dart/User/id.html">id</a></li>
       <li><a href="kuzzle_dart/User/meta.html">meta</a></li>
-      <li><a href="kuzzle_dart/User/name.html">name</a></li>
       <li><a href="kuzzle_dart/User/profileIds.html">profileIds</a></li>
       <li><a href="kuzzle_dart/User/security.html">security</a></li>
+      <li><a href="kuzzle_dart/User/source.html">source</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/runtimeType.html">runtimeType</a></li>
     
@@ -59,6 +59,7 @@
       <li><a href="kuzzle_dart/User/getProfiles.html">getProfiles</a></li>
       <li><a href="kuzzle_dart/User/toMap.html">toMap</a></li>
       <li><a href="kuzzle_dart/User/toString.html">toString</a></li>
+      <li><a href="kuzzle_dart/User/update.html">update</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/noSuchMethod.html">noSuchMethod</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/User-class.html#operators">Operators</a></li>
@@ -90,7 +91,12 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">@override
-String toString() =&gt; toMap().toString();</code></pre>
+String toString() =&gt; &lt;String, dynamic&gt;{
+      &#39;_id&#39;: id,
+      &#39;_source&#39;: source,
+      &#39;meta&#39;: meta,
+      &#39;profileIds&#39;: profileIds,
+    }.toString();</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the toString method from the CredentialsResponse class, for the Dart programming language.">
-  <title>toString method - CredentialsResponse class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the toMap method from the CredentialsResponse class, for the Dart programming language.">
+  <title>toMap method - CredentialsResponse class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
-    <li class="self-crumb">toString method</li>
+    <li class="self-crumb">toMap method</li>
   </ol>
-  <div class="self-name">toString</div>
+  <div class="self-name">toMap</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -64,27 +64,21 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>toString method</h1>
+    <h1>toMap method</h1>
 
     <section class="multi-line-signature">
-      <div>
-        <ol class="annotation-list">
-          <li>@override</li>
-        </ol>
-      </div>
-      <span class="returntype">String</span>
-      <span class="name ">toString</span>
+      <span class="returntype">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+      <span class="name ">toMap</span>
 (<wbr>)
-      <div class="features">override</div>
-    </section>
-    <section class="desc markdown">
-      <p>Returns a string representation of this object.</p>
+      
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">@override
-String toString() =&gt; toMap().toString();</code></pre>
+      <pre class="language-dart"><code class="language-dart">Map&lt;String, dynamic&gt; toMap() =&gt; &lt;String, dynamic&gt;{
+      &#39;username&#39;: username,
+      &#39;kuid&#39;: kuid,
+    };</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

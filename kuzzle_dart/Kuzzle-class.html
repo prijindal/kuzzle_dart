@@ -366,8 +366,17 @@
           
 </dd>
         <dt id="createMyCredentials" class="callable">
-          <span class="name"><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="createMyCredentials-param-strategy"><span class="type-annotation"><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="createMyCredentials-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+          <span class="name"><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="createMyCredentials-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="credentialsExist" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></span><span class="signature">(<wbr><span class="parameter" id="credentialsExist-param-strategy"><span class="type-annotation"><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></span> <span class="parameter-name">strategy</span></span>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -385,7 +394,7 @@
 </dd>
         <dt id="deleteMyCredentials" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="deleteMyCredentials-param-strategy"><span class="type-annotation"><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></span> <span class="parameter-name">strategy</span>, {</span> <span class="parameter" id="deleteMyCredentials-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
-            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/AcknowledgedResponse-class.html">AcknowledgedResponse</a></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -422,6 +431,15 @@
         <dt id="getAutoRefresh" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></span><span class="signature">(<wbr>{<span class="parameter" id="getAutoRefresh-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="getAutoRefresh-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="getCurrentUser" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></span><span class="signature">(<wbr>{<span class="parameter" id="getCurrentUser-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -471,6 +489,15 @@
           </dt>
         <dd>
           
+          
+</dd>
+        <dt id="getStrategies" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/getStrategies.html">getStrategies</a></span><span class="signature">(<wbr>{<span class="parameter" id="getStrategies-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Get all authentication strategies registered in Kuzzle
           
 </dd>
         <dt id="listCollections" class="callable">
@@ -539,6 +566,15 @@
         <dt id="register" class="callable">
           <span class="name"><a href="kuzzle_dart/Kuzzle/register.html">register</a></span><span class="signature">(<wbr><span class="parameter" id="register-param-user"><span class="type-annotation"><a href="kuzzle_dart/User-class.html">User</a></span> <span class="parameter-name">user</span>, </span> <span class="parameter" id="register-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="register-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="searchUsers" class="callable">
+          <span class="name"><a href="kuzzle_dart/Kuzzle/searchUsers.html">searchUsers</a></span><span class="signature">(<wbr><span class="parameter" id="searchUsers-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, {</span> <span class="parameter" id="searchUsers-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SearchResponse-class.html">SearchResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>&gt;</span></span>
           </span>
           </dt>
         <dd>
@@ -681,17 +717,20 @@
       <li><a href="kuzzle_dart/Kuzzle/connectInternal.html">connectInternal</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/getStrategies.html">getStrategies</a></li>
       <li><a href="kuzzle_dart/Kuzzle/listCollections.html">listCollections</a></li>
       <li><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></li>
       <li><a href="kuzzle_dart/Kuzzle/login.html">login</a></li>
@@ -700,6 +739,7 @@
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/searchUsers.html">searchUsers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
