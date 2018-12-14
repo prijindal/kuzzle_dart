@@ -26,7 +26,7 @@ class CheckTokenResponse {
         state = map['state'],
         expiresAt = map['expiresAt'];
 
-  final int valid;
+  final bool valid;
   final String state;
   final int expiresAt;
 }
@@ -115,9 +115,19 @@ class Kuzzle {
 
   Future<CheckTokenResponse> checkToken(String token) async =>
       addNetworkQuery(<String, dynamic>{
+        'action': 'checkToken',
         'controller': 'auth',
-        'token': token,
+        'body': {
+          'token': token,
+        },
       }).then((response) => CheckTokenResponse.fromMap(response.result));
+
+  Future<bool> credentialsExist(LoginStrategy strategy) async =>
+      addNetworkQuery(<String, dynamic>{
+        'action': 'credentialsExist',
+        'controller': 'auth',
+        'strategy': enumToString<LoginStrategy>(strategy),
+      }).then((response) => response.result as bool);
 
   Collection collection(String collection, {String index}) {
     index ??= defaultIndex;
@@ -164,8 +174,7 @@ class Kuzzle {
           .then((response) =>
               SharedAcknowledgedResponse.fromMap(response.result));
 
-  Future<CredentialsResponse> createMyCredentials(
-          LoginStrategy strategy, Credentials credentials,
+  Future<CredentialsResponse> createMyCredentials(Credentials credentials,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
@@ -179,7 +188,7 @@ class Kuzzle {
       }, queuable: queuable)
           .then((response) => CredentialsResponse.fromMap(response.result));
 
-  Future<bool> deleteMyCredentials(LoginStrategy strategy,
+  Future<AcknowledgedResponse> deleteMyCredentials(LoginStrategy strategy,
           {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
@@ -187,7 +196,7 @@ class Kuzzle {
         'strategy': enumToString<LoginStrategy>(strategy),
         'jwt': _jwtToken,
       }, queuable: queuable)
-          .then((response) => response.result['acknowledged']);
+          .then((response) => AcknowledgedResponse.fromMap(response.result));
 
   Future<AcknowledgedResponse> deleteIndex(String index) async =>
       addNetworkQuery(<String, dynamic>{
@@ -228,6 +237,13 @@ class Kuzzle {
         'action': 'getAutoRefresh',
       }, queuable: queuable)
           .then((response) => response.result);
+
+  Future<User> getCurrentUser({bool queuable = true}) async =>
+      addNetworkQuery(<String, dynamic>{
+        'controller': 'auth',
+        'action': 'getCurrentUser',
+      }, queuable: queuable)
+          .then((response) => User.fromMap(security, response.result));
 
   String getJwtToken() => _jwtToken;
 
@@ -270,6 +286,16 @@ class Kuzzle {
       }, queuable: queuable)
           .then((response) => response.result['hits']
               .map((stats) => Statistics.fromMap(stats)));
+
+  /// Get all authentication strategies registered in Kuzzle
+  Future<List<String>> getStrategies({bool queuable = true}) =>
+      addNetworkQuery(<String, dynamic>{
+        'controller': 'auth',
+        'action': 'getStrategies',
+      }, queuable: queuable)
+          .then((response) => (response.result as List<dynamic>)
+              .map<String>((res) => res as String)
+              .toList());
 
   Future<List<ListCollectionResponse>> listCollections(
     String index, {

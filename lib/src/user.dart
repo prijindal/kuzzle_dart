@@ -2,7 +2,8 @@ import 'profile.dart';
 import 'security.dart';
 
 class User extends Object {
-  User(this.security, {this.id, this.meta, this.name, List<dynamic> profileIds})
+  User(this.security,
+      {this.id, this.meta, this.source, List<dynamic> profileIds})
       : profileIds = profileIds == null
             ? <String>[]
             : profileIds.map<String>((id) => id as String).toList();
@@ -13,23 +14,32 @@ class User extends Object {
             : map['_source']['profileIds']
                 .map<String>((id) => id as String)
                 .toList(),
-        name = map['_source']['name'],
-        meta = map['_meta'];
+        source = map['_source'],
+        meta = map['_meta'] {
+    source.remove('profileIds');
+    source.remove('_kuzzle_info');
+  }
 
   final Security security;
   final String id;
   final Map<String, dynamic> meta;
-  final String name;
+  final Map<String, dynamic> source;
   final List<String> profileIds;
 
   @override
-  String toString() => toMap().toString();
-
-  Map<String, dynamic> toMap() => <String, dynamic>{
+  String toString() => <String, dynamic>{
         '_id': id,
-        'name': name,
+        '_source': source,
+        'meta': meta,
         'profileIds': profileIds,
-      };
+      }.toString();
+
+  Map<String, dynamic> toMap() {
+    final map = <String, dynamic>{
+      'profileIds': profileIds,
+    }..addAll(source);
+    return map;
+  }
 
   Future<List<Profile>> getProfiles() => Future.wait<Profile>(profileIds
       .map((profileId) => security.addNetworkQuery(
@@ -43,4 +53,7 @@ class User extends Object {
 
   Future<String> delete({String refresh = 'false'}) =>
       security.deleteUser(id, refresh: refresh);
+
+  Future<User> update({bool queuable = true}) =>
+      security.kuzzle.updateSelf(source);
 }

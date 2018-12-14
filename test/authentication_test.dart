@@ -17,7 +17,8 @@ void main() {
       username: uuid.v1(),
       password: uuid.v1(),
     );
-    user = User(kuzzleTestHelper.kuzzle.security, name: 'Test User');
+    user =
+        User(kuzzleTestHelper.kuzzle.security, source: {'name': 'Test User'});
   });
 
   group('authentication', () {
@@ -25,13 +26,77 @@ void main() {
       test('register', () async {
         final saveduser =
             await kuzzleTestHelper.kuzzle.register(user, credentials);
-        expect(saveduser.name, user.name);
+        expect(saveduser.source['name'], user.source['name']);
         user = saveduser;
       });
 
       test('login', () async {
         final response = await kuzzleTestHelper.kuzzle.login(credentials);
         expect(response.id, user.id);
+      });
+
+      test('check token', () async {
+        final checkToken = await kuzzleTestHelper.kuzzle
+            .checkToken(kuzzleTestHelper.kuzzle.getJwtToken());
+        expect(checkToken.valid, true);
+        final prevToken = kuzzleTestHelper.kuzzle.getJwtToken();
+        await kuzzleTestHelper.kuzzle.logout();
+        final newCheckToken =
+            await kuzzleTestHelper.kuzzle.checkToken(prevToken);
+        expect(newCheckToken.valid, false);
+        expect((await kuzzleTestHelper.kuzzle.login(credentials)).id, user.id);
+      });
+
+      test('check if credentials exists', () async {
+        expect(
+            await kuzzleTestHelper.kuzzle.credentialsExist(LoginStrategy.local),
+            true);
+      });
+
+      test('delete credentials', () async {
+        expect(
+            (await kuzzleTestHelper.kuzzle
+                    .deleteMyCredentials(LoginStrategy.local))
+                .acknowledged,
+            true);
+      });
+
+      test('create credentials', () async {
+        final credentialsResponse = await kuzzleTestHelper.kuzzle
+            .createMyCredentials(Credentials(LoginStrategy.local,
+                username: 'alternate', password: 'alternate'));
+        expect(credentialsResponse.username, 'alternate');
+      });
+
+      test('get credentials', () async {
+        final currentUser =
+            await kuzzleTestHelper.kuzzle.getMyCredentials(LoginStrategy.local);
+        expect(currentUser.username, 'alternate');
+        expect(currentUser.kuid, user.id);
+      });
+
+      test('update credentials', () async {
+        final credentialsResponse =
+            await kuzzleTestHelper.kuzzle.updateMyCredentials(credentials);
+        expect(credentialsResponse.username, credentials.username);
+      });
+
+      test('get all strategies', () async {
+        expect(await kuzzleTestHelper.kuzzle.getStrategies(), ['local']);
+      });
+
+      test('get current user', () async {
+        final currentUser = await kuzzleTestHelper.kuzzle.getCurrentUser();
+        expect(currentUser.id, user.id);
+        expect(currentUser.profileIds, ['default']);
+        expect(currentUser.source['name'], user.source['name']);
+      });
+
+      test('update self', () async {
+        user.source.addAll({'lastname': 'Some last name'});
+        final updatedUser = await user.update();
+        expect(updatedUser.source['name'], user.source['name']);
+        expect(updatedUser.source['lastname'], 'Some last name');
       });
 
       test('signout', () async {

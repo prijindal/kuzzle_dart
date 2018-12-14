@@ -22,6 +22,14 @@ class CredentialsResponse {
 
   final String username;
   final String kuid;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, dynamic> toMap() => <String, dynamic>{
+        'username': username,
+        'kuid': kuid,
+      };
 }
 
 // After login

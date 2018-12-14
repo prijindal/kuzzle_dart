@@ -27,7 +27,7 @@ class Security extends KuzzleObject {
       User(this,
           id: id,
           meta: meta,
-          name: content['name'],
+          source: content,
           profileIds: content['profileIds']);
 
   Future<User> createUser(
