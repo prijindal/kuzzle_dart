@@ -35,4 +35,4 @@ deploy:
   local-dir: doc/api
   on:
     branch: master
-    condition: $TRAVIS_DART_VERSION=stable
+    dart: stable
