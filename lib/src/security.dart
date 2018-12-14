@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'credentials.dart';
 import 'helpers.dart';
 import 'kuzzle.dart';

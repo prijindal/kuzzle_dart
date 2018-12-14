@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:meta/meta.dart';
 import 'helpers.dart';
 import 'kuzzle.dart';
