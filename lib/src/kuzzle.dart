@@ -109,6 +109,13 @@ class Kuzzle {
     return completer.future;
   }
 
+  /// Checks if an administrator account has been created,
+  ///
+  /// return true if it exists and false if it does not.
+  Future<bool> adminExists({bool queuable = true}) => addNetworkQuery(
+          <String, dynamic>{'controller': 'server', 'action': 'adminExists'})
+      .then((response) => response.result['exists'] as bool);
+
   void networkQuery(Map<String, dynamic> body) {
     _webSocket.sink.add(json.encode(body));
   }
@@ -222,13 +229,15 @@ class Kuzzle {
 
   // void flushQueue() => throw ResponseError();
 
-  Future<List<Statistics>> getAllStatistics({bool queuable = true}) async =>
+  Future<ScrollResponse<Statistics>> getAllStatistics(
+          {bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'server',
         'action': 'getAllStats',
       }, queuable: queuable)
-          .then((response) => response.result['hits']
-              .map((stats) => Statistics.fromMap(stats)));
+          .then((response) => ScrollResponse<Statistics>.fromMap(
+              response.result,
+              (map) => Statistics.fromMap(map as Map<String, dynamic>)));
 
   Future<bool> getAutoRefresh({String index, bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
@@ -257,14 +266,15 @@ class Kuzzle {
       }, queuable: queuable)
           .then((response) => CredentialsResponse.fromMap(response.result));
 
-  Future<Rights> getMyRights({bool queuable = true}) async =>
+  Future<List<Rights>> getMyRights({bool queuable = true}) async =>
       addNetworkQuery(<String, dynamic>{
         'controller': 'auth',
         'action': 'getMyRights',
         'jwt': _jwtToken,
       }, queuable: queuable)
-          .then((response) =>
-              response.result['hits'].map((stats) => Rights.fromMap(stats)));
+          .then((response) => (response.result['hits'] as List<dynamic>)
+              .map<Rights>((stats) => Rights.fromMap(stats))
+              .toList());
 
   Future<ServerInfo> getServerInfo({bool queuable = true}) =>
       addNetworkQuery(<String, dynamic>{

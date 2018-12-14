@@ -11,4 +11,15 @@ class Rights {
   final String index;
   final String collection;
   final String value;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, dynamic> toMap() => {
+        'controller': controller,
+        'action': action,
+        'index': index,
+        'collection': collection,
+        'value': value,
+      };
 }

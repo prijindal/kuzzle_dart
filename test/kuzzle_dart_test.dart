@@ -10,9 +10,15 @@ void main() {
     kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
   });
 
-  test('create index', () async {
-    await kuzzleTestHelper.kuzzle
-        .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
+  test('check admin', () async {
+    expect(await kuzzleTestHelper.kuzzle.adminExists(), true);
+  });
+
+  test('get all statistics', () async {
+    final stats = await kuzzleTestHelper.kuzzle.getAllStatistics();
+    expect(stats.total, greaterThanOrEqualTo(1));
+    expect(stats.hits[stats.total - 1].completedRequests.websocket,
+        greaterThanOrEqualTo(1));
   });
 
   test('test for security constructor', () async {

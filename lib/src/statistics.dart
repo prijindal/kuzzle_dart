@@ -9,6 +9,15 @@ class RequestStatistics {
   int websocket;
   int http;
   int mqtt;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, dynamic> toMap() => {
+        'websocket': websocket,
+        'http': http,
+        'mqtt': mqtt,
+      };
 }
 
 class Statistics {
@@ -24,4 +33,15 @@ class Statistics {
   RequestStatistics ongoingRequests;
   RequestStatistics connections;
   int timestamp;
+
+  @override
+  String toString() => toMap().toString();
+
+  Map<String, dynamic> toMap() => {
+        'completedRequests': completedRequests,
+        'failedRequests': failedRequests,
+        'ongoingRequests': ongoingRequests,
+        'connections': connections,
+        'timestamp': timestamp,
+      };
 }

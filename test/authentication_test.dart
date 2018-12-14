@@ -104,6 +104,17 @@ void main() {
         expect(iAm.id, user.id);
       });
 
+      test('get my rights', () async {
+        final rights = await kuzzleTestHelper.kuzzle.getMyRights();
+        // All rights are valid
+        expect(rights.length, 1);
+        expect(rights[0].controller, '*');
+        expect(rights[0].action, '*');
+        expect(rights[0].index, '*');
+        expect(rights[0].collection, '*');
+        expect(rights[0].value, 'allowed');
+      });
+
       test('signout', () async {
         await kuzzleTestHelper.kuzzle.logout();
       });
