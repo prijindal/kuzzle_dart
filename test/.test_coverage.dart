@@ -7,6 +7,7 @@ import 'document_test.dart' as document_test;
 import 'index_test.dart' as index_test;
 import 'kuzzle_dart_test.dart' as kuzzle_dart_test;
 import 'memory_storage_test.dart' as memory_storage_test;
+import 'subscriptions_test.dart' as subscriptions_test;
 
 void main() {
   index_test.main();
@@ -15,4 +16,5 @@ void main() {
   document_test.main();
   memory_storage_test.main();
   kuzzle_dart_test.main();
+  subscriptions_test.main();
 }
