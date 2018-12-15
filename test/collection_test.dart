@@ -44,7 +44,7 @@ void main() {
       final listCollectionResponse =
           await kuzzle.listCollections(kuzzle.defaultIndex);
       expect(listCollectionResponse.length, greaterThanOrEqualTo(1));
-      expect(listCollectionResponse[0].name, 'posts');
+      expect(listCollectionResponse[0].collectionName, 'posts');
     });
 
     test('search specifications', () async {
