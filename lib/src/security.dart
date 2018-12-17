@@ -31,6 +31,12 @@ class Security extends KuzzleObject {
           source: content,
           profileIds: content['profileIds']);
 
+  Future<RawKuzzleResponse> createFirstAdmin(Credentials credentials) =>
+      addNetworkQuery(
+        'createFirstAdmin',
+        body: {'credentials': credentials.toMap()},
+      );
+
   Future<User> createUser(
     User user,
     Credentials credentials, {

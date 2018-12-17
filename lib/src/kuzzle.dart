@@ -156,6 +156,7 @@ class Kuzzle {
       final jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
       final response = RawKuzzleResponse.fromMap(this, jsonResponse);
+      // print(response);
       if (roomMaps.containsKey(response.room)) {
         roomMaps[response.room].add(response);
       } else if (futureMaps.containsKey(requestId) &&
@@ -221,6 +222,10 @@ class Kuzzle {
   void disconect() {
     _streamSubscription.cancel();
     _webSocket.sink.close(status.goingAway);
+    roomMaps.forEach((key, roomSubscription) {
+      roomSubscription.close();
+    });
+    roomMaps.removeWhere((key, room) => true);
   }
 
   Future<bool> existsIndex(
