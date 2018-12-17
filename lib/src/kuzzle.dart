@@ -351,7 +351,7 @@ class Kuzzle {
         'size': size,
       }, queuable: queuable)
           .then((response) => (response.result['collections'] as List<dynamic>)
-              .map<Collection>((map) => collection('name'))
+              .map<Collection>((map) => collection(map['name'], index: index))
               .toList());
 
   Future<List<String>> listIndexes({bool queuable = true}) async =>
