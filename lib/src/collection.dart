@@ -50,6 +50,7 @@ class Collection extends KuzzleObject {
     final prevMap = super.getPartialQuery()
       ..addAll(<String, dynamic>{
         'collection': collectionName,
+        'index': index,
       });
     return prevMap;
   }
