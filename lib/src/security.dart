@@ -44,6 +44,7 @@ class Security extends KuzzleObject {
         },
         optionalParams: <String, dynamic>{
           'refresh': refresh,
+          '_id': user.id,
         },
       ).then((response) => User.fromMap(this, response.result));
 
