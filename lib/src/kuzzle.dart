@@ -80,6 +80,15 @@ class Kuzzle {
   Map<String, dynamic> headers;
 
   String _jwtToken;
+  
+  String get jwtToken {
+    return _jwtToken;
+  }
+
+  void set jwtToken(String _newJwtToken) {
+    _jwtToken = _newJwtToken;
+  }
+  
   // int offlineQueue;
   // void Function() offlineQueueLoader;
   // void Function() queueFilter;
