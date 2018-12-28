@@ -54,6 +54,7 @@
       <li><a href="kuzzle_dart/Kuzzle/futureMaps.html">futureMaps</a></li>
       <li><a href="kuzzle_dart/Kuzzle/headers.html">headers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/host.html">host</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
@@ -66,6 +67,7 @@
       <li><a href="kuzzle_dart/Kuzzle/sslConnection.html">sslConnection</a></li>
       <li><a href="kuzzle_dart/Kuzzle/uuid.html">uuid</a></li>
       <li><a href="kuzzle_dart/Kuzzle/volatile.html">volatile</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/webSocket.html">webSocket</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/runtimeType.html">runtimeType</a></li>
     
@@ -138,7 +140,7 @@
     final jsonResponse = json.decode(message);
     final String requestId = jsonResponse[&#39;requestId&#39;];
     final response = RawKuzzleResponse.fromMap(this, jsonResponse);
-    &#47;&#47; print(response.result);
+    &#47;&#47; print(response);
     if (roomMaps.containsKey(response.room)) {
       roomMaps[response.room].add(response);
     } else if (futureMaps.containsKey(requestId) &amp;&amp;
@@ -150,6 +152,11 @@
       }
       futureMaps.remove(requestId);
     }
+  });
+  _streamSubscription.onError((error) {
+    futureMaps.forEach((requestId, future) {
+      future.completeError(error);
+    });
   });
 }</code></pre>
     </section>

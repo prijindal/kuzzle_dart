@@ -51,6 +51,7 @@
       <li class="inherited"><a href="kuzzle_dart/Security/runtimeType.html">runtimeType</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/Security-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/Security/createFirstAdmin.html">createFirstAdmin</a></li>
       <li><a href="kuzzle_dart/Security/createUser.html">createUser</a></li>
       <li><a href="kuzzle_dart/Security/deleteUser.html">deleteUser</a></li>
       <li><a href="kuzzle_dart/Security/getController.html">getController</a></li>
@@ -98,6 +99,7 @@
       },
       optionalParams: &lt;String, dynamic&gt;{
         &#39;refresh&#39;: refresh,
+        &#39;_id&#39;: user.id,
       },
     ).then((response) =&gt; User.fromMap(this, response.result));</code></pre>
     </section>

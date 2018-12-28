@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the getController method from the Security class, for the Dart programming language.">
-  <title>getController method - Security class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the createFirstAdmin method from the Security class, for the Dart programming language.">
+  <title>createFirstAdmin method - Security class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Security-class.html">Security</a></li>
-    <li class="self-crumb">getController method</li>
+    <li class="self-crumb">createFirstAdmin method</li>
   </ol>
-  <div class="self-name">getController</div>
+  <div class="self-name">createFirstAdmin</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -75,24 +75,22 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>getController method</h1>
+    <h1>createFirstAdmin method</h1>
 
     <section class="multi-line-signature">
-      <div>
-        <ol class="annotation-list">
-          <li>@override</li>
-        </ol>
-      </div>
-      <span class="returntype">String</span>
-      <span class="name ">getController</span>
-(<wbr>)
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
+      <span class="name ">createFirstAdmin</span>
+(<wbr><span class="parameter" id="createFirstAdmin-param-credentials"><span class="type-annotation"><a href="kuzzle_dart/Credentials-class.html">Credentials</a></span> <span class="parameter-name">credentials</span></span>)
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">@override
-String getController() =&gt; controller;</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; createFirstAdmin(Credentials credentials) =&gt;
+    addNetworkQuery(
+      &#39;createFirstAdmin&#39;,
+      body: {&#39;credentials&#39;: credentials.toMap()},
+    );</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

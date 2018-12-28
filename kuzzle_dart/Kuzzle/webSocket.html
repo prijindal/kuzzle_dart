@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the connect method from the Kuzzle class, for the Dart programming language.">
-  <title>connect method - Kuzzle class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the webSocket property from the Kuzzle class, for the Dart programming language.">
+  <title>webSocket property - Kuzzle class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
-    <li class="self-crumb">connect method</li>
+    <li class="self-crumb">webSocket property</li>
   </ol>
-  <div class="self-name">connect</div>
+  <div class="self-name">webSocket</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -124,23 +124,23 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>connect method</h1>
+    <h1>webSocket property</h1>
 
-    <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
-      <span class="name ">connect</span>
-(<wbr>)
-      
-    </section>
-    
-    <section class="summary source-code" id="source">
-      <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; connect() async {
-  _webSocket = await connectInternal();
-  bindSubscription();
-}</code></pre>
-    </section>
 
+        <section id="getter">
+        
+        <section class="multi-line-signature">
+          <span class="returntype">IOWebSocketChannel</span>
+          <span class="name ">webSocket</span>
+  
+</section>
+        
+        <section class="summary source-code" id="source">
+  <h2><span>Implementation</span> </h2>
+  <pre class="language-dart"><code class="language-dart">IOWebSocketChannel get webSocket =&gt; _webSocket;</code></pre>
+</section>
+</section>
+        
   </div> <!-- /.main-content -->
 
   <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

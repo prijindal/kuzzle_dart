@@ -105,7 +105,7 @@
     <h1>search method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ScrollResponse-class.html">ScrollResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/SearchResponse-class.html">SearchResponse</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">search</span>
 (<wbr>{<span class="parameter" id="search-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>: <span class="default-value">emptyMap</span>, </span> <span class="parameter" id="search-param-aggregations"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">aggregations</span>: <span class="default-value">emptyMap</span>, </span> <span class="parameter" id="search-param-sort"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">sort</span>: <span class="default-value">emptyMap</span>, </span> <span class="parameter" id="search-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="search-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span>, </span> <span class="parameter" id="search-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>: <span class="default-value">0</span>, </span> <span class="parameter" id="search-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>: <span class="default-value">10</span>, </span> <span class="parameter" id="search-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span>: <span class="default-value">false</span></span> })
       
@@ -113,7 +113,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;ScrollResponse&lt;Document&gt;&gt; search({
+      <pre class="language-dart"><code class="language-dart">Future&lt;SearchResponse&lt;Document&gt;&gt; search({
   Map&lt;String, dynamic&gt; query = emptyMap,
   Map&lt;String, dynamic&gt; aggregations = emptyMap,
   Map&lt;String, dynamic&gt; sort = emptyMap,
@@ -137,7 +137,7 @@
         &#39;size&#39;: size,
         &#39;includeTrash&#39;: includeTrash
       },
-    ).then((response) =&gt; ScrollResponse&lt;Document&gt;.fromMap(response.result,
+    ).then((response) =&gt; SearchResponse&lt;Document&gt;.fromMap(response.result,
         (map) =&gt; Document.fromMap(this, map as Map&lt;String, dynamic&gt;)));</code></pre>
     </section>
 
