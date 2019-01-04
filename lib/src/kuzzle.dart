@@ -106,10 +106,12 @@ class Kuzzle extends EventBus {
       pendingRequests[requestId] = request;
       futureMaps[requestId] = completer;
     } else {
+      print('non queuable request');
+      print(request.query.toString());
       networkQuery(request);
       completer.complete(RawKuzzleResponse.fromMap(
         this,
-        request,
+        RawKuzzleRequest(request.query),
         <String, dynamic>{'result': request.query['body']},
       ));
     }
@@ -168,16 +170,19 @@ class Kuzzle extends EventBus {
   void bindSubscription() {
     _streamSubscription = _webSocket.stream.listen((message) {
       final jsonResponse = json.decode(message);
-      final String requestId = jsonResponse['requestId'];
+      final requestId = jsonResponse['requestId'];
+      final request = pendingRequests[requestId];
 
-      if (!pendingRequests.containsKey(requestId)) {
+      if (request == null) {
         // Todo: handle error
+        print('pending request $requestId not found');
         return;
       }
+      print('pending request $requestId found !!');
 
       final response = RawKuzzleResponse.fromMap(
         this,
-        pendingRequests[requestId],
+        request,
         jsonResponse
       );
       // print(response);
@@ -195,7 +200,7 @@ class Kuzzle extends EventBus {
       {
         unsetJwtToken();
         fire(TokenExpiredEvent(
-          request: response.request,
+          request: request,
           future: futureMaps[requestId].future
         ));
       }
@@ -203,7 +208,7 @@ class Kuzzle extends EventBus {
       if (response.error is ResponseError) {
          fire(QueryErrorEvent(
            error: response.error,
-           request: response.request,
+           request: request,
            future: futureMaps[requestId].future
          ));
       }
@@ -226,7 +231,7 @@ class Kuzzle extends EventBus {
     _streamSubscription.onError((error) {
       print('kuzzle stream error');
       print(error);
-      fire(DisconnectedEvent());
+      fire(NetworkErrorEvent(error));
 
       futureMaps.forEach((requestId, future) {
         future.completeError(error);
