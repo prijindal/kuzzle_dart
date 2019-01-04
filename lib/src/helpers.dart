@@ -67,12 +67,16 @@ abstract class KuzzleObject extends Object {
     if (optionalParams != null) {
       query.addAll(optionalParams);
     }
+    final request = RawKuzzleRequest(query);
+
     if (collection == null && kuzzle != null) {
-      return kuzzle.addNetworkQuery(query, queuable: queuable);
+      return kuzzle.addNetworkQuery(request, queuable: queuable);
     } else if (collection != null && kuzzle == null) {
-      return collection.kuzzle.addNetworkQuery(query, queuable: queuable);
+      return collection.kuzzle.addNetworkQuery(request, queuable: queuable);
     }
-    return RawKuzzleResponse.fromMap(null, <String, dynamic>{});
+
+    // Todo: handle wired case
+    return RawKuzzleResponse.fromMap(null, request, <String, dynamic>{});
   }
 
   // void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>

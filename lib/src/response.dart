@@ -5,8 +5,16 @@ import 'error.dart';
 import 'kuzzle.dart';
 import 'room.dart';
 
+class RawKuzzleRequest {
+  RawKuzzleRequest(
+    this.query,
+  );
+
+  final Map<String, dynamic> query;
+}
+
 class RawKuzzleResponse {
-  RawKuzzleResponse.fromMap(this.kuzzle, Map<String, dynamic> map)
+  RawKuzzleResponse.fromMap(this.kuzzle, RawKuzzleRequest this.request, Map<String, dynamic> map)
       : status = map['status'],
         error =
             map['error'] == null ? null : ResponseError.fromMap(map['error']),
@@ -27,6 +35,7 @@ class RawKuzzleResponse {
   final String index;
   final String collection;
   final String room;
+  final RawKuzzleRequest request;
   final String requestId;
   final String state;
   final dynamic result; // Usually Map<String, dynamic> result;
