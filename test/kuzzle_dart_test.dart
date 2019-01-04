@@ -12,7 +12,7 @@ void main() {
     kuzzle.on<kuzzle_dart.ConnectedEvent>().listen((event) {
       isConnectedEventCalled = true;
     });
-    
+
     await kuzzle.connect();
     kuzzle.defaultIndex = Uuid().v1();
   });

@@ -80,7 +80,7 @@ Future<void> kuzzleConnections() async {
   final roomId = await room.unsubscribe();
   print(roomId);
 
-  kuzzle.disconect();
+  kuzzle.disconnect();
 }
 
 void main() {

@@ -7,7 +7,7 @@ class NetworkErrorEvent {
     this.error,
   );
 
-  final Error error;
+  final dynamic error; // Exception or Error
 }
 class DisconnectedEvent {}
 class ReconnectedEvent {}
