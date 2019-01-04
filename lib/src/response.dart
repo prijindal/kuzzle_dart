@@ -14,18 +14,21 @@ class RawKuzzleRequest {
 }
 
 class RawKuzzleResponse {
-  RawKuzzleResponse.fromMap(this.kuzzle, RawKuzzleRequest this.request, Map<String, dynamic> map)
-      : status = map['status'],
-        error =
-            map['error'] == null ? null : ResponseError.fromMap(map['error']),
-        action = map['action'],
-        controller = map['controller'],
-        index = map['index'],
-        collection = map['collection'],
-        room = map['room'],
-        requestId = map['requestId'],
-        state = map['state'],
-        result = map['result'];
+  RawKuzzleResponse.fromMap(
+    this.kuzzle,
+    this.request,
+    Map<String, dynamic> map
+  ) : status = map['status'],
+      error =
+          map['error'] == null ? null : ResponseError.fromMap(map['error']),
+      action = map['action'],
+      controller = map['controller'],
+      index = map['index'],
+      collection = map['collection'],
+      room = map['room'],
+      requestId = map['requestId'],
+      state = map['state'],
+      result = map['result'];
 
   final Kuzzle kuzzle;
   final int status;
