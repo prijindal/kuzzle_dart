@@ -5,87 +5,79 @@ import 'package:kuzzle/kuzzle_dart.dart';
 import 'helpers/kuzzle.dart';
 
 void main() {
-  final kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzle = TestKuzzle();
   Credentials credentials;
   User user;
   setUpAll(() async {
-    await kuzzleTestHelper.connect();
+    await kuzzle.connect();
     final uuid = Uuid();
-    kuzzleTestHelper.kuzzle.defaultIndex = uuid.v1();
+    kuzzle.defaultIndex = uuid.v1();
     credentials = Credentials(
       LoginStrategy.local,
       username: uuid.v1(),
       password: uuid.v1(),
     );
-    user =
-        User(kuzzleTestHelper.kuzzle.security, source: {'name': 'Test User'});
+    user = User(kuzzle.security, source: {'name': 'Test User'});
   });
 
   group('authentication', () {
     group('user auth', () {
       test('register', () async {
-        final saveduser =
-            await kuzzleTestHelper.kuzzle.register(user, credentials);
+        final saveduser = await kuzzle.register(user, credentials);
         expect(saveduser.source['name'], user.source['name']);
         user = saveduser;
       });
 
       test('login', () async {
-        final response = await kuzzleTestHelper.kuzzle.login(credentials);
+        final response = await kuzzle.login(credentials);
         expect(response.id, user.id);
       });
 
       test('check token', () async {
-        final checkToken = await kuzzleTestHelper.kuzzle
-            .checkToken(kuzzleTestHelper.kuzzle.getJwtToken());
+        final checkToken = await kuzzle.checkToken(kuzzle.getJwtToken());
         expect(checkToken.valid, true);
-        final prevToken = kuzzleTestHelper.kuzzle.getJwtToken();
-        await kuzzleTestHelper.kuzzle.logout();
-        final newCheckToken =
-            await kuzzleTestHelper.kuzzle.checkToken(prevToken);
+        final prevToken = kuzzle.getJwtToken();
+        await kuzzle.logout();
+        final newCheckToken = await kuzzle.checkToken(prevToken);
         expect(newCheckToken.valid, false);
-        expect((await kuzzleTestHelper.kuzzle.login(credentials)).id, user.id);
+        expect((await kuzzle.login(credentials)).id, user.id);
       });
 
       test('check if credentials exists', () async {
-        expect(
-            await kuzzleTestHelper.kuzzle.credentialsExist(LoginStrategy.local),
-            true);
+        expect(await kuzzle.credentialsExist(LoginStrategy.local), true);
       });
 
       test('delete credentials', () async {
         expect(
-            (await kuzzleTestHelper.kuzzle
-                    .deleteMyCredentials(LoginStrategy.local))
+            (await kuzzle.deleteMyCredentials(LoginStrategy.local))
                 .acknowledged,
             true);
       });
 
       test('create credentials', () async {
         final credentialsResponse =
-            await kuzzleTestHelper.kuzzle.createMyCredentials(credentials);
+            await kuzzle.createMyCredentials(credentials);
         expect(credentialsResponse.username, credentials.username);
       });
 
       test('get credentials', () async {
-        final currentUser =
-            await kuzzleTestHelper.kuzzle.getMyCredentials(LoginStrategy.local);
+        final currentUser = await kuzzle.getMyCredentials(LoginStrategy.local);
         expect(currentUser.username, credentials.username);
         expect(currentUser.kuid, user.id);
       });
 
       test('update credentials', () async {
         final credentialsResponse =
-            await kuzzleTestHelper.kuzzle.updateMyCredentials(credentials);
+            await kuzzle.updateMyCredentials(credentials);
         expect(credentialsResponse.username, credentials.username);
       });
 
       test('get all strategies', () async {
-        expect(await kuzzleTestHelper.kuzzle.getStrategies(), ['local']);
+        expect(await kuzzle.getStrategies(), ['local']);
       });
 
       test('get current user', () async {
-        final currentUser = await kuzzleTestHelper.kuzzle.getCurrentUser();
+        final currentUser = await kuzzle.getCurrentUser();
         expect(currentUser.id, user.id);
         expect(currentUser.profileIds, ['default']);
         expect(currentUser.source['name'], user.source['name']);
@@ -100,12 +92,12 @@ void main() {
       });
 
       test('whoami', () async {
-        final iAm = await kuzzleTestHelper.kuzzle.whoAmI();
+        final iAm = await kuzzle.whoAmI();
         expect(iAm.id, user.id);
       });
 
       test('get my rights', () async {
-        final rights = await kuzzleTestHelper.kuzzle.getMyRights();
+        final rights = await kuzzle.getMyRights();
         // All rights are valid
         expect(rights.length, 1);
         expect(rights[0].controller, '*');
@@ -116,15 +108,15 @@ void main() {
       });
 
       test('signout', () async {
-        await kuzzleTestHelper.kuzzle.logout();
+        await kuzzle.logout();
       });
 
       test('admin login', () async {
-        await kuzzleTestHelper.kuzzle.login(adminCredentials);
+        await kuzzle.login(TestKuzzle.adminCredentials);
       });
 
       test('search users', () async {
-        final searchUsers = await kuzzleTestHelper.kuzzle.searchUsers({
+        final searchUsers = await kuzzle.searchUsers({
           'bool': {
             'must': [
               {
@@ -148,5 +140,5 @@ void main() {
     });
   });
 
-  tearDownAll(kuzzleTestHelper.end);
+  tearDownAll(kuzzle.disconect);
 }

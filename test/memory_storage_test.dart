@@ -5,16 +5,16 @@ import 'package:kuzzle/kuzzle_dart.dart';
 import 'helpers/kuzzle.dart';
 
 void main() {
-  final kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzle = TestKuzzle();
   setUpAll(() async {
-    await kuzzleTestHelper.connect();
-    kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
+    await kuzzle.connect();
+    kuzzle.defaultIndex = Uuid().v1();
   });
 
   group('memory storage', () {
     MemoryStorage memoryStorage;
     setUpAll(() async {
-      memoryStorage = kuzzleTestHelper.kuzzle.memoryStorage;
+      memoryStorage = kuzzle.memoryStorage;
     });
 
     test('append', () async {
@@ -638,5 +638,5 @@ void main() {
     });
   });
 
-  tearDownAll(kuzzleTestHelper.end);
+  tearDownAll(kuzzle.disconect);
 }

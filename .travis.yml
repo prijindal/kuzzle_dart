@@ -14,13 +14,13 @@ services:
 before_script:
   - if [ $TRAVIS_DART_TEST == true ]; then ./docker_launch.sh; fi
 
-after_success:
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
-  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then dartdoc; fi
-
 cache:
   directories:
     - $HOME/.pub-cache
+
+after_success:
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ]; then ./coverage.sh; fi
+  - if [ "$TRAVIS_DART_VERSION" == "stable" ] && [ $TRAVIS_DART_TEST == true ] && [ $TRAVIS_BRANCH == 'master' ]; then dartdoc; fi
 
 deploy:
   provider: pages

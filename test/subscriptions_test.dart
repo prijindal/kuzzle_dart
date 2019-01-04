@@ -5,10 +5,10 @@ import 'package:kuzzle/kuzzle_dart.dart';
 import 'helpers/kuzzle.dart';
 
 void main() {
-  final kuzzleTestHelper = KuzzleTestHelper();
+  final kuzzle = TestKuzzle();
   setUpAll(() async {
-    await kuzzleTestHelper.connect();
-    kuzzleTestHelper.kuzzle.defaultIndex = Uuid().v1();
+    await kuzzle.connect();
+    kuzzle.defaultIndex = Uuid().v1();
   });
 
   group('Subscriptions', () {
@@ -16,9 +16,8 @@ void main() {
     Room room;
     final sampleContent = {'foo': 'bar'};
     setUpAll(() async {
-      await kuzzleTestHelper.kuzzle
-          .createIndex(kuzzleTestHelper.kuzzle.defaultIndex);
-      collection = kuzzleTestHelper.kuzzle.collection('posts');
+      await kuzzle.createIndex(kuzzle.defaultIndex);
+      collection = kuzzle.collection('posts');
       await collection.create();
     });
 
@@ -45,10 +44,9 @@ void main() {
     });
 
     tearDownAll(() async {
-      await kuzzleTestHelper.kuzzle
-          .deleteIndex(kuzzleTestHelper.kuzzle.defaultIndex);
+      await kuzzle.deleteIndex(kuzzle.defaultIndex);
     });
   });
 
-  tearDownAll(kuzzleTestHelper.end);
+  tearDownAll(kuzzle.disconect);
 }

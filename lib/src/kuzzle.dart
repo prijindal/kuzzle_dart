@@ -150,6 +150,8 @@ class Kuzzle {
     return Collection(this, collection, index);
   }
 
+  IOWebSocketChannel get webSocket => _webSocket;
+
   Future<void> connect() async {
     _webSocket = await connectInternal();
     bindSubscription();
@@ -163,7 +165,7 @@ class Kuzzle {
       final jsonResponse = json.decode(message);
       final String requestId = jsonResponse['requestId'];
       final response = RawKuzzleResponse.fromMap(this, jsonResponse);
-      // print(response.result);
+      // print(response);
       if (roomMaps.containsKey(response.room)) {
         roomMaps[response.room].add(response);
       } else if (futureMaps.containsKey(requestId) &&
@@ -175,6 +177,11 @@ class Kuzzle {
         }
         futureMaps.remove(requestId);
       }
+    });
+    _streamSubscription.onError((error) {
+      futureMaps.forEach((requestId, future) {
+        future.completeError(error);
+      });
     });
   }
 
@@ -224,6 +231,10 @@ class Kuzzle {
   void disconect() {
     _streamSubscription.cancel();
     _webSocket.sink.close(status.goingAway);
+    roomMaps.forEach((key, roomSubscription) {
+      roomSubscription.close();
+    });
+    roomMaps.removeWhere((key, room) => true);
   }
 
   Future<bool> existsIndex(
@@ -333,7 +344,7 @@ class Kuzzle {
               .map<String>((res) => res as String)
               .toList());
 
-  Future<List<ListCollectionResponse>> listCollections(
+  Future<List<Collection>> listCollections(
     String index, {
     bool queuable = true,
     int from,
@@ -349,7 +360,7 @@ class Kuzzle {
         'size': size,
       }, queuable: queuable)
           .then((response) => (response.result['collections'] as List<dynamic>)
-              .map((map) => ListCollectionResponse.fromMap(map))
+              .map<Collection>((map) => collection(map['name'], index: index))
               .toList());
 
   Future<List<String>> listIndexes({bool queuable = true}) async =>
