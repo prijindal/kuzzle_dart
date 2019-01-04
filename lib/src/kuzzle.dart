@@ -177,7 +177,7 @@ class Kuzzle extends EventBus {
 
       final response = RawKuzzleResponse.fromMap(
         this,
-        pendingRequests['requestId'],
+        pendingRequests[requestId],
         jsonResponse
       );
       // print(response);
