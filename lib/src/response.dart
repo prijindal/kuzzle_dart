@@ -11,6 +11,9 @@ class RawKuzzleRequest {
   );
 
   final Map<String, dynamic> query;
+
+  @override
+  String toString() => query.toString();
 }
 
 class RawKuzzleResponse {
