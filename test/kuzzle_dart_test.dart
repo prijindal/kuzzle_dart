@@ -1,17 +1,28 @@
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
+import 'package:kuzzle/kuzzle_dart.dart' as kuzzle_dart;
 
 import 'helpers/kuzzle.dart';
 
 void main() {
   final kuzzle = TestKuzzle();
+  var isConnectedEventCalled = false;
+
   setUpAll(() async {
+    kuzzle.on<kuzzle_dart.ConnectedEvent>().listen((event) {
+      isConnectedEventCalled = true;
+    });
+    
     await kuzzle.connect();
     kuzzle.defaultIndex = Uuid().v1();
   });
 
   test('check admin', () async {
     expect(await kuzzle.adminExists(), true);
+  });
+
+  test('check ConnectedEvent called', () {
+    expect(isConnectedEventCalled, true);
   });
 
   test('get all statistics', () async {
@@ -28,6 +39,7 @@ void main() {
     final config = await kuzzle.getConfig();
     expect(config['services']['internalCache']['backend'], 'redis');
   });
+
   test('get server info', () async {
     final info = await kuzzle.getServerInfo();
     expect(info.info.containsKey('api'), true);
@@ -42,5 +54,5 @@ void main() {
     kuzzle.security.role('id', <String, dynamic>{});
   });
 
-  tearDownAll(kuzzle.disconect);
+  tearDownAll(kuzzle.disconnect);
 }

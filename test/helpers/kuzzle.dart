@@ -42,8 +42,8 @@ class TestKuzzle extends Kuzzle {
   }
 
   @override
-  void disconect() {
-    super.disconect();
+  void disconnect() {
+    super.disconnect();
     if (streamSubscription != null && server != null) {
       streamSubscription.cancel();
       server.close(force: true);

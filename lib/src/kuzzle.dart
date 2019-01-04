@@ -9,8 +9,8 @@ import 'package:web_socket_channel/status.dart' as status;
 
 import 'collection.dart';
 import 'credentials.dart';
-import 'event.dart';
 import 'error.dart';
+import 'event.dart';
 import 'helpers.dart';
 import 'memorystorage.dart';
 import 'response.dart';
@@ -106,8 +106,6 @@ class Kuzzle extends EventBus {
       pendingRequests[requestId] = request;
       futureMaps[requestId] = completer;
     } else {
-      print('non queuable request');
-      print(request.query.toString());
       networkQuery(request);
       completer.complete(RawKuzzleResponse.fromMap(
         this,
@@ -175,17 +173,14 @@ class Kuzzle extends EventBus {
 
       if (request == null) {
         // Todo: handle error
-        print('pending request $requestId not found');
         return;
       }
-      print('pending request $requestId found !!');
 
       final response = RawKuzzleResponse.fromMap(
         this,
         request,
         jsonResponse
       );
-      // print(response);
 
       if (roomMaps.containsKey(response.room)) {
         roomMaps[response.room].add(response);
@@ -229,8 +224,6 @@ class Kuzzle extends EventBus {
     });
 
     _streamSubscription.onError((error) {
-      print('kuzzle stream error');
-      print(error);
       fire(NetworkErrorEvent(error));
 
       futureMaps.forEach((requestId, future) {
@@ -282,13 +275,15 @@ class Kuzzle extends EventBus {
         'action': 'delete',
       })).then((response) => AcknowledgedResponse.fromMap(response.result));
 
-  void disconect() {
+  void disconnect() {
     _streamSubscription.cancel();
     _webSocket.sink.close(status.goingAway);
     roomMaps.forEach((key, roomSubscription) {
       roomSubscription.close();
     });
     roomMaps.removeWhere((key, room) => true);
+
+    fire(DisconnectedEvent());
   }
 
   Future<bool> existsIndex(
