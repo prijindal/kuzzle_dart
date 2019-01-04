@@ -88,14 +88,16 @@ class Collection extends KuzzleObject {
     Map<String, dynamic> content, {
     Map<String, dynamic> volatile,
     bool queuable = true,
+    String documentId,
     String refresh,
     String ifExist,
   }) async =>
       addNetworkQuery(
-        'create',
+        ifExist == 'replace' ? 'createOrReplace' : 'create',
         body: content,
         optionalParams: <String, dynamic>{
           'controller': Document.controller,
+          '_id': documentId,
         },
         queuable: queuable,
       ).then((response) => Document.fromMap(this, response.result));
