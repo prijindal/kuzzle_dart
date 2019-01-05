@@ -127,12 +127,16 @@
   if (optionalParams != null) {
     query.addAll(optionalParams);
   }
+  final request = RawKuzzleRequest(query);
+
   if (collection == null &amp;&amp; kuzzle != null) {
-    return kuzzle.addNetworkQuery(query, queuable: queuable);
+    return kuzzle.addNetworkQuery(request, queuable: queuable);
   } else if (collection != null &amp;&amp; kuzzle == null) {
-    return collection.kuzzle.addNetworkQuery(query, queuable: queuable);
+    return collection.kuzzle.addNetworkQuery(request, queuable: queuable);
   }
-  return RawKuzzleResponse.fromMap(null, &lt;String, dynamic&gt;{});
+
+  &#47;&#47; Todo: handle wired case
+  return RawKuzzleResponse.fromMap(null, request, &lt;String, dynamic&gt;{});
 }</code></pre>
     </section>
 

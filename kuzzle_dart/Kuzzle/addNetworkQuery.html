@@ -57,6 +57,7 @@
       <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/pendingRequests.html">pendingRequests</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
       <li><a href="kuzzle_dart/Kuzzle/queueMaxSize.html">queueMaxSize</a></li>
       <li><a href="kuzzle_dart/Kuzzle/queueTTL.html">queueTTL</a></li>
@@ -70,6 +71,7 @@
       <li><a href="kuzzle_dart/Kuzzle/webSocket.html">webSocket</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/streamController.html">streamController</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
@@ -84,7 +86,7 @@
       <li><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/disconnect.html">disconnect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
@@ -112,7 +114,10 @@
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
       <li><a href="kuzzle_dart/Kuzzle/validateMyCredentials.html">validateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/whoAmI.html">whoAmI</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/destroy.html">destroy</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/fire.html">fire</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/on.html">on</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/Kuzzle-class.html#operators">Operators</a></li>
@@ -129,32 +134,34 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></span>&gt;</span></span>
       <span class="name ">addNetworkQuery</span>
-(<wbr><span class="parameter" id="addNetworkQuery-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, {</span> <span class="parameter" id="addNetworkQuery-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
+(<wbr><span class="parameter" id="addNetworkQuery-param-request"><span class="type-annotation"><a href="kuzzle_dart/RawKuzzleRequest-class.html">RawKuzzleRequest</a></span> <span class="parameter-name">request</span>, {</span> <span class="parameter" id="addNetworkQuery-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span></span> })
       
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;RawKuzzleResponse&gt; addNetworkQuery(
-  Map&lt;String, dynamic&gt; body, {
+  RawKuzzleRequest request, {
   bool queuable = true,
 }) {
   final completer = Completer&lt;RawKuzzleResponse&gt;();
   final String requestId = uuid.v1();
-  body.addAll(&lt;String, dynamic&gt;{
+  request.query.addAll(&lt;String, dynamic&gt;{
     &#39;requestId&#39;: requestId,
   });
-  if (_jwtToken != null) {
-    body[&#39;jwt&#39;] = _jwtToken;
+  if (jwtToken != null) {
+    request.query[&#39;jwt&#39;] = jwtToken;
   }
   if (queuable) {
-    networkQuery(body);
+    networkQuery(request);
+    pendingRequests[requestId] = request;
     futureMaps[requestId] = completer;
   } else {
-    networkQuery(body);
+    networkQuery(request);
     completer.complete(RawKuzzleResponse.fromMap(
       this,
-      &lt;String, dynamic&gt;{&#39;result&#39;: body[&#39;body&#39;]},
+      RawKuzzleRequest(request.query),
+      &lt;String, dynamic&gt;{&#39;result&#39;: request.query[&#39;body&#39;]},
     ));
   }
   return completer.future;

@@ -107,7 +107,7 @@
     <section class="multi-line-signature">
       <span class="returntype">FutureOr<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Document-class.html">Document</a></span>&gt;</span></span>
       <span class="name ">createDocument</span>
-(<wbr><span class="parameter" id="createDocument-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createDocument-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="createDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="createDocument-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>, </span> <span class="parameter" id="createDocument-param-ifExist"><span class="type-annotation">String</span> <span class="parameter-name">ifExist</span></span> })
+(<wbr><span class="parameter" id="createDocument-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createDocument-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="createDocument-param-queuable"><span class="type-annotation">bool</span> <span class="parameter-name">queuable</span>: <span class="default-value">true</span>, </span> <span class="parameter" id="createDocument-param-documentId"><span class="type-annotation">String</span> <span class="parameter-name">documentId</span>, </span> <span class="parameter" id="createDocument-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>, </span> <span class="parameter" id="createDocument-param-ifExist"><span class="type-annotation">String</span> <span class="parameter-name">ifExist</span></span> })
       
     </section>
     
@@ -117,14 +117,16 @@
   Map&lt;String, dynamic&gt; content, {
   Map&lt;String, dynamic&gt; volatile,
   bool queuable = true,
+  String documentId,
   String refresh,
   String ifExist,
 }) async =&gt;
     addNetworkQuery(
-      &#39;create&#39;,
+      ifExist == &#39;replace&#39; ? &#39;createOrReplace&#39; : &#39;create&#39;,
       body: content,
       optionalParams: &lt;String, dynamic&gt;{
         &#39;controller&#39;: Document.controller,
+        &#39;_id&#39;: documentId,
       },
       queuable: queuable,
     ).then((response) =&gt; Document.fromMap(this, response.result));</code></pre>

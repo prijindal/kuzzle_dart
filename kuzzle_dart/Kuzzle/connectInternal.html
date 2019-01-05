@@ -57,6 +57,7 @@
       <li><a href="kuzzle_dart/Kuzzle/jwtToken.html">jwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/memoryStorage.html">memoryStorage</a></li>
       <li><a href="kuzzle_dart/Kuzzle/offlineMode.html">offlineMode</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/pendingRequests.html">pendingRequests</a></li>
       <li><a href="kuzzle_dart/Kuzzle/port.html">port</a></li>
       <li><a href="kuzzle_dart/Kuzzle/queueMaxSize.html">queueMaxSize</a></li>
       <li><a href="kuzzle_dart/Kuzzle/queueTTL.html">queueTTL</a></li>
@@ -70,6 +71,7 @@
       <li><a href="kuzzle_dart/Kuzzle/webSocket.html">webSocket</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/streamController.html">streamController</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/Kuzzle-class.html#instance-methods">Methods</a></li>
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
@@ -84,7 +86,7 @@
       <li><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/disconect.html">disconect</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/disconnect.html">disconnect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
@@ -112,7 +114,10 @@
       <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
       <li><a href="kuzzle_dart/Kuzzle/validateMyCredentials.html">validateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/whoAmI.html">whoAmI</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/destroy.html">destroy</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/fire.html">fire</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/Kuzzle/on.html">on</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/Kuzzle-class.html#operators">Operators</a></li>
@@ -135,8 +140,14 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;IOWebSocketChannel&gt; connectInternal() async =&gt;
-    IOWebSocketChannel.connect(&#39;ws:&#47;&#47;$host:${port.toString()}&#47;ws&#39;);</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;IOWebSocketChannel&gt; connectInternal() async {
+  final channel = IOWebSocketChannel
+      .connect(&#39;ws:&#47;&#47;$host:${port.toString()}&#47;ws&#39;);
+
+  fire(ConnectedEvent());
+
+  return channel;
+}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

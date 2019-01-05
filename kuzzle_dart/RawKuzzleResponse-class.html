@@ -44,15 +44,24 @@
       <li><a href="kuzzle_dart/CheckTokenResponse-class.html">CheckTokenResponse</a></li>
       <li><a href="kuzzle_dart/Collection-class.html">Collection</a></li>
       <li><a href="kuzzle_dart/CollectionMapping-class.html">CollectionMapping</a></li>
+      <li><a href="kuzzle_dart/ConnectedEvent-class.html">ConnectedEvent</a></li>
       <li><a href="kuzzle_dart/Credentials-class.html">Credentials</a></li>
       <li><a href="kuzzle_dart/CredentialsResponse-class.html">CredentialsResponse</a></li>
+      <li><a href="kuzzle_dart/DisconnectedEvent-class.html">DisconnectedEvent</a></li>
       <li><a href="kuzzle_dart/Document-class.html">Document</a></li>
       <li><a href="kuzzle_dart/GeoPositionPoint-class.html">GeoPositionPoint</a></li>
       <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
       <li><a href="kuzzle_dart/ListCollectionResponse-class.html">ListCollectionResponse</a></li>
+      <li><a href="kuzzle_dart/LoginAttemptEvent-class.html">LoginAttemptEvent</a></li>
       <li><a href="kuzzle_dart/MappingDefinition-class.html">MappingDefinition</a></li>
       <li><a href="kuzzle_dart/MemoryStorage-class.html">MemoryStorage</a></li>
+      <li><a href="kuzzle_dart/NetworkErrorEvent-class.html">NetworkErrorEvent</a></li>
+      <li><a href="kuzzle_dart/OfflineQueuePopEvent-class.html">OfflineQueuePopEvent</a></li>
+      <li><a href="kuzzle_dart/OfflineQueuePushEvent-class.html">OfflineQueuePushEvent</a></li>
+      <li><a href="kuzzle_dart/QueryErrorEvent-class.html">QueryErrorEvent</a></li>
+      <li><a href="kuzzle_dart/RawKuzzleRequest-class.html">RawKuzzleRequest</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse-class.html">RawKuzzleResponse</a></li>
+      <li><a href="kuzzle_dart/ReconnectedEvent-class.html">ReconnectedEvent</a></li>
       <li><a href="kuzzle_dart/RequestStatistics-class.html">RequestStatistics</a></li>
       <li><a href="kuzzle_dart/Rights-class.html">Rights</a></li>
       <li><a href="kuzzle_dart/Room-class.html">Room</a></li>
@@ -65,6 +74,7 @@
       <li><a href="kuzzle_dart/SharedAcknowledgedResponse-class.html">SharedAcknowledgedResponse</a></li>
       <li><a href="kuzzle_dart/Specifications-class.html">Specifications</a></li>
       <li><a href="kuzzle_dart/Statistics-class.html">Statistics</a></li>
+      <li><a href="kuzzle_dart/TokenExpiredEvent-class.html">TokenExpiredEvent</a></li>
       <li><a href="kuzzle_dart/User-class.html">User</a></li>
       <li><a href="kuzzle_dart/ValidResponse-class.html">ValidResponse</a></li>
     
@@ -74,7 +84,6 @@
     
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
       <li><a href="kuzzle_dart/CollectionType-class.html">CollectionType</a></li>
-      <li><a href="kuzzle_dart/Event-class.html">Event</a></li>
       <li><a href="kuzzle_dart/KuzzleConnectType-class.html">KuzzleConnectType</a></li>
       <li><a href="kuzzle_dart/KuzzleOfflineModeType-class.html">KuzzleOfflineModeType</a></li>
       <li><a href="kuzzle_dart/LoginStrategy-class.html">LoginStrategy</a></li>
@@ -82,8 +91,6 @@
       <li><a href="kuzzle_dart/RoomState-class.html">RoomState</a></li>
       <li><a href="kuzzle_dart/RoomUsersScope-class.html">RoomUsersScope</a></li>
     
-      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#typedefs">Typedefs</a></li>
-      <li><a href="kuzzle_dart/EventListener.html">EventListener</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#exceptions">Exceptions</a></li>
       <li><a href="kuzzle_dart/ResponseError-class.html">ResponseError</a></li>
@@ -100,7 +107,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="RawKuzzleResponse.fromMap" class="callable">
-          <span class="name"><a href="kuzzle_dart/RawKuzzleResponse/RawKuzzleResponse.fromMap.html">RawKuzzleResponse.fromMap</a></span><span class="signature">(<span class="parameter" id="fromMap-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span>, </span> <span class="parameter" id="fromMap-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span></span>)</span>
+          <span class="name"><a href="kuzzle_dart/RawKuzzleResponse/RawKuzzleResponse.fromMap.html">RawKuzzleResponse.fromMap</a></span><span class="signature">(<span class="parameter" id="fromMap-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span>, </span> <span class="parameter" id="fromMap-param-request"><span class="type-annotation"><a href="kuzzle_dart/RawKuzzleRequest-class.html">RawKuzzleRequest</a></span> <span class="parameter-name">request</span>, </span> <span class="parameter" id="fromMap-param-map"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">map</span></span>)</span>
         </dt>
         <dd>
           
@@ -155,6 +162,14 @@
         <dt id="kuzzle" class="property">
           <span class="name"><a href="kuzzle_dart/RawKuzzleResponse/kuzzle.html">kuzzle</a></span>
           <span class="signature">&#8594; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> 
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="request" class="property">
+          <span class="name"><a href="kuzzle_dart/RawKuzzleResponse/request.html">request</a></span>
+          <span class="signature">&#8594; <a href="kuzzle_dart/RawKuzzleRequest-class.html">RawKuzzleRequest</a></span> 
         </dt>
         <dd>
           
@@ -295,6 +310,7 @@
       <li><a href="kuzzle_dart/RawKuzzleResponse/error.html">error</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse/index.html">index</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse/kuzzle.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/RawKuzzleResponse/request.html">request</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse/requestId.html">requestId</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse/result.html">result</a></li>
       <li><a href="kuzzle_dart/RawKuzzleResponse/room.html">room</a></li>
