@@ -107,5 +107,5 @@ void main() {
     });
   });
 
-  tearDownAll(kuzzle.disconect);
+  tearDownAll(kuzzle.disconnect);
 }

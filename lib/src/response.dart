@@ -5,19 +5,33 @@ import 'error.dart';
 import 'kuzzle.dart';
 import 'room.dart';
 
+class RawKuzzleRequest {
+  RawKuzzleRequest(
+    this.query,
+  );
+
+  final Map<String, dynamic> query;
+
+  @override
+  String toString() => query.toString();
+}
+
 class RawKuzzleResponse {
-  RawKuzzleResponse.fromMap(this.kuzzle, Map<String, dynamic> map)
-      : status = map['status'],
-        error =
-            map['error'] == null ? null : ResponseError.fromMap(map['error']),
-        action = map['action'],
-        controller = map['controller'],
-        index = map['index'],
-        collection = map['collection'],
-        room = map['room'],
-        requestId = map['requestId'],
-        state = map['state'],
-        result = map['result'];
+  RawKuzzleResponse.fromMap(
+    this.kuzzle,
+    this.request,
+    Map<String, dynamic> map
+  ) : status = map['status'],
+      error =
+          map['error'] == null ? null : ResponseError.fromMap(map['error']),
+      action = map['action'],
+      controller = map['controller'],
+      index = map['index'],
+      collection = map['collection'],
+      room = map['room'],
+      requestId = map['requestId'],
+      state = map['state'],
+      result = map['result'];
 
   final Kuzzle kuzzle;
   final int status;
@@ -27,6 +41,7 @@ class RawKuzzleResponse {
   final String index;
   final String collection;
   final String room;
+  final RawKuzzleRequest request;
   final String requestId;
   final String state;
   final dynamic result; // Usually Map<String, dynamic> result;

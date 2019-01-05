@@ -25,8 +25,8 @@ class TestKuzzle extends Kuzzle {
 
   @override
   Future<IOWebSocketChannel> connectInternal() async {
-    var port = this.port;
     if (isImitation) {
+      var port = this.port;
       server = await HttpServer.bind(host, 0);
       streamSubscription =
           server.transform(WebSocketTransformer()).listen((webSocket) {
@@ -37,13 +37,15 @@ class TestKuzzle extends Kuzzle {
         });
       });
       port = server.port;
+      return IOWebSocketChannel.connect('ws://$host:${port.toString()}/ws');
     }
-    return IOWebSocketChannel.connect('ws://$host:${port.toString()}/ws');
+
+    return super.connectInternal();
   }
 
   @override
-  void disconect() {
-    super.disconect();
+  void disconnect() {
+    super.disconnect();
     if (streamSubscription != null && server != null) {
       streamSubscription.cancel();
       server.close(force: true);
