@@ -149,54 +149,56 @@ class Kuzzle extends EventBus {
     return channel;
   }
 
+  void onStreamListen(dynamic message) {
+    final jsonResponse = json.decode(message);
+    final requestId = jsonResponse['requestId'];
+    final request = pendingRequests[requestId];
+
+    if (request == null) {
+      // Todo: handle error
+      return;
+    }
+
+    final response = RawKuzzleResponse.fromMap(this, request, jsonResponse);
+
+    if (roomMaps.containsKey(response.room)) {
+      roomMaps[response.room].add(response);
+
+      // pendingRequests.remove(requestId);
+      return;
+    }
+
+    if (response.action != 'logout' &&
+        response.error != null &&
+        response.error.message == 'Token expired') {
+      unsetJwtToken();
+      fire(TokenExpiredEvent(
+          request: request, future: futureMaps[requestId].future));
+    }
+
+    if (response.error is ResponseError) {
+      fire(QueryErrorEvent(
+          error: response.error,
+          request: request,
+          future: futureMaps[requestId].future));
+    }
+
+    if (futureMaps.containsKey(requestId) &&
+        !futureMaps[requestId].isCompleted) {
+      if (response.error == null) {
+        futureMaps[requestId].complete(response);
+      } else {
+        futureMaps[requestId].completeError(response.error);
+      }
+
+      futureMaps.remove(requestId);
+    }
+
+    pendingRequests.remove(requestId);
+  }
+
   void bindSubscription() {
-    _streamSubscription = _webSocket.stream.listen((message) {
-      final jsonResponse = json.decode(message);
-      final requestId = jsonResponse['requestId'];
-      final request = pendingRequests[requestId];
-
-      if (request == null) {
-        // Todo: handle error
-        return;
-      }
-
-      final response = RawKuzzleResponse.fromMap(this, request, jsonResponse);
-
-      if (roomMaps.containsKey(response.room)) {
-        roomMaps[response.room].add(response);
-
-        // pendingRequests.remove(requestId);
-        return;
-      }
-
-      if (response.action != 'logout' &&
-          response.error != null &&
-          response.error.message == 'Token expired') {
-        unsetJwtToken();
-        fire(TokenExpiredEvent(
-            request: request, future: futureMaps[requestId].future));
-      }
-
-      if (response.error is ResponseError) {
-        fire(QueryErrorEvent(
-            error: response.error,
-            request: request,
-            future: futureMaps[requestId].future));
-      }
-
-      if (futureMaps.containsKey(requestId) &&
-          !futureMaps[requestId].isCompleted) {
-        if (response.error == null) {
-          futureMaps[requestId].complete(response);
-        } else {
-          futureMaps[requestId].completeError(response.error);
-        }
-
-        futureMaps.remove(requestId);
-      }
-
-      pendingRequests.remove(requestId);
-    });
+    _streamSubscription = _webSocket.stream.listen(onStreamListen);
 
     _streamSubscription.onError((error) {
       fire(NetworkErrorEvent(error));
