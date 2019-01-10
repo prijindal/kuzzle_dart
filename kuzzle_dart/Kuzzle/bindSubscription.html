@@ -95,6 +95,7 @@
       <li><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></li>
       <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
+      <li><a href="kuzzle_dart/Kuzzle/onStreamListen.html">onStreamListen</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/register.html">register</a></li>
       <li><a href="kuzzle_dart/Kuzzle/searchUsers.html">searchUsers</a></li>
@@ -128,53 +129,7 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">void bindSubscription() {
-  _streamSubscription = _webSocket.stream.listen((message) {
-    final jsonResponse = json.decode(message);
-    final requestId = jsonResponse[&#39;requestId&#39;];
-    final request = pendingRequests[requestId];
-
-    if (request == null) {
-      &#47;&#47; Todo: handle error
-      return;
-    }
-
-    final response = RawKuzzleResponse.fromMap(this, request, jsonResponse);
-
-    if (roomMaps.containsKey(response.room)) {
-      roomMaps[response.room].add(response);
-
-      &#47;&#47; pendingRequests.remove(requestId);
-      return;
-    }
-
-    if (response.action != &#39;logout&#39; &amp;&amp;
-        response.error != null &amp;&amp;
-        response.error.message == &#39;Token expired&#39;) {
-      unsetJwtToken();
-      fire(TokenExpiredEvent(
-          request: request, future: futureMaps[requestId].future));
-    }
-
-    if (response.error is ResponseError) {
-      fire(QueryErrorEvent(
-          error: response.error,
-          request: request,
-          future: futureMaps[requestId].future));
-    }
-
-    if (futureMaps.containsKey(requestId) &amp;&amp;
-        !futureMaps[requestId].isCompleted) {
-      if (response.error == null) {
-        futureMaps[requestId].complete(response);
-      } else {
-        futureMaps[requestId].completeError(response.error);
-      }
-
-      futureMaps.remove(requestId);
-    }
-
-    pendingRequests.remove(requestId);
-  });
+  _streamSubscription = _webSocket.stream.listen(onStreamListen);
 
   _streamSubscription.onError((error) {
     fire(NetworkErrorEvent(error));
