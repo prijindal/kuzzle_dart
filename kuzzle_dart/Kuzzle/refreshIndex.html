@@ -45,6 +45,7 @@
       <li class="section-title">
         <a href="kuzzle_dart/Kuzzle-class.html#instance-properties">Properties</a>
       </li>
+      <li><a href="kuzzle_dart/Kuzzle/auth.html">auth</a></li>
       <li><a href="kuzzle_dart/Kuzzle/autoQueue.html">autoQueue</a></li>
       <li><a href="kuzzle_dart/Kuzzle/autoReconnect.html">autoReconnect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/autoReplay.html">autoReplay</a></li>
@@ -77,32 +78,21 @@
       <li><a href="kuzzle_dart/Kuzzle/addNetworkQuery.html">addNetworkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/adminExists.html">adminExists</a></li>
       <li><a href="kuzzle_dart/Kuzzle/bindSubscription.html">bindSubscription</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/checkToken.html">checkToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/collection.html">collection</a></li>
       <li><a href="kuzzle_dart/Kuzzle/connect.html">connect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/connectInternal.html">connectInternal</a></li>
       <li><a href="kuzzle_dart/Kuzzle/createIndex.html">createIndex</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/createMyCredentials.html">createMyCredentials</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/credentialsExist.html">credentialsExist</a></li>
       <li><a href="kuzzle_dart/Kuzzle/deleteIndex.html">deleteIndex</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/deleteMyCredentials.html">deleteMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/disconnect.html">disconnect</a></li>
       <li><a href="kuzzle_dart/Kuzzle/existsIndex.html">existsIndex</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAllStatistics.html">getAllStatistics</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getAutoRefresh.html">getAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getConfig.html">getConfig</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/getCurrentUser.html">getCurrentUser</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getJwtToken.html">getJwtToken</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getLastStatistics.html">getLastStatistics</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/getMyCredentials.html">getMyCredentials</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/getMyRights.html">getMyRights</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getServerInfo.html">getServerInfo</a></li>
       <li><a href="kuzzle_dart/Kuzzle/getStatistics.html">getStatistics</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/getStrategies.html">getStrategies</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/listCollections.html">listCollections</a></li>
       <li><a href="kuzzle_dart/Kuzzle/listIndexes.html">listIndexes</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/login.html">login</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/logout.html">logout</a></li>
       <li><a href="kuzzle_dart/Kuzzle/networkQuery.html">networkQuery</a></li>
       <li><a href="kuzzle_dart/Kuzzle/now.html">now</a></li>
       <li><a href="kuzzle_dart/Kuzzle/refreshIndex.html">refreshIndex</a></li>
@@ -110,9 +100,6 @@
       <li><a href="kuzzle_dart/Kuzzle/searchUsers.html">searchUsers</a></li>
       <li><a href="kuzzle_dart/Kuzzle/setAutoRefresh.html">setAutoRefresh</a></li>
       <li><a href="kuzzle_dart/Kuzzle/unsetJwtToken.html">unsetJwtToken</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/updateMyCredentials.html">updateMyCredentials</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/updateSelf.html">updateSelf</a></li>
-      <li><a href="kuzzle_dart/Kuzzle/validateMyCredentials.html">validateMyCredentials</a></li>
       <li><a href="kuzzle_dart/Kuzzle/whoAmI.html">whoAmI</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/destroy.html">destroy</a></li>
       <li class="inherited"><a href="kuzzle_dart/Kuzzle/fire.html">fire</a></li>
@@ -141,11 +128,13 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;Shards&gt; refreshIndex(String index, {bool queuable = true}) =&gt;
-    addNetworkQuery(RawKuzzleRequest({
-      &#39;index&#39;: index,
-      &#39;controller&#39;: &#39;index&#39;,
-      &#39;action&#39;: &#39;refresh&#39;,
-    }), queuable: queuable)
+    addNetworkQuery(
+            RawKuzzleRequest({
+              &#39;index&#39;: index,
+              &#39;controller&#39;: &#39;index&#39;,
+              &#39;action&#39;: &#39;refresh&#39;,
+            }),
+            queuable: queuable)
         .then((response) =&gt; Shards.fromMap(response.result[&#39;_shards&#39;]));</code></pre>
     </section>
 
