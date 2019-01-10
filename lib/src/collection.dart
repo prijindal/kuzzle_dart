@@ -167,6 +167,24 @@ class Collection extends KuzzleObject {
       addNetworkQuery('getSpecifications', queuable: queuable)
           .then((response) => Specifications.fromMap(this, response.result));
 
+  Future<List<Collection>> list({
+    bool queuable = true,
+    int from,
+    int size,
+    String type = 'all',
+  }) async =>
+      addNetworkQuery('list',
+              optionalParams: {
+                'action': 'list',
+                'type': type,
+                'from': from,
+                'size': size,
+              },
+              queuable: queuable)
+          .then((response) => (response.result['collections'] as List<dynamic>)
+              .map<Collection>((map) => Collection(kuzzle, map['name'], index))
+              .toList());
+
   Future<List<Document>> mCreateDocument(
     List<Document> documents, {
     bool queuable = true,

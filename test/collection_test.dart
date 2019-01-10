@@ -42,7 +42,7 @@ void main() {
     });
     test('list all collections', () async {
       final listCollectionResponse =
-          await kuzzle.listCollections(kuzzle.defaultIndex);
+          await kuzzle.collection(kuzzle.defaultIndex).list();
       expect(listCollectionResponse.length, greaterThanOrEqualTo(1));
       expect(listCollectionResponse[0].collectionName, 'posts');
     });

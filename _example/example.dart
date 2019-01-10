@@ -17,7 +17,7 @@ const Credentials creds =
 Future<void> kuzzleConnections() async {
   final kuzzle = Kuzzle(HOST, defaultIndex: DEFAULT_INDEX);
   await kuzzle.connect();
-  await kuzzle.login(adminCredentials);
+  await kuzzle.auth.login(adminCredentials);
 
   final indexes = await kuzzle.listIndexes();
 
@@ -34,10 +34,10 @@ Future<void> kuzzleConnections() async {
     print(response.toObject());
   }, scope: RoomScope.all, state: RoomState.done, users: RoomUsersScope.all);
 
-  await kuzzle.logout();
+  await kuzzle.auth.logout();
 
   try {
-    final response = await kuzzle.login(creds);
+    final response = await kuzzle.auth.login(creds);
     print(response);
   } on dynamic catch (e) {
     if (e is ResponseError) {
@@ -66,9 +66,9 @@ Future<void> kuzzleConnections() async {
 
   await document.delete();
 
-  await kuzzle.logout();
+  await kuzzle.auth.logout();
 
-  await kuzzle.login(adminCredentials);
+  await kuzzle.auth.login(adminCredentials);
 
   final collectionMapping = await collection.getMapping();
   print(collectionMapping);

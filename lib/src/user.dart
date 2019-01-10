@@ -56,5 +56,5 @@ class User extends Object {
       security.deleteUser(id, refresh: refresh);
 
   Future<User> update({bool queuable = true}) =>
-      security.kuzzle.updateSelf(source);
+      security.kuzzle.auth.updateSelf(source);
 }

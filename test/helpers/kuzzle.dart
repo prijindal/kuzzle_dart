@@ -20,7 +20,7 @@ class TestKuzzle extends Kuzzle {
   @override
   Future<void> connect() async {
     await super.connect();
-    await login(adminCredentials);
+    await auth.login(adminCredentials);
   }
 
   @override
