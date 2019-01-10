@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:pedantic/pedantic.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
@@ -156,10 +157,17 @@ class Kuzzle extends EventBus {
   }
 
   Future<IOWebSocketChannel> connectInternal() async {
-    final channel = IOWebSocketChannel
-        .connect('ws://$host:${port.toString()}/ws');
+    final channel = IOWebSocketChannel.connect(
+      'ws://$host:${port.toString()}/ws',
+      pingInterval: Duration(seconds: 5),
+    );
 
-    fire(ConnectedEvent());
+    if (_streamSubscription == null) {
+      fire(ConnectedEvent());
+    } else {
+      unawaited(_streamSubscription.cancel());
+      fire(ReconnectedEvent());
+    }
 
     return channel;
   }
@@ -221,13 +229,24 @@ class Kuzzle extends EventBus {
       }
 
       pendingRequests.remove(requestId);
+    },
+    onDone: () {
+      fire(DisconnectedEvent());
+
+      if (_webSocket.closeCode != status.normalClosure) {
+        if (autoReconnect) {
+          Timer(Duration(milliseconds: reconnectionDelay), connect);
+        }
+      }
     });
 
     _streamSubscription.onError((error) {
       fire(NetworkErrorEvent(error));
 
       futureMaps.forEach((requestId, future) {
-        future.completeError(error);
+        if (!future.isCompleted) {
+          future.completeError(error);
+        }
       });
     });
   }
@@ -277,7 +296,7 @@ class Kuzzle extends EventBus {
 
   void disconnect() {
     _streamSubscription.cancel();
-    _webSocket.sink.close(status.goingAway);
+    _webSocket.sink.close(status.normalClosure);
     roomMaps.forEach((key, roomSubscription) {
       roomSubscription.close();
     });
