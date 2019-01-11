@@ -37,7 +37,6 @@ void main () async {
   final result = await kuzzle.server.info();
   print('[result][server][info] $result');
 }
-
 ```
 
 > view all samples in [example/example.dart file](./example/example.dart)

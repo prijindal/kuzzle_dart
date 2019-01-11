@@ -1,11 +1,12 @@
-class KuzzleError extends Error {
-  KuzzleError([this.message, this.status, _stack])
-      : stack = _stack != null ? _stack : StackTrace.current;
+import 'response.dart';
+import 'request.dart';
 
-  factory KuzzleError.fromJson(Map<String, dynamic> json) => KuzzleError(
-    json['error']['message'],
-    json['status']
-  );
+class KuzzleError extends Error {
+  KuzzleError([this.message, this.status, StackTrace _stack])
+      : stack = _stack ?? StackTrace.current;
+
+  factory KuzzleError.fromJson(Map<String, dynamic> json) =>
+      KuzzleError(json['error']['message'] as String, json['status'] as int);
 
   final int status;
   final String message;
@@ -13,4 +14,10 @@ class KuzzleError extends Error {
 
   @override
   String toString() => 'KuzzleError[$status][$message]';
+}
+
+class BadResponseFormatError extends KuzzleError {
+  BadResponseFormatError(String message, this.response) : super(message, 400);
+
+  final KuzzleResponse response;
 }

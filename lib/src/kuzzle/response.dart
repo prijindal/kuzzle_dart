@@ -14,19 +14,19 @@ class KuzzleResponse {
   });
 
   KuzzleResponse.fromJson(Map<String, dynamic> json) {
-    action = json['action'];
-    collection = json['collection'];
-    controller = json['controller'];
+    action = json['action'] as String;
+    collection = json['collection'] as String;
+    controller = json['controller'] as String;
     error = json['error'] == null ? null : KuzzleError.fromJson(json);
-    index = json['index'];
-    room = json['room'];
+    index = json['index'] as String;
+    room = json['room'] as String;
     result = json['result'] as Map<String, dynamic>;
-    status = json['status'];
+    status = json['status'] as int;
     volatile = json['volatile'] as Map<String, dynamic>;
   }
 
   Map toJson() {
-    final map = {};
+    final map = <String, dynamic>{};
 
     if (action != null) {
       map['action'] = action;

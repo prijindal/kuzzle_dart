@@ -14,25 +14,38 @@ class KuzzleRequest {
     this.refresh,
     this.uid,
     this.volatile,
+    this.startTime,
+    this.endTime,
+    this.strategy,
+    this.expiresIn,
   }) {
-    requestId ??= _uuid.v4();
+    requestId ??= _uuid.v4() as String;
   }
 
   KuzzleRequest.fromMap(Map data) {
-    action = data['action'];
+    action = data['action'] as String;
     body = data['body'] as Map<String, dynamic>;
-    collection = data['collection'];
-    controller = data['controller'];
-    index = data['index'];
-    jwt = data['jwt'];
-    requestId = data['requestId'] ?? _uuid.v4();
-    refresh = data['refresh'];
-    uid = data['_id'];
+    collection = data['collection'] as String;
+    controller = data['controller'] as String;
+    index = data['index'] as String;
+    jwt = data['jwt'] as String;
+    requestId = data['requestId'] as String;
+    requestId ??= _uuid.v4() as String;
+    refresh = data['refresh'] as String;
+    uid = data['_id'] as String;
     volatile = data['volatile'] as Map<String, dynamic>;
+    startTime = data['startTime'] == null
+        ? null
+        : DateTime.parse(data['startTime'] as String);
+    endTime = data['endTime'] == null
+        ? null
+        : DateTime.parse(data['endTime'] as String);
+    strategy = data['strategy'] as String;
+    expiresIn = data['expiresIn'] as String;
   }
 
   Map toJson() {
-    final map = {};
+    final map = <String, dynamic>{};
 
     if (action != null) {
       map['action'] = action;
@@ -64,6 +77,18 @@ class KuzzleRequest {
     if (volatile != null) {
       map['volatile'] = volatile;
     }
+    if (startTime != null) {
+      map['startTime'] = startTime.millisecondsSinceEpoch;
+    }
+    if (endTime != null) {
+      map['endTime'] = endTime.millisecondsSinceEpoch;
+    }
+    if (strategy != null) {
+      map['strategy'] = strategy;
+    }
+    if (expiresIn != null) {
+      map['expiresIn'] = expiresIn;
+    }
 
     return map;
   }
@@ -81,4 +106,8 @@ class KuzzleRequest {
   String refresh;
   String uid;
   Map<String, dynamic> volatile;
+  DateTime startTime;
+  DateTime endTime;
+  String strategy;
+  String expiresIn;
 }

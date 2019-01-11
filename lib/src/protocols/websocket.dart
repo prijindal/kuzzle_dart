@@ -9,21 +9,22 @@ import '../kuzzle/response.dart';
 import 'abstract.dart';
 
 class WebSocketProtocol extends KuzzleProtocol {
-  WebSocketProtocol(String host, {
+  WebSocketProtocol(
+    String host, {
     bool autoReconnect = true,
     int port = 7512,
     Duration reconnectionDelay,
     bool ssl = false,
-  }) : super(host,
-    autoReconnect: autoReconnect,
-    port: port,
-    reconnectionDelay: reconnectionDelay,
-    ssl: ssl,
-  );
+  }) : super(
+          host,
+          autoReconnect: autoReconnect,
+          port: port,
+          reconnectionDelay: reconnectionDelay,
+          ssl: ssl,
+        );
 
   String _lastUrl;
   WebSocket _webSocket;
-
 
   @override
   Future<void> connect() async {
@@ -49,23 +50,24 @@ class WebSocketProtocol extends KuzzleProtocol {
 
     _webSocket.listen((payload) {
       try {
-        final json = jsonDecode(payload);
+        final Map<String, dynamic> json = jsonDecode(payload as String);
         final response = KuzzleResponse.fromJson(json);
 
         if (response.room.isNotEmpty) {
           emit(response.room, [response]);
-        }
-        else {
+        } else {
           emit('discarded', [response]);
         }
-      } on Exception catch(error) {
+      } on Exception catch (error) {
         print('websocket.onData.payloadError:');
         print(error);
       }
     }, onError: (error) {
-      print('websocket.onError');
-      print(error);
-      clientNetworkError(error);
+      if (error is Error) {
+        clientNetworkError(error);
+      } else {
+        clientNetworkError(KuzzleError('websocket.onError'));
+      }
 
       /*if (_webSocket.readyState == WebSocket.closing
         || _webSocket.readyState == WebSocket.closed
@@ -75,21 +77,16 @@ class WebSocketProtocol extends KuzzleProtocol {
     }, onDone: () {
       if (_webSocket.closeCode == 1000) {
         clientDisconnected();
-      }
-      else if (wasConnected) {
-        clientNetworkError(KuzzleError(
-          _webSocket.closeReason,
-          _webSocket.closeCode
-        ));
+      } else if (wasConnected) {
+        clientNetworkError(
+            KuzzleError(_webSocket.closeReason, _webSocket.closeCode));
       }
     });
   }
 
   @override
   void send(KuzzleRequest request) {
-    if (_webSocket != null
-        && _webSocket.readyState == WebSocket.open
-    ) {
+    if (_webSocket != null && _webSocket.readyState == WebSocket.open) {
       _webSocket.add(jsonEncode(request));
     }
   }

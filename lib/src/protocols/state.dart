@@ -1,4 +1,3 @@
-
 enum KuzzleProtocolState {
   ready,
   connected,

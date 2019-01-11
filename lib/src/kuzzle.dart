@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'controllers/abstract.dart';
+import 'controllers/auth.dart';
 import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
 import 'kuzzle/event_emitter.dart';
@@ -8,10 +9,7 @@ import 'kuzzle/request.dart';
 import 'kuzzle/response.dart';
 import 'protocols/abstract.dart';
 
-enum OfflineMode {
-  manual,
-  auto
-}
+enum OfflineMode { manual, auto }
 
 class KuzzleQueuedRequest {
   KuzzleQueuedRequest({
@@ -25,7 +23,8 @@ class KuzzleQueuedRequest {
 }
 
 class Kuzzle extends KuzzleEventEmitter {
-  Kuzzle(this.protocol, {
+  Kuzzle(
+    this.protocol, {
     bool autoQueue = false,
     bool autoReplay = false,
     this.autoResubscribe = true,
@@ -51,6 +50,7 @@ class Kuzzle extends KuzzleEventEmitter {
     _replayInterval = replayInterval ?? Duration(milliseconds: 10);
 
     server = ServerController(this);
+    auth = AuthController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -62,8 +62,11 @@ class Kuzzle extends KuzzleEventEmitter {
     });
   }
 
-  ServerController get server => this['server'];
+  ServerController get server => this['server'] as ServerController;
   set server(ServerController _server) => this['server'] = _server;
+
+  AuthController get auth => this['auth'] as AuthController;
+  set auth(AuthController _auth) => this['auth'] = _auth;
 
   final KuzzleProtocol protocol;
   final bool autoResubscribe;
@@ -83,7 +86,7 @@ class Kuzzle extends KuzzleEventEmitter {
   Map<String, dynamic> get volatile => _volatile;
 
   Duration _queueTTL;
-  Duration get queueTTL =>_queueTTL;
+  Duration get queueTTL => _queueTTL;
 
   Duration _replayInterval;
   Duration get replayInterval => _replayInterval;
@@ -99,6 +102,7 @@ class Kuzzle extends KuzzleEventEmitter {
     protocol.autoReconnect = value;
   }
 
+  /// Connects to a Kuzzle instance using the provided host name
   Future<void> connect() {
     if (protocol.isReady()) {
       return Future.value();
@@ -155,43 +159,48 @@ class Kuzzle extends KuzzleEventEmitter {
     return protocol.connect();
   }
 
-  void disconnect () {
+  /// Disconnects from Kuzzle and invalidate this instance.
+  void disconnect() {
     protocol.close();
   }
 
-  void startQueuing () {
+  /// Starts the requests queuing.
+  void startQueuing() {
     _queuing = true;
   }
 
-  void stopQueuing () {
+  /// Stops the requests queuing.
+  void stopQueuing() {
     _queuing = false;
   }
 
-  void playQueue () {
+  /// Plays the requests queued during offline mode.
+  void playQueue() {
     if (protocol.isReady()) {
       _cleanQueue();
       _dequeue();
     }
   }
 
+  /// Empties the offline queue without replaying it.
   void flushQueue() {
     _offlineQueue.clear();
   }
 
-  void _cleanQueue () {
+  /// Clean up invalid requests in the queue
+  ///
+  /// Ensure the `queryTTL` and `queryMaxSize` properties are respected
+  void _cleanQueue() {
     final now = DateTime.now();
     var lastDocumentIndex = -1;
 
     if (!queueTTL.isNegative) {
       lastDocumentIndex = _offlineQueue.lastIndexWhere((queuedRequest) =>
-        queuedRequest.queuedAt.add(queueTTL).difference(now).isNegative
-      );
+          queuedRequest.queuedAt.add(queueTTL).difference(now).isNegative);
 
       if (lastDocumentIndex != -1) {
-        for (
-          final queuedRequest
-          in _offlineQueue.getRange(0, lastDocumentIndex + 1)
-        ) {
+        for (final queuedRequest
+            in _offlineQueue.getRange(0, lastDocumentIndex + 1)) {
           emit('offlineQueuePop', [queuedRequest.request]);
         }
 
@@ -200,18 +209,34 @@ class Kuzzle extends KuzzleEventEmitter {
     }
 
     if (queueMaxSize > 0 && _offlineQueue.length > queueMaxSize) {
-      for (
-        final queuedRequest
-        in _offlineQueue.getRange(0, _offlineQueue.length - queueMaxSize + 1 )
-      ) {
+      for (final queuedRequest in _offlineQueue.getRange(
+          0, _offlineQueue.length - queueMaxSize + 1)) {
         emit('offlineQueuePop', [queuedRequest.request]);
       }
 
-      _offlineQueue.removeRange(0, _offlineQueue.length - queueMaxSize + 1 );
+      _offlineQueue.removeRange(0, _offlineQueue.length - queueMaxSize + 1);
     }
   }
 
-  void _dequeue () {
+  /// Play all queued requests, in order.
+  void _dequeue() {
+    void _dequeuingProcess() {
+      if (_offlineQueue.isNotEmpty) {
+        final queuedRequest = _offlineQueue.first;
+
+        protocol.query(queuedRequest.request).then((response) {
+          queuedRequest.completer.complete(response);
+        }).catchError((error) {
+          queuedRequest.completer.completeError(error);
+        });
+
+        emit('offlineQueuePop', [queuedRequest.request]);
+        _offlineQueue.removeAt(0);
+
+        Timer(replayInterval, _dequeuingProcess);
+      }
+    }
+
     if (offlineQueueLoader != null) {
       // todo: implement offlineQueueLoader
     }
@@ -219,27 +244,22 @@ class Kuzzle extends KuzzleEventEmitter {
     _dequeuingProcess();
   }
 
-  void _dequeuingProcess () {
-    if (_offlineQueue.isNotEmpty) {
-      final queuedRequest = _offlineQueue.first;
-
-      protocol
-          .query(queuedRequest.request)
-          .then((response) {
-        queuedRequest.completer.complete(response);
-      })
-          .catchError((error) {
-        queuedRequest.completer.completeError(error);
-      });
-
-      emit('offlineQueuePop', [queuedRequest.request]);
-      _offlineQueue.removeAt(0);
-
-      Timer(replayInterval, _dequeuingProcess);
-    }
-  }
-
-  Future<KuzzleResponse> query(Map request, [Map options]) {
+  /// Base method used to send read queries to Kuzzle
+  ///
+  /// This is a low-level method, with offline queue management,
+  /// exposed to allow advanced SDK users to bypass high-level methods.
+  ///
+  /// Takes an optional Map `[options]` with the following properties:
+  ///
+  /// ```
+  ///  final options = {
+  ///    'queueable': bool,
+  ///    'volatile': Map<String, dynamic>,
+  ///  };
+  /// ```
+  ///
+  Future<KuzzleResponse> query(Map<String, dynamic> request,
+      [Map<String, dynamic> options]) {
     final _request = KuzzleRequest.fromMap(request);
 
     // bind volatile data
@@ -254,14 +274,16 @@ class Kuzzle extends KuzzleEventEmitter {
     _request.volatile['sdkInstanceId'] = protocol.id;
     _request.volatile['sdkVersion'] = '0.0.1';
 
-    if (
-    (jwt != null && jwt.isNotEmpty)
-        && !(_request.controller == 'auth' && _request.action == 'checkToken')
-    ) {
+    /*
+     * Do not add the token for the checkToken route,
+     * to avoid getting a token error when a developer
+     * simply wish to verify his token
+     */
+    if ((jwt != null && jwt.isNotEmpty) &&
+        !(_request.controller == 'auth' && _request.action == 'checkToken')) {
       _request.jwt = jwt;
     }
 
-    // check queue-able
     var queueable = true;
     if (options != null && options.containsKey('queueable')) {
       queueable = options['queueable'] as bool;
@@ -290,19 +312,19 @@ class Kuzzle extends KuzzleEventEmitter {
 
       emit('discarded', [_request]);
       return Future.error(KuzzleError(
-        'Unable to execute request: not connected to a Kuzzle server.'
-      ));
+          'Unable to execute request: not connected to a Kuzzle server.'));
     }
 
     return protocol.query(_request);
   }
 
-  KuzzleController operator [](String accessor) => _controllers.singleWhere(
-    (controller) => controller.accessor == accessor
-  );
+  KuzzleController operator [](String accessor) =>
+      _controllers.singleWhere((controller) => controller.accessor == accessor);
 
   void operator []=(String accessor, KuzzleController controller) {
     assert(this[accessor] == null);
+
+    controller.accessor = accessor;
 
     _controllers.add(controller);
   }

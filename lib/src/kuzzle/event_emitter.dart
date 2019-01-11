@@ -1,6 +1,7 @@
+import 'package:meta/meta.dart';
 
 class KuzzleListener {
-  KuzzleListener(this.fn, { this.once });
+  KuzzleListener(this.fn, {this.once});
 
   final Function fn;
   final bool once;
@@ -11,7 +12,7 @@ class KuzzleEventEmitter {
 
   final Map<String, List<KuzzleListener>> _events = {};
 
-  bool _exist (String eventName, Function callback) {
+  bool _exist(String eventName, Function callback) {
     assert(eventName != null);
     assert(eventName.isNotEmpty);
     assert(callback != null);
@@ -20,9 +21,9 @@ class KuzzleEventEmitter {
       return false;
     }
 
-    return _events[eventName].where(
-      (listener) => listener.fn == callback
-    ).isNotEmpty;
+    return _events[eventName]
+        .where((listener) => listener.fn == callback)
+        .isNotEmpty;
   }
 
   List<String> eventNames() => _events.keys.toList();
@@ -31,10 +32,10 @@ class KuzzleEventEmitter {
     assert(eventName != null);
     assert(eventName.isNotEmpty);
 
-    return (_events.containsKey(eventName)) ? _events[eventName].length : 0;
+    return listeners(eventName).length;
   }
 
-  List<KuzzleListener> listeners (String eventName) {
+  List<KuzzleListener> listeners(String eventName) {
     assert(eventName != null);
     assert(eventName.isNotEmpty);
 
@@ -45,11 +46,8 @@ class KuzzleEventEmitter {
     return _events[eventName];
   }
 
-  void addListener(
-    String eventName,
-    Function callback,
-    { bool once = false }
-  ) {
+  @mustCallSuper
+  void addListener(String eventName, Function callback, {bool once = false}) {
     assert(callback != null);
     assert(eventName != null);
     assert(eventName.isNotEmpty);
@@ -63,11 +61,9 @@ class KuzzleEventEmitter {
     }
   }
 
-  void prependListener(
-    String eventName,
-    Function callback,
-    { bool once = false }
-  ) {
+  @mustCallSuper
+  void prependListener(String eventName, Function callback,
+      {bool once = false}) {
     assert(callback != null);
     assert(eventName != null);
     assert(eventName.isNotEmpty);
@@ -81,6 +77,7 @@ class KuzzleEventEmitter {
     }
   }
 
+  @mustCallSuper
   void removeListener(String eventName, Function callback) {
     assert(callback != null);
     assert(eventName != null);
@@ -97,6 +94,7 @@ class KuzzleEventEmitter {
     }
   }
 
+  @mustCallSuper
   void removeAllListeners([String eventName]) {
     if (eventName.isNotEmpty) {
       _events[eventName].clear();
@@ -114,7 +112,15 @@ class KuzzleEventEmitter {
   void once(String eventName, Function callback) =>
       addListener(eventName, callback, once: true);
 
-  bool emit(String eventName, [
+  /// Call all listeners registered for [eventName] event
+  ///
+  /// All listeners found are called with [positionalArguments]
+  /// and [namedArguments]
+  ///
+  /// Listeners registered as once is then cleared
+  @mustCallSuper
+  bool emit(
+    String eventName, [
     List positionalArguments,
     Map<Symbol, dynamic> namedArguments,
   ]) {
@@ -148,4 +154,3 @@ class KuzzleEventEmitter {
     return true;
   }
 }
-

@@ -13,16 +13,17 @@ import 'state.dart';
 final _uuid = Uuid();
 
 abstract class KuzzleProtocol extends KuzzleEventEmitter {
-  KuzzleProtocol(this.host, {
+  KuzzleProtocol(
+    this.host, {
     this.autoReconnect = true,
     this.port = 7512,
     Duration reconnectionDelay,
     this.ssl = false,
-  }) : assert(host.isNotEmpty),
-    assert(port > 0),
-    _state = KuzzleProtocolState.offline,
-    _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
-    id = _uuid.v4();
+  })  : assert(host.isNotEmpty),
+        assert(port > 0),
+        _state = KuzzleProtocolState.offline,
+        _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
+        id = _uuid.v4() as String;
 
   bool autoReconnect;
   final String host;
@@ -50,8 +51,10 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     _state = KuzzleProtocolState.connecting;
   }
 
+  /// Sends a payload to the connected server
   void send(KuzzleRequest request);
 
+  /// Called when the client's connection is established
   void clientConnected({
     KuzzleProtocolState state = KuzzleProtocolState.connected,
   }) {
@@ -62,16 +65,17 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     wasConnected = true;
   }
 
+  /// Called when the client's connection is closed
   void clientDisconnected() {
     emit('disconnect');
   }
 
+  /// Called when the client's connection is closed with an error state
   void clientNetworkError(Error error) {
     _state = KuzzleProtocolState.offline;
 
-    emit('networkError', [
-      KuzzleError('Unable to connect to kuzzle server at $host:$port')
-    ]);
+    emit('networkError',
+        [KuzzleError('Unable to connect to kuzzle server at $host:$port')]);
 
     if (autoReconnect && !retrying && !stopRetryingToConnect) {
       retrying = true;
@@ -85,19 +89,20 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     }
   }
 
+  /// Called when the client's connection is closed
   @mustCallSuper
   void close() {
     _state = KuzzleProtocolState.offline;
   }
 
+  /// Register a response event handler for [request]
   @mustCallSuper
   Future<KuzzleResponse> query(KuzzleRequest request) {
     if (!isReady()) {
       emit('discarded', [request]);
 
       return Future.error(KuzzleError(
-        'Unable to execute request: not connected to a Kuzzle server.'
-      ));
+          'Unable to execute request: not connected to a Kuzzle server.'));
     }
 
     final completer = Completer<KuzzleResponse>();
@@ -106,16 +111,15 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
       if (response.error != null) {
         emit('queryError', [response.error, request]);
 
-        if (response.action != 'logout'
-          && response.error.message == 'Token expired'
-        ) {
+        if (response.action != 'logout' &&
+            response.error.message == 'Token expired') {
           emit('tokenExpired');
         }
 
         return completer.completeError(response.error);
       }
 
-      return completer.complete(response);
+      return completer.complete(response as KuzzleResponse);
     });
 
     try {
