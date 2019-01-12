@@ -33,7 +33,9 @@ void main() {
   kuzzle.on('offlineQueuePop', (request) => print('[dequeue] => $request'));
 
   // perform a query when offline
-  kuzzle.query({'controller': 'server', 'action': 'now'}).catchError((error) {
+  kuzzle
+      .query(KuzzleRequest(controller: 'server', action: 'now'))
+      .catchError((error) {
     // should raise an error:
     // KuzzleError[Unable to execute request: not connected to a Kuzzle server.]
     assert(error is KuzzleError);
@@ -58,7 +60,9 @@ void main() {
     print('[result][auth][getCurrentUser] 2 $user');
   });
   // perform a query when connection status is not known
-  kuzzle.query({'controller': 'server', 'action': 'now'}).then((response) {
+  kuzzle
+      .query(KuzzleRequest(controller: 'server', action: 'now'))
+      .then((response) {
     // this query should be queued and resolved when connected & answered
     assert(response is KuzzleResponse);
 

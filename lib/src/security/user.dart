@@ -1,6 +1,8 @@
 import '../kuzzle.dart';
 import '../kuzzle/response.dart';
 
+import 'profile.dart';
+
 class User {
   User(
     this.kuzzle, {
@@ -29,31 +31,4 @@ class User {
 
   // todo: implement this after kuzzle.security.mGetRoles
   Future<List<Profile>> getProfiles() async => <Profile>[];
-}
-
-class Profile {
-  Profile(
-    this.kuzzle, {
-    this.uid,
-    this.policies,
-  });
-
-  final Kuzzle kuzzle;
-  String uid;
-  List<Map<String, dynamic>> policies;
-
-  // todo: implement this after kuzzle.security.mGetRoles
-  Future<List<Role>> getRoles() async => <Role>[];
-}
-
-class Role {
-  Role(
-    this.kuzzle, {
-    this.uid,
-    this.controllers,
-  });
-
-  final Kuzzle kuzzle;
-  String uid;
-  Map<String, dynamic> controllers;
 }

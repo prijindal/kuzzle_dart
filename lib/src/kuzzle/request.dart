@@ -15,11 +15,42 @@ class KuzzleRequest {
     this.uid,
     this.volatile,
     this.startTime,
-    this.endTime,
+    this.stopTime,
     this.strategy,
     this.expiresIn,
+    this.from,
+    this.size,
+    this.type,
+    this.scroll,
+    this.scrollId,
+    this.sort,
+    this.searchAfter,
   }) {
     requestId ??= _uuid.v4() as String;
+  }
+
+  KuzzleRequest.clone(KuzzleRequest request) {
+    action = request.action;
+    body = request.body;
+    collection = request.collection;
+    controller = request.controller;
+    index = request.index;
+    jwt = request.jwt;
+    // requestId = request.requestId;
+    refresh = request.refresh;
+    uid = request.uid;
+    volatile = request.volatile;
+    startTime = request.startTime;
+    stopTime = request.stopTime;
+    strategy = request.strategy;
+    expiresIn = request.expiresIn;
+    from = request.from;
+    size = request.size;
+    type = request.type;
+    scroll = request.scroll;
+    scrollId = request.scrollId;
+    sort = request.sort;
+    searchAfter = request.searchAfter;
   }
 
   KuzzleRequest.fromMap(Map data) {
@@ -37,11 +68,18 @@ class KuzzleRequest {
     startTime = data['startTime'] == null
         ? null
         : DateTime.parse(data['startTime'] as String);
-    endTime = data['endTime'] == null
+    stopTime = data['stopTime'] == null
         ? null
-        : DateTime.parse(data['endTime'] as String);
+        : DateTime.parse(data['stopTime'] as String);
     strategy = data['strategy'] as String;
     expiresIn = data['expiresIn'] as String;
+    from = data['from'] as int;
+    size = data['size'] as int;
+    type = data['type'] as String;
+    scroll = data['scroll'] as String;
+    scrollId = data['scrollId'] as String;
+    sort = data['sort'] as List<dynamic>;
+    searchAfter = data['search_after'] as List<dynamic>;
   }
 
   Map toJson() {
@@ -80,14 +118,35 @@ class KuzzleRequest {
     if (startTime != null) {
       map['startTime'] = startTime.millisecondsSinceEpoch;
     }
-    if (endTime != null) {
-      map['endTime'] = endTime.millisecondsSinceEpoch;
+    if (stopTime != null) {
+      map['stopTime'] = stopTime.millisecondsSinceEpoch;
     }
     if (strategy != null) {
       map['strategy'] = strategy;
     }
     if (expiresIn != null) {
       map['expiresIn'] = expiresIn;
+    }
+    if (from != null) {
+      map['from'] = from;
+    }
+    if (size != null) {
+      map['size'] = size;
+    }
+    if (type != null) {
+      map['type'] = type;
+    }
+    if (scroll != null) {
+      map['scroll'] = scroll;
+    }
+    if (scrollId != null) {
+      map['scrollId'] = scrollId;
+    }
+    if (sort != null) {
+      map['sort'] = sort;
+    }
+    if (searchAfter != null) {
+      map['search_after'] = searchAfter;
     }
 
     return map;
@@ -107,7 +166,14 @@ class KuzzleRequest {
   String uid;
   Map<String, dynamic> volatile;
   DateTime startTime;
-  DateTime endTime;
+  DateTime stopTime;
   String strategy;
   String expiresIn;
+  int from;
+  int size;
+  String type;
+  String scroll;
+  String scrollId;
+  List<dynamic> sort;
+  List<dynamic> searchAfter;
 }

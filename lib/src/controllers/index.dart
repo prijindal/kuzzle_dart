@@ -1,4 +1,5 @@
 import '../kuzzle.dart';
+import '../kuzzle/request.dart';
 import '../kuzzle/errors.dart';
 
 import 'abstract.dart';
@@ -8,33 +9,33 @@ class IndexController extends KuzzleController {
 
   /// Creates a new data [index] in Kuzzle.
   Future<Map<String, dynamic>> create(String index) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'create',
-      'index': index,
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'create',
+      index: index,
+    ));
 
     return response.result;
   }
 
   /// Delete an [index] from Kuzzle.
   Future<Map<String, dynamic>> delete(String index) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'delete',
-      'index': index,
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'delete',
+      index: index,
+    ));
 
     return response.result;
   }
 
   /// Checks if the given [index] exists in Kuzzle.
   Future<bool> exists(String index) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'exists',
-      'index': index,
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'exists',
+      index: index,
+    ));
 
     if (response.result != null && response.result.containsKey('exists')) {
       if (response.result['exists'] is bool) {
@@ -42,8 +43,7 @@ class IndexController extends KuzzleController {
       }
     }
 
-    return Future.error(
-        BadResponseFormatError('$name.exists: bad response format', response));
+    throw BadResponseFormatError('$name.exists: bad response format', response);
   }
 
   /// Returns the current [autoRefresh] status for the given [index].
@@ -52,26 +52,26 @@ class IndexController extends KuzzleController {
   /// perform a refresh request immediately after each change in the storage,
   /// causing documents to be immediately visible in a search
   Future<bool> getAutoRefresh(String index) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'getAutoRefresh',
-      'index': index,
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'getAutoRefresh',
+      index: index,
+    ));
 
     if (response.result is bool) {
       return response.result as bool;
     }
 
-    return Future.error(BadResponseFormatError(
-        '$name.getAutoRefresh: bad response format', response));
+    throw BadResponseFormatError(
+        '$name.getAutoRefresh: bad response format', response);
   }
 
   /// Returns the complete list of data indexes.
   Future<List<String>> list() async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'list',
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'list',
+    ));
 
     if (response.result != null && response.result.containsKey('indexes')) {
       if (response.result['indexes'] is List<String>) {
@@ -79,19 +79,16 @@ class IndexController extends KuzzleController {
       }
     }
 
-    return Future.error(
-        BadResponseFormatError('$name.list: bad response format', response));
+    throw BadResponseFormatError('$name.list: bad response format', response);
   }
 
   /// Deletes multiple indexes.
   Future<List<String>> mDelete(List<String> indexes) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'mDelete',
-      'body': <String, dynamic>{
-        'indexes': indexes
-      },
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'mDelete',
+      body: <String, dynamic>{'indexes': indexes},
+    ));
 
     if (response.result != null && response.result.containsKey('deleted')) {
       if (response.result['deleted'] is List<String>) {
@@ -99,8 +96,8 @@ class IndexController extends KuzzleController {
       }
     }
 
-    return Future.error(
-        BadResponseFormatError('$name.mDelete: bad response format', response));
+    throw BadResponseFormatError(
+        '$name.mDelete: bad response format', response);
   }
 
   /// Forces an immediate re-indexation of the provided [index].
@@ -113,11 +110,11 @@ class IndexController extends KuzzleController {
   /// Note: forcing immediate refreshes comes with performance costs,
   /// and should only performed when absolutely necessary.
   Future<Map<String, dynamic>> refresh(String index) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'refresh',
-      'index': index,
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'refresh',
+      index: index,
+    ));
 
     return response.result['_shards'] as Map<String, dynamic>;
   }
@@ -133,19 +130,20 @@ class IndexController extends KuzzleController {
   /// Note: forcing immediate refreshes comes with performance costs,
   /// and should only performed when absolutely necessary.
   Future<bool> refreshInternal() async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'refreshInternal',
-    });
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'refreshInternal',
+    ));
 
-    if (response.result != null && response.result.containsKey('acknowledged')) {
+    if (response.result != null &&
+        response.result.containsKey('acknowledged')) {
       if (response.result['acknowledged'] is bool) {
         return response.result['acknowledged'] as bool;
       }
     }
 
-    return Future.error(BadResponseFormatError(
-        '$name.refreshInternal: bad response format', response));
+    throw BadResponseFormatError(
+        '$name.refreshInternal: bad response format', response);
   }
 
   /// Changes the [autoRefresh] configuration of an [index].
@@ -159,15 +157,14 @@ class IndexController extends KuzzleController {
   /// Set the autoRefresh flag to true only for indexes needing changes
   /// to be immediately available through searches,
   /// and only for slowly changing indexes.
-  Future<bool> setAutoRefresh(String index, { bool autoRefresh }) async {
-    final response = await kuzzle.query({
-      'controller': name,
-      'action': 'setAutoRefresh',
-      'index': index,
-      'body': <String, dynamic>{
-        'autoRefresh': autoRefresh,
-      }
-    });
+  Future<bool> setAutoRefresh(String index, {bool autoRefresh}) async {
+    final response = await kuzzle.query(KuzzleRequest(
+        controller: name,
+        action: 'setAutoRefresh',
+        index: index,
+        body: <String, dynamic>{
+          'autoRefresh': autoRefresh,
+        }));
 
     if (response.result != null && response.result.containsKey('response')) {
       if (response.result['response'] is bool) {
@@ -175,7 +172,7 @@ class IndexController extends KuzzleController {
       }
     }
 
-    return Future.error(BadResponseFormatError(
-        '$name.setAutoRefresh: bad response format', response));
+    throw BadResponseFormatError(
+        '$name.setAutoRefresh: bad response format', response);
   }
 }

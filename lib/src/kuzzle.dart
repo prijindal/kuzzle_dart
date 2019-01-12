@@ -3,8 +3,9 @@ import 'dart:async';
 import 'controllers/abstract.dart';
 import 'controllers/auth.dart';
 import 'controllers/bulk.dart';
-import 'controllers/server.dart';
+import 'controllers/collection.dart';
 import 'controllers/index.dart';
+import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
 import 'kuzzle/event_emitter.dart';
 import 'kuzzle/request.dart';
@@ -52,6 +53,7 @@ class Kuzzle extends KuzzleEventEmitter {
     bulk = BulkController(this);
     auth = AuthController(this);
     index = IndexController(this);
+    collection = CollectionController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -74,6 +76,11 @@ class Kuzzle extends KuzzleEventEmitter {
 
   IndexController get index => this['index'] as IndexController;
   set index(IndexController _index) => this['index'] = _index;
+
+  CollectionController get collection =>
+      this['collection'] as CollectionController;
+  set collection(CollectionController _collection) =>
+      this['collection'] = _collection;
 
   /// Protocol used by the SDK
   final KuzzleProtocol protocol;
@@ -272,21 +279,22 @@ class Kuzzle extends KuzzleEventEmitter {
   ///  };
   /// ```
   ///
-  Future<KuzzleResponse> query(Map<String, dynamic> request,
+  /// todo: replace request by a KuzzleRequest (avoid casts at each request)
+  Future<KuzzleResponse> query(KuzzleRequest request,
       [Map<String, dynamic> options]) {
-    final _request = KuzzleRequest.fromMap(request);
+    //final _request = KuzzleRequest.fromMap(request);
 
     // bind volatile data
-    _request.volatile ??= volatile;
+    request.volatile ??= volatile;
 
     for (final item in volatile.keys) {
-      if (!_request.volatile.containsKey(item)) {
-        _request.volatile[item] = volatile[item];
+      if (!request.volatile.containsKey(item)) {
+        request.volatile[item] = volatile[item];
       }
     }
 
-    _request.volatile['sdkInstanceId'] = protocol.id;
-    _request.volatile['sdkVersion'] = '0.0.1';
+    request.volatile['sdkInstanceId'] = protocol.id;
+    request.volatile['sdkVersion'] = '0.0.1';
 
     /*
      * Do not add the token for the checkToken route,
@@ -294,8 +302,8 @@ class Kuzzle extends KuzzleEventEmitter {
      * simply wish to verify his token
      */
     if ((jwt != null && jwt.isNotEmpty) &&
-        !(_request.controller == 'auth' && _request.action == 'checkToken')) {
-      _request.jwt = jwt;
+        !(request.controller == 'auth' && request.action == 'checkToken')) {
+      request.jwt = jwt;
     }
 
     var queueable = true;
@@ -313,7 +321,7 @@ class Kuzzle extends KuzzleEventEmitter {
         final completer = Completer<KuzzleResponse>();
         final queuedRequest = KuzzleQueuedRequest(
           completer: completer,
-          request: _request,
+          request: request,
         );
 
         _cleanQueue();
@@ -324,12 +332,12 @@ class Kuzzle extends KuzzleEventEmitter {
         return completer.future;
       }
 
-      emit('discarded', [_request]);
+      emit('discarded', [request]);
       return Future.error(KuzzleError(
           'Unable to execute request: not connected to a Kuzzle server.'));
     }
 
-    return protocol.query(_request);
+    return protocol.query(request);
   }
 
   KuzzleController operator [](String accessor) =>
