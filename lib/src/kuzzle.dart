@@ -4,6 +4,7 @@ import 'controllers/abstract.dart';
 import 'controllers/auth.dart';
 import 'controllers/bulk.dart';
 import 'controllers/server.dart';
+import 'controllers/index.dart';
 import 'kuzzle/errors.dart';
 import 'kuzzle/event_emitter.dart';
 import 'kuzzle/request.dart';
@@ -53,6 +54,7 @@ class Kuzzle extends KuzzleEventEmitter {
     server = ServerController(this);
     bulk = BulkController(this);
     auth = AuthController(this);
+    index = IndexController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -72,6 +74,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
   BulkController get bulk => this['bulk'] as BulkController;
   set bulk(BulkController _bulk) => this['bulk'] = _bulk;
+
+  IndexController get index => this['index'] as IndexController;
+  set index(IndexController _index) => this['index'] = _index;
 
   final KuzzleProtocol protocol;
   final bool autoResubscribe;

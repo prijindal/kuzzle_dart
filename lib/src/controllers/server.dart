@@ -16,8 +16,8 @@ class ServerController extends KuzzleController {
       }
     }
 
-    return Future.error(
-        BadResponseFormatError('adminExists: bad response format', response));
+    return Future.error(BadResponseFormatError(
+        '$name.adminExists: bad response format', response));
   }
 
   /// Returns all stored statistics frames
@@ -76,6 +76,6 @@ class ServerController extends KuzzleController {
     }
 
     return Future.error(
-        BadResponseFormatError('now: bad response format', response));
+        BadResponseFormatError('$name.now: bad response format', response));
   }
 }

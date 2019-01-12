@@ -7,7 +7,7 @@ class BulkController extends KuzzleController {
 
   /// Creates, updates or deletes
   /// large amounts of [documents] as fast as possible.
-  Future<Map<String, dynamic>> import( Map<String, dynamic> documents) async {
+  Future<Map<String, dynamic>> import(Map<String, dynamic> documents) async {
     final response = await kuzzle.query({
       'controller': name,
       'action': 'import',
