@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import '../kuzzle.dart';
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
@@ -109,10 +107,11 @@ class CollectionController extends KuzzleController {
 
   /// Searches collection specifications.
   Future<SpecificationSearchResult> searchSpecifications(String index,
-      {int from, int size, String scroll}) async {
+      {Map<String, dynamic> query, int from, int size, String scroll}) async {
     final request = KuzzleRequest(
       controller: name,
       action: 'searchSpecifications',
+      body: query,
       from: from,
       size: size,
       scroll: scroll,

@@ -50,8 +50,8 @@ class WebSocketProtocol extends KuzzleProtocol {
 
     _webSocket.listen((payload) {
       try {
-        final Map<String, dynamic> json = jsonDecode(payload as String);
-        final response = KuzzleResponse.fromJson(json);
+        final Map<String, dynamic> _json = json.decode(payload as String);
+        final response = KuzzleResponse.fromJson(_json);
 
         if (response.room.isNotEmpty) {
           emit(response.room, [response]);
@@ -87,7 +87,7 @@ class WebSocketProtocol extends KuzzleProtocol {
   @override
   void send(KuzzleRequest request) {
     if (_webSocket != null && _webSocket.readyState == WebSocket.open) {
-      _webSocket.add(jsonEncode(request));
+      _webSocket.add(json.encode(request));
     }
   }
 

@@ -51,13 +51,23 @@ void main() {
     print('[result][auth][getCurrentUser] 1 $user');
 
     final token = await kuzzle.auth.login('local', <String, dynamic>{
-      'username': 'tutu',
-      'password': 'tutututu',
+      'username': 'awesome',
+      'password': 'p@ssw0rd',
     });
     print('[result][auth][login] $token');
 
     user = await kuzzle.auth.getCurrentUser();
     print('[result][auth][getCurrentUser] 2 $user');
+
+    final results = await kuzzle.document
+        .search('myindex', 'mycollection', query: <String, dynamic>{
+      'query': <String, dynamic>{
+        'match': <String, dynamic>{
+          '_kuzzle_info.author': user.uid,
+        }
+      }
+    });
+    print(results.hits);
   });
   // perform a query when connection status is not known
   kuzzle

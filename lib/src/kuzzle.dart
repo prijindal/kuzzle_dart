@@ -4,6 +4,7 @@ import 'controllers/abstract.dart';
 import 'controllers/auth.dart';
 import 'controllers/bulk.dart';
 import 'controllers/collection.dart';
+import 'controllers/document.dart';
 import 'controllers/index.dart';
 import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
@@ -54,6 +55,7 @@ class Kuzzle extends KuzzleEventEmitter {
     auth = AuthController(this);
     index = IndexController(this);
     collection = CollectionController(this);
+    document = DocumentController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -76,6 +78,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
   IndexController get index => this['index'] as IndexController;
   set index(IndexController _index) => this['index'] = _index;
+
+  DocumentController get document => this['document'] as DocumentController;
+  set document(DocumentController _document) => this['document'] = _document;
 
   CollectionController get collection =>
       this['collection'] as CollectionController;
@@ -119,7 +124,8 @@ class Kuzzle extends KuzzleEventEmitter {
     protocol.autoReconnect = value;
   }
 
-  final List<KuzzleController> _controllers = <KuzzleController>[];
+  final Map<String, KuzzleController> _controllers =
+      <String, KuzzleController>{};
   final List<KuzzleQueuedRequest> _offlineQueue = <KuzzleQueuedRequest>[];
   bool _queuing = false;
 
@@ -340,14 +346,13 @@ class Kuzzle extends KuzzleEventEmitter {
     return protocol.query(request);
   }
 
-  KuzzleController operator [](String accessor) =>
-      _controllers.singleWhere((controller) => controller.accessor == accessor);
+  KuzzleController operator [](String accessor) => _controllers[accessor];
 
   void operator []=(String accessor, KuzzleController controller) {
-    assert(this[accessor] == null);
+    assert(_controllers[accessor] == null);
 
     controller.accessor = accessor;
 
-    _controllers.add(controller);
+    _controllers[accessor] = controller;
   }
 }

@@ -9,11 +9,14 @@ import 'abstract.dart';
 class AuthController extends KuzzleController {
   AuthController(Kuzzle kuzzle) : super(kuzzle, name: 'auth');
 
-  /// Checks whether a given jwt token still
+  /// Checks whether a given jwt [token] still
   /// represents a valid session in Kuzzle.
-  Future<Map<String, dynamic>> checkToken() async {
+  Future<Map<String, dynamic>> checkToken(String token) async {
     final response = await kuzzle.query(
-        KuzzleRequest(controller: name, action: 'checkToken'),
+        KuzzleRequest(
+            controller: name,
+            action: 'checkToken',
+            body: <String, dynamic>{'token': token}),
         {'queueable': false});
 
     return response.result;
@@ -101,7 +104,7 @@ class AuthController extends KuzzleController {
   ///
   /// If login success, store the jwt into kuzzle object
   Future<String> login(String strategy, Map<String, dynamic> credentials,
-          [String expiresIn]) async =>
+          {String expiresIn}) async =>
       kuzzle
           .query(KuzzleRequest(
         controller: name,

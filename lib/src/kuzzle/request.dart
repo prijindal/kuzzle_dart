@@ -24,7 +24,8 @@ class KuzzleRequest {
     this.scroll,
     this.scrollId,
     this.sort,
-    this.searchAfter,
+    this.includeTrash,
+    this.retryOnConflict,
   }) {
     requestId ??= _uuid.v4() as String;
   }
@@ -50,7 +51,8 @@ class KuzzleRequest {
     scroll = request.scroll;
     scrollId = request.scrollId;
     sort = request.sort;
-    searchAfter = request.searchAfter;
+    includeTrash = request.includeTrash;
+    retryOnConflict = request.retryOnConflict;
   }
 
   KuzzleRequest.fromMap(Map data) {
@@ -79,7 +81,8 @@ class KuzzleRequest {
     scroll = data['scroll'] as String;
     scrollId = data['scrollId'] as String;
     sort = data['sort'] as List<dynamic>;
-    searchAfter = data['search_after'] as List<dynamic>;
+    includeTrash = data['includeTrash'] as bool;
+    retryOnConflict = data['retryOnConflict'] as int;
   }
 
   Map toJson() {
@@ -107,7 +110,9 @@ class KuzzleRequest {
       map['requestId'] = requestId;
     }
     if (refresh != null) {
-      map['refresh'] = refresh;
+      // we follow the api but allow some more logical "mistakes"
+      // (the only allowed value for refresh arg is "wait_for")
+      map['refresh'] = 'wait_for';
     }
     if (uid != null) {
       map['_id'] = uid;
@@ -145,8 +150,11 @@ class KuzzleRequest {
     if (sort != null) {
       map['sort'] = sort;
     }
-    if (searchAfter != null) {
-      map['search_after'] = searchAfter;
+    if (includeTrash != null) {
+      map['includeTrash'] = includeTrash;
+    }
+    if (retryOnConflict != null) {
+      map['retryOnConflict'] = retryOnConflict;
     }
 
     return map;
@@ -175,5 +183,6 @@ class KuzzleRequest {
   String scroll;
   String scrollId;
   List<dynamic> sort;
-  List<dynamic> searchAfter;
+  bool includeTrash;
+  int retryOnConflict;
 }

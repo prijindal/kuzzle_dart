@@ -23,7 +23,7 @@ abstract class SearchResult {
       aggregations = response.result['aggregations'] as Map<String, dynamic>;
     }
     if (response.result.containsKey('hits')) {
-      hits = response.result['hits'] as List<Map<String, dynamic>>;
+      hits = response.result['hits'] as List<dynamic>;
       fetched = hits.length;
     }
     if (response.result.containsKey('total')) {
@@ -46,7 +46,7 @@ abstract class SearchResult {
   String scrollAction;
 
   Map<String, dynamic> aggregations = <String, dynamic>{};
-  List<Map<String, dynamic>> hits = <Map<String, dynamic>>[];
+  List<dynamic> hits = <dynamic>[];
   int fetched = 0;
   int total = 0;
 
@@ -70,14 +70,15 @@ abstract class SearchResult {
               response.result['aggregations'] as Map<String, dynamic>;
         }
         if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<Map<String, dynamic>>;
+          hits = response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
       });
     } else if (_request.size != null && _request.sort != null) {
-      final request = KuzzleRequest.clone(_request)
-        ..action = searchAction
-        ..searchAfter = <dynamic>[];
+      final request = KuzzleRequest.clone(_request)..action = searchAction;
+
+      request.body ??= <String, dynamic>{};
+      request.body['search_after'] ??= <dynamic>[];
 
       final hit = hits.last;
 
@@ -88,7 +89,7 @@ abstract class SearchResult {
             ? '${_request.collection}#${hit['_id']}'
             : _get(hit['_source'] as Map<String, dynamic>, key.split('.'));
 
-        request.searchAfter.add(value);
+        request.body['search_after'].add(value);
       }
 
       await _kuzzle.query(request).then((response) {
@@ -99,7 +100,7 @@ abstract class SearchResult {
               response.result['aggregations'] as Map<String, dynamic>;
         }
         if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<Map<String, dynamic>>;
+          hits = response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
       });
@@ -120,7 +121,7 @@ abstract class SearchResult {
               response.result['aggregations'] as Map<String, dynamic>;
         }
         if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<Map<String, dynamic>>;
+          hits = response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
       });
