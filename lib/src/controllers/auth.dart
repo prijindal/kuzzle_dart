@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '../kuzzle.dart';
 import '../kuzzle/request.dart';
-import '../security/user.dart';
+import '../kuzzle/user.dart';
 
 import 'abstract.dart';
 
