@@ -27,29 +27,26 @@ class KuzzleQueuedRequest {
 class Kuzzle extends KuzzleEventEmitter {
   Kuzzle(
     this.protocol, {
-    bool autoQueue = false,
-    bool autoReplay = false,
+    this.autoQueue = false,
+    this.autoReplay = false,
     this.autoResubscribe = true,
     this.eventTimeout = 200,
     this.offlineMode = OfflineMode.manual,
     this.offlineQueueLoader,
     this.queueFilter,
-    Duration queueTTL,
+    this.queueTTL,
     this.queueMaxSize = 500,
-    Duration replayInterval,
-    Map<String, dynamic> volatile,
+    this.replayInterval,
+    this.volatile,
   }) {
     if (offlineMode == OfflineMode.auto) {
-      _autoQueue = true;
-      _autoReplay = true;
-    } else {
-      _autoQueue = autoQueue;
-      _autoReplay = autoReplay;
+      autoQueue = true;
+      autoReplay = true;
     }
 
-    _volatile = volatile ?? <String, dynamic>{};
-    _queueTTL = queueTTL ?? Duration(minutes: 2);
-    _replayInterval = replayInterval ?? Duration(milliseconds: 10);
+    volatile ??= <String, dynamic>{};
+    queueTTL ??= Duration(minutes: 2);
+    replayInterval ??= Duration(milliseconds: 10);
 
     server = ServerController(this);
     bulk = BulkController(this);
@@ -78,39 +75,46 @@ class Kuzzle extends KuzzleEventEmitter {
   IndexController get index => this['index'] as IndexController;
   set index(IndexController _index) => this['index'] = _index;
 
+  /// Protocol used by the SDK
   final KuzzleProtocol protocol;
-  final bool autoResubscribe;
+
   final int eventTimeout;
   final OfflineMode offlineMode;
   final Function offlineQueueLoader;
   final Function queueFilter;
-  final int queueMaxSize;
 
-  final List<KuzzleController> _controllers = <KuzzleController>[];
-  final List<KuzzleQueuedRequest> _offlineQueue = <KuzzleQueuedRequest>[];
-  bool _queuing = false;
+  /// Automatically queue all requests during offline mode
+  bool autoQueue;
 
+  /// Automatically replay queued requests on a reconnected event
+  bool autoReplay;
+
+  /// Automatically renew all subscriptions on a reconnected event
+  bool autoResubscribe;
+
+  /// Number of maximum requests kept during offline mode
+  int queueMaxSize;
+
+  /// Time a queued request is kept during offline mode, in milliseconds
+  Duration queueTTL;
+
+  /// Delay between each replayed requests
+  Duration replayInterval;
+
+  /// Token used in requests for authentication
   String jwt;
 
-  Map<String, dynamic> _volatile;
-  Map<String, dynamic> get volatile => _volatile;
-
-  Duration _queueTTL;
-  Duration get queueTTL => _queueTTL;
-
-  Duration _replayInterval;
-  Duration get replayInterval => _replayInterval;
-
-  bool _autoQueue;
-  bool get autoQueue => _autoQueue;
-
-  bool _autoReplay;
-  bool get autoReplay => _autoReplay;
+  /// Common volatile data, will be sent to all future requests
+  Map<String, dynamic> volatile;
 
   bool get autoReconnect => protocol.autoReconnect;
   set autoReconnect(bool value) {
     protocol.autoReconnect = value;
   }
+
+  final List<KuzzleController> _controllers = <KuzzleController>[];
+  final List<KuzzleQueuedRequest> _offlineQueue = <KuzzleQueuedRequest>[];
+  bool _queuing = false;
 
   /// Connects to a Kuzzle instance using the provided host name
   Future<void> connect() {
