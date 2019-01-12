@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'controllers/abstract.dart';
 import 'controllers/auth.dart';
+import 'controllers/bulk.dart';
 import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
 import 'kuzzle/event_emitter.dart';
@@ -50,6 +51,7 @@ class Kuzzle extends KuzzleEventEmitter {
     _replayInterval = replayInterval ?? Duration(milliseconds: 10);
 
     server = ServerController(this);
+    bulk = BulkController(this);
     auth = AuthController(this);
 
     protocol.on('queryError', (error, request) {
@@ -67,6 +69,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
   AuthController get auth => this['auth'] as AuthController;
   set auth(AuthController _auth) => this['auth'] = _auth;
+
+  BulkController get bulk => this['bulk'] as BulkController;
+  set bulk(BulkController _bulk) => this['bulk'] = _bulk;
 
   final KuzzleProtocol protocol;
   final bool autoResubscribe;
