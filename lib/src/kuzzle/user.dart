@@ -17,9 +17,6 @@ class User {
     meta = response.result['_meta'] as Map<String, dynamic>;
   }
 
-  @override
-  String toString() => '$uid $content $meta';
-
   final Kuzzle kuzzle;
   String uid;
   Map<String, dynamic> content;
@@ -29,6 +26,11 @@ class User {
       ? content['profileIds'] as List<String>
       : <String>[];
 
-  // todo: implement this after kuzzle.security.mGetRoles
-  Future<List<Profile>> getProfiles() async => <Profile>[];
+  Future<List<Profile>> getProfiles() async {
+    if (profileIds == null || profileIds.isEmpty) {
+      return <Profile>[];
+    }
+
+    return kuzzle.security.mGetProfiles(profileIds);
+  }
 }

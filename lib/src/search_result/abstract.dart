@@ -8,13 +8,11 @@ import '../kuzzle/response.dart';
 
 abstract class SearchResult {
   SearchResult(
-    this._kuzzle, {
-    KuzzleRequest request,
-    KuzzleResponse response,
+    this.kuzzle, {
+    this.request,
+    this.response,
     Map<String, dynamic> options,
-  })  : _request = request,
-        _response = response,
-        _options = options {
+  }) : _options = options {
     controller = request.controller;
     searchAction = 'search';
     scrollAction = 'scroll';
@@ -31,10 +29,16 @@ abstract class SearchResult {
     }
   }
 
-  Kuzzle _kuzzle;
-  KuzzleRequest _request;
-  KuzzleResponse _response;
   Map<String, dynamic> _options;
+
+  @protected
+  Kuzzle kuzzle;
+
+  @protected
+  KuzzleRequest request;
+
+  @protected
+  KuzzleResponse response;
 
   @protected
   String controller;
@@ -50,80 +54,86 @@ abstract class SearchResult {
   int fetched = 0;
   int total = 0;
 
-  Future<void> next() async {
+  Future<List<dynamic>> next() async {
     if (fetched >= total) {
-      return;
+      return <dynamic>[];
     }
 
-    if (_request.scroll != null && _request.scroll.isNotEmpty) {
-      await _kuzzle
+    if (request.scroll != null && request.scroll.isNotEmpty) {
+      return await kuzzle
           .query(KuzzleRequest(
         controller: controller,
         action: scrollAction,
-        scrollId: _response.result['scrollId'] as String,
+        scrollId: response.result['scrollId'] as String,
       ))
-          .then((response) {
-        _response = response;
+          .then((_response) {
+        response = _response;
 
-        if (response.result.containsKey('aggregations')) {
+        if (_response.result.containsKey('aggregations')) {
           aggregations =
-              response.result['aggregations'] as Map<String, dynamic>;
+              _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<dynamic>;
+        if (_response.result.containsKey('hits')) {
+          hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
-      });
-    } else if (_request.size != null && _request.sort != null) {
-      final request = KuzzleRequest.clone(_request)..action = searchAction;
 
-      request.body ??= <String, dynamic>{};
-      request.body['search_after'] ??= <dynamic>[];
+        return hits;
+      });
+    } else if (request.size != null && request.sort != null) {
+      final _request = KuzzleRequest.clone(request)..action = searchAction;
+
+      _request.body ??= <String, dynamic>{};
+      _request.body['search_after'] ??= <dynamic>[];
 
       final hit = hits.last;
 
-      for (var sort in _request.sort) {
+      for (var sort in request.sort) {
         final key =
             (sort is String) ? sort : (sort as Map<String, dynamic>).keys.first;
         final value = (key == '_uid')
-            ? '${_request.collection}#${hit['_id']}'
+            ? '${request.collection}#${hit['_id']}'
             : _get(hit['_source'] as Map<String, dynamic>, key.split('.'));
 
-        request.body['search_after'].add(value);
+        _request.body['search_after'].add(value);
       }
 
-      await _kuzzle.query(request).then((response) {
-        _response = response;
+      return await kuzzle.query(_request).then((_response) {
+        response = _response;
 
-        if (response.result.containsKey('aggregations')) {
+        if (_response.result.containsKey('aggregations')) {
           aggregations =
-              response.result['aggregations'] as Map<String, dynamic>;
+              _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<dynamic>;
+        if (_response.result.containsKey('hits')) {
+          hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
+
+        return hits;
       });
-    } else if (_request.size != null) {
-      if (_request.from >= total) {
-        return;
+    } else if (request.size != null) {
+      if (request.from >= total) {
+        return <dynamic>[];
       }
 
-      await _kuzzle
-          .query(KuzzleRequest.clone(_request)
+      return await kuzzle
+          .query(KuzzleRequest.clone(request)
             ..action = searchAction
             ..from = fetched)
-          .then((response) {
-        _response = response;
+          .then((_response) {
+        response = _response;
 
-        if (response.result.containsKey('aggregations')) {
+        if (_response.result.containsKey('aggregations')) {
           aggregations =
-              response.result['aggregations'] as Map<String, dynamic>;
+              _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (response.result.containsKey('hits')) {
-          hits = response.result['hits'] as List<dynamic>;
+        if (_response.result.containsKey('hits')) {
+          hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
+
+        return hits;
       });
     }
 

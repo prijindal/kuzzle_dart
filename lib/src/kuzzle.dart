@@ -6,6 +6,7 @@ import 'controllers/bulk.dart';
 import 'controllers/collection.dart';
 import 'controllers/document.dart';
 import 'controllers/index.dart';
+import 'controllers/security.dart';
 import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
 import 'kuzzle/event_emitter.dart';
@@ -56,6 +57,7 @@ class Kuzzle extends KuzzleEventEmitter {
     index = IndexController(this);
     collection = CollectionController(this);
     document = DocumentController(this);
+    security = SecurityController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -81,6 +83,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
   DocumentController get document => this['document'] as DocumentController;
   set document(DocumentController _document) => this['document'] = _document;
+
+  SecurityController get security => this['security'] as SecurityController;
+  set security(SecurityController _security) => this['security'] = _security;
 
   CollectionController get collection =>
       this['collection'] as CollectionController;

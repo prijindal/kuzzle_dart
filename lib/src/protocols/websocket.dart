@@ -15,7 +15,9 @@ class WebSocketProtocol extends KuzzleProtocol {
     int port = 7512,
     Duration reconnectionDelay,
     bool ssl = false,
-  }) : super(
+    Duration pingInterval,
+  })  : _pingInterval = pingInterval,
+        super(
           host,
           autoReconnect: autoReconnect,
           port: port,
@@ -25,6 +27,14 @@ class WebSocketProtocol extends KuzzleProtocol {
 
   String _lastUrl;
   WebSocket _webSocket;
+  Duration _pingInterval;
+  Duration get pingInterval => _pingInterval;
+  set pingInterval(Duration value) {
+    _pingInterval = value;
+    if (_webSocket != null) {
+      _webSocket.pingInterval = value;
+    }
+  }
 
   @override
   Future<void> connect() async {
@@ -47,6 +57,8 @@ class WebSocketProtocol extends KuzzleProtocol {
 
       rethrow;
     }
+
+    _webSocket.pingInterval = _pingInterval;
 
     _webSocket.listen((payload) {
       try {

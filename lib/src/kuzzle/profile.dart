@@ -1,4 +1,5 @@
 import '../kuzzle.dart';
+import '../kuzzle/response.dart';
 
 import 'role.dart';
 
@@ -9,10 +10,21 @@ class Profile {
     this.policies,
   });
 
+  Profile.fromKuzzleResponse(this.kuzzle, KuzzleResponse response) {
+    uid = response.result['_id'] as String;
+    policies = response.result['_source']['policies'] as List<dynamic>;
+  }
+
   final Kuzzle kuzzle;
   String uid;
-  List<Map<String, dynamic>> policies;
+  List<dynamic> policies;
 
-  // todo: implement this after kuzzle.security.mGetRoles
-  Future<List<Role>> getRoles() async => <Role>[];
+  Future<List<Role>> getRoles() async {
+    if (policies == null || policies.isEmpty) {
+      return <Role>[];
+    }
+
+    return kuzzle.security
+        .mGetRoles(policies.map((policy) => policy['roleId']) as List<String>);
+  }
 }

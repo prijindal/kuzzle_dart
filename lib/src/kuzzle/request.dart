@@ -26,6 +26,7 @@ class KuzzleRequest {
     this.sort,
     this.includeTrash,
     this.retryOnConflict,
+    this.reset,
   }) {
     requestId ??= _uuid.v4() as String;
   }
@@ -53,6 +54,7 @@ class KuzzleRequest {
     sort = request.sort;
     includeTrash = request.includeTrash;
     retryOnConflict = request.retryOnConflict;
+    reset = request.reset;
   }
 
   KuzzleRequest.fromMap(Map data) {
@@ -83,6 +85,7 @@ class KuzzleRequest {
     sort = data['sort'] as List<dynamic>;
     includeTrash = data['includeTrash'] as bool;
     retryOnConflict = data['retryOnConflict'] as int;
+    reset = data['reset'] as bool;
   }
 
   Map toJson() {
@@ -156,6 +159,9 @@ class KuzzleRequest {
     if (retryOnConflict != null) {
       map['retryOnConflict'] = retryOnConflict;
     }
+    if (reset != null) {
+      map['reset'] = reset;
+    }
 
     return map;
   }
@@ -185,4 +191,5 @@ class KuzzleRequest {
   List<dynamic> sort;
   bool includeTrash;
   int retryOnConflict;
+  bool reset;
 }
