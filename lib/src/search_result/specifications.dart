@@ -4,13 +4,12 @@ import '../kuzzle/response.dart';
 
 import 'abstract.dart';
 
-class SpecificationSearchResult extends SearchResult {
+class SpecificationSearchResult extends KuzzleSearchResult {
   SpecificationSearchResult(
     Kuzzle kuzzle, {
     KuzzleRequest request,
     KuzzleResponse response,
-    Map<String, dynamic> options,
-  }) : super(kuzzle, request: request, response: response, options: options) {
+  }) : super(kuzzle, request: request, response: response) {
     controller = 'collection';
     searchAction = 'searchSpecifications';
     scrollAction = 'scrollSpecifications';

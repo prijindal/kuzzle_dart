@@ -1,18 +1,16 @@
 import '../kuzzle.dart';
-import '../kuzzle/errors.dart';
+import '../kuzzle/profile.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
-import '../kuzzle/profile.dart';
 
 import 'abstract.dart';
 
-class ProfileSearchResult extends SearchResult {
+class ProfileSearchResult extends KuzzleSearchResult {
   ProfileSearchResult(
     Kuzzle kuzzle, {
     KuzzleRequest request,
     KuzzleResponse response,
-    Map<String, dynamic> options,
-  }) : super(kuzzle, request: request, response: response, options: options) {
+  }) : super(kuzzle, request: request, response: response) {
     controller = null;
     searchAction = 'searchProfiles';
     scrollAction = 'scrollProfiles';

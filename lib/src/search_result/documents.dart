@@ -4,13 +4,12 @@ import '../kuzzle/response.dart';
 
 import 'abstract.dart';
 
-class DocumentsSearchResult extends SearchResult {
+class DocumentsSearchResult extends KuzzleSearchResult {
   DocumentsSearchResult(
     Kuzzle kuzzle, {
     KuzzleRequest request,
     KuzzleResponse response,
-    Map<String, dynamic> options,
-  }) : super(kuzzle, request: request, response: response, options: options) {
+  }) : super(kuzzle, request: request, response: response) {
     controller = 'documents';
     searchAction = 'search';
     scrollAction = 'scroll';

@@ -1,18 +1,16 @@
 import '../kuzzle.dart';
-import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 import '../kuzzle/user.dart';
 
 import 'abstract.dart';
 
-class UserSearchResult extends SearchResult {
+class UserSearchResult extends KuzzleSearchResult {
   UserSearchResult(
     Kuzzle kuzzle, {
     KuzzleRequest request,
     KuzzleResponse response,
-    Map<String, dynamic> options,
-  }) : super(kuzzle, request: request, response: response, options: options) {
+  }) : super(kuzzle, request: request, response: response) {
     controller = null;
     searchAction = 'searchUsers';
     scrollAction = 'scrollUsers';

@@ -6,13 +6,12 @@ import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 
-abstract class SearchResult {
-  SearchResult(
+abstract class KuzzleSearchResult {
+  KuzzleSearchResult(
     this.kuzzle, {
     this.request,
     this.response,
-    Map<String, dynamic> options,
-  }) : _options = options {
+  }) {
     controller = request.controller;
     searchAction = 'search';
     scrollAction = 'scroll';
@@ -29,7 +28,8 @@ abstract class SearchResult {
     }
   }
 
-  Map<String, dynamic> _options;
+  // todo: implement query options
+  // Map<String, dynamic> _options;
 
   @protected
   Kuzzle kuzzle;

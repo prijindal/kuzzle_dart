@@ -8,9 +8,14 @@ import '../kuzzle/event_emitter.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 
-import 'state.dart';
-
 final _uuid = Uuid();
+
+enum KuzzleProtocolState {
+  ready,
+  connected,
+  connecting,
+  offline,
+}
 
 abstract class KuzzleProtocol extends KuzzleEventEmitter {
   KuzzleProtocol(
@@ -71,7 +76,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
   }
 
   /// Called when the client's connection is closed with an error state
-  void clientNetworkError(Error error) {
+  void clientNetworkError([dynamic error]) {
     _state = KuzzleProtocolState.offline;
 
     emit('networkError',
@@ -80,9 +85,9 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     if (autoReconnect && !retrying && !stopRetryingToConnect) {
       retrying = true;
 
-      Timer(_reconnectionDelay, () {
+      Timer(_reconnectionDelay, () async {
         retrying = false;
-        connect().catchError(clientNetworkError);
+        await connect().catchError(clientNetworkError);
       });
     } else {
       emit('disconnect');
@@ -95,6 +100,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
     _state = KuzzleProtocolState.offline;
   }
 
+  // todo: implement query options
   /// Register a response event handler for [request]
   @mustCallSuper
   Future<KuzzleResponse> query(KuzzleRequest request) {

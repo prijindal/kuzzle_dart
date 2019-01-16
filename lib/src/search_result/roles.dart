@@ -6,13 +6,12 @@ import '../kuzzle/role.dart';
 
 import 'abstract.dart';
 
-class RoleSearchResult extends SearchResult {
+class RoleSearchResult extends KuzzleSearchResult {
   RoleSearchResult(
     Kuzzle kuzzle, {
     KuzzleRequest request,
     KuzzleResponse response,
-    Map<String, dynamic> options,
-  }) : super(kuzzle, request: request, response: response, options: options) {
+  }) : super(kuzzle, request: request, response: response) {
     controller = null;
     searchAction = 'searchRoles';
     scrollAction = null; // scrollRoles action does not exists in Kuzzle API.

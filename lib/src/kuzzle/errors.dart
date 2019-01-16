@@ -1,5 +1,4 @@
 import 'response.dart';
-import 'request.dart';
 
 class KuzzleError extends Error {
   KuzzleError([this.message, this.status, StackTrace _stack])

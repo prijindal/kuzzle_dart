@@ -1,6 +1,6 @@
 import '../kuzzle.dart';
-import '../kuzzle/request.dart';
 import '../kuzzle/errors.dart';
+import '../kuzzle/request.dart';
 
 import 'abstract.dart';
 

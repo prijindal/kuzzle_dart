@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 
-class KuzzleListener {
-  KuzzleListener(this.fn, {this.once});
+class _KuzzleListener {
+  _KuzzleListener(this.fn, {this.once});
 
   final Function fn;
   final bool once;
@@ -10,7 +10,7 @@ class KuzzleListener {
 class KuzzleEventEmitter {
   KuzzleEventEmitter();
 
-  final Map<String, List<KuzzleListener>> _events = {};
+  final Map<String, List<_KuzzleListener>> _events = {};
 
   bool _exist(String eventName, Function callback) {
     assert(eventName != null);
@@ -35,12 +35,12 @@ class KuzzleEventEmitter {
     return listeners(eventName).length;
   }
 
-  List<KuzzleListener> listeners(String eventName) {
+  List<_KuzzleListener> listeners(String eventName) {
     assert(eventName != null);
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
-      return <KuzzleListener>[];
+      return <_KuzzleListener>[];
     }
 
     return _events[eventName];
@@ -53,11 +53,11 @@ class KuzzleEventEmitter {
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
-      _events[eventName] = <KuzzleListener>[];
+      _events[eventName] = <_KuzzleListener>[];
     }
 
     if (!_exist(eventName, callback)) {
-      _events[eventName].add(KuzzleListener(callback, once: once));
+      _events[eventName].add(_KuzzleListener(callback, once: once));
     }
   }
 
@@ -69,11 +69,11 @@ class KuzzleEventEmitter {
     assert(eventName.isNotEmpty);
 
     if (!_events.containsKey(eventName)) {
-      _events[eventName] = <KuzzleListener>[];
+      _events[eventName] = <_KuzzleListener>[];
     }
 
     if (!_exist(eventName, callback)) {
-      _events[eventName].insert(0, KuzzleListener(callback, once: once));
+      _events[eventName].insert(0, _KuzzleListener(callback, once: once));
     }
   }
 
@@ -132,7 +132,7 @@ class KuzzleEventEmitter {
     }
 
     final _listeners = listeners(eventName);
-    final _onceListeners = <KuzzleListener>[];
+    final _onceListeners = <_KuzzleListener>[];
 
     for (final listener in _listeners) {
       if (listener.once) {

@@ -27,13 +27,12 @@ class WebSocketProtocol extends KuzzleProtocol {
 
   String _lastUrl;
   WebSocket _webSocket;
+  StreamSubscription _subscription;
   Duration _pingInterval;
   Duration get pingInterval => _pingInterval;
   set pingInterval(Duration value) {
     _pingInterval = value;
-    if (_webSocket != null) {
-      _webSocket.pingInterval = value;
-    }
+    _webSocket?.pingInterval = value;
   }
 
   @override
@@ -47,12 +46,20 @@ class WebSocketProtocol extends KuzzleProtocol {
       _lastUrl = url;
     }
 
+    await _subscription?.cancel();
+    _subscription = null;
+
+    await _webSocket?.close();
+    _webSocket = null;
+
     try {
       _webSocket = await WebSocket.connect(url);
-      clientConnected();
-    } on WebSocketException catch (error) {
+    } on IOException {
       if (wasConnected) {
-        clientNetworkError(KuzzleError(error.message));
+        clientNetworkError(
+            KuzzleError('WebSocketProtocol: Unable to connect to $url'));
+
+        return;
       }
 
       rethrow;
@@ -60,39 +67,16 @@ class WebSocketProtocol extends KuzzleProtocol {
 
     _webSocket.pingInterval = _pingInterval;
 
-    _webSocket.listen((payload) {
-      try {
-        final Map<String, dynamic> _json = json.decode(payload as String);
-        final response = KuzzleResponse.fromJson(_json);
+    _subscription = _webSocket.listen(_handlePayload,
+        onError: _handleError, onDone: _handleDone);
 
-        if (response.room.isNotEmpty) {
-          emit(response.room, [response]);
-        } else {
-          emit('discarded', [response]);
-        }
-      } on Exception catch (error) {
-        print('websocket.onData.payloadError:');
-        print(error);
-      }
-    }, onError: (error) {
-      if (error is Error) {
-        clientNetworkError(error);
-      } else {
-        clientNetworkError(KuzzleError('websocket.onError'));
-      }
+    clientConnected();
 
-      /*if (_webSocket.readyState == WebSocket.closing
-        || _webSocket.readyState == WebSocket.closed
-      ) {
-        completer.completeError(error);
-      }*/
-    }, onDone: () {
-      if (_webSocket.closeCode == 1000) {
-        clientDisconnected();
-      } else if (wasConnected) {
-        clientNetworkError(
-            KuzzleError(_webSocket.closeReason, _webSocket.closeCode));
-      }
+    await _webSocket.done.then((error) {
+      print('WebSocketProtocol done');
+      print(error.runtimeType);
+      clientNetworkError(
+          KuzzleError('WebSocketProtocol: connection with $url closed'));
     });
   }
 
@@ -108,11 +92,48 @@ class WebSocketProtocol extends KuzzleProtocol {
     super.close();
 
     removeAllListeners();
-    wasConnected = false;
-    if (_webSocket != null) {
-      _webSocket.close();
-    }
-    _webSocket = null;
     stopRetryingToConnect = true;
+    wasConnected = false;
+
+    _subscription?.cancel();
+    _subscription = null;
+
+    _webSocket?.close();
+    _webSocket = null;
+  }
+
+  void _handlePayload(dynamic payload) {
+    try {
+      final Map<String, dynamic> _json = json.decode(payload as String);
+      final response = KuzzleResponse.fromJson(_json);
+
+      if (response.room.isNotEmpty) {
+        emit(response.room, [response]);
+      } else {
+        emit('discarded', [response]);
+      }
+    } on Exception catch (error) {
+      print('websocket _handlePayload error');
+      print(payload);
+      print(error);
+      // emit('discarded', [payload]);
+    }
+  }
+
+  void _handleError(dynamic error, StackTrace stackTrace) {
+    if (error is Error) {
+      clientNetworkError(error);
+    } else {
+      clientNetworkError(KuzzleError('websocket.onError'));
+    }
+  }
+
+  void _handleDone() {
+    if (_webSocket.closeCode == 1000) {
+      clientDisconnected();
+    } else if (wasConnected) {
+      clientNetworkError(
+          KuzzleError(_webSocket.closeReason, _webSocket.closeCode));
+    }
   }
 }

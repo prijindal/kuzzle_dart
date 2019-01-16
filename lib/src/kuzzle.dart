@@ -16,8 +16,8 @@ import 'protocols/abstract.dart';
 
 enum OfflineMode { manual, auto }
 
-class KuzzleQueuedRequest {
-  KuzzleQueuedRequest({
+class _KuzzleQueuedRequest {
+  _KuzzleQueuedRequest({
     this.completer,
     this.request,
   }) : queuedAt = DateTime.now();
@@ -131,13 +131,22 @@ class Kuzzle extends KuzzleEventEmitter {
 
   final Map<String, KuzzleController> _controllers =
       <String, KuzzleController>{};
-  final List<KuzzleQueuedRequest> _offlineQueue = <KuzzleQueuedRequest>[];
+  final List<_KuzzleQueuedRequest> _offlineQueue = <_KuzzleQueuedRequest>[];
   bool _queuing = false;
 
   /// Connects to a Kuzzle instance using the provided host name
   Future<void> connect() {
     if (protocol.isReady()) {
       return Future.value();
+    }
+
+    if (protocol.state == KuzzleProtocolState.connecting) {
+      final completer = Completer<void>();
+
+      // todo: handle reconnect event
+      protocol.once('connect', completer.complete);
+
+      return completer.future;
     }
 
     if (autoQueue) {
@@ -242,11 +251,11 @@ class Kuzzle extends KuzzleEventEmitter {
 
     if (queueMaxSize > 0 && _offlineQueue.length > queueMaxSize) {
       for (final queuedRequest in _offlineQueue.getRange(
-          0, _offlineQueue.length - queueMaxSize + 1)) {
+          0, _offlineQueue.length + 1 - queueMaxSize)) {
         emit('offlineQueuePop', [queuedRequest.request]);
       }
 
-      _offlineQueue.removeRange(0, _offlineQueue.length - queueMaxSize + 1);
+      _offlineQueue.removeRange(0, _offlineQueue.length + 1 - queueMaxSize);
     }
   }
 
@@ -276,6 +285,7 @@ class Kuzzle extends KuzzleEventEmitter {
     _dequeuingProcess();
   }
 
+  // todo: implement query options
   /// Base method used to send read queries to Kuzzle
   ///
   /// This is a low-level method, with offline queue management,
@@ -290,7 +300,6 @@ class Kuzzle extends KuzzleEventEmitter {
   ///  };
   /// ```
   ///
-  /// todo: replace request by a KuzzleRequest (avoid casts at each request)
   Future<KuzzleResponse> query(KuzzleRequest request,
       [Map<String, dynamic> options]) {
     //final _request = KuzzleRequest.fromMap(request);
@@ -330,7 +339,7 @@ class Kuzzle extends KuzzleEventEmitter {
     if (_queuing) {
       if (queueable) {
         final completer = Completer<KuzzleResponse>();
-        final queuedRequest = KuzzleQueuedRequest(
+        final queuedRequest = _KuzzleQueuedRequest(
           completer: completer,
           request: request,
         );
@@ -348,6 +357,7 @@ class Kuzzle extends KuzzleEventEmitter {
           'Unable to execute request: not connected to a Kuzzle server.'));
     }
 
+    // todo: implement query options
     return protocol.query(request);
   }
 

@@ -1,6 +1,6 @@
 import '../kuzzle.dart';
-import '../kuzzle/request.dart';
 import '../kuzzle/errors.dart';
+import '../kuzzle/request.dart';
 
 import 'abstract.dart';
 
@@ -46,9 +46,9 @@ class IndexController extends KuzzleController {
     throw BadResponseFormatError('$name.exists: bad response format', response);
   }
 
-  /// Returns the current [autoRefresh] status for the given [index].
+  /// Returns the current autoRefresh status for the given [index].
   ///
-  /// The [autoRefresh] flag, when set to true, forces Kuzzle to
+  /// The autoRefresh flag, when set to true, forces Kuzzle to
   /// perform a refresh request immediately after each change in the storage,
   /// causing documents to be immediately visible in a search
   Future<bool> getAutoRefresh(String index) async {
