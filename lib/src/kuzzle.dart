@@ -191,11 +191,22 @@ class Kuzzle extends KuzzleEventEmitter {
         playQueue();
       }
 
-      if (jwt != null) {
-        // todo: implement checkToken on reconnection
+      if (jwt == null) {
+        emit('reconnected');
+        return;
       }
 
-      emit('reconnected');
+      auth.checkToken(jwt).then((result) {
+        // shouldn't obtain an error but let's invalidate the token anyway
+        if (result['valid'] is! bool && result['valid'] == false) {
+          jwt = null;
+        }
+
+        emit('reconnected');
+      }).catchError((_) {
+        jwt = null;
+        emit('reconnected');
+      });
     });
 
     protocol.on('discarded', (request) {

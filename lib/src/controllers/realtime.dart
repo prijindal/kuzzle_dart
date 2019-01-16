@@ -82,7 +82,7 @@ class RealTimeController extends KuzzleController {
   Future<Map<String, dynamic>> unsubscribe(String roomId) async {
     if (!_subscriptions.containsKey(roomId)) {
       return Future.error(
-          KuzzleError('$name.unsubscribe; not subscribed to $roomId'));
+          KuzzleError('$name.unsubscribe: not subscribed to $roomId'));
     }
 
     for (final room in _subscriptions[roomId]) {
