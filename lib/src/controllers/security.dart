@@ -24,7 +24,7 @@ class SecurityController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Creates a Kuzzle administrator account, only if none exist.
@@ -163,7 +163,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes a security profile.
@@ -175,7 +175,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes a security role.
@@ -187,7 +187,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes a user and all their associate credentials.
@@ -198,7 +198,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Retrieves the list of fields accepted by authentication strategies.
@@ -208,7 +208,7 @@ class SecurityController extends KuzzleController {
       action: 'getAllCredentialFields',
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Retrieves the list of accepted field names by
@@ -220,7 +220,7 @@ class SecurityController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets a user's credential information for
@@ -237,7 +237,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets credential information for the user identified by
@@ -258,7 +258,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets a security profile.
@@ -279,7 +279,7 @@ class SecurityController extends KuzzleController {
       action: 'getProfileMapping',
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets the detailed rights configured by a security profile.
@@ -290,7 +290,7 @@ class SecurityController extends KuzzleController {
       uid: uid,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets a security role.
@@ -311,7 +311,7 @@ class SecurityController extends KuzzleController {
       action: 'getRoleMapping',
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets a security role.
@@ -332,7 +332,7 @@ class SecurityController extends KuzzleController {
       action: 'getUserMapping',
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets the detailed rights granted to a user.
@@ -374,7 +374,7 @@ class SecurityController extends KuzzleController {
           'ids': ids,
         }));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes multiple security roles.
@@ -387,7 +387,7 @@ class SecurityController extends KuzzleController {
           'ids': ids,
         }));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes multiple security users.
@@ -400,7 +400,7 @@ class SecurityController extends KuzzleController {
           'ids': ids,
         }));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets multiple security profiles.
@@ -518,7 +518,7 @@ class SecurityController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Updates a security profile definition.
@@ -548,7 +548,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Updates a security role definition
@@ -581,7 +581,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Updates a user definition.
@@ -609,7 +609,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Checks if the provided credentials are well-formed.

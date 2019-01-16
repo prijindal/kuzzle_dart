@@ -11,8 +11,9 @@ class Room {
       this.users,
       this.volatile,
       this.autoResubscribe,
-      this.subscribeToSelf = true}) {
+      this.subscribeToSelf}) {
     autoResubscribe ??= kuzzle.autoResubscribe;
+    subscribeToSelf ??= true;
 
     _request = KuzzleRequest(
       action: 'subscribe',
