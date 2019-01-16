@@ -68,7 +68,14 @@ void main() {
       }
     });
     print(results.hits);
+
+    final roomId = await kuzzle.realtime
+        .subscribe('myindex', 'mycollection', <String, dynamic>{}, (response) {
+      print('[subscription] $response');
+    });
+    print('subscribed to room $roomId');
   });
+
   // perform a query when connection status is not known
   kuzzle
       .query(KuzzleRequest(controller: 'server', action: 'now'))

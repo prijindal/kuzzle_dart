@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:pedantic/pedantic.dart';
 
 import '../kuzzle/errors.dart';
 import '../kuzzle/request.dart';
@@ -72,12 +73,12 @@ class WebSocketProtocol extends KuzzleProtocol {
 
     clientConnected();
 
-    await _webSocket.done.then((error) {
+    unawaited(_webSocket.done.then((error) {
       print('WebSocketProtocol done');
       print(error.runtimeType);
       clientNetworkError(
           KuzzleError('WebSocketProtocol: connection with $url closed'));
-    });
+    }));
   }
 
   @override

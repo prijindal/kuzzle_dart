@@ -17,7 +17,7 @@ class AuthController extends KuzzleController {
             controller: name,
             action: 'checkToken',
             body: <String, dynamic>{'token': token}),
-        {'queueable': false});
+        queueable: false);
 
     return response.result;
   }
