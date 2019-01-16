@@ -1,527 +1,373 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:meta/meta.dart';
-import 'package:uuid/uuid.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/status.dart' as status;
 
-import 'collection.dart';
-import 'credentials.dart';
-import 'error.dart';
-import 'helpers.dart';
-import 'memorystorage.dart';
-import 'response.dart';
-import 'rights.dart';
-import 'security.dart';
-import 'serverinfo.dart';
-import 'statistics.dart';
-import 'user.dart';
+import 'controllers/abstract.dart';
+import 'controllers/auth.dart';
+import 'controllers/bulk.dart';
+import 'controllers/collection.dart';
+import 'controllers/document.dart';
+import 'controllers/index.dart';
+import 'controllers/security.dart';
+import 'controllers/server.dart';
+import 'kuzzle/errors.dart';
+import 'kuzzle/event_emitter.dart';
+import 'kuzzle/request.dart';
+import 'kuzzle/response.dart';
+import 'protocols/abstract.dart';
 
-enum KuzzleConnectType { auto }
-enum KuzzleOfflineModeType { auto, manual }
+enum OfflineMode { manual, auto }
 
-class CheckTokenResponse {
-  CheckTokenResponse.fromMap(Map<String, dynamic> map)
-      : valid = map['valid'],
-        state = map['state'],
-        expiresAt = map['expiresAt'];
+class _KuzzleQueuedRequest {
+  _KuzzleQueuedRequest({
+    this.completer,
+    this.request,
+  }) : queuedAt = DateTime.now();
 
-  final bool valid;
-  final String state;
-  final int expiresAt;
+  Completer<KuzzleResponse> completer;
+  KuzzleRequest request;
+  DateTime queuedAt;
 }
 
-class Kuzzle {
+class Kuzzle extends KuzzleEventEmitter {
   Kuzzle(
-    this.host, {
+    this.protocol, {
     this.autoQueue = false,
-    this.autoReconnect = true,
     this.autoReplay = false,
     this.autoResubscribe = true,
-    this.connectType = KuzzleConnectType.auto,
-    this.defaultIndex,
-    this.headers,
-    this.volatile,
-    this.offlineMode,
-    this.port = 7512,
-    this.queueTTL = 120000,
+    this.eventTimeout = 200,
+    this.offlineMode = OfflineMode.manual,
+    this.offlineQueueLoader,
+    this.queueFilter,
+    this.queueTTL,
     this.queueMaxSize = 500,
-    this.replayInterval = 10,
-    this.reconnectionDelay = 1000,
-    this.sslConnection = false,
+    this.replayInterval,
+    this.volatile,
   }) {
-    security = Security(this);
-  }
+    if (offlineMode == OfflineMode.auto) {
+      autoQueue = true;
+      autoReplay = true;
+    }
 
-  final String host;
-  final bool autoQueue;
-  final bool autoReconnect;
-  final bool autoReplay;
-  final bool autoResubscribe;
-  final KuzzleConnectType connectType;
-  String defaultIndex;
-  final Map<String, dynamic> volatile;
-  final KuzzleConnectType offlineMode;
-  final int port;
-  final int queueTTL;
-  final int queueMaxSize;
-  final int replayInterval;
-  final int reconnectionDelay;
-  final bool sslConnection;
-  Security security;
-  Map<String, Completer<RawKuzzleResponse>> futureMaps =
-      <String, Completer<RawKuzzleResponse>>{};
-  Map<String, StreamController<RawKuzzleResponse>> roomMaps =
-      <String, StreamController<RawKuzzleResponse>>{};
-  IOWebSocketChannel _webSocket;
-  StreamSubscription<dynamic> _streamSubscription;
-  Uuid uuid = Uuid();
+    volatile ??= <String, dynamic>{};
+    queueTTL ??= Duration(minutes: 2);
+    replayInterval ??= Duration(milliseconds: 10);
 
-  Map<String, dynamic> headers;
+    server = ServerController(this);
+    bulk = BulkController(this);
+    auth = AuthController(this);
+    index = IndexController(this);
+    collection = CollectionController(this);
+    document = DocumentController(this);
+    security = SecurityController(this);
 
-  String _jwtToken;
-  
-  String get jwtToken {
-    return _jwtToken;
-  }
-
-  void set jwtToken(String _newJwtToken) {
-    _jwtToken = _newJwtToken;
-  }
-  
-  // int offlineQueue;
-  // void Function() offlineQueueLoader;
-  // void Function() queueFilter;
-
-  Future<RawKuzzleResponse> addNetworkQuery(
-    Map<String, dynamic> body, {
-    bool queuable = true,
-  }) {
-    final completer = Completer<RawKuzzleResponse>();
-    final String requestId = uuid.v1();
-    body.addAll(<String, dynamic>{
-      'requestId': requestId,
+    protocol.on('queryError', (error, request) {
+      emit('queryError', [error, request]);
     });
-    if (_jwtToken != null) {
-      body['jwt'] = _jwtToken;
+
+    protocol.on('tokenExpired', () {
+      jwt = null;
+      emit('tokenExpired');
+    });
+  }
+
+  ServerController get server => this['server'] as ServerController;
+  set server(ServerController _server) => this['server'] = _server;
+
+  AuthController get auth => this['auth'] as AuthController;
+  set auth(AuthController _auth) => this['auth'] = _auth;
+
+  BulkController get bulk => this['bulk'] as BulkController;
+  set bulk(BulkController _bulk) => this['bulk'] = _bulk;
+
+  IndexController get index => this['index'] as IndexController;
+  set index(IndexController _index) => this['index'] = _index;
+
+  DocumentController get document => this['document'] as DocumentController;
+  set document(DocumentController _document) => this['document'] = _document;
+
+  SecurityController get security => this['security'] as SecurityController;
+  set security(SecurityController _security) => this['security'] = _security;
+
+  CollectionController get collection =>
+      this['collection'] as CollectionController;
+  set collection(CollectionController _collection) =>
+      this['collection'] = _collection;
+
+  /// Protocol used by the SDK
+  final KuzzleProtocol protocol;
+
+  final int eventTimeout;
+  final OfflineMode offlineMode;
+  final Function offlineQueueLoader;
+  final Function queueFilter;
+
+  /// Automatically queue all requests during offline mode
+  bool autoQueue;
+
+  /// Automatically replay queued requests on a reconnected event
+  bool autoReplay;
+
+  /// Automatically renew all subscriptions on a reconnected event
+  bool autoResubscribe;
+
+  /// Number of maximum requests kept during offline mode
+  int queueMaxSize;
+
+  /// Time a queued request is kept during offline mode, in milliseconds
+  Duration queueTTL;
+
+  /// Delay between each replayed requests
+  Duration replayInterval;
+
+  /// Token used in requests for authentication
+  String jwt;
+
+  /// Common volatile data, will be sent to all future requests
+  Map<String, dynamic> volatile;
+
+  bool get autoReconnect => protocol.autoReconnect;
+  set autoReconnect(bool value) {
+    protocol.autoReconnect = value;
+  }
+
+  final Map<String, KuzzleController> _controllers =
+      <String, KuzzleController>{};
+  final List<_KuzzleQueuedRequest> _offlineQueue = <_KuzzleQueuedRequest>[];
+  bool _queuing = false;
+
+  /// Connects to a Kuzzle instance using the provided host name
+  Future<void> connect() {
+    if (protocol.isReady()) {
+      return Future.value();
     }
-    if (queuable) {
-      networkQuery(body);
-      futureMaps[requestId] = completer;
-    } else {
-      networkQuery(body);
-      completer.complete(RawKuzzleResponse.fromMap(
-        this,
-        <String, dynamic>{'result': body['body']},
-      ));
+
+    if (protocol.state == KuzzleProtocolState.connecting) {
+      final completer = Completer<void>();
+
+      // todo: handle reconnect event
+      protocol.once('connect', completer.complete);
+
+      return completer.future;
     }
-    return completer.future;
-  }
 
-  /// Checks if an administrator account has been created,
-  ///
-  /// return true if it exists and false if it does not.
-  Future<bool> adminExists({bool queuable = true}) => addNetworkQuery(
-          <String, dynamic>{'controller': 'server', 'action': 'adminExists'})
-      .then((response) => response.result['exists'] as bool);
+    if (autoQueue) {
+      startQueuing();
+    }
 
-  void networkQuery(Map<String, dynamic> body) {
-    _webSocket.sink.add(json.encode(body));
-  }
-
-  Future<CheckTokenResponse> checkToken(String token) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'checkToken',
-        'controller': 'auth',
-        'body': {
-          'token': token,
-        },
-      }).then((response) => CheckTokenResponse.fromMap(response.result));
-
-  Future<bool> credentialsExist(LoginStrategy strategy) async =>
-      addNetworkQuery(<String, dynamic>{
-        'action': 'credentialsExist',
-        'controller': 'auth',
-        'strategy': enumToString<LoginStrategy>(strategy),
-      }).then((response) => response.result as bool);
-
-  Collection collection(String collection, {String index}) {
-    index ??= defaultIndex;
-    return Collection(this, collection, index);
-  }
-
-  IOWebSocketChannel get webSocket => _webSocket;
-
-  Future<void> connect() async {
-    _webSocket = await connectInternal();
-    bindSubscription();
-  }
-
-  Future<IOWebSocketChannel> connectInternal() async =>
-      IOWebSocketChannel.connect('ws://$host:${port.toString()}/ws');
-
-  void bindSubscription() {
-    _streamSubscription = _webSocket.stream.listen((message) {
-      final jsonResponse = json.decode(message);
-      final String requestId = jsonResponse['requestId'];
-      final response = RawKuzzleResponse.fromMap(this, jsonResponse);
-      // print(response);
-      if (roomMaps.containsKey(response.room)) {
-        roomMaps[response.room].add(response);
-      } else if (futureMaps.containsKey(requestId) &&
-          !futureMaps[requestId].isCompleted) {
-        if (response.error == null) {
-          futureMaps[requestId].complete(response);
-        } else {
-          futureMaps[requestId].completeError(response.error);
-        }
-        futureMaps.remove(requestId);
+    protocol.on('connect', () {
+      if (autoQueue) {
+        stopQueuing();
       }
+
+      if (autoReplay) {
+        playQueue();
+      }
+
+      emit('connected');
     });
-    _streamSubscription.onError((error) {
-      futureMaps.forEach((requestId, future) {
-        future.completeError(error);
-      });
+
+    protocol.on('networkError', (error) {
+      if (autoQueue) {
+        startQueuing();
+      }
+
+      emit('networkError', [error]);
     });
+
+    protocol.on('disconnect', () {
+      emit('disconnected');
+    });
+
+    protocol.on('reconnect', () {
+      if (autoQueue) {
+        stopQueuing();
+      }
+
+      if (autoReplay) {
+        playQueue();
+      }
+
+      if (jwt != null) {
+        // todo: implement checkToken on reconnection
+      }
+
+      emit('reconnected');
+    });
+
+    protocol.on('discarded', (request) {
+      emit('discarded', [request]);
+    });
+
+    return protocol.connect();
   }
 
-  FutureOr<SharedAcknowledgedResponse> createIndex(
-    String index, {
-    bool queuable = true,
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'create',
-      }, queuable: queuable)
-          .then((response) =>
-              SharedAcknowledgedResponse.fromMap(response.result));
-
-  Future<CredentialsResponse> createMyCredentials(Credentials credentials,
-          {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'createMyCredentials',
-        'strategy': enumToString<LoginStrategy>(credentials.strategy),
-        'jwt': _jwtToken,
-        'body': <String, dynamic>{
-          'username': credentials.username,
-          'password': credentials.password,
-        }
-      }, queuable: queuable)
-          .then((response) => CredentialsResponse.fromMap(response.result));
-
-  Future<AcknowledgedResponse> deleteMyCredentials(LoginStrategy strategy,
-          {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'deleteMyCredentials',
-        'strategy': enumToString<LoginStrategy>(strategy),
-        'jwt': _jwtToken,
-      }, queuable: queuable)
-          .then((response) => AcknowledgedResponse.fromMap(response.result));
-
-  Future<AcknowledgedResponse> deleteIndex(String index) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'delete',
-      }).then((response) => AcknowledgedResponse.fromMap(response.result));
-
-  void disconect() {
-    _streamSubscription.cancel();
-    _webSocket.sink.close(status.goingAway);
-    roomMaps.forEach((key, roomSubscription) {
-      roomSubscription.close();
-    });
-    roomMaps.removeWhere((key, room) => true);
+  /// Disconnects from Kuzzle and invalidate this instance.
+  void disconnect() {
+    protocol.close();
   }
 
-  Future<bool> existsIndex(
-    String index, {
-    bool queuable = true,
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'exists',
-      }).then((response) => response.result as bool);
+  /// Starts the requests queuing.
+  void startQueuing() {
+    _queuing = true;
+  }
 
-  // void flushQueue() => throw ResponseError();
+  /// Stops the requests queuing.
+  void stopQueuing() {
+    _queuing = false;
+  }
 
-  /// Kuzzle monitors its internal activities and makes regular snapshots.
+  /// Plays the requests queued during offline mode.
+  void playQueue() {
+    if (protocol.isReady()) {
+      _cleanQueue();
+      _dequeue();
+    }
+  }
+
+  /// Empties the offline queue without replaying it.
+  void flushQueue() {
+    _offlineQueue.clear();
+  }
+
+  /// Clean up invalid requests in the queue
   ///
-  /// This command returns all the stored statistics. By default,
-  /// snapshots are made every 10 seconds and they are stored for 1 hour.
-  Future<ScrollResponse<Statistics>> getAllStatistics(
-          {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'getAllStats',
-      }, queuable: queuable)
-          .then((response) => ScrollResponse<Statistics>.fromMap(
-              response.result,
-              (map) => Statistics.fromMap(map as Map<String, dynamic>)));
+  /// Ensure the `queryTTL` and `queryMaxSize` properties are respected
+  void _cleanQueue() {
+    final now = DateTime.now();
+    var lastDocumentIndex = -1;
 
-  /// Returns the current Kuzzle configuration.
-  Future<Map<String, dynamic>> getConfig() => addNetworkQuery({
-        'controller': 'server',
-        'action': 'getConfig',
-      }).then((response) => response.result);
+    if (!queueTTL.isNegative) {
+      lastDocumentIndex = _offlineQueue.lastIndexWhere((queuedRequest) =>
+          queuedRequest.queuedAt.add(queueTTL).difference(now).isNegative);
 
-  Future<Statistics> getLastStatistics({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'getLastStats',
-      }, queuable: queuable)
-          .then((response) => Statistics.fromMap(response.result));
-
-  /// Returns statistics for snapshots made
-  /// after a given timestamp (utc, in milliseconds).
-  Future<ScrollResponse<Statistics>> getStatistics(
-          DateTime startTime, DateTime endTime, {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'getStats',
-        'startTime': startTime.millisecondsSinceEpoch,
-        'endTime': endTime.millisecondsSinceEpoch,
-      }, queuable: queuable)
-          .then((response) => ScrollResponse<Statistics>.fromMap(
-              response.result,
-              (map) => Statistics.fromMap(map as Map<String, dynamic>)));
-
-  Future<bool> getAutoRefresh({String index, bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'getAutoRefresh',
-      }, queuable: queuable)
-          .then((response) => response.result);
-
-  Future<User> getCurrentUser({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'getCurrentUser',
-      }, queuable: queuable)
-          .then((response) => User.fromMap(security, response.result));
-
-  String getJwtToken() => _jwtToken;
-
-  Future<CredentialsResponse> getMyCredentials(LoginStrategy strategy,
-          {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'getMyCredentials',
-        'strategy': enumToString<LoginStrategy>(strategy),
-        'jwt': _jwtToken,
-      }, queuable: queuable)
-          .then((response) => CredentialsResponse.fromMap(response.result));
-
-  Future<List<Rights>> getMyRights({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'getMyRights',
-        'jwt': _jwtToken,
-      }, queuable: queuable)
-          .then((response) => (response.result['hits'] as List<dynamic>)
-              .map<Rights>((stats) => Rights.fromMap(stats))
-              .toList());
-
-  Future<ServerInfo> getServerInfo({bool queuable = true}) =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'info',
-      }, queuable: queuable)
-          .then((response) => ServerInfo.fromMap(response.result));
-
-  /// Get all authentication strategies registered in Kuzzle
-  Future<List<String>> getStrategies({bool queuable = true}) =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'getStrategies',
-      }, queuable: queuable)
-          .then((response) => (response.result as List<dynamic>)
-              .map<String>((res) => res as String)
-              .toList());
-
-  Future<List<Collection>> listCollections(
-    String index, {
-    bool queuable = true,
-    int from,
-    int size,
-    String type = 'all',
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'collection',
-        'action': 'list',
-        'type': type,
-        'from': from,
-        'size': size,
-      }, queuable: queuable)
-          .then((response) => (response.result['collections'] as List<dynamic>)
-              .map<Collection>((map) => collection(map['name'], index: index))
-              .toList());
-
-  Future<List<String>> listIndexes({bool queuable = true}) async =>
-      await addNetworkQuery(<String, dynamic>{
-        'controller': 'index',
-        'action': 'list',
-      }, queuable: queuable)
-          .then((response) => (response.result['indexes'] as List<dynamic>)
-              .map((index) => index as String)
-              .toList());
-
-  Future<AuthResponse> login(
-    Credentials credentials, {
-    String expiresIn,
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'login',
-        'strategy': enumToString<LoginStrategy>(credentials.strategy),
-        'expiresIn': expiresIn,
-        'body': <String, dynamic>{
-          'username': credentials.username,
-          'password': credentials.password,
+      if (lastDocumentIndex != -1) {
+        for (final queuedRequest
+            in _offlineQueue.getRange(0, lastDocumentIndex + 1)) {
+          emit('offlineQueuePop', [queuedRequest.request]);
         }
-      })
-          .then((response) => AuthResponse.fromMap(response.result))
-          .then((response) {
-        if (response.id == '-1') {
-          throw ResponseError(
-              message: 'wrong username or password', status: 401);
-        } else {
-          _jwtToken = response.jwt;
-        }
-        return response;
-      });
 
-  Future<User> register(
-    User user,
-    Credentials credentials, {
-    String expiresIn,
-  }) =>
-      security.createUser(user, credentials);
+        _offlineQueue.removeRange(0, lastDocumentIndex + 1);
+      }
+    }
 
-  Future<void> logout() async => addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'logout',
-        'jwt': _jwtToken,
-      }).then((response) {
-        _jwtToken = null;
-      });
+    if (queueMaxSize > 0 && _offlineQueue.length > queueMaxSize) {
+      for (final queuedRequest in _offlineQueue.getRange(
+          0, _offlineQueue.length + 1 - queueMaxSize)) {
+        emit('offlineQueuePop', [queuedRequest.request]);
+      }
 
-  MemoryStorage get memoryStorage => MemoryStorage(this);
-
-  Future<int> now({bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'server',
-        'action': 'now',
-      }, queuable: queuable)
-          .then((response) => response.result['now']);
-
-  // void query({bool queuable = true}) => throw ResponseError();
-
-  Future<Shards> refreshIndex(String index, {bool queuable = true}) =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'refresh',
-      }, queuable: queuable)
-          .then((response) => Shards.fromMap(response.result['_shards']));
-
-  // void removeAllListeners({Event event}) => throw ResponseError();
-
-  // void removeListener(Event event, EventListener eventListener) =>
-  //     throw ResponseError();
-
-  // void replayQueue() => throw ResponseError();
-
-  Future<SearchResponse<User>> searchUsers(Map<String, dynamic> body,
-          {bool queuable = true}) =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': Security.controller,
-        'action': 'searchUsers',
-        'body': body,
-        'from': 0,
-        'size': 10,
-      }, queuable: queuable)
-          .then((response) => SearchResponse<User>.fromMap(response.result,
-              (map) => User.fromMap(security, map as Map<dynamic, dynamic>)));
-
-  Future<bool> setAutoRefresh({
-    @required bool autoRefresh,
-    String index,
-    bool queuable = true,
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'index': index,
-        'controller': 'index',
-        'action': 'setAutoRefresh',
-        'body': <String, dynamic>{
-          'autoRefresh': autoRefresh,
-        }
-      }, queuable: queuable)
-          .then((response) => response.result['response']);
-
-  // void setHeaders(Map<String, dynamic> newheaders, {bool replace = false}) =>
-  //     headers = newheaders;
-
-  // void startQueuing() => throw ResponseError();
-
-  // void stopQueuing() => throw ResponseError();
-
-  void unsetJwtToken() {
-    _jwtToken = null;
+      _offlineQueue.removeRange(0, _offlineQueue.length + 1 - queueMaxSize);
+    }
   }
 
-  Future<CredentialsResponse> updateMyCredentials(
-    Credentials credentials, {
-    bool queuable = true,
-  }) =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'updateMyCredentials',
-        'strategy': enumToString<LoginStrategy>(credentials.strategy),
-        'jwt': _jwtToken,
-        'body': <String, dynamic>{
-          'username': credentials.username,
-          'password': credentials.password,
-        }
-      }, queuable: queuable)
-          .then((response) => CredentialsResponse.fromMap(response.result));
+  /// Play all queued requests, in order.
+  void _dequeue() {
+    void _dequeuingProcess() {
+      if (_offlineQueue.isNotEmpty) {
+        final queuedRequest = _offlineQueue.first;
 
-  Future<User> updateSelf(Map<String, dynamic> content,
-          {bool queuable = true}) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'updateSelf',
-        'jwt': _jwtToken,
-        'body': content,
-      }, queuable: queuable)
-          .then((response) => User.fromMap(security, response.result));
+        protocol.query(queuedRequest.request).then((response) {
+          queuedRequest.completer.complete(response);
+        }).catchError((error) {
+          queuedRequest.completer.completeError(error);
+        });
 
-  Future<bool> validateMyCredentials(
-    LoginStrategy strategy,
-    Credentials credentials, {
-    bool queuable = true,
-  }) async =>
-      addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'validateMyCredentials',
-        'strategy': enumToString<LoginStrategy>(strategy),
-        'jwt': _jwtToken,
-        'body': <String, dynamic>{
-          'username': credentials.username,
-          'password': credentials.password,
-        }
-      }, queuable: queuable)
-          .then((response) => response.result);
+        emit('offlineQueuePop', [queuedRequest.request]);
+        _offlineQueue.removeAt(0);
 
-  Future<User> whoAmI() async => addNetworkQuery(<String, dynamic>{
-        'controller': 'auth',
-        'action': 'getCurrentUser',
-        'jwt': _jwtToken,
-      }).then((response) => User.fromMap(security, response.result));
+        Timer(replayInterval, _dequeuingProcess);
+      }
+    }
+
+    if (offlineQueueLoader != null) {
+      // todo: implement offlineQueueLoader
+    }
+
+    _dequeuingProcess();
+  }
+
+  // todo: implement query options
+  /// Base method used to send read queries to Kuzzle
+  ///
+  /// This is a low-level method, with offline queue management,
+  /// exposed to allow advanced SDK users to bypass high-level methods.
+  ///
+  /// Takes an optional Map `[options]` with the following properties:
+  ///
+  /// ```
+  ///  final options = {
+  ///    'queueable': bool,
+  ///    'volatile': Map<String, dynamic>,
+  ///  };
+  /// ```
+  ///
+  Future<KuzzleResponse> query(KuzzleRequest request,
+      [Map<String, dynamic> options]) {
+    //final _request = KuzzleRequest.fromMap(request);
+
+    // bind volatile data
+    request.volatile ??= volatile;
+
+    for (final item in volatile.keys) {
+      if (!request.volatile.containsKey(item)) {
+        request.volatile[item] = volatile[item];
+      }
+    }
+
+    request.volatile['sdkInstanceId'] = protocol.id;
+    request.volatile['sdkVersion'] = '0.0.1';
+
+    /*
+     * Do not add the token for the checkToken route,
+     * to avoid getting a token error when a developer
+     * simply wish to verify his token
+     */
+    if ((jwt != null && jwt.isNotEmpty) &&
+        !(request.controller == 'auth' && request.action == 'checkToken')) {
+      request.jwt = jwt;
+    }
+
+    var queueable = true;
+    if (options != null && options.containsKey('queueable')) {
+      queueable = options['queueable'] as bool;
+    }
+
+    if (queueFilter != null) {
+      // todo: implement queueFilter
+    }
+
+    // check queueing
+    if (_queuing) {
+      if (queueable) {
+        final completer = Completer<KuzzleResponse>();
+        final queuedRequest = _KuzzleQueuedRequest(
+          completer: completer,
+          request: request,
+        );
+
+        _cleanQueue();
+
+        _offlineQueue.add(queuedRequest);
+        emit('offlineQueuePush', [queuedRequest.request]);
+
+        return completer.future;
+      }
+
+      emit('discarded', [request]);
+      return Future.error(KuzzleError(
+          'Unable to execute request: not connected to a Kuzzle server.'));
+    }
+
+    // todo: implement query options
+    return protocol.query(request);
+  }
+
+  KuzzleController operator [](String accessor) => _controllers[accessor];
+
+  void operator []=(String accessor, KuzzleController controller) {
+    assert(_controllers[accessor] == null);
+
+    controller.accessor = accessor;
+
+    _controllers[accessor] = controller;
+  }
 }

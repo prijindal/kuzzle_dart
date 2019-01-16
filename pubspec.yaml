@@ -1,19 +1,19 @@
 name: kuzzle
-version: 0.0.1
+version: 1.0.0-alpha.1
 
 description: A library to communicate with kuzzle API
-author: Priyanshu Jindal<priyanshujindal1995@gmail.com>
+authors:
+- Priyanshu Jindal<priyanshujindal1995@gmail.com>
+- Sacha Stafyniak<sacha.stafyniak@gmail.com>
 homepage: https://github.com/prijindal/kuzzle_dart
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
-  geohash: any
-  pedantic: any
-  uuid: any
-  web_socket_channel: any
+  meta: ^1.1.6
+  uuid: ^1.0.3
 
 dev_dependencies:
-  test: any
-  coverage: any
+  test: ^1.5.1+1
+  coverage: ^0.12.3
