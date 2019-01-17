@@ -97,6 +97,7 @@ class CollectionController extends KuzzleController {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'list',
+      index: index,
       from: from,
       size: size,
       type: type,
