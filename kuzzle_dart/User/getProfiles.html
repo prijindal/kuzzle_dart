@@ -41,26 +41,23 @@
     <ol>
       <li class="section-title"><a href="kuzzle_dart/User-class.html#constructors">Constructors</a></li>
       <li><a href="kuzzle_dart/User/User.html">User</a></li>
-      <li><a href="kuzzle_dart/User/User.fromMap.html">fromMap</a></li>
+      <li><a href="kuzzle_dart/User/User.fromKuzzleResponse.html">fromKuzzleResponse</a></li>
     
       <li class="section-title">
         <a href="kuzzle_dart/User-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="kuzzle_dart/User/id.html">id</a></li>
+      <li><a href="kuzzle_dart/User/content.html">content</a></li>
+      <li><a href="kuzzle_dart/User/kuzzle.html">kuzzle</a></li>
       <li><a href="kuzzle_dart/User/meta.html">meta</a></li>
       <li><a href="kuzzle_dart/User/profileIds.html">profileIds</a></li>
-      <li><a href="kuzzle_dart/User/security.html">security</a></li>
-      <li><a href="kuzzle_dart/User/source.html">source</a></li>
+      <li><a href="kuzzle_dart/User/uid.html">uid</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/runtimeType.html">runtimeType</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/User-class.html#instance-methods">Methods</a></li>
-      <li><a href="kuzzle_dart/User/delete.html">delete</a></li>
       <li><a href="kuzzle_dart/User/getProfiles.html">getProfiles</a></li>
-      <li><a href="kuzzle_dart/User/toMap.html">toMap</a></li>
-      <li><a href="kuzzle_dart/User/toString.html">toString</a></li>
-      <li><a href="kuzzle_dart/User/update.html">update</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/User/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="kuzzle_dart/User-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="kuzzle_dart/User/operator_equals.html">operator ==</a></li>
@@ -74,7 +71,7 @@
     <h1>getProfiles method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">Profile</span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Profile-class.html">Profile</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">getProfiles</span>
 (<wbr>)
       
@@ -82,15 +79,13 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Profile&gt;&gt; getProfiles() =&gt; Future.wait&lt;Profile&gt;(profileIds
-    .map((profileId) =&gt; security.addNetworkQuery(
-          &#39;getProfile&#39;,
-          optionalParams: &lt;String, dynamic&gt;{
-            &#39;_id&#39;: profileId,
-          },
-        ).then&lt;Profile&gt;(
-            (response) =&gt; Profile.fromMap(security, response.result)))
-    .toList());</code></pre>
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Profile&gt;&gt; getProfiles() async {
+  if (profileIds == null || profileIds.isEmpty) {
+    return &lt;Profile&gt;[];
+  }
+
+  return kuzzle.security.mGetProfiles(profileIds);
+}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
@@ -102,7 +97,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 0.0.1
+    kuzzle 1.0.0-alpha.1
   </span>
 
 </footer>

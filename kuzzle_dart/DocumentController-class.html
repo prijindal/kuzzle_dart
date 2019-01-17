@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the DocumentController class from the kuzzle_dart library, for the Dart programming language.">
+  <title>DocumentController class - kuzzle_dart library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">kuzzle</a></li>
+    <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+    <li class="self-crumb">DocumentController class</li>
+  </ol>
+  <div class="self-name">DocumentController</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>kuzzle_dart library</h5>
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
+      <li><a href="kuzzle_dart/AuthController-class.html">AuthController</a></li>
+      <li><a href="kuzzle_dart/BulkController-class.html">BulkController</a></li>
+      <li><a href="kuzzle_dart/CollectionController-class.html">CollectionController</a></li>
+      <li><a href="kuzzle_dart/DocumentController-class.html">DocumentController</a></li>
+      <li><a href="kuzzle_dart/DocumentsSearchResult-class.html">DocumentsSearchResult</a></li>
+      <li><a href="kuzzle_dart/IndexController-class.html">IndexController</a></li>
+      <li><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></li>
+      <li><a href="kuzzle_dart/KuzzleController-class.html">KuzzleController</a></li>
+      <li><a href="kuzzle_dart/KuzzleEventEmitter-class.html">KuzzleEventEmitter</a></li>
+      <li><a href="kuzzle_dart/KuzzleProtocol-class.html">KuzzleProtocol</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest-class.html">KuzzleRequest</a></li>
+      <li><a href="kuzzle_dart/KuzzleResponse-class.html">KuzzleResponse</a></li>
+      <li><a href="kuzzle_dart/KuzzleSearchResult-class.html">KuzzleSearchResult</a></li>
+      <li><a href="kuzzle_dart/Profile-class.html">Profile</a></li>
+      <li><a href="kuzzle_dart/ProfileSearchResult-class.html">ProfileSearchResult</a></li>
+      <li><a href="kuzzle_dart/Role-class.html">Role</a></li>
+      <li><a href="kuzzle_dart/RoleSearchResult-class.html">RoleSearchResult</a></li>
+      <li><a href="kuzzle_dart/Room-class.html">Room</a></li>
+      <li><a href="kuzzle_dart/SecurityController-class.html">SecurityController</a></li>
+      <li><a href="kuzzle_dart/ServerController-class.html">ServerController</a></li>
+      <li><a href="kuzzle_dart/SpecificationSearchResult-class.html">SpecificationSearchResult</a></li>
+      <li><a href="kuzzle_dart/User-class.html">User</a></li>
+      <li><a href="kuzzle_dart/UserSearchResult-class.html">UserSearchResult</a></li>
+      <li><a href="kuzzle_dart/WebSocketProtocol-class.html">WebSocketProtocol</a></li>
+    
+    
+    
+    
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
+      <li><a href="kuzzle_dart/KuzzleProtocolState-class.html">KuzzleProtocolState</a></li>
+      <li><a href="kuzzle_dart/OfflineMode-class.html">OfflineMode</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#typedefs">Typedefs</a></li>
+      <li><a href="kuzzle_dart/RoomListener.html">RoomListener</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#exceptions">Exceptions</a></li>
+      <li><a href="kuzzle_dart/BadResponseFormatError-class.html">BadResponseFormatError</a></li>
+      <li><a href="kuzzle_dart/KuzzleError-class.html">KuzzleError</a></li>
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <h1>DocumentController class </h1>
+
+    
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li>Object</li>
+          <li><a href="kuzzle_dart/KuzzleController-class.html">KuzzleController</a></li>
+          <li>DocumentController</li>
+        </ul></dd>
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="DocumentController" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/DocumentController.html">DocumentController</a></span><span class="signature">(<span class="parameter" id="-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span></span>)</span>
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="accessor" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></span>
+          <span class="signature">&#8596; String</span> 
+        </dt>
+        <dd class="inherited">
+          
+          <div class="features">read / write, inherited</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span> 
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="kuzzle_dart/KuzzleController/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="kuzzle" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></span>
+          <span class="signature">&#8594; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> 
+        </dt>
+        <dd class="inherited">
+          
+          <div class="features">@protected, final, inherited</div>
+</dd>
+        <dt id="name" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/name.html">name</a></span>
+          <span class="signature">&#8594; String</span> 
+        </dt>
+        <dd class="inherited">
+          
+          <div class="features">final, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span> 
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="count" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/count.html">count</a></span><span class="signature">(<wbr><span class="parameter" id="count-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="count-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, {</span> <span class="parameter" id="count-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="count-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Counts documents in a data <code>collection</code>. <a href="kuzzle_dart/DocumentController/count.html">[...]</a>
+          
+</dd>
+        <dt id="create" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/create.html">create</a></span><span class="signature">(<wbr><span class="parameter" id="create-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="create-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="create-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span>, {</span> <span class="parameter" id="create-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="create-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Creates a new document in the persistent data storage.
+          
+</dd>
+        <dt id="createOrReplace" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/createOrReplace.html">createOrReplace</a></span><span class="signature">(<wbr><span class="parameter" id="createOrReplace-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="createOrReplace-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="createOrReplace-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createOrReplace-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span>, {</span> <span class="parameter" id="createOrReplace-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Creates a new document in the persistent data storage,
+or replaces its content if it already exists.
+          
+</dd>
+        <dt id="delete" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/delete.html">delete</a></span><span class="signature">(<wbr><span class="parameter" id="delete-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="delete-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="delete-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, {</span> <span class="parameter" id="delete-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Deletes a document.
+          
+</dd>
+        <dt id="deleteByQuery" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/deleteByQuery.html">deleteByQuery</a></span><span class="signature">(<wbr><span class="parameter" id="deleteByQuery-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="deleteByQuery-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="deleteByQuery-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, {</span> <span class="parameter" id="deleteByQuery-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Deletes documents matching the provided search query.
+          
+</dd>
+        <dt id="exists" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/exists.html">exists</a></span><span class="signature">(<wbr><span class="parameter" id="exists-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="exists-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="exists-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Check if a document exists
+          
+</dd>
+        <dt id="get" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="get-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="get-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, {</span> <span class="parameter" id="get-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Get a document
+          
+</dd>
+        <dt id="mCreate" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mCreate.html">mCreate</a></span><span class="signature">(<wbr><span class="parameter" id="mCreate-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mCreate-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mCreate-param-documents"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">documents</span>, {</span> <span class="parameter" id="mCreate-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Creates multiple documents.
+          
+</dd>
+        <dt id="mCreateOrReplace" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mCreateOrReplace.html">mCreateOrReplace</a></span><span class="signature">(<wbr><span class="parameter" id="mCreateOrReplace-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mCreateOrReplace-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mCreateOrReplace-param-documents"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">documents</span>, {</span> <span class="parameter" id="mCreateOrReplace-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Creates or replaces multiple documents.
+          
+</dd>
+        <dt id="mDelete" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mDelete.html">mDelete</a></span><span class="signature">(<wbr><span class="parameter" id="mDelete-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mDelete-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mDelete-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mDelete-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Deletes multiple documents.
+          
+</dd>
+        <dt id="mGet" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mGet.html">mGet</a></span><span class="signature">(<wbr><span class="parameter" id="mGet-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mGet-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mGet-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mGet-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Gets multiple documents.
+          
+</dd>
+        <dt id="mReplace" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mReplace.html">mReplace</a></span><span class="signature">(<wbr><span class="parameter" id="mReplace-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mReplace-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mReplace-param-documents"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">documents</span>, {</span> <span class="parameter" id="mReplace-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Replaces multiple documents.
+          
+</dd>
+        <dt id="mUpdate" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/mUpdate.html">mUpdate</a></span><span class="signature">(<wbr><span class="parameter" id="mUpdate-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="mUpdate-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="mUpdate-param-documents"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">documents</span>, {</span> <span class="parameter" id="mUpdate-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Updates multiple documents.
+          
+</dd>
+        <dt id="replace" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/replace.html">replace</a></span><span class="signature">(<wbr><span class="parameter" id="replace-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="replace-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="replace-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="replace-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span>, {</span> <span class="parameter" id="replace-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Replaces the content of an existing document.
+          
+</dd>
+        <dt id="search" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/search.html">search</a></span><span class="signature">(<wbr><span class="parameter" id="search-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="search-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, {</span> <span class="parameter" id="search-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="search-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="search-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="search-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span>, </span> <span class="parameter" id="search-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/DocumentsSearchResult-class.html">DocumentsSearchResult</a></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Searches documents. <a href="kuzzle_dart/DocumentController/search.html">[...]</a>
+          
+</dd>
+        <dt id="update" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/update.html">update</a></span><span class="signature">(<wbr><span class="parameter" id="update-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="update-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="update-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="update-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span>, {</span> <span class="parameter" id="update-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>, </span> <span class="parameter" id="update-param-retryOnConflict"><span class="type-annotation">int</span> <span class="parameter-name">retryOnConflict</span></span> })
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Updates a document content.
+          
+</dd>
+        <dt id="validate" class="callable">
+          <span class="name"><a href="kuzzle_dart/DocumentController/validate.html">validate</a></span><span class="signature">(<wbr><span class="parameter" id="validate-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="validate-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="validate-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span></span>)
+            <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+          </span>
+          </dt>
+        <dd>
+          Validates data against existing validation rules. <a href="kuzzle_dart/DocumentController/validate.html">[...]</a>
+          
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/KuzzleController/noSuchMethod.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+          </dt>
+        <dd class="inherited">
+          The equality operator. <a href="kuzzle_dart/KuzzleController/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/DocumentController-class.html#constructors">Constructors</a></li>
+      <li><a href="kuzzle_dart/DocumentController/DocumentController.html">DocumentController</a></li>
+    
+      <li class="section-title inherited">
+        <a href="kuzzle_dart/DocumentController-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/DocumentController-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/DocumentController/count.html">count</a></li>
+      <li><a href="kuzzle_dart/DocumentController/create.html">create</a></li>
+      <li><a href="kuzzle_dart/DocumentController/createOrReplace.html">createOrReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/delete.html">delete</a></li>
+      <li><a href="kuzzle_dart/DocumentController/deleteByQuery.html">deleteByQuery</a></li>
+      <li><a href="kuzzle_dart/DocumentController/exists.html">exists</a></li>
+      <li><a href="kuzzle_dart/DocumentController/get.html">get</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mCreate.html">mCreate</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mCreateOrReplace.html">mCreateOrReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mDelete.html">mDelete</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mGet.html">mGet</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mReplace.html">mReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mUpdate.html">mUpdate</a></li>
+      <li><a href="kuzzle_dart/DocumentController/replace.html">replace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/search.html">search</a></li>
+      <li><a href="kuzzle_dart/DocumentController/update.html">update</a></li>
+      <li><a href="kuzzle_dart/DocumentController/validate.html">validate</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="kuzzle_dart/DocumentController-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    kuzzle 1.0.0-alpha.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the createOrReplace method from the DocumentController class, for the Dart programming language.">
+  <title>createOrReplace method - DocumentController class - kuzzle_dart library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">kuzzle</a></li>
+    <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+    <li><a href="kuzzle_dart/DocumentController-class.html">DocumentController</a></li>
+    <li class="self-crumb">createOrReplace method</li>
+  </ol>
+  <div class="self-name">createOrReplace</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>DocumentController class</h5>
+    <ol>
+      <li class="section-title"><a href="kuzzle_dart/DocumentController-class.html#constructors">Constructors</a></li>
+      <li><a href="kuzzle_dart/DocumentController/DocumentController.html">DocumentController</a></li>
+    
+      <li class="section-title inherited">
+        <a href="kuzzle_dart/DocumentController-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="kuzzle_dart/DocumentController-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/DocumentController/count.html">count</a></li>
+      <li><a href="kuzzle_dart/DocumentController/create.html">create</a></li>
+      <li><a href="kuzzle_dart/DocumentController/createOrReplace.html">createOrReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/delete.html">delete</a></li>
+      <li><a href="kuzzle_dart/DocumentController/deleteByQuery.html">deleteByQuery</a></li>
+      <li><a href="kuzzle_dart/DocumentController/exists.html">exists</a></li>
+      <li><a href="kuzzle_dart/DocumentController/get.html">get</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mCreate.html">mCreate</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mCreateOrReplace.html">mCreateOrReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mDelete.html">mDelete</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mGet.html">mGet</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mReplace.html">mReplace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/mUpdate.html">mUpdate</a></li>
+      <li><a href="kuzzle_dart/DocumentController/replace.html">replace</a></li>
+      <li><a href="kuzzle_dart/DocumentController/search.html">search</a></li>
+      <li><a href="kuzzle_dart/DocumentController/update.html">update</a></li>
+      <li><a href="kuzzle_dart/DocumentController/validate.html">validate</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="kuzzle_dart/DocumentController-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>createOrReplace method</h1>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
+      <span class="name ">createOrReplace</span>
+(<wbr><span class="parameter" id="createOrReplace-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="createOrReplace-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="createOrReplace-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createOrReplace-param-document"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">document</span>, {</span> <span class="parameter" id="createOrReplace-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+      
+    </section>
+    <section class="desc markdown">
+      <p>Creates a new document in the persistent data storage,
+or replaces its content if it already exists.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;Map&lt;String, dynamic&gt;&gt; createOrReplace(String index, String collection,
+    String uid, Map&lt;String, dynamic&gt; document,
+    {String refresh}) async {
+  final response = await kuzzle.query(KuzzleRequest(
+    controller: name,
+    action: &#39;createOrReplace&#39;,
+    index: index,
+    collection: collection,
+    uid: uid,
+    body: document,
+    refresh: refresh,
+  ));
+
+  return response.result as Map&lt;String, dynamic&gt;;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    kuzzle 1.0.0-alpha.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
