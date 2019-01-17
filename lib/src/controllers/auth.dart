@@ -17,9 +17,9 @@ class AuthController extends KuzzleController {
             controller: name,
             action: 'checkToken',
             body: <String, dynamic>{'token': token}),
-        {'queueable': false});
+        queueable: false);
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Create [credentials] of the specified [strategy] for the current user.
@@ -32,7 +32,7 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Check the existence of the specified [strategy]'s
@@ -44,7 +44,7 @@ class AuthController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Delete credentials of the specified [strategy] for the current user.
@@ -55,7 +55,7 @@ class AuthController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Fetches the current user.
@@ -77,7 +77,7 @@ class AuthController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets the rights array of the currently logged user
@@ -97,7 +97,7 @@ class AuthController extends KuzzleController {
       action: 'getStrategies',
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Send login request to kuzzle with credentials
@@ -153,7 +153,7 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Fetches the current user.
@@ -177,6 +177,6 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 }

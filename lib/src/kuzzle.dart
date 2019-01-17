@@ -6,6 +6,7 @@ import 'controllers/bulk.dart';
 import 'controllers/collection.dart';
 import 'controllers/document.dart';
 import 'controllers/index.dart';
+import 'controllers/realtime.dart';
 import 'controllers/security.dart';
 import 'controllers/server.dart';
 import 'kuzzle/errors.dart';
@@ -40,14 +41,14 @@ class Kuzzle extends KuzzleEventEmitter {
     this.queueTTL,
     this.queueMaxSize = 500,
     this.replayInterval,
-    this.volatile,
+    this.globalVolatile,
   }) {
     if (offlineMode == OfflineMode.auto) {
       autoQueue = true;
       autoReplay = true;
     }
 
-    volatile ??= <String, dynamic>{};
+    globalVolatile ??= <String, dynamic>{};
     queueTTL ??= Duration(minutes: 2);
     replayInterval ??= Duration(milliseconds: 10);
 
@@ -58,6 +59,7 @@ class Kuzzle extends KuzzleEventEmitter {
     collection = CollectionController(this);
     document = DocumentController(this);
     security = SecurityController(this);
+    realtime = RealTimeController(this);
 
     protocol.on('queryError', (error, request) {
       emit('queryError', [error, request]);
@@ -86,6 +88,9 @@ class Kuzzle extends KuzzleEventEmitter {
 
   SecurityController get security => this['security'] as SecurityController;
   set security(SecurityController _security) => this['security'] = _security;
+
+  RealTimeController get realtime => this['realtime'] as RealTimeController;
+  set realtime(RealTimeController _realtime) => this['realtime'] = _realtime;
 
   CollectionController get collection =>
       this['collection'] as CollectionController;
@@ -122,7 +127,7 @@ class Kuzzle extends KuzzleEventEmitter {
   String jwt;
 
   /// Common volatile data, will be sent to all future requests
-  Map<String, dynamic> volatile;
+  Map<String, dynamic> globalVolatile;
 
   bool get autoReconnect => protocol.autoReconnect;
   set autoReconnect(bool value) {
@@ -186,11 +191,22 @@ class Kuzzle extends KuzzleEventEmitter {
         playQueue();
       }
 
-      if (jwt != null) {
-        // todo: implement checkToken on reconnection
+      if (jwt == null) {
+        emit('reconnected');
+        return;
       }
 
-      emit('reconnected');
+      auth.checkToken(jwt).then((result) {
+        // shouldn't obtain an error but let's invalidate the token anyway
+        if (result['valid'] is! bool && result['valid'] == false) {
+          jwt = null;
+        }
+
+        emit('reconnected');
+      }).catchError((_) {
+        jwt = null;
+        emit('reconnected');
+      });
     });
 
     protocol.on('discarded', (request) {
@@ -301,15 +317,15 @@ class Kuzzle extends KuzzleEventEmitter {
   /// ```
   ///
   Future<KuzzleResponse> query(KuzzleRequest request,
-      [Map<String, dynamic> options]) {
+      {Map<String, dynamic> volatile, bool queueable = true}) {
     //final _request = KuzzleRequest.fromMap(request);
 
     // bind volatile data
-    request.volatile ??= volatile;
+    request.volatile ??= volatile ?? globalVolatile;
 
-    for (final item in volatile.keys) {
+    for (final item in globalVolatile.keys) {
       if (!request.volatile.containsKey(item)) {
-        request.volatile[item] = volatile[item];
+        request.volatile[item] = globalVolatile[item];
       }
     }
 
@@ -324,11 +340,6 @@ class Kuzzle extends KuzzleEventEmitter {
     if ((jwt != null && jwt.isNotEmpty) &&
         !(request.controller == 'auth' && request.action == 'checkToken')) {
       request.jwt = jwt;
-    }
-
-    var queueable = true;
-    if (options != null && options.containsKey('queueable')) {
-      queueable = options['queueable'] as bool;
     }
 
     if (queueFilter != null) {

@@ -24,7 +24,7 @@ class CollectionController extends KuzzleController {
       body: mapping,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes validation specifications for a data collection.
@@ -43,7 +43,7 @@ class CollectionController extends KuzzleController {
       collection: collection,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Checks whether a [collection] exists in the [index].
@@ -72,7 +72,7 @@ class CollectionController extends KuzzleController {
       collection: collection,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the validation specifications associated to the [collection].
@@ -86,7 +86,7 @@ class CollectionController extends KuzzleController {
     );
     final response = await kuzzle.query(request);
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the list of data collections associated to a provided data index.
@@ -102,7 +102,7 @@ class CollectionController extends KuzzleController {
       type: type,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Searches collection specifications.
@@ -132,7 +132,7 @@ class CollectionController extends KuzzleController {
       collection: collection,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Updates a data [collection] data [mapping].
@@ -146,7 +146,7 @@ class CollectionController extends KuzzleController {
       body: mapping,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// The updateSpecifications method allows you to create or update
@@ -185,6 +185,6 @@ class CollectionController extends KuzzleController {
       },
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 }
