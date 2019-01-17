@@ -96,7 +96,7 @@ class KuzzleEventEmitter {
 
   @mustCallSuper
   void removeAllListeners([String eventName]) {
-    if (eventName.isNotEmpty) {
+    if (eventName != null && eventName.isNotEmpty) {
       _events[eventName].clear();
     } else {
       _events.clear();

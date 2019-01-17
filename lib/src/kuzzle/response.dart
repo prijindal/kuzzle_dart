@@ -20,7 +20,7 @@ class KuzzleResponse {
     error = json['error'] == null ? null : KuzzleError.fromJson(json);
     index = json['index'] as String;
     room = json['room'] as String;
-    result = json['result'] as Map<String, dynamic>;
+    result = json['result'] as dynamic;
     status = json['status'] as int;
     volatile = json['volatile'] as Map<String, dynamic>;
   }
@@ -68,7 +68,7 @@ class KuzzleResponse {
   KuzzleError error;
   String index;
   String room;
-  Map<String, dynamic> result;
+  dynamic result;
   int status;
   Map<String, dynamic> volatile;
 }

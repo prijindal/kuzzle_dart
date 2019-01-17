@@ -9,10 +9,11 @@ class ServerController extends KuzzleController {
 
   /// Checks if an administrator user exists
   Future<bool> adminExists() async {
-    final response =
-        await kuzzle.query(KuzzleRequest(controller: name, action: 'now'));
+    final response = await kuzzle
+        .query(KuzzleRequest(controller: name, action: 'adminExists'));
 
-    if (response.result != null && response.result.containsKey('exists')) {
+    if (response.result != null &&
+        (response.result as Map<String, dynamic>).containsKey('exists')) {
       if (response.result['exists'] is bool) {
         return response.result['exists'] as bool;
       }
@@ -27,7 +28,7 @@ class ServerController extends KuzzleController {
     final response = await kuzzle
         .query(KuzzleRequest(controller: name, action: 'getAllStats'));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the Kuzzle configuration
@@ -35,7 +36,7 @@ class ServerController extends KuzzleController {
     final response = await kuzzle
         .query(KuzzleRequest(controller: name, action: 'getConfig'));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the last statistics frame
@@ -43,7 +44,7 @@ class ServerController extends KuzzleController {
     final response = await kuzzle
         .query(KuzzleRequest(controller: name, action: 'getLastStats'));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the statistics frame from a date
@@ -56,7 +57,7 @@ class ServerController extends KuzzleController {
       stopTime: stopTime,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Returns the Kuzzle server information
@@ -64,7 +65,7 @@ class ServerController extends KuzzleController {
     final response =
         await kuzzle.query(KuzzleRequest(controller: name, action: 'info'));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Get server's current timestamp
@@ -72,7 +73,8 @@ class ServerController extends KuzzleController {
     final response =
         await kuzzle.query(KuzzleRequest(controller: name, action: 'now'));
 
-    if (response.result != null && response.result.containsKey('now')) {
+    if (response.result != null &&
+        (response.result as Map<String, dynamic>).containsKey('now')) {
       if (response.result['now'] is int) {
         return DateTime.fromMillisecondsSinceEpoch(
             response.result['now'] as int);

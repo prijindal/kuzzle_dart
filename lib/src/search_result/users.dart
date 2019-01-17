@@ -15,10 +15,12 @@ class UserSearchResult extends KuzzleSearchResult {
     searchAction = 'searchUsers';
     scrollAction = 'scrollUsers';
 
-    hits = (response.result['hits'] as List).map((hit) => User(kuzzle,
-        uid: hit['_id'] as String,
-        content: hit['_source'] as Map<String, dynamic>,
-        meta: hit['_meta'] as Map<String, dynamic>)) as List<User>;
+    hits = (response.result['hits'] as List)
+        .map((hit) => User(kuzzle,
+            uid: hit['_id'] as String,
+            content: hit['_source'] as Map<String, dynamic>,
+            meta: hit['_meta'] as Map<String, dynamic>))
+        .toList() as List<User>;
   }
 
   @override

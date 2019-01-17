@@ -41,7 +41,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Creates a new document in the persistent data storage,
@@ -59,7 +59,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes a document.
@@ -75,7 +75,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes documents matching the provided search query.
@@ -123,7 +123,7 @@ class DocumentController extends KuzzleController {
       includeTrash: includeTrash,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Creates multiple documents.
@@ -139,7 +139,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Creates or replaces multiple documents.
@@ -155,7 +155,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Deletes multiple documents.
@@ -171,7 +171,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets multiple documents.
@@ -187,7 +187,7 @@ class DocumentController extends KuzzleController {
       includeTrash: includeTrash,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Replaces multiple documents.
@@ -203,7 +203,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Updates multiple documents.
@@ -219,7 +219,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Replaces the content of an existing document.
@@ -236,7 +236,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Searches documents.
@@ -287,7 +287,7 @@ class DocumentController extends KuzzleController {
       retryOnConflict: retryOnConflict,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Validates data against existing validation rules.
@@ -306,6 +306,6 @@ class DocumentController extends KuzzleController {
       body: document,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 }

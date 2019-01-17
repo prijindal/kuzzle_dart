@@ -16,14 +16,14 @@ abstract class KuzzleSearchResult {
     searchAction = 'search';
     scrollAction = 'scroll';
 
-    if (response.result.containsKey('aggregations')) {
+    if ((response.result as Map<String, dynamic>).containsKey('aggregations')) {
       aggregations = response.result['aggregations'] as Map<String, dynamic>;
     }
-    if (response.result.containsKey('hits')) {
+    if ((response.result as Map<String, dynamic>).containsKey('hits')) {
       hits = response.result['hits'] as List<dynamic>;
       fetched = hits.length;
     }
-    if (response.result.containsKey('total')) {
+    if ((response.result as Map<String, dynamic>).containsKey('total')) {
       total = response.result['total'] as int;
     }
   }
@@ -69,11 +69,12 @@ abstract class KuzzleSearchResult {
           .then((_response) {
         response = _response;
 
-        if (_response.result.containsKey('aggregations')) {
+        if ((_response.result as Map<String, dynamic>)
+            .containsKey('aggregations')) {
           aggregations =
               _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (_response.result.containsKey('hits')) {
+        if ((_response.result as Map<String, dynamic>).containsKey('hits')) {
           hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
@@ -101,11 +102,12 @@ abstract class KuzzleSearchResult {
       return await kuzzle.query(_request).then((_response) {
         response = _response;
 
-        if (_response.result.containsKey('aggregations')) {
+        if ((_response.result as Map<String, dynamic>)
+            .containsKey('aggregations')) {
           aggregations =
               _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (_response.result.containsKey('hits')) {
+        if ((_response.result as Map<String, dynamic>).containsKey('hits')) {
           hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }
@@ -124,11 +126,12 @@ abstract class KuzzleSearchResult {
           .then((_response) {
         response = _response;
 
-        if (_response.result.containsKey('aggregations')) {
+        if ((_response.result as Map<String, dynamic>)
+            .containsKey('aggregations')) {
           aggregations =
               _response.result['aggregations'] as Map<String, dynamic>;
         }
-        if (_response.result.containsKey('hits')) {
+        if ((_response.result as Map<String, dynamic>).containsKey('hits')) {
           hits = _response.result['hits'] as List<dynamic>;
           fetched += hits.length;
         }

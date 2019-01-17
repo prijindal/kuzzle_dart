@@ -15,7 +15,7 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Delete an [index] from Kuzzle.
@@ -26,7 +26,7 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Checks if the given [index] exists in Kuzzle.
@@ -37,9 +37,9 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    if (response.result != null && response.result.containsKey('exists')) {
-      if (response.result['exists'] is bool) {
-        return response.result['exists'] as bool;
+    if (response.result != null) {
+      if (response.result is bool) {
+        return response.result as bool;
       }
     }
 
@@ -73,9 +73,12 @@ class IndexController extends KuzzleController {
       action: 'list',
     ));
 
-    if (response.result != null && response.result.containsKey('indexes')) {
-      if (response.result['indexes'] is List<String>) {
-        return response.result['indexes'] as List<String>;
+    if (response.result != null &&
+        (response.result as Map<String, dynamic>).containsKey('indexes')) {
+      if (response.result['indexes'] is List) {
+        return (response.result['indexes'] as List<dynamic>)
+            .map<String>((a) => a as String)
+            .toList();
       }
     }
 
@@ -90,7 +93,8 @@ class IndexController extends KuzzleController {
       body: <String, dynamic>{'indexes': indexes},
     ));
 
-    if (response.result != null && response.result.containsKey('deleted')) {
+    if (response.result != null &&
+        (response.result as Map<String, dynamic>).containsKey('deleted')) {
       if (response.result['deleted'] is List<String>) {
         return response.result['deleted'] as List<String>;
       }
@@ -136,7 +140,7 @@ class IndexController extends KuzzleController {
     ));
 
     if (response.result != null &&
-        response.result.containsKey('acknowledged')) {
+        (response.result as Map<String, dynamic>).containsKey('acknowledged')) {
       if (response.result['acknowledged'] is bool) {
         return response.result['acknowledged'] as bool;
       }
@@ -166,7 +170,8 @@ class IndexController extends KuzzleController {
           'autoRefresh': autoRefresh,
         }));
 
-    if (response.result != null && response.result.containsKey('response')) {
+    if (response.result != null &&
+        (response.result as Map<String, dynamic>).containsKey('response')) {
       if (response.result['response'] is bool) {
         return response.result['response'] as bool;
       }

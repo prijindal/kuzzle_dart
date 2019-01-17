@@ -23,7 +23,9 @@ class User {
   Map<String, dynamic> meta;
 
   List<String> get profileIds => content.containsKey('profileIds')
-      ? content['profileIds'] as List<String>
+      ? (content['profileIds'] as List<dynamic>)
+          .map<String>((a) => a as String)
+          .toList()
       : <String>[];
 
   Future<List<Profile>> getProfiles() async {

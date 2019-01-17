@@ -19,7 +19,7 @@ class AuthController extends KuzzleController {
             body: <String, dynamic>{'token': token}),
         {'queueable': false});
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Create [credentials] of the specified [strategy] for the current user.
@@ -32,19 +32,19 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Check the existence of the specified [strategy]'s
   /// credentials for the current user.
-  Future<Map<String, dynamic>> credentialsExist(String strategy) async {
+  Future<bool> credentialsExist(String strategy) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'credentialsExist',
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as bool;
   }
 
   /// Delete credentials of the specified [strategy] for the current user.
@@ -55,7 +55,7 @@ class AuthController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Fetches the current user.
@@ -77,27 +77,31 @@ class AuthController extends KuzzleController {
       strategy: strategy,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Gets the rights array of the currently logged user
-  Future<Map<String, dynamic>> getMyRights() async {
+  Future<List<Map<String, dynamic>>> getMyRights() async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getMyRights',
     ));
 
-    return response.result['hits'] as Map<String, dynamic>;
+    return (response.result['hits'] as List<dynamic>)
+        .map<Map<String, dynamic>>((a) => a as Map<String, dynamic>)
+        .toList();
   }
 
   /// Get all the strategies registered in Kuzzle by all auth plugins
-  Future<Map<String, dynamic>> getStrategies() async {
+  Future<List<String>> getStrategies() async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getStrategies',
     ));
 
-    return response.result;
+    return (response.result as List<dynamic>)
+        .map<String>((a) => a as String)
+        .toList();
   }
 
   /// Send login request to kuzzle with credentials
@@ -153,7 +157,7 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Fetches the current user.
@@ -177,6 +181,6 @@ class AuthController extends KuzzleController {
       body: credentials,
     ));
 
-    return response.result;
+    return response.result as Map<String, dynamic>;
   }
 }
