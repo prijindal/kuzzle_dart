@@ -27,6 +27,9 @@ class KuzzleRequest {
     this.includeTrash,
     this.retryOnConflict,
     this.reset,
+    this.scope,
+    this.state,
+    this.users,
   }) {
     requestId ??= _uuid.v4() as String;
   }
@@ -55,6 +58,9 @@ class KuzzleRequest {
     includeTrash = request.includeTrash;
     retryOnConflict = request.retryOnConflict;
     reset = request.reset;
+    scope = request.scope;
+    state = request.state;
+    users = request.users;
   }
 
   KuzzleRequest.fromMap(Map data) {
@@ -86,6 +92,9 @@ class KuzzleRequest {
     includeTrash = data['includeTrash'] as bool;
     retryOnConflict = data['retryOnConflict'] as int;
     reset = data['reset'] as bool;
+    scope = data['scope'] as String;
+    state = data['state'] as String;
+    users = data['users'] as String;
   }
 
   Map toJson() {
@@ -162,6 +171,15 @@ class KuzzleRequest {
     if (reset != null) {
       map['reset'] = reset;
     }
+    if (scope != null) {
+      map['scope'] = scope;
+    }
+    if (state != null) {
+      map['state'] = state;
+    }
+    if (users != null) {
+      map['users'] = users;
+    }
 
     return map;
   }
@@ -192,4 +210,7 @@ class KuzzleRequest {
   bool includeTrash;
   int retryOnConflict;
   bool reset;
+  String scope;
+  String state;
+  String users;
 }

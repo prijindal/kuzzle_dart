@@ -37,9 +37,11 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    if (response.result != null) {
-      if (response.result is bool) {
-        return response.result as bool;
+    final result = response.result as Map<String, dynamic>;
+
+    if (result != null && result.containsKey('exists')) {
+      if (result['exists'] is bool) {
+        return result['exists'] as bool;
       }
     }
 
@@ -73,10 +75,11 @@ class IndexController extends KuzzleController {
       action: 'list',
     ));
 
-    if (response.result != null &&
-        (response.result as Map<String, dynamic>).containsKey('indexes')) {
-      if (response.result['indexes'] is List) {
-        return (response.result['indexes'] as List<dynamic>)
+    final result = response.result as Map<String, dynamic>;
+
+    if (result != null && result.containsKey('indexes')) {
+      if (result['indexes'] is List<String>) {
+        return (result['indexes'] as List<dynamic>)
             .map<String>((a) => a as String)
             .toList();
       }
@@ -93,10 +96,11 @@ class IndexController extends KuzzleController {
       body: <String, dynamic>{'indexes': indexes},
     ));
 
-    if (response.result != null &&
-        (response.result as Map<String, dynamic>).containsKey('deleted')) {
-      if (response.result['deleted'] is List<String>) {
-        return response.result['deleted'] as List<String>;
+    final result = response.result as Map<String, dynamic>;
+
+    if (result != null && result.containsKey('deleted')) {
+      if (result['deleted'] is List<String>) {
+        return result['deleted'] as List<String>;
       }
     }
 
@@ -120,7 +124,9 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    return response.result['_shards'] as Map<String, dynamic>;
+    final result = response.result as Map<String, dynamic>;
+
+    return result['_shards'] as Map<String, dynamic>;
   }
 
   /// Forces an immediate re-indexation of Kuzzle internal storage.
@@ -139,10 +145,11 @@ class IndexController extends KuzzleController {
       action: 'refreshInternal',
     ));
 
-    if (response.result != null &&
-        (response.result as Map<String, dynamic>).containsKey('acknowledged')) {
-      if (response.result['acknowledged'] is bool) {
-        return response.result['acknowledged'] as bool;
+    final result = response.result as Map<String, dynamic>;
+
+    if (result != null && result.containsKey('acknowledged')) {
+      if (result['acknowledged'] is bool) {
+        return result['acknowledged'] as bool;
       }
     }
 
@@ -170,10 +177,11 @@ class IndexController extends KuzzleController {
           'autoRefresh': autoRefresh,
         }));
 
-    if (response.result != null &&
-        (response.result as Map<String, dynamic>).containsKey('response')) {
-      if (response.result['response'] is bool) {
-        return response.result['response'] as bool;
+    final result = response.result as Map<String, dynamic>;
+
+    if (result != null && result.containsKey('response')) {
+      if (result['response'] is bool) {
+        return result['response'] as bool;
       }
     }
 
