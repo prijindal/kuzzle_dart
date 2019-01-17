@@ -74,19 +74,11 @@ class ServerController extends KuzzleController {
     final response =
         await kuzzle.query(KuzzleRequest(controller: name, action: 'now'));
 
-<<<<<<< HEAD
-    if (response.result != null &&
-        (response.result as Map<String, dynamic>).containsKey('now')) {
-      if (response.result['now'] is int) {
-        return DateTime.fromMillisecondsSinceEpoch(
-            response.result['now'] as int);
-=======
     final result = response.result as Map<String, dynamic>;
 
     if (result != null && result.containsKey('now')) {
       if (result['now'] is int) {
         return DateTime.fromMillisecondsSinceEpoch(result['now'] as int);
->>>>>>> dev
       }
     }
 

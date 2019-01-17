@@ -37,11 +37,9 @@ class IndexController extends KuzzleController {
       index: index,
     ));
 
-    final result = response.result as Map<String, dynamic>;
-
-    if (result != null && result.containsKey('exists')) {
-      if (result['exists'] is bool) {
-        return result['exists'] as bool;
+    if (response.result != null) {
+      if (response.result is bool) {
+        return response.result as bool;
       }
     }
 
@@ -78,7 +76,7 @@ class IndexController extends KuzzleController {
     final result = response.result as Map<String, dynamic>;
 
     if (result != null && result.containsKey('indexes')) {
-      if (result['indexes'] is List<String>) {
+      if (result['indexes'] is List) {
         return (result['indexes'] as List<dynamic>)
             .map<String>((a) => a as String)
             .toList();
