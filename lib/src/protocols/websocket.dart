@@ -105,7 +105,7 @@ class WebSocketProtocol extends KuzzleProtocol {
 
   void _handlePayload(dynamic payload) {
     try {
-      final Map<String, dynamic> _json = json.decode(payload as String);
+      final _json = json.decode(payload as String) as Map<String, dynamic>;
       final response = KuzzleResponse.fromJson(_json);
 
       if (response.room.isNotEmpty) {
