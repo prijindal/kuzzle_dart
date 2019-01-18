@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master)](https://travis-ci.org/prijindal/kuzzle_dart)
 [![codecov](https://codecov.io/gh/prijindal/kuzzle_dart/branch/master/graph/badge.svg)](https://codecov.io/gh/prijindal/kuzzle_dart)
 
-The kuzzle package provides SDK for [kuzzle](https://docs.kuzzle.io).
+The kuzzle package provides SDK for [kuzzle](https://kuzzle.io).
 It uses WebSocket to do the same.
 
 ## Getting Started
@@ -13,7 +13,6 @@ Include this in your pubspec.yaml
 ```yaml
 dependencies:
   kuzzle:
-    branch: dev
     git: git://github.com/prijindal/kuzzle_dart.git
 
 ```
@@ -23,7 +22,7 @@ In the future versioning of pub will be used
 ## Example
 
 ```dart
-import 'package:kuzzle/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle.dart';
 
 final kuzzle = Kuzzle(
   WebSocketProtocol('127.0.0.1.xip.io'),
@@ -39,8 +38,9 @@ void main () async {
 }
 ```
 
-> view all samples in [example/example.dart file](./example/example.dart)
+> view all samples in [example/ folder](./example/)
 
 ## Information
 - Uses WebSocket to communicate with kuzzle, in the future http might also be used
-- Soon documentation will also be coming
+- Documentation is auto generated from source, and [available here](https://prijindal.github.io/kuzzle_dart/)
+- More detailed documentation is [available on kuzzle website](https://docs-v2.kuzzle.io)
