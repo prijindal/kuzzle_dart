@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:kuzzle/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle.dart';
 
 void main() async {
   final kuzzle = Kuzzle(

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master)](https://travis-ci.org/prijindal/kuzzle_dart)
 [![codecov](https://codecov.io/gh/prijindal/kuzzle_dart/branch/master/graph/badge.svg)](https://codecov.io/gh/prijindal/kuzzle_dart)
 
-The kuzzle_dart package provides SDK for [kuzzle](https://docs.kuzzle.io).
+The kuzzle package provides SDK for [kuzzle](https://docs.kuzzle.io).
 It uses WebSocket to do the same.
 
 ## Getting Started

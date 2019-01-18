@@ -1,4 +1,4 @@
-import 'package:kuzzle/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle.dart';
 
 void main() {
   final kuzzle = Kuzzle(
