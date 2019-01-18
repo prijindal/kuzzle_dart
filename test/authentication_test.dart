@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:uuid/uuid.dart';
 import 'package:test/test.dart';
 import 'package:kuzzle/kuzzle.dart';

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:kuzzle/kuzzle_dart.dart';
+import 'package:kuzzle/kuzzle.dart';
 
 const Map<String, dynamic> adminCredentials = {
   'username': 'admin',

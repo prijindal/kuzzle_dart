@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:kuzzle/kuzzle.dart';
 
-void main() async {
+Future<void> main() async {
   final kuzzle = Kuzzle(
     WebSocketProtocol('127.0.0.1.xip.io'),
     offlineMode: OfflineMode.auto,

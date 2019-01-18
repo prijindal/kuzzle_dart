@@ -15,7 +15,7 @@ class UserSearchResult extends KuzzleSearchResult {
     searchAction = 'searchUsers';
     scrollAction = 'scrollUsers';
 
-    hits = (response.result['hits'] as List)
+    hits = response.result['hits']
         .map((hit) => User(kuzzle,
             uid: hit['_id'] as String,
             content: hit['_source'] as Map<String, dynamic>,
