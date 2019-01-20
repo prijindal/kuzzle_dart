@@ -19,11 +19,11 @@ class RoleSearchResult extends KuzzleSearchResult {
     hits = (response.result['hits'] as List).map((hit) => Role(kuzzle,
             uid: hit['_id'] as String,
             controllers: hit['_source']['controllers'] as Map<String, dynamic>))
-        as List<Role>;
+        as List<dynamic>;
   }
 
   @override
-  Future<List<Role>> next() {
+  Future<List<dynamic>> next() {
     if (request.scroll != null || request.sort != null) {
       throw KuzzleError('only from/size params are allowed for role search');
     }
@@ -32,6 +32,8 @@ class RoleSearchResult extends KuzzleSearchResult {
         .map((hit) => Role(kuzzle,
             uid: hit['_id'] as String,
             controllers: hit['_source']['controllers']
-                as Map<String, dynamic>)) as List<Role>);
+                as Map<String, dynamic>)) as List<dynamic>);
   }
+
+  List<Role> getRoles() => List<Role>.from(hits);
 }

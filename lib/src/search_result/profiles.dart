@@ -17,12 +17,14 @@ class ProfileSearchResult extends KuzzleSearchResult {
 
     hits = (response.result['hits'] as List).map((hit) => Profile(kuzzle,
         uid: hit['_id'] as String,
-        policies: hit['_source']['policies'] as List)) as List<Profile>;
+        policies: hit['_source']['policies'] as List)) as List<dynamic>;
   }
 
   @override
-  Future<List<Profile>> next() => super.next().then((_) => hits =
+  Future<List<dynamic>> next() => super.next().then((_) => hits =
       (response.result['hits'] as List).map((hit) => Profile(kuzzle,
           uid: hit['_id'] as String,
-          policies: hit['_source']['policies'] as List)) as List<Profile>);
+          policies: hit['_source']['policies'] as List)) as List<dynamic>);
+
+  List<Profile> getRoles() => List<Profile>.from(hits);
 }
