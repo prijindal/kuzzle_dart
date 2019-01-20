@@ -144,8 +144,8 @@ Future&lt;void&gt; connect() async {
   clientConnected();
 
   unawaited(_webSocket.done.then((error) {
-    print(&#39;WebSocketProtocol done&#39;);
-    print(error.runtimeType);
+    &#47;&#47; print(&#39;WebSocketProtocol done&#39;);
+    &#47;&#47; print(error.runtimeType);
     clientNetworkError(
         KuzzleError(&#39;WebSocketProtocol: connection with $url closed&#39;));
   }));

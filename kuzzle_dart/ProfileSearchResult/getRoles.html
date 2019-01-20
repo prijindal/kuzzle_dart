@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="API docs for the next method from the ProfileSearchResult class, for the Dart programming language.">
-  <title>next method - ProfileSearchResult class - kuzzle_dart library - Dart API</title>
+  <meta name="description" content="API docs for the getRoles method from the ProfileSearchResult class, for the Dart programming language.">
+  <title>getRoles method - ProfileSearchResult class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -26,9 +26,9 @@
     <li><a href="index.html">kuzzle</a></li>
     <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
     <li><a href="kuzzle_dart/ProfileSearchResult-class.html">ProfileSearchResult</a></li>
-    <li class="self-crumb">next method</li>
+    <li class="self-crumb">getRoles method</li>
   </ol>
-  <div class="self-name">next</div>
+  <div class="self-name">getRoles</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -73,27 +73,18 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>next method</h1>
+    <h1>getRoles method</h1>
 
     <section class="multi-line-signature">
-      <div>
-        <ol class="annotation-list">
-          <li>@override</li>
-        </ol>
-      </div>
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
-      <span class="name ">next</span>
+      <span class="returntype">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Profile-class.html">Profile</a></span>&gt;</span></span>
+      <span class="name ">getRoles</span>
 (<wbr>)
-      <div class="features">override</div>
+      
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">@override
-Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits =
-    (response.result[&#39;hits&#39;] as List).map((hit) =&gt; Profile(kuzzle,
-        uid: hit[&#39;_id&#39;] as String,
-        policies: hit[&#39;_source&#39;][&#39;policies&#39;] as List)) as List&lt;dynamic&gt;);</code></pre>
+      <pre class="language-dart"><code class="language-dart">List&lt;Profile&gt; getRoles() =&gt; List&lt;Profile&gt;.from(hits);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

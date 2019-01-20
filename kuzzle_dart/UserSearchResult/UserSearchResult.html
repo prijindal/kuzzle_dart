@@ -59,6 +59,7 @@
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/total.html">total</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/UserSearchResult-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/UserSearchResult/getUsers.html">getUsers</a></li>
       <li><a href="kuzzle_dart/UserSearchResult/next.html">next</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/toString.html">toString</a></li>
@@ -91,12 +92,12 @@
   searchAction = &#39;searchUsers&#39;;
   scrollAction = &#39;scrollUsers&#39;;
 
-  hits = (response.result[&#39;hits&#39;] as List)
+  hits = response.result[&#39;hits&#39;]
       .map((hit) =&gt; User(kuzzle,
           uid: hit[&#39;_id&#39;] as String,
           content: hit[&#39;_source&#39;] as Map&lt;String, dynamic&gt;,
           meta: hit[&#39;_meta&#39;] as Map&lt;String, dynamic&gt;))
-      .toList() as List&lt;User&gt;;
+      .toList() as List&lt;dynamic&gt;;
 }</code></pre>
     </section>
 

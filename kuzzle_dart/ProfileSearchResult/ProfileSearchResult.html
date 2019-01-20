@@ -59,6 +59,7 @@
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/total.html">total</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/ProfileSearchResult-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/ProfileSearchResult/getRoles.html">getRoles</a></li>
       <li><a href="kuzzle_dart/ProfileSearchResult/next.html">next</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/toString.html">toString</a></li>
@@ -93,7 +94,7 @@
 
   hits = (response.result[&#39;hits&#39;] as List).map((hit) =&gt; Profile(kuzzle,
       uid: hit[&#39;_id&#39;] as String,
-      policies: hit[&#39;_source&#39;][&#39;policies&#39;] as List)) as List&lt;Profile&gt;;
+      policies: hit[&#39;_source&#39;][&#39;policies&#39;] as List)) as List&lt;dynamic&gt;;
 }</code></pre>
     </section>
 

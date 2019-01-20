@@ -59,6 +59,7 @@
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/total.html">total</a></li>
     
       <li class="section-title"><a href="kuzzle_dart/UserSearchResult-class.html#instance-methods">Methods</a></li>
+      <li><a href="kuzzle_dart/UserSearchResult/getUsers.html">getUsers</a></li>
       <li><a href="kuzzle_dart/UserSearchResult/next.html">next</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/noSuchMethod.html">noSuchMethod</a></li>
       <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/toString.html">toString</a></li>
@@ -80,7 +81,7 @@
           <li>@override</li>
         </ol>
       </div>
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
       <span class="name ">next</span>
 (<wbr>)
       <div class="features">override</div>
@@ -89,11 +90,11 @@
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">@override
-Future&lt;List&lt;User&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits =
+Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits =
     (response.result[&#39;hits&#39;] as List).map((hit) =&gt; User(kuzzle,
         uid: hit[&#39;_id&#39;] as String,
         content: hit[&#39;_source&#39;] as Map&lt;String, dynamic&gt;,
-        meta: hit[&#39;_meta&#39;] as Map&lt;String, dynamic&gt;)) as List&lt;User&gt;);</code></pre>
+        meta: hit[&#39;_meta&#39;] as Map&lt;String, dynamic&gt;)) as List&lt;dynamic&gt;);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

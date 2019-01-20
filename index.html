@@ -44,20 +44,19 @@
         <h1 id="kuzzle-sdk-for-dart">Kuzzle SDK for dart</h1>
 <p><a href="https://travis-ci.org/prijindal/kuzzle_dart"><img alt="Build Status" src="https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master"></a>
 <a href="https://codecov.io/gh/prijindal/kuzzle_dart"><img alt="codecov" src="https://codecov.io/gh/prijindal/kuzzle_dart/branch/master/graph/badge.svg"></a></p>
-<p>The kuzzle_dart package provides SDK for <a href="https://docs.kuzzle.io">kuzzle</a>.
+<p>The kuzzle package provides SDK for <a href="https://kuzzle.io">kuzzle</a>.
 It uses WebSocket to do the same.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>Include this in your pubspec.yaml</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
   kuzzle:
-    branch: dev
     git: git://github.com/prijindal/kuzzle_dart.git
 
 </code></pre>
 <p>Right now i would recommend that this be used directly from the git or a tar package.
 In the future versioning of pub will be used</p>
 <h2 id="example">Example</h2>
-<pre class="language-dart"><code class="language-dart">import 'package:kuzzle/kuzzle_dart.dart';
+<pre class="language-dart"><code class="language-dart">import 'package:kuzzle/kuzzle.dart';
 
 final kuzzle = Kuzzle(
   WebSocketProtocol('127.0.0.1.xip.io'),
@@ -73,8 +72,8 @@ void main () async {
 }
 </code></pre>
 <blockquote>
-<p>view all samples in <a href="./example/example.dart">example/example.dart file</a></p></blockquote>
-<h2 id="information">Information</h2><ul><li>Uses WebSocket to communicate with kuzzle, in the future http might also be used</li><li>Soon documentation will also be coming</li></ul>
+<p>view all samples in <a href="./example/">example/ folder</a></p></blockquote>
+<h2 id="information">Information</h2><ul><li>Uses WebSocket to communicate with kuzzle, in the future http might also be used</li><li>Documentation is auto generated from source, and <a href="https://prijindal.github.io/kuzzle_dart/">available here</a></li><li>More detailed documentation is <a href="https://docs-v2.kuzzle.io">available on kuzzle website</a></li></ul>
       </section>
       
         <section class="summary">

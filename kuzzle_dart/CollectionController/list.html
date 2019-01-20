@@ -95,6 +95,7 @@
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
     action: &#39;list&#39;,
+    index: index,
     from: from,
     size: size,
     type: type,
