@@ -74,8 +74,8 @@ class WebSocketProtocol extends KuzzleProtocol {
     clientConnected();
 
     unawaited(_webSocket.done.then((error) {
-      print('WebSocketProtocol done');
-      print(error.runtimeType);
+      // print('WebSocketProtocol done');
+      // print(error.runtimeType);
       clientNetworkError(
           KuzzleError('WebSocketProtocol: connection with $url closed'));
     }));
@@ -114,10 +114,10 @@ class WebSocketProtocol extends KuzzleProtocol {
         emit('discarded', [response]);
       }
     } on Exception catch (error) {
-      print('websocket _handlePayload error');
-      print(payload);
-      print(error);
-      // emit('discarded', [payload]);
+      // print('websocket _handlePayload error');
+      // print(payload);
+      // print(error);
+      emit('discarded', [payload]);
     }
   }
 
