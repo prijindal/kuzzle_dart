@@ -28,7 +28,8 @@ class SecurityController extends KuzzleController {
   }
 
   /// Creates a Kuzzle administrator account, only if none exist.
-  Future<KuzzleUser> createFirstAdmin(String uid, Map<String, dynamic> credentials,
+  Future<KuzzleUser> createFirstAdmin(
+      String uid, Map<String, dynamic> credentials,
       {Map<String, dynamic> content, bool reset}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -64,7 +65,8 @@ class SecurityController extends KuzzleController {
 
   /// Creates a new role or, if the provided role
   /// identifier already exists, replaces it.
-  Future<KuzzleRole> createOrReplaceRole(String uid, Map<String, dynamic> controllers,
+  Future<KuzzleRole> createOrReplaceRole(
+      String uid, Map<String, dynamic> controllers,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -80,7 +82,8 @@ class SecurityController extends KuzzleController {
   }
 
   /// Creates a new profile.
-  Future<KuzzleProfile> createProfile(String uid, List<Map<String, dynamic>> policies,
+  Future<KuzzleProfile> createProfile(
+      String uid, List<Map<String, dynamic>> policies,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -404,7 +407,8 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets multiple security profiles.
-  Future<List<KuzzleProfile>> mGetProfiles(List<String> ids, {String refresh}) async {
+  Future<List<KuzzleProfile>> mGetProfiles(List<String> ids,
+      {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
         controller: name,
         action: 'mGetProfiles',
