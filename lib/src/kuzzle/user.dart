@@ -3,15 +3,15 @@ import '../kuzzle/response.dart';
 
 import 'profile.dart';
 
-class User {
-  User(
+class KuzzleUser {
+  KuzzleUser(
     this.kuzzle, {
     this.uid,
     this.content,
     this.meta,
   });
 
-  User.fromKuzzleResponse(this.kuzzle, KuzzleResponse response) {
+  KuzzleUser.fromKuzzleResponse(this.kuzzle, KuzzleResponse response) {
     uid = response.result['_id'] as String;
     content = response.result['_source'] as Map<String, dynamic>;
     meta = response.result['_meta'] as Map<String, dynamic>;
@@ -28,9 +28,9 @@ class User {
           .toList()
       : <String>[];
 
-  Future<List<Profile>> getProfiles() async {
+  Future<List<KuzzleProfile>> getProfiles() async {
     if (profileIds == null || profileIds.isEmpty) {
-      return <Profile>[];
+      return <KuzzleProfile>[];
     }
 
     return kuzzle.security.mGetProfiles(profileIds);

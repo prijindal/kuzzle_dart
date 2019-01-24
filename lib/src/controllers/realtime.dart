@@ -10,7 +10,7 @@ import 'abstract.dart';
 class RealTimeController extends KuzzleController {
   RealTimeController(Kuzzle kuzzle) : super(kuzzle, name: 'realtime');
 
-  final Map<String, List<Room>> _subscriptions = {};
+  final Map<String, List<KuzzleRoom>> _subscriptions = {};
 
   /// Returns the number of other connections sharing the same subscription.
   Future<int> count(String roomId) async {
@@ -59,7 +59,7 @@ class RealTimeController extends KuzzleController {
       Map<String, dynamic> volatile,
       bool subscribeToSelf,
       bool autoResubscribe}) async {
-    final room = Room(kuzzle, index, collection, filters, callback,
+    final room = KuzzleRoom(kuzzle, index, collection, filters, callback,
         volatile: volatile,
         users: users,
         scope: scope,
@@ -69,7 +69,7 @@ class RealTimeController extends KuzzleController {
 
     return room.subscribe().then((response) {
       if (!_subscriptions.containsKey(room.id)) {
-        _subscriptions[room.id] = <Room>[];
+        _subscriptions[room.id] = <KuzzleRoom>[];
       }
 
       _subscriptions[room.id].add(room);

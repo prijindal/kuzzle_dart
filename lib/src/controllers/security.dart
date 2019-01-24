@@ -28,7 +28,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Creates a Kuzzle administrator account, only if none exist.
-  Future<User> createFirstAdmin(String uid, Map<String, dynamic> credentials,
+  Future<KuzzleUser> createFirstAdmin(String uid, Map<String, dynamic> credentials,
       {Map<String, dynamic> content, bool reset}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -41,12 +41,12 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new profile or, if the provided profile
   /// identifier already exists, replaces it.
-  Future<Profile> createOrReplaceProfile(
+  Future<KuzzleProfile> createOrReplaceProfile(
       String uid, List<Map<String, dynamic>> policies,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
@@ -59,12 +59,12 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Profile.fromKuzzleResponse(kuzzle, response);
+    return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new role or, if the provided role
   /// identifier already exists, replaces it.
-  Future<Role> createOrReplaceRole(String uid, Map<String, dynamic> controllers,
+  Future<KuzzleRole> createOrReplaceRole(String uid, Map<String, dynamic> controllers,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -76,11 +76,11 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Role.fromKuzzleResponse(kuzzle, response);
+    return KuzzleRole.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new profile.
-  Future<Profile> createProfile(String uid, List<Map<String, dynamic>> policies,
+  Future<KuzzleProfile> createProfile(String uid, List<Map<String, dynamic>> policies,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -92,7 +92,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Profile.fromKuzzleResponse(kuzzle, response);
+    return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new user in Kuzzle, with a preset list of security profiles.
@@ -103,7 +103,7 @@ class SecurityController extends KuzzleController {
   /// This method allows users with limited rights to create other accounts,
   /// but blocks them from creating accounts with unwanted privileges
   /// (e.g. an anonymous user creating his own account).
-  Future<User> createRestrictedUser(Map<String, dynamic> credentials,
+  Future<KuzzleUser> createRestrictedUser(Map<String, dynamic> credentials,
       {Map<String, dynamic> content, String uid, String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -116,11 +116,11 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new role.
-  Future<Role> createRole(String uid, Map<String, dynamic> controllers,
+  Future<KuzzleRole> createRole(String uid, Map<String, dynamic> controllers,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -132,11 +132,11 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Role.fromKuzzleResponse(kuzzle, response);
+    return KuzzleRole.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Creates a new user
-  Future<User> createUser(
+  Future<KuzzleUser> createUser(
       Map<String, dynamic> credentials, Map<String, dynamic> content,
       {String uid, String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
@@ -150,7 +150,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Deletes user credentials for the specified authentication strategy.
@@ -262,14 +262,14 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets a security profile.
-  Future<Profile> getProfile(String uid) async {
+  Future<KuzzleProfile> getProfile(String uid) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getProfile',
       uid: uid,
     ));
 
-    return Profile.fromKuzzleResponse(kuzzle, response);
+    return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Gets the mapping of the internal security profiles collection.
@@ -294,14 +294,14 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets a security role.
-  Future<Role> getRole(String uid) async {
+  Future<KuzzleRole> getRole(String uid) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getRole',
       uid: uid,
     ));
 
-    return Role.fromKuzzleResponse(kuzzle, response);
+    return KuzzleRole.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Gets the mapping of the internal security role collection.
@@ -315,14 +315,14 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets a security role.
-  Future<User> getUser(String uid) async {
+  Future<KuzzleUser> getUser(String uid) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'getUser',
       uid: uid,
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Gets the mapping of the internal security user collection.
@@ -404,7 +404,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets multiple security profiles.
-  Future<List<Profile>> mGetProfiles(List<String> ids, {String refresh}) async {
+  Future<List<KuzzleProfile>> mGetProfiles(List<String> ids, {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
         controller: name,
         action: 'mGetProfiles',
@@ -412,10 +412,10 @@ class SecurityController extends KuzzleController {
           'ids': ids,
         }));
 
-    final profiles = <Profile>[];
+    final profiles = <KuzzleProfile>[];
 
     for (final hit in response.result['hits']) {
-      profiles.add(Profile(kuzzle,
+      profiles.add(KuzzleProfile(kuzzle,
           uid: hit['_id'] as String,
           policies: hit['_source']['policies'] as List<dynamic>));
     }
@@ -424,7 +424,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Gets multiple security roles.
-  Future<List<Role>> mGetRoles(List<String> ids, {String refresh}) async {
+  Future<List<KuzzleRole>> mGetRoles(List<String> ids, {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
         controller: name,
         action: 'mGetRoles',
@@ -432,10 +432,10 @@ class SecurityController extends KuzzleController {
           'ids': ids,
         }));
 
-    final roles = <Role>[];
+    final roles = <KuzzleRole>[];
 
     for (final hit in response.result['hits']) {
-      roles.add(Role(kuzzle,
+      roles.add(KuzzleRole(kuzzle,
           uid: hit['_id'] as String,
           controllers: hit['_source']['controllers'] as Map<String, dynamic>));
     }
@@ -444,7 +444,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Replaces a user with new configuration.
-  Future<User> replaceUser(Map<String, dynamic> content,
+  Future<KuzzleUser> replaceUser(Map<String, dynamic> content,
       {String uid, String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -454,7 +454,7 @@ class SecurityController extends KuzzleController {
       body: content,
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Searches security profiles, optionally returning
@@ -522,7 +522,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Updates a security profile definition.
-  Future<Profile> updateProfile(String uid, List<dynamic> policies,
+  Future<KuzzleProfile> updateProfile(String uid, List<dynamic> policies,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -534,7 +534,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Profile.fromKuzzleResponse(kuzzle, response);
+    return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Updates the internal profile storage mapping.
@@ -555,7 +555,7 @@ class SecurityController extends KuzzleController {
   ///
   /// Note: partial updates are not supported for roles,
   /// this API route will replace the entire role content with the provided one.
-  Future<Role> updateRole(String uid, Map<String, dynamic> controllers,
+  Future<KuzzleRole> updateRole(String uid, Map<String, dynamic> controllers,
       {String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -567,7 +567,7 @@ class SecurityController extends KuzzleController {
       },
     ));
 
-    return Role.fromKuzzleResponse(kuzzle, response);
+    return KuzzleRole.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Updates the internal role storage mapping.
@@ -585,7 +585,7 @@ class SecurityController extends KuzzleController {
   }
 
   /// Updates a user definition.
-  Future<User> updateUser(Map<String, dynamic> content,
+  Future<KuzzleUser> updateUser(Map<String, dynamic> content,
       {String uid, String refresh}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
@@ -595,7 +595,7 @@ class SecurityController extends KuzzleController {
       body: content,
     ));
 
-    return User.fromKuzzleResponse(kuzzle, response);
+    return KuzzleUser.fromKuzzleResponse(kuzzle, response);
   }
 
   /// Updates the internal user storage mapping.

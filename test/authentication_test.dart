@@ -7,7 +7,7 @@ import 'helpers/kuzzle.dart';
 void main() {
   final kuzzle = Kuzzle(WebSocketProtocol('localhost'));
   Map<String, dynamic> credentials;
-  User user;
+  KuzzleUser user;
   setUpAll(() async {
     await connectKuzzle(kuzzle);
     final uuid = Uuid();
@@ -15,7 +15,7 @@ void main() {
       'username': uuid.v1(),
       'password': uuid.v1(),
     };
-    user = User(kuzzle, content: {
+    user = KuzzleUser(kuzzle, content: {
       'name': 'Test User',
       'profileIds': <String>['default'],
     });

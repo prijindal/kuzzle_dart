@@ -15,16 +15,16 @@ class ProfileSearchResult extends KuzzleSearchResult {
     searchAction = 'searchProfiles';
     scrollAction = 'scrollProfiles';
 
-    hits = (response.result['hits'] as List).map((hit) => Profile(kuzzle,
+    hits = (response.result['hits'] as List).map((hit) => KuzzleProfile(kuzzle,
         uid: hit['_id'] as String,
         policies: hit['_source']['policies'] as List)) as List<dynamic>;
   }
 
   @override
   Future<List<dynamic>> next() => super.next().then((_) => hits =
-      (response.result['hits'] as List).map((hit) => Profile(kuzzle,
+      (response.result['hits'] as List).map((hit) => KuzzleProfile(kuzzle,
           uid: hit['_id'] as String,
           policies: hit['_source']['policies'] as List)) as List<dynamic>);
 
-  List<Profile> getRoles() => List<Profile>.from(hits);
+  List<KuzzleProfile> getRoles() => List<KuzzleProfile>.from(hits);
 }
