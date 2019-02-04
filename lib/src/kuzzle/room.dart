@@ -4,8 +4,9 @@ import '../kuzzle/response.dart';
 
 typedef RoomListener = void Function(KuzzleResponse);
 
-class Room {
-  Room(this.kuzzle, this.index, this.collection, this.filters, this.callback,
+class KuzzleRoom {
+  KuzzleRoom(
+      this.kuzzle, this.index, this.collection, this.filters, this.callback,
       {this.state,
       this.scope,
       this.users,

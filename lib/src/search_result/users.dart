@@ -16,7 +16,7 @@ class UserSearchResult extends KuzzleSearchResult {
     scrollAction = 'scrollUsers';
 
     hits = response.result['hits']
-        .map((hit) => User(kuzzle,
+        .map((hit) => KuzzleUser(kuzzle,
             uid: hit['_id'] as String,
             content: hit['_source'] as Map<String, dynamic>,
             meta: hit['_meta'] as Map<String, dynamic>))
@@ -25,10 +25,10 @@ class UserSearchResult extends KuzzleSearchResult {
 
   @override
   Future<List<dynamic>> next() => super.next().then((_) => hits =
-      (response.result['hits'] as List).map((hit) => User(kuzzle,
+      (response.result['hits'] as List).map((hit) => KuzzleUser(kuzzle,
           uid: hit['_id'] as String,
           content: hit['_source'] as Map<String, dynamic>,
           meta: hit['_meta'] as Map<String, dynamic>)) as List<dynamic>);
 
-  List<User> getUsers() => List<User>.from(hits);
+  List<KuzzleUser> getUsers() => List<KuzzleUser>.from(hits);
 }

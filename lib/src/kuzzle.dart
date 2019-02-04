@@ -330,7 +330,7 @@ class Kuzzle extends KuzzleEventEmitter {
     }
 
     request.volatile['sdkInstanceId'] = protocol.id;
-    request.volatile['sdkVersion'] = '0.0.1';
+    request.volatile['sdkVersion'] = '1.0.0-alpha.2';
 
     /*
      * Do not add the token for the checkToken route,

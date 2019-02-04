@@ -3,14 +3,14 @@ import '../kuzzle/response.dart';
 
 import 'role.dart';
 
-class Profile {
-  Profile(
+class KuzzleProfile {
+  KuzzleProfile(
     this.kuzzle, {
     this.uid,
     this.policies,
   });
 
-  Profile.fromKuzzleResponse(this.kuzzle, KuzzleResponse response) {
+  KuzzleProfile.fromKuzzleResponse(this.kuzzle, KuzzleResponse response) {
     uid = response.result['_id'] as String;
     policies = response.result['_source']['policies'] as List<dynamic>;
   }
@@ -19,9 +19,9 @@ class Profile {
   String uid;
   List<dynamic> policies;
 
-  Future<List<Role>> getRoles() async {
+  Future<List<KuzzleRole>> getRoles() async {
     if (policies == null || policies.isEmpty) {
-      return <Role>[];
+      return <KuzzleRole>[];
     }
 
     return kuzzle.security

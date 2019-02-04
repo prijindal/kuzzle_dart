@@ -16,7 +16,7 @@ class RoleSearchResult extends KuzzleSearchResult {
     searchAction = 'searchRoles';
     scrollAction = null; // scrollRoles action does not exists in Kuzzle API.
 
-    hits = (response.result['hits'] as List).map((hit) => Role(kuzzle,
+    hits = (response.result['hits'] as List).map((hit) => KuzzleRole(kuzzle,
             uid: hit['_id'] as String,
             controllers: hit['_source']['controllers'] as Map<String, dynamic>))
         as List<dynamic>;
@@ -29,11 +29,11 @@ class RoleSearchResult extends KuzzleSearchResult {
     }
 
     return super.next().then((_) => hits = (response.result['hits'] as List)
-        .map((hit) => Role(kuzzle,
+        .map((hit) => KuzzleRole(kuzzle,
             uid: hit['_id'] as String,
             controllers: hit['_source']['controllers']
                 as Map<String, dynamic>)) as List<dynamic>);
   }
 
-  List<Role> getRoles() => List<Role>.from(hits);
+  List<KuzzleRole> getRoles() => List<KuzzleRole>.from(hits);
 }
