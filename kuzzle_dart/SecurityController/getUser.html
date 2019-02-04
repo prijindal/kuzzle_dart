@@ -109,7 +109,7 @@
     <h1>getUser method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
       <span class="name ">getUser</span>
 (<wbr><span class="parameter" id="getUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
       
@@ -120,14 +120,14 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;User&gt; getUser(String uid) async {
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleUser&gt; getUser(String uid) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
     action: &#39;getUser&#39;,
     uid: uid,
   ));
 
-  return User.fromKuzzleResponse(kuzzle, response);
+  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -140,7 +140,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

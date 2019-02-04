@@ -96,7 +96,7 @@ Future&lt;List&lt;dynamic&gt;&gt; next() {
   }
 
   return super.next().then((_) =&gt; hits = (response.result[&#39;hits&#39;] as List)
-      .map((hit) =&gt; Role(kuzzle,
+      .map((hit) =&gt; KuzzleRole(kuzzle,
           uid: hit[&#39;_id&#39;] as String,
           controllers: hit[&#39;_source&#39;][&#39;controllers&#39;]
               as Map&lt;String, dynamic&gt;)) as List&lt;dynamic&gt;);
@@ -112,7 +112,7 @@ Future&lt;List&lt;dynamic&gt;&gt; next() {
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

@@ -80,7 +80,7 @@
     <h1>getCurrentUser method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
       <span class="name ">getCurrentUser</span>
 (<wbr>)
       
@@ -91,13 +91,13 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;User&gt; getCurrentUser() async {
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleUser&gt; getCurrentUser() async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
     action: &#39;getCurrentUser&#39;,
   ));
 
-  return User.fromKuzzleResponse(kuzzle, response);
+  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -110,7 +110,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

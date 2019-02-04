@@ -109,7 +109,7 @@
     <h1>updateProfile method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Profile-class.html">Profile</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
       <span class="name ">updateProfile</span>
 (<wbr><span class="parameter" id="updateProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateProfile-param-policies"><span class="type-annotation">List</span> <span class="parameter-name">policies</span>, {</span> <span class="parameter" id="updateProfile-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
@@ -120,7 +120,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Profile&gt; updateProfile(String uid, List&lt;dynamic&gt; policies,
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleProfile&gt; updateProfile(String uid, List&lt;dynamic&gt; policies,
     {String refresh}) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
@@ -132,7 +132,7 @@
     },
   ));
 
-  return Profile.fromKuzzleResponse(kuzzle, response);
+  return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -145,7 +145,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

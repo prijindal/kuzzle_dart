@@ -109,7 +109,7 @@
     <h1>updateRole method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Role-class.html">Role</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
       <span class="name ">updateRole</span>
 (<wbr><span class="parameter" id="updateRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateRole-param-controllers"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">controllers</span>, {</span> <span class="parameter" id="updateRole-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
@@ -122,7 +122,7 @@ this API route will replace the entire role content with the provided one.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Role&gt; updateRole(String uid, Map&lt;String, dynamic&gt; controllers,
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleRole&gt; updateRole(String uid, Map&lt;String, dynamic&gt; controllers,
     {String refresh}) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
@@ -134,7 +134,7 @@ this API route will replace the entire role content with the provided one.</p>
     },
   ));
 
-  return Role.fromKuzzleResponse(kuzzle, response);
+  return KuzzleRole.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -147,7 +147,7 @@ this API route will replace the entire role content with the provided one.</p>
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

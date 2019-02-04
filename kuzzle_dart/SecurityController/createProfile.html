@@ -109,7 +109,7 @@
     <h1>createProfile method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Profile-class.html">Profile</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
       <span class="name ">createProfile</span>
 (<wbr><span class="parameter" id="createProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createProfile-param-policies"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">policies</span>, {</span> <span class="parameter" id="createProfile-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
@@ -120,7 +120,8 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Profile&gt; createProfile(String uid, List&lt;Map&lt;String, dynamic&gt;&gt; policies,
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleProfile&gt; createProfile(
+    String uid, List&lt;Map&lt;String, dynamic&gt;&gt; policies,
     {String refresh}) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
@@ -132,7 +133,7 @@
     },
   ));
 
-  return Profile.fromKuzzleResponse(kuzzle, response);
+  return KuzzleProfile.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -145,7 +146,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

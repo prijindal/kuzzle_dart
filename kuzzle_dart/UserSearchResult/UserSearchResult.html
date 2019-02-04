@@ -93,7 +93,7 @@
   scrollAction = &#39;scrollUsers&#39;;
 
   hits = response.result[&#39;hits&#39;]
-      .map((hit) =&gt; User(kuzzle,
+      .map((hit) =&gt; KuzzleUser(kuzzle,
           uid: hit[&#39;_id&#39;] as String,
           content: hit[&#39;_source&#39;] as Map&lt;String, dynamic&gt;,
           meta: hit[&#39;_meta&#39;] as Map&lt;String, dynamic&gt;))
@@ -110,7 +110,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

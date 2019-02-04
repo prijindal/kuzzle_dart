@@ -92,7 +92,7 @@
   searchAction = &#39;searchProfiles&#39;;
   scrollAction = &#39;scrollProfiles&#39;;
 
-  hits = (response.result[&#39;hits&#39;] as List).map((hit) =&gt; Profile(kuzzle,
+  hits = (response.result[&#39;hits&#39;] as List).map((hit) =&gt; KuzzleProfile(kuzzle,
       uid: hit[&#39;_id&#39;] as String,
       policies: hit[&#39;_source&#39;][&#39;policies&#39;] as List)) as List&lt;dynamic&gt;;
 }</code></pre>
@@ -107,7 +107,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

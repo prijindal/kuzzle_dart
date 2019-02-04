@@ -109,7 +109,7 @@
     <h1>mGetProfiles method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Profile-class.html">Profile</a></span>&gt;</span></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>&gt;</span></span>
       <span class="name ">mGetProfiles</span>
 (<wbr><span class="parameter" id="mGetProfiles-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mGetProfiles-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
@@ -120,7 +120,8 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Profile&gt;&gt; mGetProfiles(List&lt;String&gt; ids, {String refresh}) async {
+      <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;KuzzleProfile&gt;&gt; mGetProfiles(List&lt;String&gt; ids,
+    {String refresh}) async {
   final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: &#39;mGetProfiles&#39;,
@@ -128,10 +129,10 @@
         &#39;ids&#39;: ids,
       }));
 
-  final profiles = &lt;Profile&gt;[];
+  final profiles = &lt;KuzzleProfile&gt;[];
 
   for (final hit in response.result[&#39;hits&#39;]) {
-    profiles.add(Profile(kuzzle,
+    profiles.add(KuzzleProfile(kuzzle,
         uid: hit[&#39;_id&#39;] as String,
         policies: hit[&#39;_source&#39;][&#39;policies&#39;] as List&lt;dynamic&gt;));
   }
@@ -149,7 +150,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

@@ -109,7 +109,7 @@
     <h1>createFirstAdmin method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/User-class.html">User</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
       <span class="name ">createFirstAdmin</span>
 (<wbr><span class="parameter" id="createFirstAdmin-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createFirstAdmin-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createFirstAdmin-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, </span> <span class="parameter" id="createFirstAdmin-param-reset"><span class="type-annotation">bool</span> <span class="parameter-name">reset</span></span> })
       
@@ -120,7 +120,8 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;User&gt; createFirstAdmin(String uid, Map&lt;String, dynamic&gt; credentials,
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleUser&gt; createFirstAdmin(
+    String uid, Map&lt;String, dynamic&gt; credentials,
     {Map&lt;String, dynamic&gt; content, bool reset}) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
@@ -133,7 +134,7 @@
     },
   ));
 
-  return User.fromKuzzleResponse(kuzzle, response);
+  return KuzzleUser.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -146,7 +147,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

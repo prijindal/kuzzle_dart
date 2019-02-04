@@ -91,7 +91,7 @@
       <h2><span>Implementation</span> </h2>
       <pre class="language-dart"><code class="language-dart">@override
 Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits =
-    (response.result[&#39;hits&#39;] as List).map((hit) =&gt; User(kuzzle,
+    (response.result[&#39;hits&#39;] as List).map((hit) =&gt; KuzzleUser(kuzzle,
         uid: hit[&#39;_id&#39;] as String,
         content: hit[&#39;_source&#39;] as Map&lt;String, dynamic&gt;,
         meta: hit[&#39;_meta&#39;] as Map&lt;String, dynamic&gt;)) as List&lt;dynamic&gt;);</code></pre>
@@ -106,7 +106,7 @@ Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits 
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

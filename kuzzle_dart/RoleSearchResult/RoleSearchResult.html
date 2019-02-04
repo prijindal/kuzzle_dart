@@ -92,7 +92,7 @@
   searchAction = &#39;searchRoles&#39;;
   scrollAction = null; &#47;&#47; scrollRoles action does not exists in Kuzzle API.
 
-  hits = (response.result[&#39;hits&#39;] as List).map((hit) =&gt; Role(kuzzle,
+  hits = (response.result[&#39;hits&#39;] as List).map((hit) =&gt; KuzzleRole(kuzzle,
           uid: hit[&#39;_id&#39;] as String,
           controllers: hit[&#39;_source&#39;][&#39;controllers&#39;] as Map&lt;String, dynamic&gt;))
       as List&lt;dynamic&gt;;
@@ -108,7 +108,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>

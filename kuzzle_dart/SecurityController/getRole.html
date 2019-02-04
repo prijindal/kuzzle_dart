@@ -109,7 +109,7 @@
     <h1>getRole method</h1>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/Role-class.html">Role</a></span>&gt;</span></span>
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
       <span class="name ">getRole</span>
 (<wbr><span class="parameter" id="getRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
       
@@ -120,14 +120,14 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Role&gt; getRole(String uid) async {
+      <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleRole&gt; getRole(String uid) async {
   final response = await kuzzle.query(KuzzleRequest(
     controller: name,
     action: &#39;getRole&#39;,
     uid: uid,
   ));
 
-  return Role.fromKuzzleResponse(kuzzle, response);
+  return KuzzleRole.fromKuzzleResponse(kuzzle, response);
 }</code></pre>
     </section>
 
@@ -140,7 +140,7 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.1
+    kuzzle 1.0.0-alpha.2
   </span>
 
 </footer>
