@@ -113,7 +113,7 @@ class WebSocketProtocol extends KuzzleProtocol {
       } else {
         emit('discarded', [response]);
       }
-    } on Exception catch (error) {
+    } catch (_) {
       // print('websocket _handlePayload error');
       // print(payload);
       // print(error);
