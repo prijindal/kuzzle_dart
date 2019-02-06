@@ -41,21 +41,20 @@
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
       <section class="desc markdown">
-        <h1 id="kuzzle-sdk-for-dart">Kuzzle SDK for dart</h1>
-<p><a href="https://travis-ci.org/prijindal/kuzzle_dart"><img alt="Build Status" src="https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master"></a>
-<a href="https://codecov.io/gh/prijindal/kuzzle_dart"><img alt="codecov" src="https://codecov.io/gh/prijindal/kuzzle_dart/branch/master/graph/badge.svg"></a></p>
-<p>The kuzzle package provides SDK for <a href="https://kuzzle.io">kuzzle</a>.
-It uses WebSocket to do the same.</p>
-<h2 id="getting-started">Getting Started</h2>
+        <p><a href="https://pub.dartlang.org/packages/kuzzle"><img alt="Pub" src="https://img.shields.io/pub/v/kuzzle.svg?style=flat-square"></a>
+<a href="https://codecov.io/gh/prijindal/kuzzle_dart"><img alt="codecov" src="https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square"></a>
+<a href="https://travis-ci.org/prijindal/kuzzle_dart"><img alt="Build Status" src="https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square"></a></p>
+<h1 id="kuzzle-dart-sdk">Kuzzle Dart SDK</h1>
+<h2 id="about-kuzzle">About Kuzzle</h2>
+<p>A backend software, self-hostable and ready to use to power modern apps.</p>
+<p>You can access the Kuzzle repository on <a href="https://github.com/kuzzleio/kuzzle">Github</a> or view official website <a href="https://kuzzle.io">kuzzle.io</a>.</p><ul><li><a href="#installation">Installation</a></li><li><a href="#basic-usage">Basic usage</a></li><li><a href="#documentation-and-samples">Documentation and Samples</a></li><li><a href="#contribution">Contribution</a></li></ul>
+<h2 id="installation">Installation</h2>
 <p>Include this in your pubspec.yaml</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
-  kuzzle:
-    git: git://github.com/prijindal/kuzzle_dart.git
+  kuzzle: ^1.0.0-alpha.3
 
 </code></pre>
-<p>Right now i would recommend that this be used directly from the git or a tar package.
-In the future versioning of pub will be used</p>
-<h2 id="example">Example</h2>
+<h2 id="basic-usage">Basic usage</h2>
 <pre class="language-dart"><code class="language-dart">import 'package:kuzzle/kuzzle.dart';
 
 final kuzzle = Kuzzle(
@@ -72,8 +71,14 @@ void main () async {
 }
 </code></pre>
 <blockquote>
-<p>view all samples in <a href="./example/">example/ folder</a></p></blockquote>
-<h2 id="information">Information</h2><ul><li>Uses WebSocket to communicate with kuzzle, in the future http might also be used</li><li>Documentation is auto generated from source, and <a href="https://prijindal.github.io/kuzzle_dart/">available here</a></li><li>More detailed documentation is <a href="https://docs-v2.kuzzle.io">available on kuzzle website</a></li></ul>
+<p>only <code>WebSocketProtocol</code> protocol is available for now, feel free to suggest a PR for other protocols submissions</p></blockquote>
+<h2 id="documentation-and-samples">Documentation and Samples</h2><ul><li><a href="https://prijindal.github.io/kuzzle_dart/">https://prijindal.github.io/kuzzle_dart/</a> - 
+<em>Access the auto generated documentation from source code</em></li><li><a href="https://docs-v2.kuzzle.io/api">https://docs-v2.kuzzle.io/api</a> - 
+<em>Official Kuzzle API documentation</em></li><li><a href="./example/">example/ folder</a> - 
+<em>Various samples about using this library</em></li></ul>
+<h2 id="contributions">Contributions</h2>
+<p>If you find a bug or want a feature, but don't know how to fix/implement it, feel free to open an issue.
+If you fixed a bug or implemented a new feature, we will enjoy to merge your pull request.</p>
       </section>
       
         <section class="summary">
