@@ -1,25 +1,31 @@
-# Kuzzle SDK for dart
+[![Pub](https://img.shields.io/pub/v/kuzzle.svg?style=flat-square)](https://pub.dartlang.org/packages/kuzzle)
+[![codecov](https://img.shields.io/codecov/c/github/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://codecov.io/gh/prijindal/kuzzle_dart)
+[![Build Status](https://img.shields.io/travis/prijindal/kuzzle_dart/master.svg?style=flat-square)](https://travis-ci.org/prijindal/kuzzle_dart)
 
-[![Build Status](https://travis-ci.org/prijindal/kuzzle_dart.svg?branch=master)](https://travis-ci.org/prijindal/kuzzle_dart)
-[![codecov](https://codecov.io/gh/prijindal/kuzzle_dart/branch/master/graph/badge.svg)](https://codecov.io/gh/prijindal/kuzzle_dart)
+# Kuzzle Dart SDK
 
-The kuzzle package provides SDK for [kuzzle](https://kuzzle.io).
-It uses WebSocket to do the same.
+## About Kuzzle
 
-## Getting Started
+A backend software, self-hostable and ready to use to power modern apps.
+
+You can access the Kuzzle repository on [Github](https://github.com/kuzzleio/kuzzle) or view official website [kuzzle.io](https://kuzzle.io).
+
+* [Installation](#installation)
+* [Basic usage](#basic-usage)
+* [Documentation and Samples](#documentation-and-samples)
+* [Contribution](#contribution)
+
+## Installation
 
 Include this in your pubspec.yaml
 
 ```yaml
 dependencies:
-  kuzzle:
-    git: git://github.com/prijindal/kuzzle_dart.git
+  kuzzle: ^1.0.0-alpha.3
 
 ```
-Right now i would recommend that this be used directly from the git or a tar package.
-In the future versioning of pub will be used
 
-## Example
+## Basic usage
 
 ```dart
 import 'package:kuzzle/kuzzle.dart';
@@ -38,9 +44,18 @@ void main () async {
 }
 ```
 
-> view all samples in [example/ folder](./example/)
+> only `WebSocketProtocol` protocol is available for now, feel free to suggest a PR for other protocols submissions
 
-## Information
-- Uses WebSocket to communicate with kuzzle, in the future http might also be used
-- Documentation is auto generated from source, and [available here](https://prijindal.github.io/kuzzle_dart/)
-- More detailed documentation is [available on kuzzle website](https://docs-v2.kuzzle.io)
+## Documentation and Samples
+
+* [https://prijindal.github.io/kuzzle_dart/](https://prijindal.github.io/kuzzle_dart/) - 
+  _Access the auto generated documentation from source code_
+* [https://docs-v2.kuzzle.io/api](https://docs-v2.kuzzle.io/api) - 
+  _Official Kuzzle API documentation_
+* [example/ folder](./example/) - 
+  _Various samples about using this library_
+  
+## Contributions
+
+If you find a bug or want a feature, but don't know how to fix/implement it, feel free to open an issue.
+If you fixed a bug or implemented a new feature, we will enjoy to merge your pull request.
