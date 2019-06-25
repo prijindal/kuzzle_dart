@@ -51,7 +51,7 @@ void main () async {
 
 * [https://prijindal.github.io/kuzzle_dart/](https://prijindal.github.io/kuzzle_dart/) - 
   _Access the auto generated documentation from source code_
-* [https://docs-v2.kuzzle.io/api](https://docs-v2.kuzzle.io/api) - 
+* [https://docs.kuzzle.io/core/1/api](https://docs.kuzzle.io/core/1/api) - 
   _Official Kuzzle API documentation_
 * [example/ folder](./example/) - 
   _Various samples about using this library_
