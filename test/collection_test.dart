@@ -16,6 +16,14 @@ void main() {
     defaultCollection = 'posts';
   });
 
+  reCreate() async {
+    final response = await kuzzle.collection.create(
+      defaultIndex,
+      defaultCollection,
+      mapping: {'title': {}},
+    );
+  }
+
   group('collection', () {
     setUpAll(() async {
       await kuzzle.index.create(defaultIndex);
@@ -35,6 +43,7 @@ void main() {
       );
 
       expect(response, true);
+      await reCreate();
     });
 
     test('delete specification', () async {
@@ -58,11 +67,12 @@ void main() {
         defaultIndex,
         defaultCollection,
       );
-      expect(
-        response[defaultIndex]['mappings'][defaultCollection]['properties'],
-        <String, dynamic>{},
-      );
+      expect(response, <String, dynamic>{
+        'dynamic': 'false',
+        'properties': {},
+      });
     });
+
     test('list all collections', () async {
       final response = await kuzzle.collection.list(defaultIndex);
       print(response);
@@ -107,7 +117,10 @@ void main() {
         false,
         {},
       );
-      expect(response, <String, dynamic>{});
+      expect(response, <String, dynamic>{
+        'strict': false,
+        'fields': {},
+      });
     });
 
     test('get specifications', () async {
@@ -115,12 +128,20 @@ void main() {
         defaultIndex,
         defaultCollection,
       );
-      expect(response, {
-        'validation': {},
-        'index': defaultIndex,
-        'collection': defaultCollection,
-      });
-      expect(response['validation'], <String, dynamic>{});
+      var hasAllKeys = false;
+
+      for (var key in ['collection', 'index', 'validation', '_kuzzle_info']) {
+        hasAllKeys = response.containsKey(key);
+
+        if (!hasAllKeys) {
+          break;
+        }
+      }
+
+      expect(hasAllKeys, true);
+      expect(response['index'], defaultIndex);
+      expect(response['collection'], defaultCollection);
+      expect(response['validation'].runtimeType, <String, dynamic>{}.runtimeType);
     });
     test('validate specifications', () async {
       final response = await kuzzle.collection.validateSpecifications(
