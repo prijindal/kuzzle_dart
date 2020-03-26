@@ -19,6 +19,7 @@ class IndexController extends KuzzleController {
   }
 
   /// Delete an [index] from Kuzzle.
+  /// returns true if achnowledged
   Future<bool> delete(String index) async {
     final response = await kuzzle.query(KuzzleRequest(
       action: 'delete',
