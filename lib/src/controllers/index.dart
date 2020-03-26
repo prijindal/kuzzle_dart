@@ -8,14 +8,14 @@ class IndexController extends KuzzleController {
   IndexController(Kuzzle kuzzle) : super(kuzzle, name: 'index');
 
   /// Creates a new data [index] in Kuzzle.
-  Future<Map<String, dynamic>> create(String index) async {
+  Future<bool> create(String index) async {
     final response = await kuzzle.query(KuzzleRequest(
       action: 'create',
       controller: name,
       index: index,
     ));
 
-    return response.result as Map<String, dynamic>;
+    return response.status == 200;
   }
 
   /// Delete an [index] from Kuzzle.
