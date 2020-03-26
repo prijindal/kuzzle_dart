@@ -21,92 +21,115 @@ void main() {
       await kuzzle.index.create(defaultIndex);
     });
     test('creation', () async {
-      final createdResponse = await kuzzle.collection.create(
+      final response = await kuzzle.collection.create(
         defaultIndex,
         defaultCollection,
         mapping: {'title': {}},
       );
-      expect(createdResponse['acknowledged'], true);
+      expect(response['acknowledged'], true);
     });
     test('delete', () async {
-      final deleteResponse = await kuzzle.collection.delete(
+      final response = await kuzzle.collection.delete(
         defaultIndex,
         defaultCollection,
       );
 
-      expect(deleteResponse, true);
+      expect(response, true);
     });
 
     test('delete specification', () async {
-      final deleteSpecificationsResponse = await kuzzle.collection.deleteSpecifications(
+      final response = await kuzzle.collection.deleteSpecifications(
         defaultIndex,
         defaultCollection,
       );
-      expect(deleteSpecificationsResponse['acknowledged'], true);
+      expect(response['acknowledged'], true);
     });
 
     test('exists', () async {
-      final existsCollection = await kuzzle.collection.exists(
+      final response = await kuzzle.collection.exists(
         defaultIndex,
         defaultCollection,
       );
-      expect(existsCollection, true);
+      expect(response, true);
     });
 
     test('get mapping', () async {
-      final collectionMapping = await kuzzle.collection.getMapping(
+      final response = await kuzzle.collection.getMapping(
         defaultIndex,
         defaultCollection,
       );
-      expect(collectionMapping[defaultIndex]['mappings'][defaultCollection]['properties'],
-          <String, dynamic>{});
+      expect(
+        response[defaultIndex]['mappings'][defaultCollection]['properties'],
+        <String, dynamic>{},
+      );
     });
     test('list all collections', () async {
-      final listCollectionResponse = await kuzzle.collection.list(defaultIndex);
-      print(listCollectionResponse);
-      expect(listCollectionResponse['collections'].length, greaterThanOrEqualTo(1));
-      expect(listCollectionResponse['collections'][0]['name'], defaultCollection);
+      final response = await kuzzle.collection.list(defaultIndex);
+      print(response);
+      expect(
+        response['collections'].length,
+        greaterThanOrEqualTo(1),
+      );
+      expect(
+        response['collections'][0]['name'],
+        defaultCollection,
+      );
     });
 
     test('refresh', () async {
-      final refreshResponse = await kuzzle.collection.refresh(
+      final response = await kuzzle.collection.refresh(
         defaultIndex,
         defaultCollection,
       );
 
-      expect(refreshResponse, true);
+      expect(response, true);
     });
 
     test('search specifications', () async {
-      final searchSpecifications = await kuzzle.collection.searchSpecifications(defaultIndex);
-      expect(searchSpecifications.hits.length, greaterThanOrEqualTo(0));
+      final response = await kuzzle.collection.searchSpecifications(
+        defaultIndex,
+      );
+      expect(response.hits.length, greaterThanOrEqualTo(0));
     });
 
     test('truncate', () async {
-      final ids = await kuzzle.collection.truncate(defaultIndex, defaultCollection);
-      expect(ids.length, 1);
+      final response = await kuzzle.collection.truncate(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response.length, 1);
     });
 
     test('update specifications', () async {
-      final specifications =
-          await kuzzle.collection.updateSpecifications(defaultIndex, defaultCollection, {});
-      expect(specifications, <String, dynamic>{});
+      final response = await kuzzle.collection.updateSpecifications(
+        defaultIndex,
+        defaultCollection,
+        false,
+        {},
+      );
+      expect(response, <String, dynamic>{});
     });
 
     test('get specifications', () async {
-      final collectionSpecifications =
-          await kuzzle.collection.getSpecifications(defaultIndex, defaultCollection);
-      expect(collectionSpecifications, {
+      final response = await kuzzle.collection.getSpecifications(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response, {
         'validation': {},
         'index': defaultIndex,
         'collection': defaultCollection,
       });
-      expect(collectionSpecifications['validation'], <String, dynamic>{});
+      expect(response['validation'], <String, dynamic>{});
     });
     test('validate specifications', () async {
-      final isValid =
-          await kuzzle.collection.validateSpecifications(defaultIndex, defaultCollection, {});
-      expect(isValid['valid'], true);
+      final response = await kuzzle.collection.validateSpecifications(
+        defaultIndex,
+        defaultCollection,
+        false,
+        {},
+      );
+      expect(response, true);
     });
 
     tearDownAll(() async {
