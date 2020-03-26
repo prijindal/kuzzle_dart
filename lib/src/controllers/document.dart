@@ -306,8 +306,8 @@ class DocumentController extends KuzzleController {
   /// if you sort the results, by using the Elasticsearch search_after command.
   Future<DocumentsSearchResult> search(
     String index,
-    String collection,
-    Map<String, dynamic> query, {
+    String collection, {
+    Map<String, dynamic> query,
     int from,
     int size,
     String scroll,
