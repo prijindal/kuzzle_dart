@@ -12,7 +12,14 @@ void main() {
   group('index', () {
     test('create', () async {
       final response = await kuzzle.index.create('justatestindex');
-      expect(response['acknowledged'], true);
+      expect(response, true);
+
+      try {
+        final response2 = await kuzzle.index.create('justatestindex');
+        expect(response2, false);
+      } catch (e) {
+        print(e);
+      }
     });
 
     test('exists', () async {
