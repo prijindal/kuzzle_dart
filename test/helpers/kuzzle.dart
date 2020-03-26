@@ -3,7 +3,7 @@ import 'package:kuzzle/kuzzle.dart';
 
 const Map<String, dynamic> adminCredentials = {
   'username': 'admin',
-  'password': 'admin'
+  'password': 'flyfly'
 };
 
 Future<void> connectKuzzle(Kuzzle kuzzle) {

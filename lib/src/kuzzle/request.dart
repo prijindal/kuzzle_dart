@@ -3,35 +3,35 @@ import 'package:uuid/uuid.dart';
 final _uuid = Uuid();
 
 class KuzzleRequest {
-  KuzzleRequest({
-    this.action,
-    this.body,
-    this.collection,
-    this.controller,
-    this.index,
-    this.jwt,
-    this.requestId,
-    this.refresh,
-    this.uid,
-    this.volatile,
-    this.startTime,
-    this.stopTime,
-    this.strategy,
-    this.expiresIn,
-    this.from,
-    this.size,
-    this.type,
-    this.scroll,
-    this.scrollId,
-    this.sort,
-    this.includeTrash,
-    this.retryOnConflict,
-    this.reset,
-    this.scope,
-    this.state,
-    this.users,
-  }) {
-    requestId ??= _uuid.v4() as String;
+  KuzzleRequest(
+      {this.action,
+      this.body,
+      this.collection,
+      this.controller,
+      this.index,
+      this.jwt,
+      this.requestId,
+      this.refresh,
+      this.uid,
+      this.volatile,
+      this.startTime,
+      this.stopTime,
+      this.strategy,
+      this.expiresIn,
+      this.from,
+      this.size,
+      this.type,
+      this.scroll,
+      this.scrollId,
+      this.sort,
+      this.retryOnConflict,
+      this.reset,
+      this.scope,
+      this.state,
+      this.source,
+      this.users,
+      this.includeKuzzleMeta}) {
+    requestId ??= _uuid.v4();
   }
 
   KuzzleRequest.clone(KuzzleRequest request) {
@@ -55,12 +55,13 @@ class KuzzleRequest {
     scroll = request.scroll;
     scrollId = request.scrollId;
     sort = request.sort;
-    includeTrash = request.includeTrash;
     retryOnConflict = request.retryOnConflict;
     reset = request.reset;
     scope = request.scope;
     state = request.state;
     users = request.users;
+    source = request.source;
+    includeKuzzleMeta = request.includeKuzzleMeta;
   }
 
   KuzzleRequest.fromMap(Map data) {
@@ -75,12 +76,8 @@ class KuzzleRequest {
     refresh = data['refresh'] as String;
     uid = data['_id'] as String;
     volatile = data['volatile'] as Map<String, dynamic>;
-    startTime = data['startTime'] == null
-        ? null
-        : DateTime.parse(data['startTime'] as String);
-    stopTime = data['stopTime'] == null
-        ? null
-        : DateTime.parse(data['stopTime'] as String);
+    startTime = data['startTime'] == null ? null : DateTime.parse(data['startTime'] as String);
+    stopTime = data['stopTime'] == null ? null : DateTime.parse(data['stopTime'] as String);
     strategy = data['strategy'] as String;
     expiresIn = data['expiresIn'] as String;
     from = data['from'] as int;
@@ -89,12 +86,13 @@ class KuzzleRequest {
     scroll = data['scroll'] as String;
     scrollId = data['scrollId'] as String;
     sort = data['sort'] as List<dynamic>;
-    includeTrash = data['includeTrash'] as bool;
     retryOnConflict = data['retryOnConflict'] as int;
     reset = data['reset'] as bool;
     scope = data['scope'] as String;
     state = data['state'] as String;
     users = data['users'] as String;
+    source = data['source'] as bool;
+    includeKuzzleMeta = data['includeKuzzleMeta'] as bool;
   }
 
   Map toJson() {
@@ -162,9 +160,6 @@ class KuzzleRequest {
     if (sort != null) {
       map['sort'] = sort;
     }
-    if (includeTrash != null) {
-      map['includeTrash'] = includeTrash;
-    }
     if (retryOnConflict != null) {
       map['retryOnConflict'] = retryOnConflict;
     }
@@ -179,6 +174,13 @@ class KuzzleRequest {
     }
     if (users != null) {
       map['users'] = users;
+    }
+    if (source != null) {
+      map['source'] = source;
+    }
+
+    if (includeKuzzleMeta != null) {
+      map['includeKuzzleMeta'] = includeKuzzleMeta;
     }
 
     return map;
@@ -207,10 +209,11 @@ class KuzzleRequest {
   String scroll;
   String scrollId;
   List<dynamic> sort;
-  bool includeTrash;
   int retryOnConflict;
   bool reset;
+  bool source;
   String scope;
   String state;
   String users;
+  bool includeKuzzleMeta;
 }
