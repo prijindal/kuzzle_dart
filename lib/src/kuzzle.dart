@@ -92,10 +92,8 @@ class Kuzzle extends KuzzleEventEmitter {
   RealTimeController get realtime => this['realtime'] as RealTimeController;
   set realtime(RealTimeController _realtime) => this['realtime'] = _realtime;
 
-  CollectionController get collection =>
-      this['collection'] as CollectionController;
-  set collection(CollectionController _collection) =>
-      this['collection'] = _collection;
+  CollectionController get collection => this['collection'] as CollectionController;
+  set collection(CollectionController _collection) => this['collection'] = _collection;
 
   /// Protocol used by the SDK
   final KuzzleProtocol protocol;
@@ -134,8 +132,7 @@ class Kuzzle extends KuzzleEventEmitter {
     protocol.autoReconnect = value;
   }
 
-  final Map<String, KuzzleController> _controllers =
-      <String, KuzzleController>{};
+  final Map<String, KuzzleController> _controllers = <String, KuzzleController>{};
   final List<_KuzzleQueuedRequest> _offlineQueue = <_KuzzleQueuedRequest>[];
   bool _queuing = false;
 
@@ -252,12 +249,11 @@ class Kuzzle extends KuzzleEventEmitter {
     var lastDocumentIndex = -1;
 
     if (!queueTTL.isNegative) {
-      lastDocumentIndex = _offlineQueue.lastIndexWhere((queuedRequest) =>
-          queuedRequest.queuedAt.add(queueTTL).difference(now).isNegative);
+      lastDocumentIndex = _offlineQueue.lastIndexWhere(
+          (queuedRequest) => queuedRequest.queuedAt.add(queueTTL).difference(now).isNegative);
 
       if (lastDocumentIndex != -1) {
-        for (final queuedRequest
-            in _offlineQueue.getRange(0, lastDocumentIndex + 1)) {
+        for (final queuedRequest in _offlineQueue.getRange(0, lastDocumentIndex + 1)) {
           emit('offlineQueuePop', [queuedRequest.request]);
         }
 
@@ -266,8 +262,8 @@ class Kuzzle extends KuzzleEventEmitter {
     }
 
     if (queueMaxSize > 0 && _offlineQueue.length > queueMaxSize) {
-      for (final queuedRequest in _offlineQueue.getRange(
-          0, _offlineQueue.length + 1 - queueMaxSize)) {
+      for (final queuedRequest
+          in _offlineQueue.getRange(0, _offlineQueue.length + 1 - queueMaxSize)) {
         emit('offlineQueuePop', [queuedRequest.request]);
       }
 
@@ -318,58 +314,58 @@ class Kuzzle extends KuzzleEventEmitter {
   ///
   Future<KuzzleResponse> query(KuzzleRequest request,
       {Map<String, dynamic> volatile, bool queueable = true}) {
-    //final _request = KuzzleRequest.fromMap(request);
+      //final _request = KuzzleRequest.fromMap(request);
 
-    // bind volatile data
-    request.volatile ??= volatile ?? globalVolatile;
+      // bind volatile data
+      request.volatile ??= volatile ?? globalVolatile;
 
-    for (final item in globalVolatile.keys) {
-      if (!request.volatile.containsKey(item)) {
-        request.volatile[item] = globalVolatile[item];
+      for (final item in globalVolatile.keys) {
+        if (!request.volatile.containsKey(item)) {
+          request.volatile[item] = globalVolatile[item];
+        }
       }
-    }
 
-    request.volatile['sdkInstanceId'] = protocol.id;
-    request.volatile['sdkName'] = '2.0.0-alpha.1';
+      request.volatile['sdkInstanceId'] = protocol.id;
+      request.volatile['sdkName'] = '2.0.0-alpha.1';
 
-    /*
+      /*
      * Do not add the token for the checkToken route,
      * to avoid getting a token error when a developer
      * simply wish to verify his token
      */
-    if ((jwt != null && jwt.isNotEmpty) &&
-        !(request.controller == 'auth' && request.action == 'checkToken')) {
-      request.jwt = jwt;
-    }
-
-    if (queueFilter != null) {
-      // todo: implement queueFilter
-    }
-
-    // check queueing
-    if (_queuing) {
-      if (queueable) {
-        final completer = Completer<KuzzleResponse>();
-        final queuedRequest = _KuzzleQueuedRequest(
-          completer: completer,
-          request: request,
-        );
-
-        _cleanQueue();
-
-        _offlineQueue.add(queuedRequest);
-        emit('offlineQueuePush', [queuedRequest.request]);
-
-        return completer.future;
+      if ((jwt != null && jwt.isNotEmpty) &&
+          !(request.controller == 'auth' && request.action == 'checkToken')) {
+        request.jwt = jwt;
       }
 
-      emit('discarded', [request]);
-      return Future.error(KuzzleError(
-          'Unable to execute request: not connected to a Kuzzle server.'));
-    }
+      if (queueFilter != null) {
+        // todo: implement queueFilter
+      }
 
-    // todo: implement query options
-    return protocol.query(request);
+      // check queueing
+      if (_queuing) {
+        if (queueable) {
+          final completer = Completer<KuzzleResponse>();
+          final queuedRequest = _KuzzleQueuedRequest(
+            completer: completer,
+            request: request,
+          );
+
+          _cleanQueue();
+
+          _offlineQueue.add(queuedRequest);
+          emit('offlineQueuePush', [queuedRequest.request]);
+
+          return completer.future;
+        }
+
+        emit('discarded', [request]);
+        return Future.error(
+            KuzzleError('Unable to execute request: not connected to a Kuzzle server.'));
+      }
+
+      // todo: implement query options
+      return protocol.query(request);
   }
 
   KuzzleController operator [](String accessor) => _controllers[accessor];
