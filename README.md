@@ -22,7 +22,7 @@ Include this in your pubspec.yaml
 
 ```yaml
 dependencies:
-  kuzzle: ^1.0.0-alpha.4
+  kuzzle: ^2.0.0-alpha.1
 
 ```
 

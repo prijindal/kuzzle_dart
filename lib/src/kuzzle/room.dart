@@ -1,3 +1,5 @@
+import 'package:kuzzle/src/protocols/events.dart';
+
 import '../kuzzle.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
@@ -54,13 +56,13 @@ class KuzzleRoom {
         channel = response.result['channel'] as String;
 
         kuzzle.protocol.on(channel, _channelListener);
-        kuzzle.on('reconnected', _reSubscribeListener);
+        kuzzle.on(ProtocolEvents.RECONNECTED, _reSubscribeListener);
 
         return response;
       });
 
   void removeListeners() {
-    kuzzle.off('reconnected', _reSubscribeListener);
+    kuzzle.off(ProtocolEvents.RECONNECTED, _reSubscribeListener);
 
     if (channel != null) {
       kuzzle.protocol.off(channel, _channelListener);

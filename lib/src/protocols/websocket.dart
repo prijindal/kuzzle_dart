@@ -8,6 +8,7 @@ import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
 
 import 'abstract.dart';
+import 'events.dart';
 
 class WebSocketProtocol extends KuzzleProtocol {
   WebSocketProtocol(
@@ -111,13 +112,10 @@ class WebSocketProtocol extends KuzzleProtocol {
       if (response.room.isNotEmpty) {
         emit(response.room, [response]);
       } else {
-        emit('discarded', [response]);
+        emit(ProtocolEvents.DISCARDED, [response]);
       }
     } catch (_) {
-      // print('websocket _handlePayload error');
-      // print(payload);
-      // print(error);
-      emit('discarded', [payload]);
+      emit(ProtocolEvents.DISCARDED, [payload]);
     }
   }
 

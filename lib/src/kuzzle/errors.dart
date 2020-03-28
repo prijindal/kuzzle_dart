@@ -11,6 +11,11 @@ class KuzzleError extends Error {
   final String message;
   final StackTrace stack;
 
+  Map<String, dynamic> toJson() => {
+        'status': status,
+        'message': message,
+      };
+
   @override
   String toString() => 'KuzzleError[$status][$message]';
 }

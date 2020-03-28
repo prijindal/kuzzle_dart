@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:kuzzle/src/protocols/events.dart';
+
 import '../kuzzle.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/user.dart';
@@ -120,7 +122,7 @@ class AuthController extends KuzzleController {
           .then((response) {
         try {
           kuzzle.jwt = response.result['jwt'] as String;
-          kuzzle.emit('loginAttempt', [], {
+          kuzzle.emit(ProtocolEvents.LOGIN_ATTEMPT, [], {
             const Symbol('success'): true,
           });
 
@@ -129,7 +131,7 @@ class AuthController extends KuzzleController {
           rethrow;
         }
       }).catchError((error) {
-        kuzzle.emit('loginAttempt', [], {
+        kuzzle.emit(ProtocolEvents.LOGIN_ATTEMPT, [], {
           const Symbol('success'): false,
           const Symbol('error'): error,
         });

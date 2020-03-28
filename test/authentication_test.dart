@@ -118,14 +118,16 @@ void main() {
 
       test('search users', () async {
         final searchUsers = await kuzzle.security.searchUsers(query: {
-          'bool': {
-            'must': [
-              {
-                'in': {
-                  'profileIds': ['anonymous', 'default']
+          'query': {
+            'bool': {
+              'must': [
+                {
+                  'terms': {
+                    'profileIds': ['anonymous', 'default']
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
         });
         expect(searchUsers.total, 1);

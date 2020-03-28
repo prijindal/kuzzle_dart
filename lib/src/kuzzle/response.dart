@@ -38,7 +38,7 @@ class KuzzleResponse {
       map['controller'] = controller;
     }
     if (error != null) {
-      map['error'] = error;
+      map['error'] = error.toJson();
     }
     if (index != null) {
       map['index'] = index;

@@ -13,15 +13,13 @@ class DocumentController extends KuzzleController {
   ///
   /// A [query] can be provided to alter the count result,
   /// otherwise returns the total number of documents in the data collection.
-  Future<int> count(String index, String collection,
-      {Map<String, dynamic> query, bool includeTrash}) async {
+  Future<int> count(String index, String collection, {Map<String, dynamic> query}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'count',
       index: index,
       collection: collection,
       body: query,
-      includeTrash: includeTrash,
     ));
 
     return response.result['count'] as int;
@@ -29,8 +27,12 @@ class DocumentController extends KuzzleController {
 
   /// Creates a new document in the persistent data storage.
   Future<Map<String, dynamic>> create(
-      String index, String collection, Map<String, dynamic> document,
-      {String uid, String refresh}) async {
+    String index,
+    String collection,
+    Map<String, dynamic> document, {
+    String uid,
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'create',
@@ -46,9 +48,13 @@ class DocumentController extends KuzzleController {
 
   /// Creates a new document in the persistent data storage,
   /// or replaces its content if it already exists.
-  Future<Map<String, dynamic>> createOrReplace(String index, String collection,
-      String uid, Map<String, dynamic> document,
-      {String refresh}) async {
+  Future<Map<String, dynamic>> createOrReplace(
+    String index,
+    String collection,
+    String uid,
+    Map<String, dynamic> document, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'createOrReplace',
@@ -64,8 +70,11 @@ class DocumentController extends KuzzleController {
 
   /// Deletes a document.
   Future<Map<String, dynamic>> delete(
-      String index, String collection, String uid,
-      {String refresh}) async {
+    String index,
+    String collection,
+    String uid, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'delete',
@@ -79,9 +88,12 @@ class DocumentController extends KuzzleController {
   }
 
   /// Deletes documents matching the provided search query.
-  Future<List<String>> deleteByQuery(
-      String index, String collection, Map<String, dynamic> query,
-      {String refresh}) async {
+  Future<Map<String, dynamic>> deleteByQuery(
+    String index,
+    String collection,
+    Map<String, dynamic> query, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'deleteByQuery',
@@ -91,7 +103,7 @@ class DocumentController extends KuzzleController {
       refresh: refresh,
     ));
 
-    return response.result['hits'] as List<String>;
+    return response.result as Map<String, dynamic>;
   }
 
   /// Check if a document exists
@@ -112,15 +124,17 @@ class DocumentController extends KuzzleController {
   }
 
   /// Get a document
-  Future<Map<String, dynamic>> get(String index, String collection, String uid,
-      {bool includeTrash}) async {
+  Future<Map<String, dynamic>> get(
+    String index,
+    String collection,
+    String uid,
+  ) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'get',
       index: index,
       collection: collection,
       uid: uid,
-      includeTrash: includeTrash,
     ));
 
     return response.result as Map<String, dynamic>;
@@ -144,8 +158,11 @@ class DocumentController extends KuzzleController {
 
   /// Creates or replaces multiple documents.
   Future<Map<String, dynamic>> mCreateOrReplace(
-      String index, String collection, List<Map<String, dynamic>> documents,
-      {String refresh}) async {
+    String index,
+    String collection,
+    List<Map<String, dynamic>> documents, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'mCreateOrReplace',
@@ -160,8 +177,11 @@ class DocumentController extends KuzzleController {
 
   /// Deletes multiple documents.
   Future<Map<String, dynamic>> mDelete(
-      String index, String collection, List<String> ids,
-      {String refresh}) async {
+    String index,
+    String collection,
+    List<String> ids, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'mDelete',
@@ -176,15 +196,16 @@ class DocumentController extends KuzzleController {
 
   /// Gets multiple documents.
   Future<Map<String, dynamic>> mGet(
-      String index, String collection, List<String> ids,
-      {bool includeTrash}) async {
+    String index,
+    String collection,
+    List<String> ids,
+  ) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'mGet',
       index: index,
       collection: collection,
       body: <String, dynamic>{'ids': ids},
-      includeTrash: includeTrash,
     ));
 
     return response.result as Map<String, dynamic>;
@@ -192,8 +213,11 @@ class DocumentController extends KuzzleController {
 
   /// Replaces multiple documents.
   Future<Map<String, dynamic>> mReplace(
-      String index, String collection, List<Map<String, dynamic>> documents,
-      {String refresh}) async {
+    String index,
+    String collection,
+    List<Map<String, dynamic>> documents, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'mReplace',
@@ -209,7 +233,7 @@ class DocumentController extends KuzzleController {
   /// Updates multiple documents.
   Future<Map<String, dynamic>> mUpdate(
       String index, String collection, List<Map<String, dynamic>> documents,
-      {String refresh}) async {
+      {String refresh, bool retryOnConflict}) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'mUpdate',
@@ -223,9 +247,13 @@ class DocumentController extends KuzzleController {
   }
 
   /// Replaces the content of an existing document.
-  Future<Map<String, dynamic>> replace(String index, String collection,
-      String uid, Map<String, dynamic> document,
-      {String refresh}) async {
+  Future<Map<String, dynamic>> replace(
+    String index,
+    String collection,
+    String uid,
+    Map<String, dynamic> document, {
+    String refresh,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'replace',
@@ -234,6 +262,32 @@ class DocumentController extends KuzzleController {
       uid: uid,
       body: document,
       refresh: refresh,
+    ));
+
+    return response.result as Map<String, dynamic>;
+  }
+
+  /// Moves a search cursor forward.
+  ///
+  /// A search cursor is created by a search API call,
+  /// with a scroll value provided.
+  ///
+  /// Results returned by a scroll request reflect the state of the index at
+  /// the time of the initial search request, like a fixed snapshot.
+  /// Subsequent changes to documents do not affect the scroll results.
+  Future<Map<String, dynamic>> scroll(
+    String index,
+    String collection,
+    String scrollId, {
+    String scroll,
+  }) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'scroll',
+      index: index,
+      collection: collection,
+      scrollId: scrollId,
+      scroll: scroll,
     ));
 
     return response.result as Map<String, dynamic>;
@@ -250,32 +304,52 @@ class DocumentController extends KuzzleController {
   /// To handle larger result sets, you have to either create a cursor
   /// by providing a value to the scroll option or,
   /// if you sort the results, by using the Elasticsearch search_after command.
-  Future<DocumentsSearchResult> search(String index, String collection,
-      {Map<String, dynamic> query,
-      int from,
-      int size,
-      String scroll,
-      bool includeTrash}) async {
+  Future<DocumentsSearchResult> search(
+    String index,
+    String collection, {
+    Map<String, dynamic> query,
+    int from,
+    int size,
+    String scroll,
+  }) async {
     final request = KuzzleRequest(
-      controller: name,
       action: 'search',
-      index: index,
       collection: collection,
+      controller: name,
+      index: index,
       body: query,
       from: from,
       size: size,
       scroll: scroll,
-      includeTrash: includeTrash,
     );
     final response = await kuzzle.query(request);
 
     return DocumentsSearchResult(kuzzle, request: request, response: response);
   }
 
-  /// Updates a document content.
-  Future<Map<String, dynamic>> update(String index, String collection,
-      String uid, Map<String, dynamic> document,
-      {String refresh, int retryOnConflict}) async {
+  /// ####Updates a document content.
+  ///
+  /// **[index]**: index name \\\
+  /// **[collection]**: collection name \\\
+  /// **[uid]**: unique identifier of the document to update \\\
+  /// **[document]**: document as `Map<String, dynamic>` \\\
+  ///
+  ///
+  /// Optional
+  ///
+  /// **[refresh]**: if set to wait_for, Kuzzle will not respond
+  /// until the update is indexed \\\
+  /// **[retryOnConflict]**: conflicts may occur if the same document gets updated multiple times within a short timespan, in a database cluster. You can set the retryOnConflict optional argument (with a retry count), to tell Kuzzle to retry the failing updates the specified amount of times before rejecting the request with an error. \\\
+  /// **[source]**: if set to true Kuzzle will return the updated document body in the response \\\
+  Future<Map<String, dynamic>> update(
+    String index,
+    String collection,
+    String uid,
+    Map<String, dynamic> document, {
+    String refresh,
+    int retryOnConflict,
+    bool source,
+  }) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'update',
@@ -284,7 +358,55 @@ class DocumentController extends KuzzleController {
       uid: uid,
       body: document,
       refresh: refresh,
+      source: source,
       retryOnConflict: retryOnConflict,
+    ));
+
+    return response.result as Map<String, dynamic>;
+  }
+
+  /// Updates documents matching the provided search query.
+  /// Documents updated that way trigger real-time notifications.
+  ///
+  /// ---
+  /// Limitations
+  /// ---
+  ///
+  /// The request fails if the number of documents returned by the search
+  /// query exceeds the documentsWriteCount server configuration (see the
+  /// Configuring Kuzzle guide).
+  ///
+  /// update a greater number of documents, either change the server
+  /// configuration, or split the search query.
+  ///
+  /// ---
+  /// Body:
+  /// ```dart
+  /// {
+  ///   "query": {
+  ///     // query to match documents
+  ///   },
+  ///   "changes": {
+  ///     // documents changes
+  ///   }
+  /// }
+  /// ```
+  ///
+  Future<Map<String, dynamic>> updateByQuery(
+    String index,
+    String collection,
+    Map<String, dynamic> body, {
+    String refresh,
+    bool source,
+  }) async {
+    final response = await kuzzle.query(KuzzleRequest(
+      controller: name,
+      action: 'updateByQuery',
+      index: index,
+      collection: collection,
+      body: body,
+      refresh: refresh,
+      source: source,
     ));
 
     return response.result as Map<String, dynamic>;
@@ -296,8 +418,11 @@ class DocumentController extends KuzzleController {
   /// on the provided index and collection.
   ///
   /// This request does not store the document.
-  Future<Map<String, dynamic>> validate(
-      String index, String collection, Map<String, dynamic> document) async {
+  Future<bool> validate(
+    String index,
+    String collection,
+    Map<String, dynamic> document,
+  ) async {
     final response = await kuzzle.query(KuzzleRequest(
       controller: name,
       action: 'validate',
@@ -306,6 +431,6 @@ class DocumentController extends KuzzleController {
       body: document,
     ));
 
-    return response.result as Map<String, dynamic>;
+    return (response.result as Map<String, dynamic>)['valid'] as bool;
   }
 }

@@ -8,84 +8,149 @@ void main() {
   final kuzzle = Kuzzle(WebSocketProtocol('localhost'));
   String defaultIndex;
   String defaultCollection;
+
   setUpAll(() async {
     await connectKuzzle(kuzzle);
     await kuzzle.auth.login('local', adminCredentials);
-    defaultIndex = Uuid().v1() as String;
+    defaultIndex = Uuid().v1();
     defaultCollection = 'posts';
   });
+
+  reCreate() async {
+    final response = await kuzzle.collection.create(
+      defaultIndex,
+      defaultCollection,
+      mapping: {'title': {}},
+    );
+  }
 
   group('collection', () {
     setUpAll(() async {
       await kuzzle.index.create(defaultIndex);
     });
     test('creation', () async {
-      final createdResponse = await kuzzle.collection
-          .create(defaultIndex, defaultCollection, mapping: {'title': {}});
-      expect(createdResponse['acknowledged'], true);
+      final response = await kuzzle.collection.create(
+        defaultIndex,
+        defaultCollection,
+        mapping: {'title': {}},
+      );
+      expect(response['acknowledged'], true);
+    });
+    test('delete', () async {
+      final response = await kuzzle.collection.delete(
+        defaultIndex,
+        defaultCollection,
+      );
+
+      expect(response, true);
+      await reCreate();
     });
 
     test('delete specification', () async {
-      final deleteSpecificationsResponse = await kuzzle.collection
-          .deleteSpecifications(defaultIndex, defaultCollection);
-      expect(deleteSpecificationsResponse['acknowledged'], true);
+      final response = await kuzzle.collection.deleteSpecifications(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response['acknowledged'], true);
     });
 
     test('exists', () async {
-      final existsCollection =
-          await kuzzle.collection.exists(defaultIndex, defaultCollection);
-      expect(existsCollection, true);
+      final response = await kuzzle.collection.exists(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response, true);
     });
 
     test('get mapping', () async {
-      final collectionMapping =
-          await kuzzle.collection.getMapping(defaultIndex, defaultCollection);
-      expect(
-          collectionMapping[defaultIndex]['mappings'][defaultCollection]
-              ['properties'],
-          <String, dynamic>{});
+      final response = await kuzzle.collection.getMapping(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response, <String, dynamic>{
+        'dynamic': 'false',
+        'properties': {},
+      });
     });
+
     test('list all collections', () async {
-      final listCollectionResponse = await kuzzle.collection.list(defaultIndex);
-      print(listCollectionResponse);
-      expect(listCollectionResponse['collections'].length,
-          greaterThanOrEqualTo(1));
+      final response = await kuzzle.collection.list(defaultIndex);
+      print(response);
       expect(
-          listCollectionResponse['collections'][0]['name'], defaultCollection);
+        response['collections'].length,
+        greaterThanOrEqualTo(1),
+      );
+      expect(
+        response['collections'][0]['name'],
+        defaultCollection,
+      );
+    });
+
+    test('refresh', () async {
+      final response = await kuzzle.collection.refresh(
+        defaultIndex,
+        defaultCollection,
+      );
+
+      expect(response, true);
     });
 
     test('search specifications', () async {
-      final searchSpecifications =
-          await kuzzle.collection.searchSpecifications(defaultIndex);
-      expect(searchSpecifications.hits.length, greaterThanOrEqualTo(0));
+      final response = await kuzzle.collection.searchSpecifications(
+        defaultIndex,
+      );
+      expect(response.hits.length, greaterThanOrEqualTo(0));
     });
 
     test('truncate', () async {
-      final ids =
-          await kuzzle.collection.truncate(defaultIndex, defaultCollection);
-      expect(ids.length, 1);
+      final response = await kuzzle.collection.truncate(
+        defaultIndex,
+        defaultCollection,
+      );
+      expect(response.length, 1);
     });
 
     test('update specifications', () async {
-      final specifications = await kuzzle.collection
-          .updateSpecifications(defaultIndex, defaultCollection, {});
-      expect(specifications, <String, dynamic>{});
+      final response = await kuzzle.collection.updateSpecifications(
+        defaultIndex,
+        defaultCollection,
+        false,
+        {},
+      );
+      expect(response, <String, dynamic>{
+        'strict': false,
+        'fields': {},
+      });
     });
 
     test('get specifications', () async {
-      final collectionSpecifications = await kuzzle.collection
-          .getSpecifications(defaultIndex, defaultCollection);
-      expect(collectionSpecifications, {
-        'validation': {},
-        'index': defaultIndex,
-        'collection': defaultCollection,
-      });
-      expect(collectionSpecifications['validation'], <String, dynamic>{});
+      final response = await kuzzle.collection.getSpecifications(
+        defaultIndex,
+        defaultCollection,
+      );
+      var hasAllKeys = false;
+
+      for (var key in ['collection', 'index', 'validation', '_kuzzle_info']) {
+        hasAllKeys = response.containsKey(key);
+
+        if (!hasAllKeys) {
+          break;
+        }
+      }
+
+      expect(hasAllKeys, true);
+      expect(response['index'], defaultIndex);
+      expect(response['collection'], defaultCollection);
+      expect(response['validation'].runtimeType, <String, dynamic>{}.runtimeType);
     });
     test('validate specifications', () async {
-      final isValid = await kuzzle.collection
-          .validateSpecifications(defaultIndex, defaultCollection, {});
-      expect(isValid['valid'], true);
+      final response = await kuzzle.collection.validateSpecifications(
+        defaultIndex,
+        defaultCollection,
+        false,
+        {},
+      );
+      expect(response, true);
     });
 
     tearDownAll(() async {
