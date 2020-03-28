@@ -39,8 +39,8 @@ void main() {
 
   test('get server info', () async {
     final info = await kuzzle.server.info();
-    expect(info['info'].containsKey('api'), true);
-  }, skip: 'Have to check the response');
+    expect(info['serverInfo'].containsKey('kuzzle'), true);
+  }); //, skip: 'Have to check the response'
 
   test('get current time', () async {
     final now = await kuzzle.server.now();
