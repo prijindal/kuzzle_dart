@@ -4,7 +4,7 @@ import 'package:kuzzle/src/protocols/events.dart';
 
 const Map<String, dynamic> adminCredentials = {
   'username': 'admin',
-  'password': 'flyfly'
+  'password': 'admin'
 };
 
 Future<void> connectKuzzle(Kuzzle kuzzle) {
