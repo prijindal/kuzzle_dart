@@ -7,6 +7,7 @@ import '../kuzzle/errors.dart';
 import '../kuzzle/event_emitter.dart';
 import '../kuzzle/request.dart';
 import '../kuzzle/response.dart';
+import 'events.dart';
 
 final _uuid = Uuid();
 
@@ -28,7 +29,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
         assert(port > 0),
         _state = KuzzleProtocolState.offline,
         _reconnectionDelay = reconnectionDelay ?? Duration(seconds: 1),
-        id = _uuid.v4() as String;
+        id = _uuid.v4();
 
   bool autoReconnect;
   final String host;
@@ -65,21 +66,21 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
   }) {
     _state = state;
     stopRetryingToConnect = false;
-    emit(wasConnected ? 'reconnect' : 'connect');
+    emit(wasConnected ? ProtocolEvents.RECONNECT : ProtocolEvents.CONNECT);
 
     wasConnected = true;
   }
 
   /// Called when the client's connection is closed
   void clientDisconnected() {
-    emit('disconnect');
+    emit(ProtocolEvents.DISCONNECT);
   }
 
   /// Called when the client's connection is closed with an error state
   void clientNetworkError([dynamic error]) {
     _state = KuzzleProtocolState.offline;
 
-    emit('networkError',
+    emit(ProtocolEvents.NETWORK_ERROR,
         [KuzzleError('Unable to connect to kuzzle server at $host:$port')]);
 
     if (autoReconnect && !retrying && !stopRetryingToConnect) {
@@ -90,7 +91,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
         await connect().catchError(clientNetworkError);
       });
     } else {
-      emit('disconnect');
+      emit(ProtocolEvents.DISCONNECT);
     }
   }
 
@@ -105,7 +106,7 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
   @mustCallSuper
   Future<KuzzleResponse> query(KuzzleRequest request) {
     if (!isReady()) {
-      emit('discarded', [request]);
+      emit(ProtocolEvents.DISCARDED, [request]);
 
       return Future.error(KuzzleError(
           'Unable to execute request: not connected to a Kuzzle server.'));
@@ -115,11 +116,11 @@ abstract class KuzzleProtocol extends KuzzleEventEmitter {
 
     once(request.requestId, (response) {
       if (response.error != null) {
-        emit('queryError', [response.error, request]);
+        emit(ProtocolEvents.QUERY_ERROR, [response.error, request]);
 
         if (response.action != 'logout' &&
             response.error.message == 'Token expired') {
-          emit('tokenExpired');
+          emit(ProtocolEvents.TOKEN_EXPIRED);
         }
 
         return completer.completeError(response.error);
