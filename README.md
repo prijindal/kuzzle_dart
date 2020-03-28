@@ -60,3 +60,9 @@ void main () async {
 
 If you find a bug or want a feature, but don't know how to fix/implement it, feel free to open an issue.
 If you fixed a bug or implemented a new feature, we will enjoy to merge your pull request.
+
+## Contributors
+- stafyniaksacha
+- Manuelbaun
+- prijindal
+- Aschen
