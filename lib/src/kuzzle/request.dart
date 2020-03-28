@@ -76,8 +76,12 @@ class KuzzleRequest {
     refresh = data['refresh'] as String;
     uid = data['_id'] as String;
     volatile = data['volatile'] as Map<String, dynamic>;
-    startTime = data['startTime'] == null ? null : DateTime.parse(data['startTime'] as String);
-    stopTime = data['stopTime'] == null ? null : DateTime.parse(data['stopTime'] as String);
+    startTime = data['startTime'] == null
+        ? null
+        : DateTime.parse(data['startTime'] as String);
+    stopTime = data['stopTime'] == null
+        ? null
+        : DateTime.parse(data['stopTime'] as String);
     strategy = data['strategy'] as String;
     expiresIn = data['expiresIn'] as String;
     from = data['from'] as int;
