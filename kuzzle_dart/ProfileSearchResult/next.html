@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the next method from the ProfileSearchResult class, for the Dart programming language.">
   <title>next method - ProfileSearchResult class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -36,44 +37,60 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li><a href="kuzzle_dart/ProfileSearchResult-class.html">ProfileSearchResult</a></li>
+      <li class="self-crumb">next method</li>
+    </ol>
+    
     <h5>ProfileSearchResult class</h5>
     <ol>
-      <li class="section-title"><a href="kuzzle_dart/ProfileSearchResult-class.html#constructors">Constructors</a></li>
-      <li><a href="kuzzle_dart/ProfileSearchResult/ProfileSearchResult.html">ProfileSearchResult</a></li>
     
-      <li class="section-title inherited">
-        <a href="kuzzle_dart/ProfileSearchResult-class.html#instance-properties">Properties</a>
-      </li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/aggregations.html">aggregations</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/controller.html">controller</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/fetched.html">fetched</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/hashCode.html">hashCode</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/hits.html">hits</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/kuzzle.html">kuzzle</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/request.html">request</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/response.html">response</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/runtimeType.html">runtimeType</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/scrollAction.html">scrollAction</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/searchAction.html">searchAction</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/total.html">total</a></li>
+        <li class="section-title"><a href="kuzzle_dart/ProfileSearchResult-class.html#constructors">Constructors</a></li>
+        <li><a href="kuzzle_dart/ProfileSearchResult/ProfileSearchResult.html">ProfileSearchResult</a></li>
     
-      <li class="section-title"><a href="kuzzle_dart/ProfileSearchResult-class.html#instance-methods">Methods</a></li>
-      <li><a href="kuzzle_dart/ProfileSearchResult/getRoles.html">getRoles</a></li>
-      <li><a href="kuzzle_dart/ProfileSearchResult/next.html">next</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/noSuchMethod.html">noSuchMethod</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/toString.html">toString</a></li>
+        <li class="section-title inherited">
+            <a href="kuzzle_dart/ProfileSearchResult-class.html#instance-properties">Properties</a>
+        </li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/aggregations.html">aggregations</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/controller.html">controller</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/fetched.html">fetched</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/hits.html">hits</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/kuzzle.html">kuzzle</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/request.html">request</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/response.html">response</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/runtimeType.html">runtimeType</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/scrollAction.html">scrollAction</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/searchAction.html">searchAction</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/total.html">total</a></li>
     
-      <li class="section-title inherited"><a href="kuzzle_dart/ProfileSearchResult-class.html#operators">Operators</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/operator_equals.html">operator ==</a></li>
+        <li class="section-title"><a href="kuzzle_dart/ProfileSearchResult-class.html#instance-methods">Methods</a></li>
+        <li><a href="kuzzle_dart/ProfileSearchResult/getRoles.html">getRoles</a></li>
+        <li><a href="kuzzle_dart/ProfileSearchResult/next.html">next</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="kuzzle_dart/ProfileSearchResult-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleSearchResult/operator_equals.html">operator ==</a></li>
+    
+    
     
     
     
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>next method</h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">next</span> method</h1></div>
 
     <section class="multi-line-signature">
       <div>
@@ -82,13 +99,13 @@
         </ol>
       </div>
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
-      <span class="name ">next</span>
+            <span class="name ">next</span>
 (<wbr>)
       <div class="features">override</div>
     </section>
     
     <section class="summary source-code" id="source">
-      <h2><span>Implementation</span> </h2>
+      <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">@override
 Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits =
     (response.result[&#39;hits&#39;] as List).map((hit) =&gt; KuzzleProfile(kuzzle,
@@ -98,16 +115,18 @@ Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits 
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
 
 </main>
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -115,7 +134,7 @@ Future&lt;List&lt;dynamic&gt;&gt; next() =&gt; super.next().then((_) =&gt; hits 
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the KuzzleRequest class from the kuzzle_dart library, for the Dart programming language.">
   <title>KuzzleRequest class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -35,7 +36,19 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li class="self-crumb">KuzzleRequest class</li>
+    </ol>
+    
     <h5>kuzzle_dart library</h5>
     <ol>
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
@@ -68,6 +81,7 @@
     
     
     
+    
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
       <li><a href="kuzzle_dart/KuzzleProtocolState-class.html">KuzzleProtocolState</a></li>
       <li><a href="kuzzle_dart/OfflineMode-class.html">OfflineMode</a></li>
@@ -81,8 +95,8 @@
     </ol>
   </div>
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <h1>KuzzleRequest class </h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">KuzzleRequest</span> class </h1></div>
 
     
 
@@ -91,7 +105,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="KuzzleRequest" class="callable">
-          <span class="name"><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.html">KuzzleRequest</a></span><span class="signature">({<span class="parameter" id="-param-action"><span class="type-annotation">String</span> <span class="parameter-name">action</span>, </span> <span class="parameter" id="-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, </span> <span class="parameter" id="-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="-param-controller"><span class="type-annotation">String</span> <span class="parameter-name">controller</span>, </span> <span class="parameter" id="-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="-param-jwt"><span class="type-annotation">String</span> <span class="parameter-name">jwt</span>, </span> <span class="parameter" id="-param-requestId"><span class="type-annotation">String</span> <span class="parameter-name">requestId</span>, </span> <span class="parameter" id="-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>, </span> <span class="parameter" id="-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="-param-startTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">startTime</span>, </span> <span class="parameter" id="-param-stopTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">stopTime</span>, </span> <span class="parameter" id="-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span>, </span> <span class="parameter" id="-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="-param-type"><span class="type-annotation">String</span> <span class="parameter-name">type</span>, </span> <span class="parameter" id="-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span>, </span> <span class="parameter" id="-param-scrollId"><span class="type-annotation">String</span> <span class="parameter-name">scrollId</span>, </span> <span class="parameter" id="-param-sort"><span class="type-annotation">List</span> <span class="parameter-name">sort</span>, </span> <span class="parameter" id="-param-includeTrash"><span class="type-annotation">bool</span> <span class="parameter-name">includeTrash</span>, </span> <span class="parameter" id="-param-retryOnConflict"><span class="type-annotation">int</span> <span class="parameter-name">retryOnConflict</span>, </span> <span class="parameter" id="-param-reset"><span class="type-annotation">bool</span> <span class="parameter-name">reset</span>, </span> <span class="parameter" id="-param-scope"><span class="type-annotation">String</span> <span class="parameter-name">scope</span>, </span> <span class="parameter" id="-param-state"><span class="type-annotation">String</span> <span class="parameter-name">state</span>, </span> <span class="parameter" id="-param-users"><span class="type-annotation">String</span> <span class="parameter-name">users</span></span> })</span>
+          <span class="name"><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.html">KuzzleRequest</a></span><span class="signature">({<span class="parameter" id="-param-action"><span class="type-annotation">String</span> <span class="parameter-name">action</span>, </span> <span class="parameter" id="-param-body"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">body</span>, </span> <span class="parameter" id="-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="-param-controller"><span class="type-annotation">String</span> <span class="parameter-name">controller</span>, </span> <span class="parameter" id="-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="-param-jwt"><span class="type-annotation">String</span> <span class="parameter-name">jwt</span>, </span> <span class="parameter" id="-param-requestId"><span class="type-annotation">String</span> <span class="parameter-name">requestId</span>, </span> <span class="parameter" id="-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span>, </span> <span class="parameter" id="-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="-param-startTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">startTime</span>, </span> <span class="parameter" id="-param-stopTime"><span class="type-annotation">DateTime</span> <span class="parameter-name">stopTime</span>, </span> <span class="parameter" id="-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="-param-expiresIn"><span class="type-annotation">String</span> <span class="parameter-name">expiresIn</span>, </span> <span class="parameter" id="-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="-param-type"><span class="type-annotation">String</span> <span class="parameter-name">type</span>, </span> <span class="parameter" id="-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span>, </span> <span class="parameter" id="-param-scrollId"><span class="type-annotation">String</span> <span class="parameter-name">scrollId</span>, </span> <span class="parameter" id="-param-sort"><span class="type-annotation">List</span> <span class="parameter-name">sort</span>, </span> <span class="parameter" id="-param-retryOnConflict"><span class="type-annotation">int</span> <span class="parameter-name">retryOnConflict</span>, </span> <span class="parameter" id="-param-reset"><span class="type-annotation">bool</span> <span class="parameter-name">reset</span></span> <span class="parameter" id="-param-scope"><span class="type-annotation">String</span> <span class="parameter-name">scope</span>, </span> <span class="parameter" id="-param-state"><span class="type-annotation">String</span> <span class="parameter-name">state</span>, </span> <span class="parameter" id="-param-source"><span class="type-annotation">bool</span> <span class="parameter-name">source</span></span> <span class="parameter" id="-param-users"><span class="type-annotation">String</span> <span class="parameter-name">users</span>, </span> <span class="parameter" id="-param-includeKuzzleMeta"><span class="type-annotation">bool</span> <span class="parameter-name">includeKuzzleMeta</span></span> })</span>
         </dt>
         <dd>
           
@@ -117,227 +131,235 @@
       <dl class="properties">
         <dt id="action" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/action.html">action</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="body" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/body.html">body</a></span>
-          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="collection" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/collection.html">collection</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="controller" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/controller.html">controller</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="expiresIn" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/expiresIn.html">expiresIn</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="from" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/from.html">from</a></span>
-          <span class="signature">&#8596; int</span> 
+          <span class="signature">&#8596; int</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
-        <dt id="includeTrash" class="property">
-          <span class="name"><a href="kuzzle_dart/KuzzleRequest/includeTrash.html">includeTrash</a></span>
-          <span class="signature">&#8596; bool</span> 
+        <dt id="includeKuzzleMeta" class="property">
+          <span class="name"><a href="kuzzle_dart/KuzzleRequest/includeKuzzleMeta.html">includeKuzzleMeta</a></span>
+          <span class="signature">&#8596; bool</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="index" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/index.html">index</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="jwt" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/jwt.html">jwt</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="refresh" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/refresh.html">refresh</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="requestId" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/requestId.html">requestId</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="reset" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/reset.html">reset</a></span>
-          <span class="signature">&#8596; bool</span> 
+          <span class="signature">&#8596; bool</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="retryOnConflict" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/retryOnConflict.html">retryOnConflict</a></span>
-          <span class="signature">&#8596; int</span> 
+          <span class="signature">&#8596; int</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="scope" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/scope.html">scope</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="scroll" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/scroll.html">scroll</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="scrollId" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/scrollId.html">scrollId</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="size" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/size.html">size</a></span>
-          <span class="signature">&#8596; int</span> 
+          <span class="signature">&#8596; int</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="sort" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/sort.html">sort</a></span>
-          <span class="signature">&#8596; List</span> 
+          <span class="signature">&#8596; List</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
+</dd>
+        <dt id="source" class="property">
+          <span class="name"><a href="kuzzle_dart/KuzzleRequest/source.html">source</a></span>
+          <span class="signature">&#8596; bool</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">read / write</div>
 </dd>
         <dt id="startTime" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/startTime.html">startTime</a></span>
-          <span class="signature">&#8596; DateTime</span> 
+          <span class="signature">&#8596; DateTime</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="state" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/state.html">state</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="stopTime" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/stopTime.html">stopTime</a></span>
-          <span class="signature">&#8596; DateTime</span> 
+          <span class="signature">&#8596; DateTime</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="strategy" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/strategy.html">strategy</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="type" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/type.html">type</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="uid" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/uid.html">uid</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="users" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/users.html">users</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="volatile" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/volatile.html">volatile</a></span>
-          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/hashCode.html">hashCode</a></span>
-          <span class="signature">&#8594; int</span> 
+          <span class="signature">&#8594; int</span>         
         </dt>
         <dd class="inherited">
           The hash code for this object. <a href="kuzzle_dart/KuzzleRequest/hashCode.html">[...]</a>
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
         <dt id="runtimeType" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/runtimeType.html">runtimeType</a></span>
-          <span class="signature">&#8594; Type</span> 
+          <span class="signature">&#8594; Type</span>         
         </dt>
         <dd class="inherited">
           A representation of the runtime type of the object.
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
       </dl>
     </section>
@@ -349,28 +371,28 @@
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/toJson.html">toJson</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Map</span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           
-          
+                  
 </dd>
         <dt id="toString" class="callable">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/toString.html">toString</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; String</span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Returns a string representation of this object.
-          <div class="features">override</div>
+                  <div class="features">override</div>
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/KuzzleRequest/noSuchMethod.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -382,10 +404,10 @@
           <span class="name"><a href="kuzzle_dart/KuzzleRequest/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
             <span class="returntype parameter">&#8594; bool</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           The equality operator. <a href="kuzzle_dart/KuzzleRequest/operator_equals.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -395,8 +417,9 @@
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
     <ol>
+    
       <li class="section-title"><a href="kuzzle_dart/KuzzleRequest-class.html#constructors">Constructors</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.html">KuzzleRequest</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.clone.html">clone</a></li>
@@ -411,7 +434,7 @@
       <li><a href="kuzzle_dart/KuzzleRequest/controller.html">controller</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/expiresIn.html">expiresIn</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/from.html">from</a></li>
-      <li><a href="kuzzle_dart/KuzzleRequest/includeTrash.html">includeTrash</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest/includeKuzzleMeta.html">includeKuzzleMeta</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/index.html">index</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/jwt.html">jwt</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/refresh.html">refresh</a></li>
@@ -423,6 +446,7 @@
       <li><a href="kuzzle_dart/KuzzleRequest/scrollId.html">scrollId</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/size.html">size</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/sort.html">sort</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest/source.html">source</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/startTime.html">startTime</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/state.html">state</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/stopTime.html">stopTime</a></li>
@@ -444,6 +468,7 @@
     
     
     
+    
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -451,9 +476,11 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -461,7 +488,7 @@
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

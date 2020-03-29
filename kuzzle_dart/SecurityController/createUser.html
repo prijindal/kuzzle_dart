@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the createUser method from the SecurityController class, for the Dart programming language.">
   <title>createUser method - SecurityController class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -36,82 +37,98 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li><a href="kuzzle_dart/SecurityController-class.html">SecurityController</a></li>
+      <li class="self-crumb">createUser method</li>
+    </ol>
+    
     <h5>SecurityController class</h5>
     <ol>
-      <li class="section-title"><a href="kuzzle_dart/SecurityController-class.html#constructors">Constructors</a></li>
-      <li><a href="kuzzle_dart/SecurityController/SecurityController.html">SecurityController</a></li>
     
-      <li class="section-title inherited">
-        <a href="kuzzle_dart/SecurityController-class.html#instance-properties">Properties</a>
-      </li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
+        <li class="section-title"><a href="kuzzle_dart/SecurityController-class.html#constructors">Constructors</a></li>
+        <li><a href="kuzzle_dart/SecurityController/SecurityController.html">SecurityController</a></li>
     
-      <li class="section-title"><a href="kuzzle_dart/SecurityController-class.html#instance-methods">Methods</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createCredentials.html">createCredentials</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createFirstAdmin.html">createFirstAdmin</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createOrReplaceProfile.html">createOrReplaceProfile</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createOrReplaceRole.html">createOrReplaceRole</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createProfile.html">createProfile</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createRestrictedUser.html">createRestrictedUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createRole.html">createRole</a></li>
-      <li><a href="kuzzle_dart/SecurityController/createUser.html">createUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/deleteCredentials.html">deleteCredentials</a></li>
-      <li><a href="kuzzle_dart/SecurityController/deleteProfile.html">deleteProfile</a></li>
-      <li><a href="kuzzle_dart/SecurityController/deleteRole.html">deleteRole</a></li>
-      <li><a href="kuzzle_dart/SecurityController/deleteUser.html">deleteUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getAllCredentialFields.html">getAllCredentialFields</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getCredentialFields.html">getCredentialFields</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getCredentials.html">getCredentials</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getCredentialsById.html">getCredentialsById</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getProfile.html">getProfile</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getProfileMapping.html">getProfileMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getProfileRights.html">getProfileRights</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getRole.html">getRole</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getRoleMapping.html">getRoleMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getUser.html">getUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getUserMapping.html">getUserMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/getUserRights.html">getUserRights</a></li>
-      <li><a href="kuzzle_dart/SecurityController/hasCredentials.html">hasCredentials</a></li>
-      <li><a href="kuzzle_dart/SecurityController/mDeleteProfiles.html">mDeleteProfiles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/mDeleteRoles.html">mDeleteRoles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/mDeleteUsers.html">mDeleteUsers</a></li>
-      <li><a href="kuzzle_dart/SecurityController/mGetProfiles.html">mGetProfiles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/mGetRoles.html">mGetRoles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/replaceUser.html">replaceUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/searchProfiles.html">searchProfiles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/searchRoles.html">searchRoles</a></li>
-      <li><a href="kuzzle_dart/SecurityController/searchUsers.html">searchUsers</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateCredentials.html">updateCredentials</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateProfile.html">updateProfile</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateProfileMapping.html">updateProfileMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateRole.html">updateRole</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateRoleMapping.html">updateRoleMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateUser.html">updateUser</a></li>
-      <li><a href="kuzzle_dart/SecurityController/updateUserMapping.html">updateUserMapping</a></li>
-      <li><a href="kuzzle_dart/SecurityController/validateCredentials.html">validateCredentials</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+        <li class="section-title inherited">
+            <a href="kuzzle_dart/SecurityController-class.html#instance-properties">Properties</a>
+        </li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
     
-      <li class="section-title inherited"><a href="kuzzle_dart/SecurityController-class.html#operators">Operators</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+        <li class="section-title"><a href="kuzzle_dart/SecurityController-class.html#instance-methods">Methods</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createCredentials.html">createCredentials</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createFirstAdmin.html">createFirstAdmin</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createOrReplaceProfile.html">createOrReplaceProfile</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createOrReplaceRole.html">createOrReplaceRole</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createProfile.html">createProfile</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createRestrictedUser.html">createRestrictedUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createRole.html">createRole</a></li>
+        <li><a href="kuzzle_dart/SecurityController/createUser.html">createUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/deleteCredentials.html">deleteCredentials</a></li>
+        <li><a href="kuzzle_dart/SecurityController/deleteProfile.html">deleteProfile</a></li>
+        <li><a href="kuzzle_dart/SecurityController/deleteRole.html">deleteRole</a></li>
+        <li><a href="kuzzle_dart/SecurityController/deleteUser.html">deleteUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getAllCredentialFields.html">getAllCredentialFields</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getCredentialFields.html">getCredentialFields</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getCredentials.html">getCredentials</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getCredentialsById.html">getCredentialsById</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getProfile.html">getProfile</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getProfileMapping.html">getProfileMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getProfileRights.html">getProfileRights</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getRole.html">getRole</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getRoleMapping.html">getRoleMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getUser.html">getUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getUserMapping.html">getUserMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/getUserRights.html">getUserRights</a></li>
+        <li><a href="kuzzle_dart/SecurityController/hasCredentials.html">hasCredentials</a></li>
+        <li><a href="kuzzle_dart/SecurityController/mDeleteProfiles.html">mDeleteProfiles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/mDeleteRoles.html">mDeleteRoles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/mDeleteUsers.html">mDeleteUsers</a></li>
+        <li><a href="kuzzle_dart/SecurityController/mGetProfiles.html">mGetProfiles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/mGetRoles.html">mGetRoles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/replaceUser.html">replaceUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/searchProfiles.html">searchProfiles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/searchRoles.html">searchRoles</a></li>
+        <li><a href="kuzzle_dart/SecurityController/searchUsers.html">searchUsers</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateCredentials.html">updateCredentials</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateProfile.html">updateProfile</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateProfileMapping.html">updateProfileMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateRole.html">updateRole</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateRoleMapping.html">updateRoleMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateUser.html">updateUser</a></li>
+        <li><a href="kuzzle_dart/SecurityController/updateUserMapping.html">updateUserMapping</a></li>
+        <li><a href="kuzzle_dart/SecurityController/validateCredentials.html">validateCredentials</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="kuzzle_dart/SecurityController-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+    
+    
     
     
     
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>createUser method</h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">createUser</span> method</h1></div>
 
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
-      <span class="name ">createUser</span>
-(<wbr><span class="parameter" id="createUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, </span> <span class="parameter" id="createUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+            <span class="name ">createUser</span>
+(<wbr><span class="parameter" id="createUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span> <span class="parameter" id="createUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -119,7 +136,7 @@
     </section>
     
     <section class="summary source-code" id="source">
-      <h2><span>Implementation</span> </h2>
+      <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;KuzzleUser&gt; createUser(
     Map&lt;String, dynamic&gt; credentials, Map&lt;String, dynamic&gt; content,
     {String uid, String refresh}) async {
@@ -140,16 +157,18 @@
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
 
 </main>
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -157,7 +176,7 @@
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

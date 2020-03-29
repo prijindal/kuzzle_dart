@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the validateSpecifications method from the CollectionController class, for the Dart programming language.">
   <title>validateSpecifications method - CollectionController class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -36,51 +37,71 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li><a href="kuzzle_dart/CollectionController-class.html">CollectionController</a></li>
+      <li class="self-crumb">validateSpecifications method</li>
+    </ol>
+    
     <h5>CollectionController class</h5>
     <ol>
-      <li class="section-title"><a href="kuzzle_dart/CollectionController-class.html#constructors">Constructors</a></li>
-      <li><a href="kuzzle_dart/CollectionController/CollectionController.html">CollectionController</a></li>
     
-      <li class="section-title inherited">
-        <a href="kuzzle_dart/CollectionController-class.html#instance-properties">Properties</a>
-      </li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
+        <li class="section-title"><a href="kuzzle_dart/CollectionController-class.html#constructors">Constructors</a></li>
+        <li><a href="kuzzle_dart/CollectionController/CollectionController.html">CollectionController</a></li>
     
-      <li class="section-title"><a href="kuzzle_dart/CollectionController-class.html#instance-methods">Methods</a></li>
-      <li><a href="kuzzle_dart/CollectionController/create.html">create</a></li>
-      <li><a href="kuzzle_dart/CollectionController/deleteSpecifications.html">deleteSpecifications</a></li>
-      <li><a href="kuzzle_dart/CollectionController/exists.html">exists</a></li>
-      <li><a href="kuzzle_dart/CollectionController/getMapping.html">getMapping</a></li>
-      <li><a href="kuzzle_dart/CollectionController/getSpecifications.html">getSpecifications</a></li>
-      <li><a href="kuzzle_dart/CollectionController/list.html">list</a></li>
-      <li><a href="kuzzle_dart/CollectionController/searchSpecifications.html">searchSpecifications</a></li>
-      <li><a href="kuzzle_dart/CollectionController/truncate.html">truncate</a></li>
-      <li><a href="kuzzle_dart/CollectionController/updateMapping.html">updateMapping</a></li>
-      <li><a href="kuzzle_dart/CollectionController/updateSpecifications.html">updateSpecifications</a></li>
-      <li><a href="kuzzle_dart/CollectionController/validateSpecifications.html">validateSpecifications</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+        <li class="section-title inherited">
+            <a href="kuzzle_dart/CollectionController-class.html#instance-properties">Properties</a>
+        </li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/name.html">name</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></li>
     
-      <li class="section-title inherited"><a href="kuzzle_dart/CollectionController-class.html#operators">Operators</a></li>
-      <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+        <li class="section-title"><a href="kuzzle_dart/CollectionController-class.html#instance-methods">Methods</a></li>
+        <li><a href="kuzzle_dart/CollectionController/create.html">create</a></li>
+        <li><a href="kuzzle_dart/CollectionController/delete.html">delete</a></li>
+        <li><a href="kuzzle_dart/CollectionController/deleteSpecifications.html">deleteSpecifications</a></li>
+        <li><a href="kuzzle_dart/CollectionController/exists.html">exists</a></li>
+        <li><a href="kuzzle_dart/CollectionController/getMapping.html">getMapping</a></li>
+        <li><a href="kuzzle_dart/CollectionController/getSpecifications.html">getSpecifications</a></li>
+        <li><a href="kuzzle_dart/CollectionController/list.html">list</a></li>
+        <li><a href="kuzzle_dart/CollectionController/refresh.html">refresh</a></li>
+        <li><a href="kuzzle_dart/CollectionController/scrollSpecifications.html">scrollSpecifications</a></li>
+        <li><a href="kuzzle_dart/CollectionController/searchSpecifications.html">searchSpecifications</a></li>
+        <li><a href="kuzzle_dart/CollectionController/truncate.html">truncate</a></li>
+        <li><a href="kuzzle_dart/CollectionController/update.html">update</a></li>
+        <li><a class="deprecated" href="kuzzle_dart/CollectionController/updateMapping.html">updateMapping</a></li>
+        <li><a href="kuzzle_dart/CollectionController/updateSpecifications.html">updateSpecifications</a></li>
+        <li><a href="kuzzle_dart/CollectionController/validateSpecifications.html">validateSpecifications</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></li>
+    
+        <li class="section-title inherited"><a href="kuzzle_dart/CollectionController-class.html#operators">Operators</a></li>
+        <li class="inherited"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></li>
+    
+    
     
     
     
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>validateSpecifications method</h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">validateSpecifications</span> method</h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
-      <span class="name ">validateSpecifications</span>
-(<wbr><span class="parameter" id="validateSpecifications-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="validateSpecifications-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="validateSpecifications-param-specifications"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">specifications</span></span>)
+      <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
+            <span class="name ">validateSpecifications</span>
+(<wbr><span class="parameter" id="validateSpecifications-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="validateSpecifications-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="validateSpecifications-param-strict"><span class="type-annotation">bool</span> <span class="parameter-name">strict</span>, </span> <span class="parameter" id="validateSpecifications-param-fields"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">fields</span></span>)
       
     </section>
     <section class="desc markdown">
@@ -90,33 +111,38 @@ It does not store nor modify the existing specification.</p>
     </section>
     
     <section class="summary source-code" id="source">
-      <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;Map&lt;String, dynamic&gt;&gt; validateSpecifications(String index,
-    String collection, Map&lt;String, dynamic&gt; specifications) async {
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; validateSpecifications(
+  String index,
+  String collection,
+  bool strict,
+  Map&lt;String, dynamic&gt; fields,
+) async {
   final response = await kuzzle.query(KuzzleRequest(
-    controller: name,
-    action: &#39;validateSpecifications&#39;,
-    body: &lt;String, dynamic&gt;{
-      index: &lt;String, dynamic&gt;{collection: specifications}
-    },
-  ));
+      controller: name,
+      collection: collection,
+      index: index,
+      action: &#39;validateSpecifications&#39;,
+      body: {&#39;strict&#39;: strict, &#39;fields&#39;: fields}));
 
-  return response.result as Map&lt;String, dynamic&gt;;
+  return (response.result as Map&lt;String, dynamic&gt;)[&#39;valid&#39;] as bool;
 }</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
 
 </main>
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -124,7 +150,7 @@ It does not store nor modify the existing specification.</p>
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the KuzzleRequest.clone constructor from the Class KuzzleRequest class from the kuzzle_dart library, for the Dart programming language.">
   <title>KuzzleRequest.clone constructor - KuzzleRequest class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -36,9 +37,23 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest-class.html">KuzzleRequest</a></li>
+      <li class="self-crumb">KuzzleRequest.clone constructor</li>
+    </ol>
+    
     <h5>KuzzleRequest class</h5>
     <ol>
+    
       <li class="section-title"><a href="kuzzle_dart/KuzzleRequest-class.html#constructors">Constructors</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.html">KuzzleRequest</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/KuzzleRequest.clone.html">clone</a></li>
@@ -53,7 +68,7 @@
       <li><a href="kuzzle_dart/KuzzleRequest/controller.html">controller</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/expiresIn.html">expiresIn</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/from.html">from</a></li>
-      <li><a href="kuzzle_dart/KuzzleRequest/includeTrash.html">includeTrash</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest/includeKuzzleMeta.html">includeKuzzleMeta</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/index.html">index</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/jwt.html">jwt</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/refresh.html">refresh</a></li>
@@ -65,6 +80,7 @@
       <li><a href="kuzzle_dart/KuzzleRequest/scrollId.html">scrollId</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/size.html">size</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/sort.html">sort</a></li>
+      <li><a href="kuzzle_dart/KuzzleRequest/source.html">source</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/startTime.html">startTime</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/state.html">state</a></li>
       <li><a href="kuzzle_dart/KuzzleRequest/stopTime.html">stopTime</a></li>
@@ -86,11 +102,12 @@
     
     
     
+    
     </ol>
   </div><!--/.sidebar-offcanvas-left-->
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-    <h1>KuzzleRequest.clone constructor</h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-constructor">KuzzleRequest.clone</span> constructor</h1></div>
 
     <section class="multi-line-signature">
       
@@ -99,7 +116,7 @@
 
     
     <section class="summary source-code" id="source">
-      <h2><span>Implementation</span> </h2>
+      <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">KuzzleRequest.clone(KuzzleRequest request) {
   action = request.action;
   body = request.body;
@@ -121,27 +138,30 @@
   scroll = request.scroll;
   scrollId = request.scrollId;
   sort = request.sort;
-  includeTrash = request.includeTrash;
   retryOnConflict = request.retryOnConflict;
   reset = request.reset;
   scope = request.scope;
   state = request.state;
   users = request.users;
+  source = request.source;
+  includeKuzzleMeta = request.includeKuzzleMeta;
 }</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
   </div><!--/.sidebar-offcanvas-->
 
 </main>
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -149,7 +169,7 @@
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

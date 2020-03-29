@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the SecurityController class from the kuzzle_dart library, for the Dart programming language.">
   <title>SecurityController class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -35,7 +36,19 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li class="self-crumb">SecurityController class</li>
+    </ol>
+    
     <h5>kuzzle_dart library</h5>
     <ol>
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
@@ -68,6 +81,7 @@
     
     
     
+    
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
       <li><a href="kuzzle_dart/KuzzleProtocolState-class.html">KuzzleProtocolState</a></li>
       <li><a href="kuzzle_dart/OfflineMode-class.html">OfflineMode</a></li>
@@ -81,8 +95,8 @@
     </ol>
   </div>
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <h1>SecurityController class </h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">SecurityController</span> class </h1></div>
 
     
     <section>
@@ -93,6 +107,7 @@
           <li><a href="kuzzle_dart/KuzzleController-class.html">KuzzleController</a></li>
           <li>SecurityController</li>
         </ul></dd>
+
 
 
 
@@ -119,43 +134,43 @@
       <dl class="properties">
         <dt id="accessor" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/accessor.html">accessor</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd class="inherited">
           
-          <div class="features">read / write, inherited</div>
+                  <div class="features">read / write, inherited</div>
 </dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/hashCode.html">hashCode</a></span>
-          <span class="signature">&#8594; int</span> 
+          <span class="signature">&#8594; int</span>         
         </dt>
         <dd class="inherited">
           The hash code for this object. <a href="kuzzle_dart/KuzzleController/hashCode.html">[...]</a>
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
         <dt id="kuzzle" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/kuzzle.html">kuzzle</a></span>
-          <span class="signature">&#8594; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> 
+          <span class="signature">&#8594; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span>         
         </dt>
         <dd class="inherited">
           
-          <div class="features">@protected, final, inherited</div>
+                  <div class="features">@protected, final, inherited</div>
 </dd>
         <dt id="name" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/name.html">name</a></span>
-          <span class="signature">&#8594; String</span> 
+          <span class="signature">&#8594; String</span>         
         </dt>
         <dd class="inherited">
           
-          <div class="features">final, inherited</div>
+                  <div class="features">final, inherited</div>
 </dd>
         <dt id="runtimeType" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/runtimeType.html">runtimeType</a></span>
-          <span class="signature">&#8594; Type</span> 
+          <span class="signature">&#8594; Type</span>         
         </dt>
         <dd class="inherited">
           A representation of the runtime type of the object.
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
       </dl>
     </section>
@@ -167,409 +182,409 @@
           <span class="name"><a href="kuzzle_dart/SecurityController/createCredentials.html">createCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="createCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="createCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createCredentials-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates authentication credentials for a user.
-          
+                  
 </dd>
         <dt id="createFirstAdmin" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/createFirstAdmin.html">createFirstAdmin</a></span><span class="signature">(<wbr><span class="parameter" id="createFirstAdmin-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createFirstAdmin-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createFirstAdmin-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, </span> <span class="parameter" id="createFirstAdmin-param-reset"><span class="type-annotation">bool</span> <span class="parameter-name">reset</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a Kuzzle administrator account, only if none exist.
-          
+                  
 </dd>
         <dt id="createOrReplaceProfile" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/createOrReplaceProfile.html">createOrReplaceProfile</a></span><span class="signature">(<wbr><span class="parameter" id="createOrReplaceProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createOrReplaceProfile-param-policies"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">policies</span>, {</span> <span class="parameter" id="createOrReplaceProfile-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new profile or, if the provided profile
 identifier already exists, replaces it.
-          
+                  
 </dd>
         <dt id="createOrReplaceRole" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/createOrReplaceRole.html">createOrReplaceRole</a></span><span class="signature">(<wbr><span class="parameter" id="createOrReplaceRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createOrReplaceRole-param-controllers"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">controllers</span>, {</span> <span class="parameter" id="createOrReplaceRole-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new role or, if the provided role
 identifier already exists, replaces it.
-          
+                  
 </dd>
         <dt id="createProfile" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/createProfile.html">createProfile</a></span><span class="signature">(<wbr><span class="parameter" id="createProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createProfile-param-policies"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">policies</span>, {</span> <span class="parameter" id="createProfile-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new profile.
-          
+                  
 </dd>
         <dt id="createRestrictedUser" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/createRestrictedUser.html">createRestrictedUser</a></span><span class="signature">(<wbr><span class="parameter" id="createRestrictedUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createRestrictedUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, </span> <span class="parameter" id="createRestrictedUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createRestrictedUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+          <span class="name"><a href="kuzzle_dart/SecurityController/createRestrictedUser.html">createRestrictedUser</a></span><span class="signature">(<wbr><span class="parameter" id="createRestrictedUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createRestrictedUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, </span> <span class="parameter" id="createRestrictedUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span> <span class="parameter" id="createRestrictedUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new user in Kuzzle, with a preset list of security profiles. <a href="kuzzle_dart/SecurityController/createRestrictedUser.html">[...]</a>
-          
+                  
 </dd>
         <dt id="createRole" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/createRole.html">createRole</a></span><span class="signature">(<wbr><span class="parameter" id="createRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createRole-param-controllers"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">controllers</span>, {</span> <span class="parameter" id="createRole-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new role.
-          
+                  
 </dd>
         <dt id="createUser" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/createUser.html">createUser</a></span><span class="signature">(<wbr><span class="parameter" id="createUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, </span> <span class="parameter" id="createUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="createUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+          <span class="name"><a href="kuzzle_dart/SecurityController/createUser.html">createUser</a></span><span class="signature">(<wbr><span class="parameter" id="createUser-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span>, {</span> <span class="parameter" id="createUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="createUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span> <span class="parameter" id="createUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Creates a new user
-          
+                  
 </dd>
         <dt id="deleteCredentials" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/deleteCredentials.html">deleteCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="deleteCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="deleteCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
+          <span class="name"><a href="kuzzle_dart/SecurityController/deleteCredentials.html">deleteCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="deleteCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span></span> <span class="parameter" id="deleteCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes user credentials for the specified authentication strategy.
-          
+                  
 </dd>
         <dt id="deleteProfile" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/deleteProfile.html">deleteProfile</a></span><span class="signature">(<wbr><span class="parameter" id="deleteProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes a security profile.
 An error is returned if the profile is still in use.
-          
+                  
 </dd>
         <dt id="deleteRole" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/deleteRole.html">deleteRole</a></span><span class="signature">(<wbr><span class="parameter" id="deleteRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes a security role.
 An error is returned if the role is still in use.
-          
+                  
 </dd>
         <dt id="deleteUser" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/deleteUser.html">deleteUser</a></span><span class="signature">(<wbr><span class="parameter" id="deleteUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes a user and all their associate credentials.
-          
+                  
 </dd>
         <dt id="getAllCredentialFields" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getAllCredentialFields.html">getAllCredentialFields</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Retrieves the list of fields accepted by authentication strategies.
-          
+                  
 </dd>
         <dt id="getCredentialFields" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getCredentialFields.html">getCredentialFields</a></span><span class="signature">(<wbr><span class="parameter" id="getCredentialFields-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Retrieves the list of accepted field names by
 the specified authentication strategy.
-          
+                  
 </dd>
         <dt id="getCredentials" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/getCredentials.html">getCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="getCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="getCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
+          <span class="name"><a href="kuzzle_dart/SecurityController/getCredentials.html">getCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="getCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span></span> <span class="parameter" id="getCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets a user's credential information for
 the specified authentication strategy. <a href="kuzzle_dart/SecurityController/getCredentials.html">[...]</a>
-          
+                  
 </dd>
         <dt id="getCredentialsById" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/getCredentialsById.html">getCredentialsById</a></span><span class="signature">(<wbr><span class="parameter" id="getCredentialsById-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="getCredentialsById-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
+          <span class="name"><a href="kuzzle_dart/SecurityController/getCredentialsById.html">getCredentialsById</a></span><span class="signature">(<wbr><span class="parameter" id="getCredentialsById-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span></span> <span class="parameter" id="getCredentialsById-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets credential information for the user identified by
 the strategy's unique user identifier userId <a href="kuzzle_dart/SecurityController/getCredentialsById.html">[...]</a>
-          
+                  
 </dd>
         <dt id="getProfile" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getProfile.html">getProfile</a></span><span class="signature">(<wbr><span class="parameter" id="getProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets a security profile.
-          
+                  
 </dd>
         <dt id="getProfileMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getProfileMapping.html">getProfileMapping</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets the mapping of the internal security profiles collection.
-          
+                  
 </dd>
         <dt id="getProfileRights" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getProfileRights.html">getProfileRights</a></span><span class="signature">(<wbr><span class="parameter" id="getProfileRights-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets the detailed rights configured by a security profile.
-          
+                  
 </dd>
         <dt id="getRole" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getRole.html">getRole</a></span><span class="signature">(<wbr><span class="parameter" id="getRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets a security role.
-          
+                  
 </dd>
         <dt id="getRoleMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getRoleMapping.html">getRoleMapping</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets the mapping of the internal security role collection.
-          
+                  
 </dd>
         <dt id="getUser" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getUser.html">getUser</a></span><span class="signature">(<wbr><span class="parameter" id="getUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets a security role.
-          
+                  
 </dd>
         <dt id="getUserMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getUserMapping.html">getUserMapping</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets the mapping of the internal security user collection.
-          
+                  
 </dd>
         <dt id="getUserRights" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/getUserRights.html">getUserRights</a></span><span class="signature">(<wbr><span class="parameter" id="getUserRights-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List</span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets the detailed rights granted to a user.
-          
+                  
 </dd>
         <dt id="hasCredentials" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/hasCredentials.html">hasCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="hasCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="hasCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
+          <span class="name"><a href="kuzzle_dart/SecurityController/hasCredentials.html">hasCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="hasCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span></span> <span class="parameter" id="hasCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Checks if a user has credentials registered
 for the specified authentication strategy.
-          
+                  
 </dd>
         <dt id="mDeleteProfiles" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/mDeleteProfiles.html">mDeleteProfiles</a></span><span class="signature">(<wbr><span class="parameter" id="mDeleteProfiles-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mDeleteProfiles-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes multiple security profiles.
-          
+                  
 </dd>
         <dt id="mDeleteRoles" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/mDeleteRoles.html">mDeleteRoles</a></span><span class="signature">(<wbr><span class="parameter" id="mDeleteRoles-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mDeleteRoles-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes multiple security roles.
-          
+                  
 </dd>
         <dt id="mDeleteUsers" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/mDeleteUsers.html">mDeleteUsers</a></span><span class="signature">(<wbr><span class="parameter" id="mDeleteUsers-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mDeleteUsers-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Deletes multiple security users.
-          
+                  
 </dd>
         <dt id="mGetProfiles" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/mGetProfiles.html">mGetProfiles</a></span><span class="signature">(<wbr><span class="parameter" id="mGetProfiles-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mGetProfiles-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets multiple security profiles.
-          
+                  
 </dd>
         <dt id="mGetRoles" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/mGetRoles.html">mGetRoles</a></span><span class="signature">(<wbr><span class="parameter" id="mGetRoles-param-ids"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span> <span class="parameter-name">ids</span>, {</span> <span class="parameter" id="mGetRoles-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">List<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Gets multiple security roles.
-          
+                  
 </dd>
         <dt id="replaceUser" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/replaceUser.html">replaceUser</a></span><span class="signature">(<wbr><span class="parameter" id="replaceUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="replaceUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="replaceUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+          <span class="name"><a href="kuzzle_dart/SecurityController/replaceUser.html">replaceUser</a></span><span class="signature">(<wbr><span class="parameter" id="replaceUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="replaceUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span> <span class="parameter" id="replaceUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Replaces a user with new configuration.
-          
+                  
 </dd>
         <dt id="searchProfiles" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/searchProfiles.html">searchProfiles</a></span><span class="signature">(<wbr><span class="parameter" id="searchProfiles-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="searchProfiles-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchProfiles-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="searchProfiles-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="searchProfiles-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/ProfileSearchResult-class.html">ProfileSearchResult</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Searches security profiles, optionally returning
 only those linked to the provided list of security roles.
-          
+                  
 </dd>
         <dt id="searchRoles" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/searchRoles.html">searchRoles</a></span><span class="signature">(<wbr><span class="parameter" id="searchRoles-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="searchRoles-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchRoles-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="searchRoles-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span></span> })
+          <span class="name"><a href="kuzzle_dart/SecurityController/searchRoles.html">searchRoles</a></span><span class="signature">(<wbr><span class="parameter" id="searchRoles-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="searchRoles-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchRoles-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span></span> <span class="parameter" id="searchRoles-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RoleSearchResult-class.html">RoleSearchResult</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Searches security roles, optionally returning only
 those allowing access to the provided controllers.
-          
+                  
 </dd>
         <dt id="searchUsers" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/searchUsers.html">searchUsers</a></span><span class="signature">(<wbr>{<span class="parameter" id="searchUsers-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchUsers-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span>, </span> <span class="parameter" id="searchUsers-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, </span> <span class="parameter" id="searchUsers-param-scroll"><span class="type-annotation">String</span> <span class="parameter-name">scroll</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/UserSearchResult-class.html">UserSearchResult</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Searches security profiles, optionally returning
 only those linked to the provided list of security roles.
-          
+                  
 </dd>
         <dt id="updateCredentials" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateCredentials.html">updateCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="updateCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="updateCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateCredentials-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates a user credentials for the specified authentication strategy.
-          
+                  
 </dd>
         <dt id="updateProfile" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateProfile.html">updateProfile</a></span><span class="signature">(<wbr><span class="parameter" id="updateProfile-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateProfile-param-policies"><span class="type-annotation">List</span> <span class="parameter-name">policies</span>, {</span> <span class="parameter" id="updateProfile-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleProfile-class.html">KuzzleProfile</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates a security profile definition.
-          
+                  
 </dd>
         <dt id="updateProfileMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateProfileMapping.html">updateProfileMapping</a></span><span class="signature">(<wbr><span class="parameter" id="updateProfileMapping-param-properties"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">properties</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates the internal profile storage mapping.
-          
+                  
 </dd>
         <dt id="updateRole" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateRole.html">updateRole</a></span><span class="signature">(<wbr><span class="parameter" id="updateRole-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateRole-param-controllers"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">controllers</span>, {</span> <span class="parameter" id="updateRole-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleRole-class.html">KuzzleRole</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates a security role definition <a href="kuzzle_dart/SecurityController/updateRole.html">[...]</a>
-          
+                  
 </dd>
         <dt id="updateRoleMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateRoleMapping.html">updateRoleMapping</a></span><span class="signature">(<wbr><span class="parameter" id="updateRoleMapping-param-properties"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">properties</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates the internal role storage mapping.
-          
+                  
 </dd>
         <dt id="updateUser" class="callable">
-          <span class="name"><a href="kuzzle_dart/SecurityController/updateUser.html">updateUser</a></span><span class="signature">(<wbr><span class="parameter" id="updateUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="updateUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="updateUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
+          <span class="name"><a href="kuzzle_dart/SecurityController/updateUser.html">updateUser</a></span><span class="signature">(<wbr><span class="parameter" id="updateUser-param-content"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">content</span>, {</span> <span class="parameter" id="updateUser-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span></span> <span class="parameter" id="updateUser-param-refresh"><span class="type-annotation">String</span> <span class="parameter-name">refresh</span></span> })
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleUser-class.html">KuzzleUser</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates a user definition.
-          
+                  
 </dd>
         <dt id="updateUserMapping" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/updateUserMapping.html">updateUserMapping</a></span><span class="signature">(<wbr><span class="parameter" id="updateUserMapping-param-properties"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">properties</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Updates the internal user storage mapping.
-          
+                  
 </dd>
         <dt id="validateCredentials" class="callable">
           <span class="name"><a href="kuzzle_dart/SecurityController/validateCredentials.html">validateCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="validateCredentials-param-strategy"><span class="type-annotation">String</span> <span class="parameter-name">strategy</span>, </span> <span class="parameter" id="validateCredentials-param-uid"><span class="type-annotation">String</span> <span class="parameter-name">uid</span>, </span> <span class="parameter" id="validateCredentials-param-credentials"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">credentials</span></span>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter">bool</span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           Checks if the provided credentials are well-formed.
 Does not actually save credentials.
-          
+                  
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/KuzzleController/noSuchMethod.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
         <dt id="toString" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleController/toString.html">toString</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; String</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           Returns a string representation of this object.
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -581,10 +596,10 @@ Does not actually save credentials.
           <span class="name"><a href="kuzzle_dart/KuzzleController/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
             <span class="returntype parameter">&#8594; bool</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           The equality operator. <a href="kuzzle_dart/KuzzleController/operator_equals.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -594,8 +609,9 @@ Does not actually save credentials.
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
     <ol>
+    
       <li class="section-title"><a href="kuzzle_dart/SecurityController-class.html#constructors">Constructors</a></li>
       <li><a href="kuzzle_dart/SecurityController/SecurityController.html">SecurityController</a></li>
     
@@ -659,6 +675,7 @@ Does not actually save credentials.
     
     
     
+    
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -666,9 +683,11 @@ Does not actually save credentials.
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -676,7 +695,7 @@ Does not actually save credentials.
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 

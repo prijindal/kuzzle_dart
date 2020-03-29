@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the KuzzleRoom class from the kuzzle_dart library, for the Dart programming language.">
   <title>KuzzleRoom class - kuzzle_dart library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="..">
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="static-assets/github.css">
   <link rel="stylesheet" href="static-assets/styles.css">
   <link rel="icon" href="static-assets/favicon.png">
-
+  <!-- header placeholder -->
 </head>
 
 <body>
@@ -35,7 +36,19 @@
 
 <main>
 
-  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">kuzzle</a></li>
+      <li><a href="kuzzle_dart/kuzzle_dart-library.html">kuzzle_dart</a></li>
+      <li class="self-crumb">KuzzleRoom class</li>
+    </ol>
+    
     <h5>kuzzle_dart library</h5>
     <ol>
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#classes">Classes</a></li>
@@ -68,6 +81,7 @@
     
     
     
+    
       <li class="section-title"><a href="kuzzle_dart/kuzzle_dart-library.html#enums">Enums</a></li>
       <li><a href="kuzzle_dart/KuzzleProtocolState-class.html">KuzzleProtocolState</a></li>
       <li><a href="kuzzle_dart/OfflineMode-class.html">OfflineMode</a></li>
@@ -81,8 +95,8 @@
     </ol>
   </div>
 
-  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <h1>KuzzleRoom class </h1>
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">KuzzleRoom</span> class </h1></div>
 
     
 
@@ -91,7 +105,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="KuzzleRoom" class="callable">
-          <span class="name"><a href="kuzzle_dart/KuzzleRoom/KuzzleRoom.html">KuzzleRoom</a></span><span class="signature">(<span class="parameter" id="-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span>, </span> <span class="parameter" id="-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="-param-filters"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">filters</span>, </span> <span class="parameter" id="-param-callback"><span class="type-annotation"><a href="kuzzle_dart/RoomListener.html">RoomListener</a></span> <span class="parameter-name">callback</span>, {</span> <span class="parameter" id="-param-state"><span class="type-annotation">String</span> <span class="parameter-name">state</span>, </span> <span class="parameter" id="-param-scope"><span class="type-annotation">String</span> <span class="parameter-name">scope</span>, </span> <span class="parameter" id="-param-users"><span class="type-annotation">String</span> <span class="parameter-name">users</span>, </span> <span class="parameter" id="-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="-param-autoResubscribe"><span class="type-annotation">bool</span> <span class="parameter-name">autoResubscribe</span>, </span> <span class="parameter" id="-param-subscribeToSelf"><span class="type-annotation">bool</span> <span class="parameter-name">subscribeToSelf</span></span> })</span>
+          <span class="name"><a href="kuzzle_dart/KuzzleRoom/KuzzleRoom.html">KuzzleRoom</a></span><span class="signature">(<span class="parameter" id="-param-kuzzle"><span class="type-annotation"><a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> <span class="parameter-name">kuzzle</span>, </span> <span class="parameter" id="-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="-param-collection"><span class="type-annotation">String</span> <span class="parameter-name">collection</span>, </span> <span class="parameter" id="-param-filters"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">filters</span>, </span> <span class="parameter" id="-param-callback"><span class="type-annotation"><a href="kuzzle_dart/RoomListener.html">RoomListener</a></span> <span class="parameter-name">callback</span>, {</span> <span class="parameter" id="-param-state"><span class="type-annotation">String</span> <span class="parameter-name">state</span>, </span> <span class="parameter" id="-param-scope"><span class="type-annotation">String</span> <span class="parameter-name">scope</span>, </span> <span class="parameter" id="-param-users"><span class="type-annotation">String</span> <span class="parameter-name">users</span>, </span> <span class="parameter" id="-param-volatile"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">volatile</span>, </span> <span class="parameter" id="-param-autoResubscribe"><span class="type-annotation">bool</span> <span class="parameter-name">autoResubscribe</span></span> <span class="parameter" id="-param-subscribeToSelf"><span class="type-annotation">bool</span> <span class="parameter-name">subscribeToSelf</span></span> })</span>
         </dt>
         <dd>
           
@@ -105,131 +119,131 @@
       <dl class="properties">
         <dt id="autoResubscribe" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/autoResubscribe.html">autoResubscribe</a></span>
-          <span class="signature">&#8596; bool</span> 
+          <span class="signature">&#8596; bool</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="callback" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/callback.html">callback</a></span>
-          <span class="signature">&#8596; <a href="kuzzle_dart/RoomListener.html">RoomListener</a></span> 
+          <span class="signature">&#8596; <a href="kuzzle_dart/RoomListener.html">RoomListener</a></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="channel" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/channel.html">channel</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="collection" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/collection.html">collection</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="filters" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/filters.html">filters</a></span>
-          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="id" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/id.html">id</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="index" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/index.html">index</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="kuzzle" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/kuzzle.html">kuzzle</a></span>
-          <span class="signature">&#8596; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span> 
+          <span class="signature">&#8596; <a href="kuzzle_dart/Kuzzle-class.html">Kuzzle</a></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="options" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/options.html">options</a></span>
-          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="scope" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/scope.html">scope</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="state" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/state.html">state</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="subscribeToSelf" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/subscribeToSelf.html">subscribeToSelf</a></span>
-          <span class="signature">&#8596; bool</span> 
+          <span class="signature">&#8596; bool</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="users" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/users.html">users</a></span>
-          <span class="signature">&#8596; String</span> 
+          <span class="signature">&#8596; String</span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="volatile" class="property">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/volatile.html">volatile</a></span>
-          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> 
+          <span class="signature">&#8596; Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span>         
         </dt>
         <dd>
           
-          <div class="features">read / write</div>
+                  <div class="features">read / write</div>
 </dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/hashCode.html">hashCode</a></span>
-          <span class="signature">&#8594; int</span> 
+          <span class="signature">&#8594; int</span>         
         </dt>
         <dd class="inherited">
           The hash code for this object. <a href="kuzzle_dart/KuzzleRoom/hashCode.html">[...]</a>
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
         <dt id="runtimeType" class="property inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/runtimeType.html">runtimeType</a></span>
-          <span class="signature">&#8594; Type</span> 
+          <span class="signature">&#8594; Type</span>         
         </dt>
         <dd class="inherited">
           A representation of the runtime type of the object.
-          <div class="features">read-only, inherited</div>
+                  <div class="features">read-only, inherited</div>
 </dd>
       </dl>
     </section>
@@ -241,37 +255,37 @@
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/removeListeners.html">removeListeners</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; void</span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           
-          
+                  
 </dd>
         <dt id="subscribe" class="callable">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/subscribe.html">subscribe</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/KuzzleResponse-class.html">KuzzleResponse</a></span>&gt;</span></span>
           </span>
-          </dt>
+                  </dt>
         <dd>
           
-          
+                  
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           Invoked when a non-existent method or property is accessed. <a href="kuzzle_dart/KuzzleRoom/noSuchMethod.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
         <dt id="toString" class="callable inherited">
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/toString.html">toString</a></span><span class="signature">(<wbr>)
             <span class="returntype parameter">&#8594; String</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           Returns a string representation of this object.
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -283,10 +297,10 @@
           <span class="name"><a href="kuzzle_dart/KuzzleRoom/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
             <span class="returntype parameter">&#8594; bool</span>
           </span>
-          </dt>
+                  </dt>
         <dd class="inherited">
           The equality operator. <a href="kuzzle_dart/KuzzleRoom/operator_equals.html">[...]</a>
-          <div class="features">inherited</div>
+                  <div class="features">inherited</div>
 </dd>
       </dl>
     </section>
@@ -296,8 +310,9 @@
 
   </div> <!-- /.main-content -->
 
-  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
     <ol>
+    
       <li class="section-title"><a href="kuzzle_dart/KuzzleRoom-class.html#constructors">Constructors</a></li>
       <li><a href="kuzzle_dart/KuzzleRoom/KuzzleRoom.html">KuzzleRoom</a></li>
     
@@ -332,6 +347,7 @@
     
     
     
+    
     </ol>
   </div><!--/.sidebar-offcanvas-->
 
@@ -339,9 +355,11 @@
 
 <footer>
   <span class="no-break">
-    kuzzle 1.0.0-alpha.4
+    kuzzle
+      2.0.0-alpha.1
   </span>
 
+  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -349,7 +367,7 @@
 <script src="static-assets/highlight.pack.js"></script>
 <script src="static-assets/URI.js"></script>
 <script src="static-assets/script.js"></script>
-
+<!-- footer placeholder -->
 
 </body>
 
