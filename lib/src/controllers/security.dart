@@ -463,7 +463,7 @@ class SecurityController extends KuzzleController {
 
   /// Searches security profiles, optionally returning
   /// only those linked to the provided list of security roles.
-  Future<ProfileSearchResult> searchProfiles(String index,
+  Future<ProfileSearchResult> searchProfiles(
       {Map<String, dynamic> query, int from, int size, String scroll}) async {
     final request = KuzzleRequest(
       controller: name,
@@ -480,7 +480,7 @@ class SecurityController extends KuzzleController {
 
   /// Searches security roles, optionally returning only
   /// those allowing access to the provided controllers.
-  Future<RoleSearchResult> searchRoles(String index,
+  Future<RoleSearchResult> searchRoles(
       {Map<String, dynamic> query, int from, int size}) async {
     final request = KuzzleRequest(
       controller: name,

@@ -15,9 +15,11 @@ class ProfileSearchResult extends KuzzleSearchResult {
     searchAction = 'searchProfiles';
     scrollAction = 'scrollProfiles';
 
-    hits = (response.result['hits'] as List).map((hit) => KuzzleProfile(kuzzle,
-        uid: hit['_id'] as String,
-        policies: hit['_source']['policies'] as List)) as List<dynamic>;
+    hits = (response.result['hits'] as List)
+        .map((hit) => KuzzleProfile(kuzzle,
+            uid: hit['_id'] as String,
+            policies: hit['_source']['policies'] as List))
+        .toList();
   }
 
   @override
