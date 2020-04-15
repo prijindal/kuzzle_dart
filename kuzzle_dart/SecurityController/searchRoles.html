@@ -128,7 +128,7 @@
     <section class="multi-line-signature">
       <span class="returntype">Future<span class="signature">&lt;<wbr><span class="type-parameter"><a href="kuzzle_dart/RoleSearchResult-class.html">RoleSearchResult</a></span>&gt;</span></span>
             <span class="name ">searchRoles</span>
-(<wbr><span class="parameter" id="searchRoles-param-index"><span class="type-annotation">String</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="searchRoles-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchRoles-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span></span> <span class="parameter" id="searchRoles-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span></span> })
+(<wbr>{<span class="parameter" id="searchRoles-param-query"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">query</span>, </span> <span class="parameter" id="searchRoles-param-from"><span class="type-annotation">int</span> <span class="parameter-name">from</span></span> <span class="parameter" id="searchRoles-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -138,7 +138,7 @@ those allowing access to the provided controllers.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Future&lt;RoleSearchResult&gt; searchRoles(String index,
+      <pre class="language-dart"><code class="language-dart">Future&lt;RoleSearchResult&gt; searchRoles(
     {Map&lt;String, dynamic&gt; query, int from, int size}) async {
   final request = KuzzleRequest(
     controller: name,
